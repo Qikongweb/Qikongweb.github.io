@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240223 LinkedList | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="链表1. 两两交换链表中的节点 #1612345678910111213dummy_head &#x3D; ListNode(-1)dummy_head.next &#x3D; headcur &#x3D; dummy_headwhile cur.next is not None and cur.next.next is not None:    temp &#x3D; cur.next    next_temp &#x3D; temp.next">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240223 LinkedList">
+<meta property="og:url" content="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="链表1. 两两交换链表中的节点 #1612345678910111213dummy_head &#x3D; ListNode(-1)dummy_head.next &#x3D; headcur &#x3D; dummy_headwhile cur.next is not None and cur.next.next is not None:    temp &#x3D; cur.next    next_temp &#x3D; temp.next">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-23T17:36:46.000Z">
+<meta property="article:modified_time" content="2024-02-24T15:16:12.985Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240223-LinkedList" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/23/20240223-LinkedList/" class="article-date">
+  <time class="dt-published" datetime="2024-02-23T17:36:46.000Z" itemprop="datePublished">2024-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240223 LinkedList
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="1-两两交换链表中的节点-16"><a href="#1-两两交换链表中的节点-16" class="headerlink" title="1. 两两交换链表中的节点 #16"></a>1. 两两交换链表中的节点 #16</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(-<span class="number">1</span>)</span><br><span class="line">dummy_head.<span class="built_in">next</span> = head</span><br><span class="line">cur = dummy_head</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cur.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> cur.<span class="built_in">next</span>.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    temp = cur.<span class="built_in">next</span></span><br><span class="line">    next_temp = temp.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    cur.<span class="built_in">next</span> = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    cur.<span class="built_in">next</span>.<span class="built_in">next</span> = temp</span><br><span class="line">    temp.<span class="built_in">next</span> = next_temp</span><br><span class="line">    cur = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">return</span> dummy_head.<span class="built_in">next</span></span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+<p>思路：这个题是一定要画图的，画完图我可以写出来。附图</p>
+<h3 id="2-删除链表倒数第N个节点，双指针-19"><a href="#2-删除链表倒数第N个节点，双指针-19" class="headerlink" title="2. 删除链表倒数第N个节点，双指针 #19"></a>2. 删除链表倒数第N个节点，双指针 #19</h3><h2 id="有虚拟头节点的方法"><a href="#有虚拟头节点的方法" class="headerlink" title="有虚拟头节点的方法"></a>有虚拟头节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line">slow = dummy_head</span><br><span class="line">fast = dummy_head</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n+<span class="number">1</span>):</span><br><span class="line">    fast = fast.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">slow.<span class="built_in">next</span> = slow.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> dummy_head.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="没有虚拟头节点的方法"><a href="#没有虚拟头节点的方法" class="headerlink" title="没有虚拟头节点的方法"></a>没有虚拟头节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">p1 = head</span><br><span class="line">p2 = head</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">    p1 = p1.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> p1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">return</span> head.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">while</span> p1.<span class="built_in">next</span>:</span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">        p2 = p2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> p2.<span class="built_in">next</span>:</span><br><span class="line">    p2.<span class="built_in">next</span> = p2.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
+<p>思路: 这个题的思路是双指针，一个指针先走到N的位置，一个指针从起点开始，这时候两个指针同时向后走，这样两个指针之间相差N，一直到第一个指针先走到None，第二个指针就是到了链表的倒数第N个节点的前一个节点，就可以删除第N个节点了<br><em><strong>注意</strong></em></p>
+<ul>
+<li>要想删除第N个节点，指针一定要定位在N前面的一个节点，才能删掉第N个节点</li>
+<li>两个方法，一个是有虚拟头节点，一个是没有，写法上有虚拟头节点的更容易些，没有的话判断条件更多。推荐有虚拟头节点，移动的步数就是N+1</li>
+</ul>
+<h3 id="3-链表是否相交-160"><a href="#3-链表是否相交-160" class="headerlink" title="3. 链表是否相交 #160"></a>3. 链表是否相交 #160</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">p1 = headA</span><br><span class="line">p2 = headB</span><br><span class="line"><span class="keyword">while</span> p1 != p2:</span><br><span class="line">    <span class="keyword">if</span> p1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        p1 = headB</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span> p2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        p2 = headA</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p2 = p2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> p1 </span><br></pre></td></tr></table></figure>
+
+<p>思路： 把两个链表拼在一起，如果有相交点，会找到，headA+headB 和 headB+headA, 他们的长度一定是一样的，那么他们如果中间没有相交，到最后也一定会相交，都是None的时候</p>
+<ul>
+<li>一个指针从链表1开始，另一个指针从链表2开始。当第一个指针到达链表1的末尾时，我们将其重定向到链表2的头部。同样的，当第二个指针到达链表2的末尾时，我们将其重定向到链表1的头部。最终，两个指针会相遇，这就是它们的交点。</li>
+<li>如果有交点的话，就是两个节点的内存地址一样，所以后续的值一定一样，这样其实就是前面的长度可能会不一样，也就是有一个先到交点位置，有一个后到交点位置，但是如果是A+B 和B+A的时候，就是肯定同时到交点位置</li>
+</ul>
+<h3 id="4-环形链表，判断有否有环，找到环的起点，快慢指针-142"><a href="#4-环形链表，判断有否有环，找到环的起点，快慢指针-142" class="headerlink" title="4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142"></a>4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fast = head</span><br><span class="line">slow = head</span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span>(fast == slow):</span><br><span class="line">        index1 = fast</span><br><span class="line">        index2 = head</span><br><span class="line">        <span class="keyword">while</span> index1 != index2:</span><br><span class="line">            index1 = index1.<span class="built_in">next</span></span><br><span class="line">            index2 = index2.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> index1</span><br><span class="line"><span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+
+<p>思路： 程序非常简单，原理证明推理过程比较复杂</p>
+<ul>
+<li><ol>
+<li>定义一个快指针一个慢指针，每次快指针移动两步，慢指针移动一步，如果有相遇，就存在环，没有相遇就不存在环</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>从相遇点找环的起点，相遇时，把快指针放在head，之后快慢指针每次移动一步，再次相交的点就是环的起点</li>
+</ol>
+</li>
+</ul>
+<h2 id="python-语法补充"><a href="#python-语法补充" class="headerlink" title="python 语法补充"></a>python 语法补充</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line"></span><br><span class="line">两个是一个意思</span><br><span class="line"></span><br><span class="line">dummy_head = ListNode(<span class="number">0</span>)</span><br><span class="line">dimmy_head.<span class="built_in">next</span> = head</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clt0867j10003v9wk2jz82z1y" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/02/22/20240222-LinkedList/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240222 LinkedList</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/02/23/20240223-LinkedList/">20240223 LinkedList</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/22/20240222-LinkedList/">20240222 LinkedList</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/21/20240221-Array/">20240221 Array</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/20/20240220-Array/">20240220 Array</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/20/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
