@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240228 string#1 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="string 字符串1. 反转字符串 #34412345678910111213141516171819class Solution:    def reverseString(self, s: List[str]) -&gt; None:        &quot;&quot;&quot;        Do not return anything, modify s in-place inst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240228 string#1">
+<meta property="og:url" content="https://qikongweb.github.io/2024/02/27/20240228-string-1/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="string 字符串1. 反转字符串 #34412345678910111213141516171819class Solution:    def reverseString(self, s: List[str]) -&gt; None:        &quot;&quot;&quot;        Do not return anything, modify s in-place inst">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-27T13:04:07.000Z">
+<meta property="article:modified_time" content="2024-02-28T00:28:40.063Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240228-string-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/27/20240228-string-1/" class="article-date">
+  <time class="dt-published" datetime="2024-02-27T13:04:07.000Z" itemprop="datePublished">2024-02-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240228 string#1
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="string-字符串"><a href="#string-字符串" class="headerlink" title="string 字符串"></a>string 字符串</h2><h3 id="1-反转字符串-344"><a href="#1-反转字符串-344" class="headerlink" title="1. 反转字符串 #344"></a>1. 反转字符串 #344</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseString</span>(<span class="params">self, s: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 数组range</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(s)//<span class="number">2</span>):</span><br><span class="line">            j = <span class="built_in">len</span>(s)-<span class="number">1</span>-i</span><br><span class="line">            s[i], s[j] = s[j], s[i]</span><br><span class="line">        <span class="comment"># return s</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 双指针 方法</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(s)-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            s[left], s[right] = s[right], s[left]</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            right -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>第一时间想到双指针while，或者for loop做range，跟双指针差不多。</li>
+<li>不需要return</li>
+</ul>
+<h3 id="2-反转字符串II-541"><a href="#2-反转字符串II-541" class="headerlink" title="2. 反转字符串II #541"></a>2. 反转字符串II #541</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseStr</span>(<span class="params">self, s: <span class="built_in">str</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        list_str = <span class="built_in">list</span>(s)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(list_str), <span class="number">2</span>*k):</span><br><span class="line">            left = i</span><br><span class="line">            <span class="keyword">if</span> i+k-<span class="number">1</span>&gt;=<span class="built_in">len</span>(list_str):</span><br><span class="line">                right = <span class="built_in">len</span>(list_str)-<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                right = i+k-<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> left &lt; right:</span><br><span class="line">                list_str[left], list_str[right] = list_str[right], list_str[left]</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        s_new = <span class="string">&quot;&quot;</span>.join(list_str)</span><br><span class="line">        <span class="keyword">return</span> s_new</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>也是第一时间想到用双指针，循环的时候是每2k循环一次</li>
+<li>如果最后一次循环不足k的时候，右指针需要改到最后一位</li>
+<li><strong>注意：python字符串不能做交换位，只能是数组，所以这道题先变数组再变回字符串</strong></li>
+</ul>
+<h3 id="3-替换数字-kama网code"><a href="#3-替换数字-kama网code" class="headerlink" title="3. 替换数字 kama网code"></a>3. 替换数字 kama网code</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="built_in">input</span>()</span><br><span class="line">ans = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> ss <span class="keyword">in</span> str1:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">ord</span>(<span class="string">&quot;0&quot;</span>) &lt;= <span class="built_in">ord</span>(ss) &lt;= <span class="built_in">ord</span>(<span class="string">&quot;9&quot;</span>):</span><br><span class="line">        ans += <span class="string">&quot;number&quot;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ans += ss</span><br><span class="line"><span class="built_in">print</span>(ans)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-翻转字符串里的单词-151-（可以再做一遍）"><a href="#4-翻转字符串里的单词-151-（可以再做一遍）" class="headerlink" title="4. 翻转字符串里的单词 #151 （可以再做一遍）"></a>4. 翻转字符串里的单词 #151 （可以再做一遍）</h3><p><strong>第一种解法</strong> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="comment"># 去掉多余的空格，用双指针</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">deleteSpaceSeries</span>(<span class="params">self, s: <span class="built_in">list</span></span>):</span><br><span class="line">        <span class="comment"># 尾巴while去空格</span></span><br><span class="line">        i = <span class="built_in">len</span>(s) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> i&gt;=<span class="number">0</span> <span class="keyword">and</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">            s.pop()</span><br><span class="line">            i-=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 开头while去空格</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(s) <span class="keyword">and</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">            i+=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 去掉中间的多余一个的空格</span></span><br><span class="line">        write_i = <span class="number">0</span> <span class="comment">#新指针</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(s):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> (s[i-<span class="number">1</span>] == <span class="string">&quot; &quot;</span> <span class="keyword">and</span> s[i]==<span class="string">&quot; &quot;</span>):</span><br><span class="line">                s[write_i] = s[i]</span><br><span class="line">                write_i += <span class="number">1</span></span><br><span class="line">            i+=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 把write_i之后的元素都去掉 </span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)-write_i):</span><br><span class="line">            s.pop()</span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line">    <span class="comment"># reverse 每个单词</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reversOneWord</span>(<span class="params">self, s: <span class="built_in">list</span></span>):</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(s) - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; <span class="built_in">len</span>(s)//<span class="number">2</span>:</span><br><span class="line">            s[left],s[right]= s[right],s[left]</span><br><span class="line">            left+=<span class="number">1</span></span><br><span class="line">            right-=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> s</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseWords</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="comment"># 不用库函数的解法,空间复杂度是O（1），没有定义其他的数组</span></span><br><span class="line">        s_new = self.deleteSpaceSeries(<span class="built_in">list</span>(s)); <span class="comment">#去除多余空格，保证单词之间之只有一个空格，且字符串首尾没空格。</span></span><br><span class="line"></span><br><span class="line">        s_reverseSentence = self.reversOneWord(s_new)</span><br><span class="line">        </span><br><span class="line">        start = <span class="number">0</span>  <span class="comment">#removeExtraSpaces后保证第一个单词的开始下标一定是0。</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(s_new)+<span class="number">1</span>) : <span class="comment">#这个循环的条件是到size+1，为了最后一次循环，保证取到了最后一位</span></span><br><span class="line">            <span class="keyword">if</span> (i == <span class="built_in">len</span>(s_new) <span class="keyword">or</span> s_new[i] == <span class="string">&#x27; &#x27;</span>):  <span class="comment">#到达空格或者串尾，说明一个单词结束。进行翻转。</span></span><br><span class="line">                s_new[start:i] = self.reversOneWord(s_new[start:i]) <span class="comment">#翻转，注意是左闭右闭 []的翻转。</span></span><br><span class="line">                start = i + <span class="number">1</span> <span class="comment">#更新下一个单词的开始下标start</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(s_new)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>第二种解法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除前后空白</span></span><br><span class="line">s = s.strip()</span><br><span class="line"><span class="comment"># 反转整个字符串</span></span><br><span class="line">s = s[::-<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 将字符串拆分为单词，并反转每个单词</span></span><br><span class="line">s_split = s.split()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(s_split)):</span><br><span class="line">    s_split[i] = s_split[i][::-<span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(s_split)</span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot; &quot;</span>.join(s_split)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>第三种解法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将字符串拆分为单词，即转换成列表类型</span></span><br><span class="line">words = s.split()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反转单词</span></span><br><span class="line">left, right = <span class="number">0</span>, <span class="built_in">len</span>(words) - <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> left &lt; right:</span><br><span class="line">    words[left], words[right] = words[right], words[left]</span><br><span class="line">    left += <span class="number">1</span></span><br><span class="line">    right -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将列表转换成字符串</span></span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot; &quot;</span>.join(words)</span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>解法是拆开成三步：<ul>
+<li>去掉多余的空格</li>
+<li>把整个字符串反转</li>
+<li>把字符串里的每个单词反转</li>
+</ul>
+</li>
+<li>第一种解法，属于有难度的，不用库函数，应用了双指针实现了反转和去掉多余的空格。空间复杂度是O(1)。因为没有新建多余的数组，有一个问题，在python中，如果把字符串变成list，还算空间复杂度是O(1)？</li>
+<li>第二,三种解法是应用了python自己的库函数：<ul>
+<li>s.splite(), 根据空格拆分string，得到list，类似typescript里的split</li>
+<li>“ “.joint(list), 如果是中间用空格链接，就要在前面加空格</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-右旋字符串-卡农网题目"><a href="#5-右旋字符串-卡农网题目" class="headerlink" title="5. 右旋字符串 卡农网题目"></a>5. 右旋字符串 卡农网题目</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">k = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line">s = <span class="built_in">input</span>()</span><br><span class="line"></span><br><span class="line">l = <span class="string">&quot;&quot;</span></span><br><span class="line">r = <span class="string">&quot;&quot;</span></span><br><span class="line">res = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(s)):</span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(s)-k:</span><br><span class="line">        l += s[i]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        r += s[i]</span><br><span class="line">        </span><br><span class="line">res = r + l</span><br><span class="line"><span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="clt5282gw0007mxwk0jp58zoa" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/02/26/20240227-hash-table2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240227 hash table2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/02/27/20240228-string-1/">20240228 string#1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/26/20240227-hash-table2/">20240227 hash table2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/24/20240226-hash-table/">20240226 hash table</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/23/20240223-LinkedList/">20240223 LinkedList</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/22/20240222-LinkedList/">20240222 LinkedList</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
