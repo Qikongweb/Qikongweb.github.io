@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240229 string#2 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="String and KMP1. Find the Index of the First Occurrence in a String #281234567class Solution:    def strStr(self, haystack: str, needle: str) -&gt; int:        for i in range(0,len(haystack)-len(needl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240229 string#2">
+<meta property="og:url" content="https://qikongweb.github.io/2024/02/28/20240229-string-2/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="String and KMP1. Find the Index of the First Occurrence in a String #281234567class Solution:    def strStr(self, haystack: str, needle: str) -&gt; int:        for i in range(0,len(haystack)-len(needl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-29T00:56:50.000Z">
+<meta property="article:modified_time" content="2024-02-29T01:27:19.291Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240229-string-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/28/20240229-string-2/" class="article-date">
+  <time class="dt-published" datetime="2024-02-29T00:56:50.000Z" itemprop="datePublished">2024-02-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240229 string#2
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="String-and-KMP"><a href="#String-and-KMP" class="headerlink" title="String and KMP"></a>String and KMP</h3><h2 id="1-Find-the-Index-of-the-First-Occurrence-in-a-String-28"><a href="#1-Find-the-Index-of-the-First-Occurrence-in-a-String-28" class="headerlink" title="1. Find the Index of the First Occurrence in a String #28"></a>1. Find the Index of the First Occurrence in a String #28</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">strStr</span>(<span class="params">self, haystack: <span class="built_in">str</span>, needle: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(haystack)-<span class="built_in">len</span>(needle)+<span class="number">1</span>):</span><br><span class="line">            s = haystack[i:i+<span class="built_in">len</span>(needle)]</span><br><span class="line">            <span class="keyword">if</span>(s == needle):</span><br><span class="line">                <span class="keyword">return</span> i</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这道题有python的简单解法，KMP 算法的思路之后再看。</p>
+<h2 id="2-重复的子字符串-459"><a href="#2-重复的子字符串-459" class="headerlink" title="2. 重复的子字符串 #459"></a>2. 重复的子字符串 #459</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">repeatedSubstringPattern</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># 自己的解法</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(s)//<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(s) % (i+<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">                n_arr = s[<span class="number">0</span>:i+<span class="number">1</span>] * <span class="built_in">int</span>(<span class="built_in">len</span>(s)/(i+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">if</span> n_arr == s:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 例子的解法</span></span><br><span class="line">        <span class="keyword">return</span> s <span class="keyword">in</span> s[<span class="number">1</span>:] + s[:-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>我的思路是，循环第i位开始，构造一个拼接字符串i位n次的字符串，然后判断新构造的字符串是否等于s，如果等于，就是True，否则就是False</li>
+<li>循环只循环一半就可以</li>
+<li>例子的思路是把s和倒过来的s拼在一起，判断s是否存在于新的字符串</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="clt6qsdn100071uwkefvnd7ij" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/02/27/20240228-string-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240228 string#1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/02/28/20240229-string-2/">20240229 string#2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/27/20240228-string-1/">20240228 string#1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/26/20240227-hash-table2/">20240227 hash table2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/24/20240226-hash-table/">20240226 hash table</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/23/20240223-LinkedList/">20240223 LinkedList</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

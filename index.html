@@ -69,6 +69,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20240229-string-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/28/20240229-string-2/" class="article-date">
+  <time class="dt-published" datetime="2024-02-29T00:56:50.000Z" itemprop="datePublished">2024-02-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/28/20240229-string-2/">20240229 string#2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="String-and-KMP"><a href="#String-and-KMP" class="headerlink" title="String and KMP"></a>String and KMP</h3><h2 id="1-Find-the-Index-of-the-First-Occurrence-in-a-String-28"><a href="#1-Find-the-Index-of-the-First-Occurrence-in-a-String-28" class="headerlink" title="1. Find the Index of the First Occurrence in a String #28"></a>1. Find the Index of the First Occurrence in a String #28</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">strStr</span>(<span class="params">self, haystack: <span class="built_in">str</span>, needle: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(haystack)-<span class="built_in">len</span>(needle)+<span class="number">1</span>):</span><br><span class="line">            s = haystack[i:i+<span class="built_in">len</span>(needle)]</span><br><span class="line">            <span class="keyword">if</span>(s == needle):</span><br><span class="line">                <span class="keyword">return</span> i</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>这道题有python的简单解法，KMP 算法的思路之后再看。</p>
+<h2 id="2-重复的子字符串-459"><a href="#2-重复的子字符串-459" class="headerlink" title="2. 重复的子字符串 #459"></a>2. 重复的子字符串 #459</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">repeatedSubstringPattern</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># 自己的解法</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(s)//<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(s) % (i+<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">                n_arr = s[<span class="number">0</span>:i+<span class="number">1</span>] * <span class="built_in">int</span>(<span class="built_in">len</span>(s)/(i+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">if</span> n_arr == s:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 例子的解法</span></span><br><span class="line">        <span class="keyword">return</span> s <span class="keyword">in</span> s[<span class="number">1</span>:] + s[:-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>我的思路是，循环第i位开始，构造一个拼接字符串i位n次的字符串，然后判断新构造的字符串是否等于s，如果等于，就是True，否则就是False</li>
+<li>循环只循环一半就可以</li>
+<li>例子的思路是把s和倒过来的s拼在一起，判断s是否存在于新的字符串</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="clt6qsdn100071uwkefvnd7ij" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-20240228-string-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/27/20240228-string-1/" class="article-date">
@@ -132,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="clt5282gw0007mxwk0jp58zoa" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="clt6qsdn100061uwkhztwa10a" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -204,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="clt5282gw0005mxwkd7oobrb6" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="clt6qsdn000051uwk2atygpbc" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -295,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="clt5282gv0004mxwkbyqxf3ik" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="clt6qsdn000041uwketwmgvqw" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -363,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clt5282gu0002mxwkfo0o20pm" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clt6qsdmz00031uwkcns608nc" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -418,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clt5282gu0003mxwk2s0rcwk4" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clt6qsdmz00021uwk61srd2qn" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -474,7 +523,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clt5282gt0001mxwkcns5cyl9" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clt6qsdmw00001uwkhgm69sz3" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -526,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clt5282gq0000mxwk5ur7f08f" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clt6qsdmy00011uwk4tit54da" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -577,7 +626,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clt5282gw0006mxwk4z49fxff" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clt6qsdn200081uwk31rv148b" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -620,6 +669,10 @@
       <ul>
         
           <li>
+            <a href="/2024/02/28/20240229-string-2/">20240229 string#2</a>
+          </li>
+        
+          <li>
             <a href="/2024/02/27/20240228-string-1/">20240228 string#1</a>
           </li>
         
@@ -633,10 +686,6 @@
         
           <li>
             <a href="/2024/02/23/20240223-LinkedList/">20240223 LinkedList</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/22/20240222-LinkedList/">20240222 LinkedList</a>
           </li>
         
       </ul>
