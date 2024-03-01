@@ -69,6 +69,109 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20240301-stack-queue-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/29/20240301-stack-queue-1/" class="article-date">
+  <time class="dt-published" datetime="2024-02-29T22:20:30.000Z" itemprop="datePublished">2024-02-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/29/20240301-stack-queue-1/">20240301 stack&amp;queue#1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="栈与队列"><a href="#栈与队列" class="headerlink" title="栈与队列"></a>栈与队列</h2><h3 id="1-用栈实现队列-232"><a href="#1-用栈实现队列-232" class="headerlink" title="1. 用栈实现队列 #232"></a>1. 用栈实现队列 #232</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyQueue</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.stack_in = []</span><br><span class="line">        self.stack_out = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">push</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.stack_in.append(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pop</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.stack_out) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(self.stack_in)):</span><br><span class="line">                self.stack_out.append(self.stack_in.pop())</span><br><span class="line">        <span class="keyword">return</span> self.stack_out.pop()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">peek</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = self.pop()</span><br><span class="line">        self.stack_out.append(result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">empty</span>(<span class="params">self</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.stack_in)== <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">len</span>(self.stack_out)==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>思路： </p>
+<ul>
+<li>用栈实现列队，主要注意的是需要有两个栈，入口栈是负责加入元素进来，出口栈是负责pop出最后一个元素，从入口栈一个一个导入到出口栈。</li>
+</ul>
+<h3 id="2-用队列实现栈-225"><a href="#2-用队列实现栈-225" class="headerlink" title="2. 用队列实现栈 #225"></a>2. 用队列实现栈 #225</h3><p>解法一： Python 的库 queue.Queue</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.queue_default = queue.Queue()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">push</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.queue_default.put(x)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, self.queue_default.qsize()-<span class="number">1</span>):</span><br><span class="line">            x = self.queue_default.get()</span><br><span class="line">            self.queue_default.put(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pop</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.queue_default.get()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">top</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = self.queue_default.get()</span><br><span class="line">        self.push(result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">empty</span>(<span class="params">self</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">return</span> self.queue_default.qsize() == <span class="number">0</span></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<p>解法二： Python库里面的 collection.deque</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.deque_ori = deque()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">push</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.deque_ori.append(x)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(self.deque_ori)-<span class="number">1</span>):</span><br><span class="line">            x = self.deque_ori.popleft()</span><br><span class="line">            self.deque_ori.append(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pop</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.deque_ori.popleft()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">top</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = self.deque_ori.popleft()</span><br><span class="line">        self.push(result)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">        <span class="keyword">return</span> self.deque_ori[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">empty</span>(<span class="params">self</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.deque_ori) == <span class="number">0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>栈是先进后出，队列是先进先出，为了实现栈，可以只用一个队列，把size-1的元素从左面出来，再推进右面。</li>
+</ul>
+<p><strong>python 语法：</strong><br>python里的queue.Queue VS collection.deque</p>
+<ul>
+<li><p>在Python里，queue.Queue主要是为了线程间通信，作为“队列”只是附带的功能。而collections.deque就是个容器，和dict，list类似。</p>
+</li>
+<li><p>如果只是想用一个简单的队列，可能从名字上看上去“Queue”更合适。当然用是可以用的，不过，Queue相比deque有个坏处：慢不少。Queue是很高级的同步设施，有例如get_nowait，join等同步用接口，该阻塞就阻塞，该返回就返回。而deque只是个容器。其实从类名也有所反映，Queue是大写的首字母；而deque是和list, dict等一样是小写的首字母。</p>
+</li>
+</ul>
+<p>Queue：put和get</p>
+<p>deque：append和popleft</p>
+<p><strong>仔细讲讲deque，python里经常用到的</strong></p>
+<ul>
+<li><p>Python中的标准库collections中有一个deque，该对象与list列表相似。这里的“双向”指的是deuqe的结构使用双向链表，它提供了两端都可以操作的序列，这意味着，我们可以在序列前后都执行添加或删除。大多操作与List相同，如访问元素，求序列长度等，同样deque序列中的元素类型也不唯一。</p>
+</li>
+<li><p>相比于list实现的队列，deque实现拥有更低的时间和空间复杂度。list实现出队（pop）和插入（insert）时的空间复杂度大约为O(n)，deque在出队（pop）和入队（append）时的时间复杂度是O(1)。</p>
+</li>
+</ul>
+<p>使用q&#x3D;deque()代替q&#x3D;list()，因为q.popleft()效率比q.pop(0)高<br>这是因为：列表实现是基于数组的。pop(0)从列表中删除第一个项，它需要左移len(lst) - 1个项来填补空白。 deque()实现使用双向链表。因此无论deque有多大，deque.popleft()都需要一个常量的操作数。<br>即deque.popleft()：T(n)&#x3D;O(1)，而list.pop(0)：T(n)&#x3D;O(n)</p>
+<ul>
+<li>基本操作：<ol>
+<li><p>deque入队和出队</p>
+<ul>
+<li>append(item)，添加一个数据到队列的尾部。与列表的append()方法功能相似。</li>
+<li>appendleft(item)，添加一个数据到队列的头部。与append()的添加方向相反。</li>
+</ul>
+</li>
+<li><p>可迭代对象入队</p>
+<ul>
+<li>append([1,2,3])，添加一个数据到队列的尾部。与列表的append()方法功能相似。</li>
+<li>appendleft([1,2,3])，添加一个数据到队列的头部。与append()的添加方向相反。</li>
+</ul>
+</li>
+<li><p>指定位置插入数据</p>
+<ul>
+<li>insert(index, item)，在队列中的指定位置插入一个数据，index为指定的位置索引。</li>
+</ul>
+</li>
+<li><p>deque 类中实现了队列两端的出队方法</p>
+<ul>
+<li>pop()，将队列尾部的数据弹出，并作为返回值。</li>
+<li>popleft()，将队列头部的数据弹出，并作为返回值。</li>
+</ul>
+</li>
+<li><p>deque的copy方法</p>
+<ul>
+<li>copy()，拷贝队列。拷贝之后，对原队列进行操作，不会影响到拷贝出来的队列。这个方法要在高于Python3.5的版本才有。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/29/20240301-stack-queue-1/" data-id="clt7z458d0007kdwk3yi72tef" data-title="20240301 stack&amp;queue#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-20240229-string-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/28/20240229-string-2/" class="article-date">
@@ -93,7 +196,8 @@
       
         <h3 id="String-and-KMP"><a href="#String-and-KMP" class="headerlink" title="String and KMP"></a>String and KMP</h3><h2 id="1-Find-the-Index-of-the-First-Occurrence-in-a-String-28"><a href="#1-Find-the-Index-of-the-First-Occurrence-in-a-String-28" class="headerlink" title="1. Find the Index of the First Occurrence in a String #28"></a>1. Find the Index of the First Occurrence in a String #28</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">strStr</span>(<span class="params">self, haystack: <span class="built_in">str</span>, needle: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(haystack)-<span class="built_in">len</span>(needle)+<span class="number">1</span>):</span><br><span class="line">            s = haystack[i:i+<span class="built_in">len</span>(needle)]</span><br><span class="line">            <span class="keyword">if</span>(s == needle):</span><br><span class="line">                <span class="keyword">return</span> i</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<p>这道题有python的简单解法，KMP 算法的思路之后再看。</p>
+<p>这道题有python的简单解法，KMP 算法的思路之后再看。<br>KMP的精髓所在就是前缀表，<img src="https://programmercarl.com/0028.%E5%AE%9E%E7%8E%B0strStr.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE" alt="在KMP精讲"> 中提到了，什么是KMP，什么是前缀表，以及为什么要用前缀表。</p>
+<p>前缀表：起始位置到下标i之前（包括i）的子串中，有多大长度的相同前缀后缀。</p>
 <h2 id="2-重复的子字符串-459"><a href="#2-重复的子字符串-459" class="headerlink" title="2. 重复的子字符串 #459"></a>2. 重复的子字符串 #459</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">repeatedSubstringPattern</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># 自己的解法</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(s)//<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(s) % (i+<span class="number">1</span>) == <span class="number">0</span>:</span><br><span class="line">                n_arr = s[<span class="number">0</span>:i+<span class="number">1</span>] * <span class="built_in">int</span>(<span class="built_in">len</span>(s)/(i+<span class="number">1</span>))</span><br><span class="line">                <span class="keyword">if</span> n_arr == s:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 例子的解法</span></span><br><span class="line">        <span class="keyword">return</span> s <span class="keyword">in</span> s[<span class="number">1</span>:] + s[:-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
 <p>思路：</p>
@@ -106,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="clt6qsdn100071uwkefvnd7ij" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="clt7z458d0006kdwk3mfb3y4f" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -164,14 +268,25 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将字符串拆分为单词，即转换成列表类型</span></span><br><span class="line">words = s.split()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反转单词</span></span><br><span class="line">left, right = <span class="number">0</span>, <span class="built_in">len</span>(words) - <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> left &lt; right:</span><br><span class="line">    words[left], words[right] = words[right], words[left]</span><br><span class="line">    left += <span class="number">1</span></span><br><span class="line">    right -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将列表转换成字符串</span></span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot; &quot;</span>.join(words)</span><br></pre></td></tr></table></figure>
 <p>思路：</p>
 <ul>
-<li>解法是拆开成三步：<ul>
+<li><p>解法是拆开成三步：</p>
+<ul>
 <li>去掉多余的空格</li>
 <li>把整个字符串反转</li>
 <li>把字符串里的每个单词反转</li>
 </ul>
 </li>
-<li>第一种解法，属于有难度的，不用库函数，应用了双指针实现了反转和去掉多余的空格。空间复杂度是O(1)。因为没有新建多余的数组，有一个问题，在python中，如果把字符串变成list，还算空间复杂度是O(1)？</li>
-<li>第二,三种解法是应用了python自己的库函数：<ul>
+<li><p>第一种解法，属于有难度的，不用库函数，应用了双指针实现了反转和去掉多余的空格。空间复杂度是O(1)。因为没有新建多余的数组，有一个问题，在python中，如果把字符串变成list，还算空间复杂度是O(1)？</p>
+<ul>
+<li><p>解答这个问题： 在Python中，字符串是不可变（immutable）的，这意味着你无法像在C++中那样直接操作字符串进行交换。当你试图修改字符串时，实际上是创建了一个新的字符串对象。</p>
+</li>
+<li><p>当你将字符串转换为列表（list）进行操作后，再将其转换回字符串时，空间复杂度取决于你创建的新列表的大小。如果你只是对原始字符串进行了原地修改，而没有创建新的对象，则空间复杂度可以近似为O(1)。</p>
+</li>
+<li><p>然而，如果你创建了新的列表对象，空间复杂度将取决于新列表对象的大小，因此不再是O(1)。</p>
+</li>
+</ul>
+</li>
+<li><p>第二,三种解法是应用了python自己的库函数：</p>
+<ul>
 <li>s.splite(), 根据空格拆分string，得到list，类似typescript里的split</li>
 <li>“ “.joint(list), 如果是中间用空格链接，就要在前面加空格</li>
 </ul>
@@ -181,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="clt6qsdn100061uwkhztwa10a" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="clt7z458c0005kdwk4tyz275u" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -253,7 +368,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="clt6qsdn000051uwk2atygpbc" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="clt7z458e0009kdwkai0cbpdl" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -344,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="clt6qsdn000041uwketwmgvqw" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="clt7z458c0004kdwkava2a7m2" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -412,7 +527,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clt6qsdmz00031uwkcns608nc" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clt7z458c0003kdwk0q7d8b27" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -467,7 +582,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clt6qsdmz00021uwk61srd2qn" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clt7z458b0002kdwk40c99cmq" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -523,7 +638,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clt6qsdmw00001uwkhgm69sz3" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clt7z458a0001kdwka3nk3qul" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -575,7 +690,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clt6qsdmy00011uwk4tit54da" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clt7z45860000kdwk2fkq90e3" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -626,7 +741,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clt6qsdn200081uwk31rv148b" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clt7z458d0008kdwkcdoka4d8" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -669,6 +784,10 @@
       <ul>
         
           <li>
+            <a href="/2024/02/29/20240301-stack-queue-1/">20240301 stack&amp;queue#1</a>
+          </li>
+        
+          <li>
             <a href="/2024/02/28/20240229-string-2/">20240229 string#2</a>
           </li>
         
@@ -682,10 +801,6 @@
         
           <li>
             <a href="/2024/02/24/20240226-hash-table/">20240226 hash table</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/23/20240223-LinkedList/">20240223 LinkedList</a>
           </li>
         
       </ul>

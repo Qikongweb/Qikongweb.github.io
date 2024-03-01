@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240301 stack&amp;queue#1 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="栈与队列1. 用栈实现队列 #23212345678910111213141516171819202122232425class MyQueue:    def __init__(self):        self.stack_in &#x3D; []        self.stack_out &#x3D; []    def push(self, x: int) -&gt; None:        self.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240301 stack&amp;queue#1">
+<meta property="og:url" content="https://qikongweb.github.io/2024/02/29/20240301-stack-queue-1/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="栈与队列1. 用栈实现队列 #23212345678910111213141516171819202122232425class MyQueue:    def __init__(self):        self.stack_in &#x3D; []        self.stack_out &#x3D; []    def push(self, x: int) -&gt; None:        self.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-29T22:20:30.000Z">
+<meta property="article:modified_time" content="2024-03-01T01:26:12.149Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240301-stack-queue-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/29/20240301-stack-queue-1/" class="article-date">
+  <time class="dt-published" datetime="2024-02-29T22:20:30.000Z" itemprop="datePublished">2024-02-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240301 stack&amp;queue#1
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="栈与队列"><a href="#栈与队列" class="headerlink" title="栈与队列"></a>栈与队列</h2><h3 id="1-用栈实现队列-232"><a href="#1-用栈实现队列-232" class="headerlink" title="1. 用栈实现队列 #232"></a>1. 用栈实现队列 #232</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyQueue</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.stack_in = []</span><br><span class="line">        self.stack_out = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">push</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.stack_in.append(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pop</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.stack_out) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(self.stack_in)):</span><br><span class="line">                self.stack_out.append(self.stack_in.pop())</span><br><span class="line">        <span class="keyword">return</span> self.stack_out.pop()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">peek</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = self.pop()</span><br><span class="line">        self.stack_out.append(result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">empty</span>(<span class="params">self</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.stack_in)== <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">len</span>(self.stack_out)==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>思路： </p>
+<ul>
+<li>用栈实现列队，主要注意的是需要有两个栈，入口栈是负责加入元素进来，出口栈是负责pop出最后一个元素，从入口栈一个一个导入到出口栈。</li>
+</ul>
+<h3 id="2-用队列实现栈-225"><a href="#2-用队列实现栈-225" class="headerlink" title="2. 用队列实现栈 #225"></a>2. 用队列实现栈 #225</h3><p>解法一： Python 的库 queue.Queue</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.queue_default = queue.Queue()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">push</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.queue_default.put(x)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, self.queue_default.qsize()-<span class="number">1</span>):</span><br><span class="line">            x = self.queue_default.get()</span><br><span class="line">            self.queue_default.put(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pop</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.queue_default.get()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">top</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = self.queue_default.get()</span><br><span class="line">        self.push(result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">empty</span>(<span class="params">self</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">return</span> self.queue_default.qsize() == <span class="number">0</span></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<p>解法二： Python库里面的 collection.deque</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.deque_ori = deque()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">push</span>(<span class="params">self, x: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.deque_ori.append(x)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(self.deque_ori)-<span class="number">1</span>):</span><br><span class="line">            x = self.deque_ori.popleft()</span><br><span class="line">            self.deque_ori.append(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pop</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.deque_ori.popleft()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">top</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = self.deque_ori.popleft()</span><br><span class="line">        self.push(result)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">        <span class="keyword">return</span> self.deque_ori[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">empty</span>(<span class="params">self</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.deque_ori) == <span class="number">0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>栈是先进后出，队列是先进先出，为了实现栈，可以只用一个队列，把size-1的元素从左面出来，再推进右面。</li>
+</ul>
+<p><strong>python 语法：</strong><br>python里的queue.Queue VS collection.deque</p>
+<ul>
+<li><p>在Python里，queue.Queue主要是为了线程间通信，作为“队列”只是附带的功能。而collections.deque就是个容器，和dict，list类似。</p>
+</li>
+<li><p>如果只是想用一个简单的队列，可能从名字上看上去“Queue”更合适。当然用是可以用的，不过，Queue相比deque有个坏处：慢不少。Queue是很高级的同步设施，有例如get_nowait，join等同步用接口，该阻塞就阻塞，该返回就返回。而deque只是个容器。其实从类名也有所反映，Queue是大写的首字母；而deque是和list, dict等一样是小写的首字母。</p>
+</li>
+</ul>
+<p>Queue：put和get</p>
+<p>deque：append和popleft</p>
+<p><strong>仔细讲讲deque，python里经常用到的</strong></p>
+<ul>
+<li><p>Python中的标准库collections中有一个deque，该对象与list列表相似。这里的“双向”指的是deuqe的结构使用双向链表，它提供了两端都可以操作的序列，这意味着，我们可以在序列前后都执行添加或删除。大多操作与List相同，如访问元素，求序列长度等，同样deque序列中的元素类型也不唯一。</p>
+</li>
+<li><p>相比于list实现的队列，deque实现拥有更低的时间和空间复杂度。list实现出队（pop）和插入（insert）时的空间复杂度大约为O(n)，deque在出队（pop）和入队（append）时的时间复杂度是O(1)。</p>
+</li>
+</ul>
+<p>使用q&#x3D;deque()代替q&#x3D;list()，因为q.popleft()效率比q.pop(0)高<br>这是因为：列表实现是基于数组的。pop(0)从列表中删除第一个项，它需要左移len(lst) - 1个项来填补空白。 deque()实现使用双向链表。因此无论deque有多大，deque.popleft()都需要一个常量的操作数。<br>即deque.popleft()：T(n)&#x3D;O(1)，而list.pop(0)：T(n)&#x3D;O(n)</p>
+<ul>
+<li>基本操作：<ol>
+<li><p>deque入队和出队</p>
+<ul>
+<li>append(item)，添加一个数据到队列的尾部。与列表的append()方法功能相似。</li>
+<li>appendleft(item)，添加一个数据到队列的头部。与append()的添加方向相反。</li>
+</ul>
+</li>
+<li><p>可迭代对象入队</p>
+<ul>
+<li>append([1,2,3])，添加一个数据到队列的尾部。与列表的append()方法功能相似。</li>
+<li>appendleft([1,2,3])，添加一个数据到队列的头部。与append()的添加方向相反。</li>
+</ul>
+</li>
+<li><p>指定位置插入数据</p>
+<ul>
+<li>insert(index, item)，在队列中的指定位置插入一个数据，index为指定的位置索引。</li>
+</ul>
+</li>
+<li><p>deque 类中实现了队列两端的出队方法</p>
+<ul>
+<li>pop()，将队列尾部的数据弹出，并作为返回值。</li>
+<li>popleft()，将队列头部的数据弹出，并作为返回值。</li>
+</ul>
+</li>
+<li><p>deque的copy方法</p>
+<ul>
+<li>copy()，拷贝队列。拷贝之后，对原队列进行操作，不会影响到拷贝出来的队列。这个方法要在高于Python3.5的版本才有。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/29/20240301-stack-queue-1/" data-id="clt7z458d0007kdwk3yi72tef" data-title="20240301 stack&amp;queue#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/02/28/20240229-string-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240229 string#2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/02/29/20240301-stack-queue-1/">20240301 stack&amp;queue#1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/28/20240229-string-2/">20240229 string#2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/27/20240228-string-1/">20240228 string#1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/26/20240227-hash-table2/">20240227 hash table2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/24/20240226-hash-table/">20240226 hash table</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
