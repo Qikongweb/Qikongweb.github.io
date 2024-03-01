@@ -69,6 +69,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20240302-stack-queue-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/01/20240302-stack-queue-2/" class="article-date">
+  <time class="dt-published" datetime="2024-03-01T21:45:49.000Z" itemprop="datePublished">2024-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/01/20240302-stack-queue-2/">20240302 stack-queue-2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="栈与队列"><a href="#栈与队列" class="headerlink" title="栈与队列"></a>栈与队列</h2><h3 id="1-有效的括号-20"><a href="#1-有效的括号-20" class="headerlink" title="1. 有效的括号 #20"></a>1. 有效的括号 #20</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># 自己的解法</span></span><br><span class="line">        d = &#123;<span class="string">&#x27;&#123;&#x27;</span>:<span class="string">&#x27;&#125;&#x27;</span>,<span class="string">&#x27;(&#x27;</span>:<span class="string">&#x27;)&#x27;</span>,<span class="string">&#x27;[&#x27;</span>:<span class="string">&#x27;]&#x27;</span>&#125;</span><br><span class="line">        q = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s:          </span><br><span class="line">            <span class="keyword">if</span> x <span class="keyword">in</span> d:</span><br><span class="line">                q.append(d[x])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(q) == <span class="number">0</span>: </span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                last = q.pop()</span><br><span class="line">                <span class="keyword">if</span> x != last:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(q) == <span class="number">0</span></span><br><span class="line">        <span class="comment"># (缩减版)</span></span><br><span class="line">        d = &#123;<span class="string">&#x27;&#123;&#x27;</span>:<span class="string">&#x27;&#125;&#x27;</span>,<span class="string">&#x27;(&#x27;</span>:<span class="string">&#x27;)&#x27;</span>,<span class="string">&#x27;[&#x27;</span>:<span class="string">&#x27;]&#x27;</span>&#125;</span><br><span class="line">        q = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s:          </span><br><span class="line">            <span class="keyword">if</span> x <span class="keyword">in</span> d:</span><br><span class="line">                q.append(d[x])</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">len</span>(q) == <span class="number">0</span> <span class="keyword">or</span> x != q.pop():</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span>    </span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(q) == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>很简单，应用栈的原理，主要就是从尾部推入右侧的括号，再右边推出，比较是不是匹配</li>
+<li>可以用数组[], 也可以用queue（）</li>
+</ul>
+<h2 id="2-删除字符串中的所有相邻重复项-1047"><a href="#2-删除字符串中的所有相邻重复项-1047" class="headerlink" title="2. 删除字符串中的所有相邻重复项 #1047"></a>2. 删除字符串中的所有相邻重复项 #1047</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeDuplicates</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        stack = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(stack) == <span class="number">0</span> <span class="keyword">or</span> stack[-<span class="number">1</span>] != x:</span><br><span class="line">                stack.append(x)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> stack[-<span class="number">1</span>] == x:</span><br><span class="line">                    stack.pop()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(stack)</span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>很简单，很上面的一个思路</li>
+</ul>
+<h2 id="3-逆波兰表达式求值-150"><a href="#3-逆波兰表达式求值-150" class="headerlink" title="3. 逆波兰表达式求值 #150"></a>3. 逆波兰表达式求值 #150</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">evalRPN</span>(<span class="params">self, tokens: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 自己的解法</span></span><br><span class="line">        stack = []</span><br><span class="line">        s = [<span class="string">&#x27;+&#x27;</span>,<span class="string">&#x27;-&#x27;</span>,<span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;/&#x27;</span>]</span><br><span class="line">        operator_dict = &#123;<span class="string">&quot;+&quot;</span>: <span class="keyword">lambda</span> x, y: x+y,</span><br><span class="line">                 <span class="string">&quot;-&quot;</span>: <span class="keyword">lambda</span> x, y: x-y,</span><br><span class="line">                 <span class="string">&quot;*&quot;</span>: <span class="keyword">lambda</span> x, y: x*y,</span><br><span class="line">                 <span class="string">&quot;/&quot;</span>: <span class="keyword">lambda</span> x, y: <span class="built_in">int</span>(x/y)&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> tokens:</span><br><span class="line">            <span class="keyword">if</span> x <span class="keyword">not</span> <span class="keyword">in</span> s:</span><br><span class="line">                stack.append(x)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                a = stack.pop()</span><br><span class="line">                b = stack.pop()</span><br><span class="line">                operator_func = operator_dict[x]</span><br><span class="line">                result = operator_func(<span class="built_in">int</span>(b),<span class="built_in">int</span>(a))</span><br><span class="line"></span><br><span class="line">                stack.append(result)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">int</span>(stack[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以不pop出来两个，而是只在最后一位上做运算</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> tokens:</span><br><span class="line">            <span class="keyword">if</span> t <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;/+-*&#x27;</span>:</span><br><span class="line">                stack.append(<span class="built_in">int</span>(t))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                num = stack.pop()</span><br><span class="line">                <span class="keyword">if</span>   t == <span class="string">&#x27;+&#x27;</span>: stack[-<span class="number">1</span>]+=  num</span><br><span class="line">                <span class="keyword">elif</span> t == <span class="string">&#x27;-&#x27;</span>: stack[-<span class="number">1</span>]-=  num</span><br><span class="line">                <span class="keyword">elif</span> t == <span class="string">&#x27;*&#x27;</span>: stack[-<span class="number">1</span>]*=  num</span><br><span class="line">                <span class="keyword">else</span>         : stack[-<span class="number">1</span>]= <span class="built_in">int</span>(stack[-<span class="number">1</span>]/num)    </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> stack[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>太简单了，都是同一套思路，唯一不太一样的是，python如何把字符串变成运算符</li>
+<li>用了字典和lambda输入，lambda是用来创建匿名函数的关键字，匿名函数是一种不需要def语句来定义的函数，通常用于简单的功能性操作。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ex:</span><br><span class="line">    lambda arguments: expression</span><br><span class="line">    add = lambda x,y : x + y</span><br><span class="line">    print(add(1,2)) # 3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">operator_dict = &#123;&quot;+&quot;: lambda x, y: x+y,</span><br><span class="line">                 &quot;-&quot;: lambda x, y: x-y,</span><br><span class="line">                 &quot;*&quot;: lambda x, y: x*y,</span><br><span class="line">                 &quot;/&quot;: lambda x, y: int(x/y)&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/01/20240302-stack-queue-2/" data-id="clt98mfei0008crwkc8d28pch" data-title="20240302 stack-queue-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-20240301-stack-queue-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/29/20240301-stack-queue-1/" class="article-date">
@@ -160,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/29/20240301-stack-queue-1/" data-id="clt7z458d0007kdwk3yi72tef" data-title="20240301 stack&amp;queue#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/29/20240301-stack-queue-1/" data-id="clt98mfei0009crwkdsnj54sz" data-title="20240301 stack&amp;queue#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -210,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="clt7z458d0006kdwk3mfb3y4f" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="clt98mfeh0007crwk55vbca30" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -296,7 +353,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="clt7z458c0005kdwk4tyz275u" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="clt98mfeh0006crwkfodka6k7" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -368,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="clt7z458e0009kdwkai0cbpdl" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="clt98mfeh0005crwke1zkcd6z" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -459,7 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="clt7z458c0004kdwkava2a7m2" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="clt98mfeg0004crwk9ozu7t26" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -527,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clt7z458c0003kdwk0q7d8b27" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clt98mfeg0003crwk9dg1fj2o" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -582,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clt7z458b0002kdwk40c99cmq" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clt98mfeg0002crwk74z3hjge" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -638,7 +695,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clt7z458a0001kdwka3nk3qul" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clt98mfec0000crwk8o2h8aou" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -690,58 +747,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clt7z45860000kdwk2fkq90e3" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/20/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-02-20T20:31:21.856Z" itemprop="datePublished">2024-02-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clt7z458d0008kdwkcdoka4d8" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clt98mfef0001crwk3o8ocqxo" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -754,6 +760,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -771,7 +782,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
     </div>
   </div>
 
@@ -782,6 +793,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/03/01/20240302-stack-queue-2/">20240302 stack-queue-2</a>
+          </li>
         
           <li>
             <a href="/2024/02/29/20240301-stack-queue-1/">20240301 stack&amp;queue#1</a>
@@ -797,10 +812,6 @@
         
           <li>
             <a href="/2024/02/26/20240227-hash-table2/">20240227 hash table2</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/24/20240226-hash-table/">20240226 hash table</a>
           </li>
         
       </ul>
