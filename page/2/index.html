@@ -69,6 +69,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20240220-Array" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/20/20240220-Array/" class="article-date">
+  <time class="dt-published" datetime="2024-02-20T20:52:42.000Z" itemprop="datePublished">2024-02-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/20/20240220-Array/">20240220 Array</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- deploy -->
+<!-- hexo clean && hexo d -g -->
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="1-数组二分法-题目-704，-35"><a href="#1-数组二分法-题目-704，-35" class="headerlink" title="1.数组二分法 题目#704， #35"></a>1.数组二分法 题目#704， #35</h3><p>#704</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">left = <span class="number">0</span></span><br><span class="line">right = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> left &lt;=right:</span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> nums[mid] &lt; target:</span><br><span class="line">        left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">        right = mid -<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> mid</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>套用模版，有两种，第一种是左闭右闭，第二种是左闭右开，区别在于定义right，while条件，以及如果右开，right&#x3D;mid</p>
+<p>#35</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">left = <span class="number">0</span></span><br><span class="line">right = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"><span class="comment"># 左闭右闭</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left &lt;= right ):</span><br><span class="line">    <span class="comment"># // 取模，向下取整</span></span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span>(nums[mid] &gt; target):</span><br><span class="line">        right = mid -<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> (nums[mid] &lt; target):</span><br><span class="line">        left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> mid</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> left</span><br></pre></td></tr></table></figure>
+<p>*<strong>这道题最后如果要插入的值不存在，返回的要插入的index，我的理解是循环的最后的条件是left&#x3D;right，这个时候，如果target大于mid，left加1，否则left不变，所以此时left是最新的值而不是mid，代表比插入值大的第一个元素的位置，或者也可以写right+1。</strong></p>
+<h3 id="2-数组快慢指针-题目-27"><a href="#2-数组快慢指针-题目-27" class="headerlink" title="2.数组快慢指针 题目#27"></a>2.数组快慢指针 题目#27</h3><p>解法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slow = <span class="number">0</span></span><br><span class="line">fast = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> fast &lt; <span class="built_in">len</span>(nums):</span><br><span class="line">    <span class="keyword">if</span>(nums[fast] != val):</span><br><span class="line">        nums[slow] = nums[fast]</span><br><span class="line">        slow = slow + <span class="number">1</span></span><br><span class="line">    fast = fast + <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> slow</span><br></pre></td></tr></table></figure>
+<p>或者用index做快指针</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">slow = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">    <span class="keyword">if</span> nums[i] != val:</span><br><span class="line">        nums[slow] = nums[i]</span><br><span class="line">        slow += <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> slow </span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度是O(N)<br><strong>注意：快指针代表获取新数组要更新的元素，慢指针代表获取数组中需要更新的位置</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="cltd1afb60000ebwk4kvu62ya" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/20/hello-world/" class="article-date">
@@ -108,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clt98mfej000acrwk1ke5ehjw" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="cltd1afbc0009ebwkajye1cvi" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -156,6 +208,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/04/20240304-stack-queue-3/">20240304 stack-queue-3</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/01/20240302-stack-queue-2/">20240302 stack-queue-2</a>
           </li>
         
@@ -169,10 +225,6 @@
         
           <li>
             <a href="/2024/02/27/20240228-string-1/">20240228 string#1</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/26/20240227-hash-table2/">20240227 hash table2</a>
           </li>
         
       </ul>
