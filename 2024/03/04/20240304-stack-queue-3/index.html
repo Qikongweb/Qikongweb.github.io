@@ -14,7 +14,7 @@
 <meta property="og:description" content="栈与队列1. 滑动窗口最大值 #23912345678910111213141516171819class Solution:    def maxSlidingWindow(self, nums: List[int], k: int) -&gt; List[int]:        res &#x3D; []        w &#x3D; deque()        for i in range(len(num">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-04T12:55:02.000Z">
-<meta property="article:modified_time" content="2024-03-04T14:25:53.889Z">
+<meta property="article:modified_time" content="2024-03-05T01:09:48.329Z">
 <meta property="article:author" content="Claire">
 <meta name="twitter:card" content="summary">
   
@@ -110,7 +110,7 @@
 </ul>
 <p>时间复杂度：</p>
 <ul>
-<li>对n个数的数组排序的时间复杂度是 O(n log n)</li>
+<li>对n个数的数组排序的时间复杂度是 O(n log n),看下面的时间复杂度的解释</li>
 <li>用deque，维护前k个元素排序的时间复杂度是O(n log k)</li>
 </ul>
 <p><strong>heapq库简介</strong></p>
@@ -135,11 +135,12 @@
 </ul>
 </li>
 </ul>
+<p><strong>时间复杂度</strong><br>查找一个数，如果是用的二分法：<br>总共有n个元素，每次查找的区间大小就是n,n&#x2F;2,n&#x2F;4,n&#x2F;8……(n&#x2F;2)^k, 其中k是循环的次数，由于最后找到是一个数，所以区间越来越小，可以约等于1，即(n&#x2F;2)^k&#x3D;1<br>那么k&#x3D;log2n (以2为底n的对数)，所以时间复杂度可以表示为O(logn)<br>那么如果是排序呢，一个数组有n个数，排序是基于二分法的，就是排序的时间复杂度就是O(nlogn)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/04/20240304-stack-queue-3/" data-id="cltd1afbb0007ebwk6tqsha2f" data-title="20240304 stack-queue-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/04/20240304-stack-queue-3/" data-id="clteh07iy000awwwkc3hg6o8i" data-title="20240304 stack-queue-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -148,6 +149,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2024/03/04/20240305-tree-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20240305 tree-1
+        
+      </div>
+    </a>
   
   
     <a href="/2024/03/01/20240302-stack-queue-2/" id="article-nav-older" class="article-nav-link-wrap">
@@ -190,6 +200,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/04/20240305-tree-1/">20240305 tree-1</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/04/20240304-stack-queue-3/">20240304 stack-queue-3</a>
           </li>
         
@@ -203,10 +217,6 @@
         
           <li>
             <a href="/2024/02/28/20240229-string-2/">20240229 string#2</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/27/20240228-string-1/">20240228 string#1</a>
           </li>
         
       </ul>
