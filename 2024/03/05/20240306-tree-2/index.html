@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240306 tree-2 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Tree1. 层序遍历 有十个题，#102是模版123456789101112131415161718192021class Solution:    def levelOrder(self, root: Optional[TreeNode]) -&gt; List[List[int]]:        # 卡哥解法        res &#x3D; []        q &#x3D; deque()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240306 tree-2">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/05/20240306-tree-2/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="Tree1. 层序遍历 有十个题，#102是模版123456789101112131415161718192021class Solution:    def levelOrder(self, root: Optional[TreeNode]) -&gt; List[List[int]]:        # 卡哥解法        res &#x3D; []        q &#x3D; deque()">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-06T04:25:53.000Z">
+<meta property="article:modified_time" content="2024-03-06T14:37:57.083Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240306-tree-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/05/20240306-tree-2/" class="article-date">
+  <time class="dt-published" datetime="2024-03-06T04:25:53.000Z" itemprop="datePublished">2024-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240306 tree-2
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h2><h3 id="1-层序遍历-有十个题，-102是模版"><a href="#1-层序遍历-有十个题，-102是模版" class="headerlink" title="1. 层序遍历 有十个题，#102是模版"></a>1. 层序遍历 有十个题，#102是模版</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">levelOrder</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 卡哥解法</span></span><br><span class="line">        res = []</span><br><span class="line">        q = deque()</span><br><span class="line">        <span class="keyword">if</span> root :</span><br><span class="line">            q.append(root)</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(q)&gt;<span class="number">0</span>:</span><br><span class="line">            level = []</span><br><span class="line">            size = <span class="built_in">len</span>(q)</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,size):</span><br><span class="line">                node = q.popleft()</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    q.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    q.append(node.right)</span><br><span class="line">                level.append(node.val)</span><br><span class="line">            res.append(level)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>#107 就是把#102的结果反转一下<br>#199 每次层遍历到最后一个节点记录下来<br>#637 每层加和求平均数，只要在题中看到每层要做什么操作就是要用到层序遍历<br>#429 和#102一样的思路，但是注意没有左右子树，而是用循环node.children代替<br>#515 注意float(‘-inf’)用法，可以用max（ele1，ele2）取出比较大的数<br>#116 本题依然是层序遍历，只不过在单层遍历的时候记录一下本层的头部节点，然后在遍历的时候让前一个节点指向本节点就可以了<br>#104 二叉树的深度就是层数，也可以用层序遍历，也可以递归</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">    self.depth = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    self.traverse(root)</span><br><span class="line">    <span class="keyword">return</span> self.depth</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">traverse</span>(<span class="params">self, node</span>):</span><br><span class="line">    <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    left = self.traverse(node.left)</span><br><span class="line">    right = self.traverse(node.right)</span><br><span class="line"></span><br><span class="line">    self.depth = <span class="built_in">max</span>(right,left)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(left,right)+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>#111 也可以用层序遍历，每层记录加1，需要注意的是，只有当左右孩子都为空的时候，才说明遍历的最低点了。如果其中一个孩子为空则不是最低点，直接返回结果</p>
+<h2 id="2-翻转二叉树-226"><a href="#2-翻转二叉树-226" class="headerlink" title="2. 翻转二叉树 #226"></a>2. 翻转二叉树 #226</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 递归前序</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">invertTree</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        self.df(root)</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">df</span>(<span class="params">self, cur_node</span>):</span><br><span class="line">        <span class="keyword">if</span> cur_node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">       </span><br><span class="line">        self.df(cur_node.left)</span><br><span class="line">        self.df(cur_node.right)</span><br><span class="line">        cur_node.left, cur_node.right = cur_node.right, cur_node.left</span><br><span class="line">        <span class="keyword">return</span> cur_node  <span class="comment">#注意这个return node不能少，因为节点被改变了要返回去</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 层序遍历，广度优先法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">invertTree</span>(<span class="params">self, root: TreeNode</span>) -&gt; TreeNode:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        queue = collections.deque([root])    </span><br><span class="line">        <span class="keyword">while</span> queue:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(queue)):</span><br><span class="line">                node = queue.popleft()</span><br><span class="line">                node.left, node.right = node.right, node.left</span><br><span class="line">                <span class="keyword">if</span> node.left: queue.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right: queue.append(node.right)</span><br><span class="line">        <span class="keyword">return</span> root  </span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 迭代法 前序，可以跳过了</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">invertTree</span>(<span class="params">self, root: TreeNode</span>) -&gt; TreeNode:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span>      </span><br><span class="line">        stack = [root]        </span><br><span class="line">        <span class="keyword">while</span> stack:</span><br><span class="line">            node = stack.pop()   </span><br><span class="line">            node.left, node.right = node.right, node.left                   </span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                stack.append(node.left)</span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                stack.append(node.right)  </span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+<p>思路：<br>关键在于遍历顺序，前中后序应该选哪一种遍历顺序？ </p>
+<ul>
+<li>递归：可以用前序或者后序，注意只要把每一个节点的左右孩子翻转一下，就可以达到整体翻转的效果，唯独中序遍历不方便，因为遍历完左子树，之后翻转，如果此时遍历右子树，但是他其实是翻转之后的左子树</li>
+<li>层序遍历特别容易理解，迭代法可以跳过</li>
+</ul>
+<h2 id="3-对称二叉树-101"><a href="#3-对称二叉树-101" class="headerlink" title="3. 对称二叉树 #101"></a>3. 对称二叉树 #101</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSymmetric</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">return</span> self.compare(root.left, root.right)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compare</span>(<span class="params">self, cur_left, cur_right</span>):</span><br><span class="line">        <span class="comment">#首先排除空节点的情况</span></span><br><span class="line">        <span class="keyword">if</span> cur_left <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> cur_right <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">elif</span> cur_left <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> cur_right <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">elif</span> cur_left <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> cur_right <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="comment"># 不为空的，但是值不想等</span></span><br><span class="line">        <span class="keyword">elif</span> cur_left.val != cur_right.val:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 左右节点不为空，且数字相等</span></span><br><span class="line">            outside = self.compare(cur_left.left,cur_right.right)</span><br><span class="line">            inside = self.compare(cur_left.right, cur_right.left)</span><br><span class="line">            <span class="keyword">return</span> outside <span class="keyword">and</span> inside</span><br><span class="line">                </span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>对于二叉树是否对称，要比较的是根节点的左子树与右子树是不是相互翻转的，理解这一点就知道了其实我们要比较的是两个树（这两个树是根节点的左右子树），所以在递归遍历的过程中，也是要同时遍历两棵树。</li>
+<li>比较的是外侧和外侧的节点比较，内侧和内侧的节点比较</li>
+<li>那么遍历的顺序应该是什么样的呢？</li>
+</ul>
+<p>本题遍历只能是“后序遍历”，因为我们要通过递归函数的返回值来判断两个子树的内侧节点和外侧节点是否相等。</p>
+<p>正是因为要遍历两棵树而且要比较内侧和外侧节点，所以准确的来说是一个树的遍历顺序是左右中，一个树的遍历顺序是右左中。</p>
+<ul>
+<li>这道题有使用迭代法（队列和栈两种）和层序遍历的写法，我先记录下来，之后再看<br>迭代法： 使用队列<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSymmetric</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        queue = collections.deque()</span><br><span class="line">        queue.append(root.left) <span class="comment">#将左子树头结点加入队列</span></span><br><span class="line">        queue.append(root.right) <span class="comment">#将右子树头结点加入队列</span></span><br><span class="line">        <span class="keyword">while</span> queue: <span class="comment">#接下来就要判断这这两个树是否相互翻转</span></span><br><span class="line">            leftNode = queue.popleft()</span><br><span class="line">            rightNode = queue.popleft()</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> leftNode <span class="keyword">and</span> <span class="keyword">not</span> rightNode: <span class="comment">#左节点为空、右节点为空，此时说明是对称的</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">#左右一个节点不为空，或者都不为空但数值不相同，返回false</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> leftNode <span class="keyword">or</span> <span class="keyword">not</span> rightNode <span class="keyword">or</span> leftNode.val != rightNode.val:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            queue.append(leftNode.left) <span class="comment">#加入左节点左孩子</span></span><br><span class="line">            queue.append(rightNode.right) <span class="comment">#加入右节点右孩子</span></span><br><span class="line">            queue.append(leftNode.right) <span class="comment">#加入左节点右孩子</span></span><br><span class="line">            queue.append(rightNode.left) <span class="comment">#加入右节点左孩子</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+迭代法：使用栈<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSymmetric</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        st = [] <span class="comment">#这里改成了栈</span></span><br><span class="line">        st.append(root.left)</span><br><span class="line">        st.append(root.right)</span><br><span class="line">        <span class="keyword">while</span> st:</span><br><span class="line">            rightNode = st.pop()</span><br><span class="line">            leftNode = st.pop()</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> leftNode <span class="keyword">and</span> <span class="keyword">not</span> rightNode:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> leftNode <span class="keyword">or</span> <span class="keyword">not</span> rightNode <span class="keyword">or</span> leftNode.val != rightNode.val:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            st.append(leftNode.left)</span><br><span class="line">            st.append(rightNode.right)</span><br><span class="line">            st.append(leftNode.right)</span><br><span class="line">            st.append(rightNode.left)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+层次遍历<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSymmetric</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">        queue = collections.deque([root.left, root.right])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> queue:</span><br><span class="line">            level_size = <span class="built_in">len</span>(queue)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> level_size % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">            level_vals = []</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(level_size):</span><br><span class="line">                node = queue.popleft()</span><br><span class="line">                <span class="keyword">if</span> node:</span><br><span class="line">                    level_vals.append(node.val)</span><br><span class="line">                    queue.append(node.left)</span><br><span class="line">                    queue.append(node.right)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    level_vals.append(<span class="literal">None</span>)</span><br><span class="line">                    </span><br><span class="line">            <span class="keyword">if</span> level_vals != level_vals[::-<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/05/20240306-tree-2/" data-id="cltfwlm01000degwk5fqdclvq" data-title="20240306 tree-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/04/20240305-tree-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240305 tree-1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/05/20240306-tree-2/">20240306 tree-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/04/20240305-tree-1/">20240305 tree-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/04/20240304-stack-queue-3/">20240304 stack-queue-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/01/20240302-stack-queue-2/">20240302 stack-queue-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/29/20240301-stack-queue-1/">20240301 stack&amp;queue#1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
