@@ -14,10 +14,10 @@
 <meta property="og:description" content="Tree1. 理论基础二叉树的种类 满二叉树：没有节点都有两个子节点，也可以说深度为k，有2^k-1个节点的二叉树 完全二叉树：除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。上一节里面的heap就是一个基于完全二叉树结构的函数 二叉搜索树：二叉搜索树是一个有序树 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值； 若它的右子树">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://qikongweb.github.io/2024/03/04/20240305-tree-1/%E5%90%8E%E5%BA%8F%E8%BF%AD%E4%BB%A3.png">
-<meta property="og:image" content="https://qikongweb.github.io/2024/03/04/20240305-tree-1/IMG_0517.png">
-<meta property="og:image" content="https://qikongweb.github.io/2024/03/04/20240305-tree-1/IMG_0518.png">
+<meta property="og:image" content="https://qikongweb.github.io/2024/03/04/20240305-tree-1/IMG_0517.jpg">
+<meta property="og:image" content="https://qikongweb.github.io/2024/03/04/20240305-tree-1/IMG_0518.jpg">
 <meta property="article:published_time" content="2024-03-04T23:25:01.000Z">
-<meta property="article:modified_time" content="2024-03-05T17:49:43.800Z">
+<meta property="article:modified_time" content="2024-03-06T23:45:12.677Z">
 <meta property="article:author" content="Claire">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://qikongweb.github.io/2024/03/04/20240305-tree-1/%E5%90%8E%E5%BA%8F%E8%BF%AD%E4%BB%A3.png">
@@ -155,12 +155,12 @@
 <p>后序</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">postorderTraversal</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        result = []</span><br><span class="line">        st = []</span><br><span class="line">        <span class="keyword">if</span> root:</span><br><span class="line">            st.append(root)</span><br><span class="line">        <span class="keyword">while</span> st:</span><br><span class="line">            node = st.pop()</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">None</span>:</span><br><span class="line">                st.append(node) <span class="comment">#中</span></span><br><span class="line">                st.append(<span class="literal">None</span>)</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> node.right: <span class="comment">#右</span></span><br><span class="line">                    st.append(node.right)</span><br><span class="line">                <span class="keyword">if</span> node.left: <span class="comment">#左</span></span><br><span class="line">                    st.append(node.left)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                node = st.pop()</span><br><span class="line">                result.append(node.val)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
-<p>附件<br><img src="/2024/03/04/20240305-tree-1/IMG_0517.png" alt="二叉树总结1"><br><img src="/2024/03/04/20240305-tree-1/IMG_0518.png" alt="二叉树总结2"></p>
+<p>附件<br><img src="/2024/03/04/20240305-tree-1/IMG_0517.jpg" alt="二叉树总结1"><br><img src="/2024/03/04/20240305-tree-1/IMG_0518.jpg" alt="二叉树总结2"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/04/20240305-tree-1/" data-id="cltfwllzz0009egwk0ibyboge" data-title="20240305 tree-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/04/20240305-tree-1/" data-id="cltgg5eb3000bg0wk62soe41j" data-title="20240305 tree-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -220,6 +220,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/06/20240307-tree-3/">20240307 tree-3</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/05/20240306-tree-2/">20240306 tree-2</a>
           </li>
         
@@ -233,10 +237,6 @@
         
           <li>
             <a href="/2024/03/01/20240302-stack-queue-2/">20240302 stack-queue-2</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/29/20240301-stack-queue-1/">20240301 stack&amp;queue#1</a>
           </li>
         
       </ul>

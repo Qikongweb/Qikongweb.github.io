@@ -69,6 +69,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20240307-tree-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/06/20240307-tree-3/" class="article-date">
+  <time class="dt-published" datetime="2024-03-06T23:32:49.000Z" itemprop="datePublished">2024-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/06/20240307-tree-3/">20240307 tree-3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/06/20240307-tree-3/" data-id="cltgg5eb3000dg0wk6gvn5dho" data-title="20240307 tree-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-20240306-tree-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/03/05/20240306-tree-2/" class="article-date">
@@ -122,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/05/20240306-tree-2/" data-id="cltfwlm01000degwk5fqdclvq" data-title="20240306 tree-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/05/20240306-tree-2/" data-id="cltgg5eb3000cg0wkf6vc3a7x" data-title="20240306 tree-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -214,12 +252,12 @@
 <p>后序</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">postorderTraversal</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        result = []</span><br><span class="line">        st = []</span><br><span class="line">        <span class="keyword">if</span> root:</span><br><span class="line">            st.append(root)</span><br><span class="line">        <span class="keyword">while</span> st:</span><br><span class="line">            node = st.pop()</span><br><span class="line">            <span class="keyword">if</span> node != <span class="literal">None</span>:</span><br><span class="line">                st.append(node) <span class="comment">#中</span></span><br><span class="line">                st.append(<span class="literal">None</span>)</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> node.right: <span class="comment">#右</span></span><br><span class="line">                    st.append(node.right)</span><br><span class="line">                <span class="keyword">if</span> node.left: <span class="comment">#左</span></span><br><span class="line">                    st.append(node.left)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                node = st.pop()</span><br><span class="line">                result.append(node.val)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
 
-<p>附件<br><img src="/2024/03/04/20240305-tree-1/IMG_0517.png" alt="二叉树总结1"><br><img src="/2024/03/04/20240305-tree-1/IMG_0518.png" alt="二叉树总结2"></p>
+<p>附件<br><img src="/2024/03/04/20240305-tree-1/IMG_0517.jpg" alt="二叉树总结1"><br><img src="/2024/03/04/20240305-tree-1/IMG_0518.jpg" alt="二叉树总结2"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/04/20240305-tree-1/" data-id="cltfwllzz0009egwk0ibyboge" data-title="20240305 tree-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/04/20240305-tree-1/" data-id="cltgg5eb3000bg0wk62soe41j" data-title="20240305 tree-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -300,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/04/20240304-stack-queue-3/" data-id="cltfwllzz0008egwkboxa2wxp" data-title="20240304 stack-queue-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/04/20240304-stack-queue-3/" data-id="cltgg5eb2000ag0wk9v2a4a3s" data-title="20240304 stack-queue-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -357,7 +395,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/01/20240302-stack-queue-2/" data-id="cltfwllzy0006egwk6hhian0r" data-title="20240302 stack-queue-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/01/20240302-stack-queue-2/" data-id="cltgg5eb10009g0wkhv1zeeic" data-title="20240302 stack-queue-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -460,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/29/20240301-stack-queue-1/" data-id="cltfwllzy0005egwk05t7cpld" data-title="20240301 stack&amp;queue#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/29/20240301-stack-queue-1/" data-id="cltgg5eb10008g0wk73tng5c3" data-title="20240301 stack&amp;queue#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -510,7 +548,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="cltfwlm00000begwkbgzken5t" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/28/20240229-string-2/" data-id="cltgg5eb10007g0wk92k5ahop" data-title="20240229 string#2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -596,7 +634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="cltfwllzy0004egwk9vykdeb0" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/27/20240228-string-1/" data-id="cltgg5eb10006g0wkbog4g4d2" data-title="20240228 string#1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -668,7 +706,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="cltfwllzx0003egwk697e8xoh" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="cltgg5eb00005g0wk0mac0w5c" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -759,75 +797,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="cltfwllzz000aegwk7dl47zm0" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240223-LinkedList" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/23/20240223-LinkedList/" class="article-date">
-  <time class="dt-published" datetime="2024-02-23T17:36:46.000Z" itemprop="datePublished">2024-02-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/23/20240223-LinkedList/">20240223 LinkedList</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="1-两两交换链表中的节点-16"><a href="#1-两两交换链表中的节点-16" class="headerlink" title="1. 两两交换链表中的节点 #16"></a>1. 两两交换链表中的节点 #16</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(-<span class="number">1</span>)</span><br><span class="line">dummy_head.<span class="built_in">next</span> = head</span><br><span class="line">cur = dummy_head</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cur.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> cur.<span class="built_in">next</span>.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    temp = cur.<span class="built_in">next</span></span><br><span class="line">    next_temp = temp.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    cur.<span class="built_in">next</span> = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    cur.<span class="built_in">next</span>.<span class="built_in">next</span> = temp</span><br><span class="line">    temp.<span class="built_in">next</span> = next_temp</span><br><span class="line">    cur = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">return</span> dummy_head.<span class="built_in">next</span></span><br><span class="line">            </span><br></pre></td></tr></table></figure>
-<p>思路：这个题是一定要画图的，画完图我可以写出来。附图</p>
-<h3 id="2-删除链表倒数第N个节点，双指针-19"><a href="#2-删除链表倒数第N个节点，双指针-19" class="headerlink" title="2. 删除链表倒数第N个节点，双指针 #19"></a>2. 删除链表倒数第N个节点，双指针 #19</h3><h2 id="有虚拟头节点的方法"><a href="#有虚拟头节点的方法" class="headerlink" title="有虚拟头节点的方法"></a>有虚拟头节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line">slow = dummy_head</span><br><span class="line">fast = dummy_head</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n+<span class="number">1</span>):</span><br><span class="line">    fast = fast.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">slow.<span class="built_in">next</span> = slow.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> dummy_head.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="没有虚拟头节点的方法"><a href="#没有虚拟头节点的方法" class="headerlink" title="没有虚拟头节点的方法"></a>没有虚拟头节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">p1 = head</span><br><span class="line">p2 = head</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">    p1 = p1.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> p1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">return</span> head.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">while</span> p1.<span class="built_in">next</span>:</span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">        p2 = p2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> p2.<span class="built_in">next</span>:</span><br><span class="line">    p2.<span class="built_in">next</span> = p2.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
-<p>思路: 这个题的思路是双指针，一个指针先走到N的位置，一个指针从起点开始，这时候两个指针同时向后走，这样两个指针之间相差N，一直到第一个指针先走到None，第二个指针就是到了链表的倒数第N个节点的前一个节点，就可以删除第N个节点了<br><em><strong>注意</strong></em></p>
-<ul>
-<li>要想删除第N个节点，指针一定要定位在N前面的一个节点，才能删掉第N个节点</li>
-<li>两个方法，一个是有虚拟头节点，一个是没有，写法上有虚拟头节点的更容易些，没有的话判断条件更多。推荐有虚拟头节点，移动的步数就是N+1</li>
-</ul>
-<h3 id="3-链表是否相交-160"><a href="#3-链表是否相交-160" class="headerlink" title="3. 链表是否相交 #160"></a>3. 链表是否相交 #160</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">p1 = headA</span><br><span class="line">p2 = headB</span><br><span class="line"><span class="keyword">while</span> p1 != p2:</span><br><span class="line">    <span class="keyword">if</span> p1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        p1 = headB</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span> p2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        p2 = headA</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p2 = p2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> p1 </span><br></pre></td></tr></table></figure>
-
-<p>思路： 把两个链表拼在一起，如果有相交点，会找到，headA+headB 和 headB+headA, 他们的长度一定是一样的，那么他们如果中间没有相交，到最后也一定会相交，都是None的时候</p>
-<ul>
-<li>一个指针从链表1开始，另一个指针从链表2开始。当第一个指针到达链表1的末尾时，我们将其重定向到链表2的头部。同样的，当第二个指针到达链表2的末尾时，我们将其重定向到链表1的头部。最终，两个指针会相遇，这就是它们的交点。</li>
-<li>如果有交点的话，就是两个节点的内存地址一样，所以后续的值一定一样，这样其实就是前面的长度可能会不一样，也就是有一个先到交点位置，有一个后到交点位置，但是如果是A+B 和B+A的时候，就是肯定同时到交点位置</li>
-</ul>
-<h3 id="4-环形链表，判断有否有环，找到环的起点，快慢指针-142"><a href="#4-环形链表，判断有否有环，找到环的起点，快慢指针-142" class="headerlink" title="4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142"></a>4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fast = head</span><br><span class="line">slow = head</span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span>(fast == slow):</span><br><span class="line">        index1 = fast</span><br><span class="line">        index2 = head</span><br><span class="line">        <span class="keyword">while</span> index1 != index2:</span><br><span class="line">            index1 = index1.<span class="built_in">next</span></span><br><span class="line">            index2 = index2.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> index1</span><br><span class="line"><span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-<p>思路： 程序非常简单，原理证明推理过程比较复杂</p>
-<ul>
-<li><ol>
-<li>定义一个快指针一个慢指针，每次快指针移动两步，慢指针移动一步，如果有相遇，就存在环，没有相遇就不存在环</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>从相遇点找环的起点，相遇时，把快指针放在head，之后快慢指针每次移动一步，再次相交的点就是环的起点</li>
-</ol>
-</li>
-</ul>
-<h2 id="python-语法补充"><a href="#python-语法补充" class="headerlink" title="python 语法补充"></a>python 语法补充</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line"></span><br><span class="line">两个是一个意思</span><br><span class="line"></span><br><span class="line">dummy_head = ListNode(<span class="number">0</span>)</span><br><span class="line">dimmy_head.<span class="built_in">next</span> = head</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="cltfwllzy0007egwk4tpu0y34" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="cltgg5eb00004g0wk7zrvfky6" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -875,6 +845,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/06/20240307-tree-3/">20240307 tree-3</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/05/20240306-tree-2/">20240306 tree-2</a>
           </li>
         
@@ -888,10 +862,6 @@
         
           <li>
             <a href="/2024/03/01/20240302-stack-queue-2/">20240302 stack-queue-2</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/29/20240301-stack-queue-1/">20240301 stack&amp;queue#1</a>
           </li>
         
       </ul>
