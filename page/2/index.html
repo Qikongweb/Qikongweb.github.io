@@ -69,6 +69,97 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20240226-hash-table" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/24/20240226-hash-table/" class="article-date">
+  <time class="dt-published" datetime="2024-02-25T00:25:41.000Z" itemprop="datePublished">2024-02-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/24/20240226-hash-table/">20240226 hash table</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h2><h3 id="1-有效的字母异位词-242"><a href="#1-有效的字母异位词-242" class="headerlink" title="1. 有效的字母异位词 #242"></a>1. 有效的字母异位词 #242</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组解法</span></span><br><span class="line">arr = [<span class="number">0</span>] * <span class="number">26</span></span><br><span class="line"><span class="keyword">for</span> ele <span class="keyword">in</span> s:</span><br><span class="line">    arr[<span class="built_in">ord</span>(ele) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> ele2 <span class="keyword">in</span> t:</span><br><span class="line">    arr[<span class="built_in">ord</span>(ele2) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># defaultDic 解法</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">s_dict = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">t_dict = defaultdict(<span class="built_in">int</span>)</span><br><span class="line"><span class="keyword">for</span> e <span class="keyword">in</span> s:</span><br><span class="line">    s_dict[e] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> t:</span><br><span class="line">    t_dict[x] += <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> s_dict == t_dict</span><br><span class="line"></span><br><span class="line"><span class="comment"># counter 解法</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">x = Counter(s)</span><br><span class="line">y = Counter(t)</span><br><span class="line"><span class="keyword">return</span> x == y</span><br></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
+<li>这道哈希表的题首先考虑用数组，在存的值不是特别大的话，可以用数组，用数组运行快，比set和map结构简单，但是不适合用数组的场景是，数据量特别大，或者存储的位置不连续，占用空间就得开的很大</li>
+<li>ord()和chr()是两个关于ASCII的转换的函数，ord是把一个字符串（Unicode 字符）作为参数，返回对应的ASCII 数值，或者Unicode 数值。chr主要用来表示ascii码对应的字符，可以用十进制，也可以用十六进制。<br>ord : 字符串&#x3D;&gt;ASCII  chr : ASCII &#x3D;&gt; 字符串</li>
+<li><em><strong>python里面是可以直接比较两个dict是否相等</strong></em></li>
+<li>defaultdic (字母都是小写)，Counter (第一个字母C是的大写)</li>
+</ul>
+<h3 id="2-两个数组的交集-349"><a href="#2-两个数组的交集-349" class="headerlink" title="2. 两个数组的交集 #349"></a>2. 两个数组的交集 #349</h3><p>哈希表使用场景：给一个元素，判断在这个集合是否出现过，快速查找</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自己想出来的解法，我循环短的数组，然后判断是不是在另一个长的里面，且在结果集里面</span></span><br><span class="line">res = []</span><br><span class="line">size1 = <span class="built_in">len</span>(nums1)</span><br><span class="line">size2 = <span class="built_in">len</span>(nums2)</span><br><span class="line"><span class="keyword">if</span>(size1 &gt; size2):</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> nums2:</span><br><span class="line">        <span class="keyword">if</span> s <span class="keyword">in</span> nums1 <span class="keyword">and</span> s <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">            res.append(s)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> nums1:</span><br><span class="line">        <span class="keyword">if</span> s <span class="keyword">in</span> nums2 <span class="keyword">and</span> s <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">            res.append(s)</span><br><span class="line"><span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用字典和集合 推荐解法</span></span><br><span class="line">table = &#123;&#125;</span><br><span class="line">res = <span class="built_in">set</span>() <span class="comment"># 定义一个空set是为了去重</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> nums1:</span><br><span class="line">    <span class="comment"># table[s] = 1 # my code</span></span><br><span class="line">    table[s] = table.get(s,<span class="number">0</span>) + <span class="number">1</span> <span class="comment"># 如果s存在table里，返回对应的值加1，如果不存在返回默认值0加1</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> nums2:</span><br><span class="line">    <span class="keyword">if</span> t <span class="keyword">in</span> table:</span><br><span class="line">        res.add(t) <span class="comment"># 添加一个ele到set里</span></span><br><span class="line">        <span class="keyword">del</span> table[t] <span class="comment"># 删除一个set里面的key，为了去重</span></span><br><span class="line"><span class="keyword">return</span> <span class="built_in">list</span>(res) <span class="comment"># 转set到list</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数组解法例子</span></span><br><span class="line">count1 = [<span class="number">0</span>]*<span class="number">1001</span></span><br><span class="line">count2 = [<span class="number">0</span>]*<span class="number">1001</span></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums1)):</span><br><span class="line">    count1[nums1[i]]+=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums2)):</span><br><span class="line">    count2[nums2[j]]+=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1001</span>):</span><br><span class="line">    <span class="keyword">if</span> count1[k]*count2[k]&gt;<span class="number">0</span>:</span><br><span class="line">        result.append(k)</span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<p>python语法：</p>
+<ul>
+<li>table[num] &#x3D; table.get(num,0) + 1，table字典中获取键为num的-值，如果num不存在于字典中，则返回默认值0。然后将获取到的值加1。</li>
+<li>del my_dict[‘a’]，del关键字被用来删除字典my_dict中的键为’a’的键值对。</li>
+</ul>
+<h3 id="3-快乐数-202"><a href="#3-快乐数-202" class="headerlink" title="3. 快乐数 #202"></a>3. 快乐数 #202</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">table = <span class="built_in">set</span>()</span><br><span class="line">        </span><br><span class="line"><span class="keyword">while</span> n != <span class="number">1</span>:</span><br><span class="line">    <span class="comment"># res = 0</span></span><br><span class="line">    <span class="comment"># while n &gt; 0:</span></span><br><span class="line">    <span class="comment">#     digit = n % 10</span></span><br><span class="line">    <span class="comment">#     res = res + digit * digit</span></span><br><span class="line">    <span class="comment">#     n = n // 10</span></span><br><span class="line">    </span><br><span class="line">    n = <span class="built_in">sum</span>(<span class="built_in">int</span>(x)**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">str</span>(n))</span><br><span class="line">    <span class="keyword">if</span> n <span class="keyword">in</span> table:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        table.add(n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>思路：不难，语法不太熟，</p>
+<ul>
+<li>python sum(list) ex: sum([1,2,3,4])</li>
+<li>n 不等于1的时候进去循环，然后不断更新n，并把n存在table里，如果table里找到n，有循环就返回，如果结果是1也返回</li>
+</ul>
+<h3 id="4-两数之和-1"><a href="#4-两数之和-1" class="headerlink" title="4. 两数之和 #1"></a>4. 两数之和 #1</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">table = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">    <span class="keyword">if</span> nums[x] <span class="keyword">in</span> table <span class="keyword">and</span> x != table[nums[x]]:</span><br><span class="line">        <span class="keyword">return</span> [x, table[nums[x]]]</span><br><span class="line">    table[target-nums[x]] = x</span><br><span class="line">    </span><br><span class="line"><span class="keyword">return</span> []  </span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>这个元素是否在集合中出现过，就要想到用hash map,这道题在遍历其中的元素的时候要知道以前的元素是否跟当前的有匹配，如果有的话就返回正确的值了，这样就是把之前所有遍历过的元素放在一个表里，让当前的元素快速查找，所有就想到了哈希表</li>
+<li>知道哈希表之后，用数组，还是set，还是dict，因为要保存index以及数值，所以我们要用dict，也就是map</li>
+</ul>
+<p><strong>Hash table in Python</strong></p>
+<h3 id="哈希表对应数据结构有数组，set，map"><a href="#哈希表对应数据结构有数组，set，map" class="headerlink" title="哈希表对应数据结构有数组，set，map"></a>哈希表对应数据结构有数组，set，map</h3><h3 id="在Python中，Set-和-Map-是两种不同的数据结构，它们有以下区别："><a href="#在Python中，Set-和-Map-是两种不同的数据结构，它们有以下区别：" class="headerlink" title="在Python中，Set 和 Map 是两种不同的数据结构，它们有以下区别："></a>在Python中，Set 和 Map 是两种不同的数据结构，它们有以下区别：</h3><ol>
+<li>Set（集合）是一种无序且元素唯一的数据结构，它不包含重复的元素。在集合中，每个元素都是独一无二的。例如：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_set = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Map（字典）是一种键值对的数据结构，它包含了键（key）和值（value）之间的映射关系。在字典中，键是唯一的，但值可以重复。例如：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my_dict = &#123;<span class="string">&#x27;apple&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;banana&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;cherry&#x27;</span>: <span class="number">5</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>总的来说，Set 是一种用于存储唯一元素的数据结构，而 Map 是一种用于存储键值对映射关系的数据结构。在Python中，Set 对应的数据结构是集合（set），Map 对应的数据结构是字典（dictionary）。</p>
+<p><strong>defaultdic in Python</strong></p>
+<h3 id="1-为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找"><a href="#1-为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找" class="headerlink" title="1. 为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找"></a>1. 为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找</h3><ul>
+<li>在字典中查找某个值时，若key不存在时则会返回一个KeyError错误而不是一个默认值，这时候可以使用defaultdict函数。</li>
+</ul>
+<p><strong>注意：使用dict[key]时，若key不存在则报错；使用dict.get(key)时，若key不存在则会返回一个默认值。</strong></p>
+<p><strong>注意：key不存在dict当中时，dict[key] &#x3D; value是赋值，不会报错；key不存在dict当中，以dict[key]方式获取值，会报错</strong></p>
+<h3 id="2-返回的默认是都可以是什么？int-0-list-str-””-set"><a href="#2-返回的默认是都可以是什么？int-0-list-str-””-set" class="headerlink" title="2.返回的默认是都可以是什么？int&#x3D;&gt;0 list&#x3D;&gt;[], str&#x3D;&gt;””, set&#x3D;&gt;()"></a>2.返回的默认是都可以是什么？int&#x3D;&gt;0 list&#x3D;&gt;[], str&#x3D;&gt;””, set&#x3D;&gt;()</h3><ul>
+<li>defaultdict接受一个工厂函数作为参数，如下来构造：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict =defaultdict( factory_function)</span><br></pre></td></tr></table></figure>
+
+<p>factory_function可以是list、set、str等等，作用是当key不存在时，返回的是工厂函数的默认值，比如list对应[ ]，str对应的是空字符串，set对应set( )，int对应0。</p>
+<p><em><strong>defaultdict是python内建dict类的一个字类，功能与dict相同，但它带有一个默认的值，若key值不存在时返回一个默认的值。</strong></em></p>
+<h3 id="3-counter-在python里是什么？"><a href="#3-counter-在python里是什么？" class="headerlink" title="3. counter 在python里是什么？"></a>3. counter 在python里是什么？</h3><p>Counter（）是collections里面的一个类，作用是计算出字符串或者列表等中不同元素出现的个数，返回值可以理解为一个字典<br><em><strong>看例子就明白了</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &#x27;abbccc&#x27;</span><br><span class="line">res = Counter(s)</span><br><span class="line">print(res) #Counter(&#123;&#x27;c&#x27;: 3, &#x27;b&#x27;: 2, &#x27;a&#x27;: 1&#125;)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="clthu9nft00049dwkdp5f3esl" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-20240223-LinkedList" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/23/20240223-LinkedList/" class="article-date">
@@ -125,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clth9rmud0003z0wk9b4yg5rf" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="clthu9nfs00039dwkgligacn6" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -180,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clth9rmuc0002z0wk4cypekjz" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="clthu9nfs00029dwkd6ss8aev" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -236,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clth9rmuc0001z0wk8iqsh2d1" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="clthu9nfr00019dwk5ai31o2c" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -288,7 +379,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clth9rmu90000z0wkb2g98lno" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="clthu9nfm00009dwk7bri9acs" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -339,7 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clth9rmug000ez0wk0mdw1ptp" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="clthu9nfx000f9dwk0chs81jo" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -387,6 +478,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/07/20240308-tree-4/">20240308 tree-4</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/06/20240307-tree-3/">20240307 tree-3</a>
           </li>
         
@@ -400,10 +495,6 @@
         
           <li>
             <a href="/2024/03/04/20240304-stack-queue-3/">20240304 stack-queue-3</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/01/20240302-stack-queue-2/">20240302 stack-queue-2</a>
           </li>
         
       </ul>
