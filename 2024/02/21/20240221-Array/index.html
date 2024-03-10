@@ -1,99 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
   
+  <link rel="icon" href="/favicon.ico" />
   
-  <title>20240221 Array | Leetcode Python solutions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Array1.左右双指针 题目#9771234567891011121314151617s &#x3D; 0z &#x3D; r &#x3D; len(nums)-1# result &#x3D; [0 for _ in range(len(nums))]result &#x3D; [float(&#x27;inf&#x27;)] * len(nums)while(s &lt;&#x3D; z):    if(nums[s]**2 &gt; nums[z]">
-<meta property="og:type" content="article">
-<meta property="og:title" content="20240221 Array">
-<meta property="og:url" content="https://qikongweb.github.io/2024/02/21/20240221-Array/index.html">
-<meta property="og:site_name" content="Leetcode Python solutions">
-<meta property="og:description" content="Array1.左右双指针 题目#9771234567891011121314151617s &#x3D; 0z &#x3D; r &#x3D; len(nums)-1# result &#x3D; [0 for _ in range(len(nums))]result &#x3D; [float(&#x27;inf&#x27;)] * len(nums)while(s &lt;&#x3D; z):    if(nums[s]**2 &gt; nums[z]">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-21T23:05:38.000Z">
-<meta property="article:modified_time" content="2024-02-23T09:31:39.219Z">
-<meta property="article:author" content="Claire">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 <meta name="generator" content="Hexo 7.1.1"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Leetcode Python solutions</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
       </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
     </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
   </div>
 </header>
 
-      <div class="outer">
-        <section id="main"><article id="post-20240221-Array" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/21/20240221-Array/" class="article-date">
-  <time class="dt-published" datetime="2024-02-21T23:05:38.000Z" itemprop="datePublished">2024-02-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      20240221 Array
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="1-左右双指针-题目-977"><a href="#1-左右双指针-题目-977" class="headerlink" title="1.左右双指针 题目#977"></a>1.左右双指针 题目#977</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span></span><br><span class="line">z = r = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"><span class="comment"># result = [0 for _ in range(len(nums))]</span></span><br><span class="line">result = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)] * <span class="built_in">len</span>(nums)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(s &lt;= z):</span><br><span class="line">    <span class="keyword">if</span>(nums[s]**<span class="number">2</span> &gt; nums[z]**<span class="number">2</span>):</span><br><span class="line">        result[r] = nums[s]**<span class="number">2</span></span><br><span class="line">        s += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result[r] = nums[z]**<span class="number">2</span></span><br><span class="line">        z -= <span class="number">1</span></span><br><span class="line">    r -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240221 Array</h1>
+  <article class="post-content"><h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="1-左右双指针-题目-977"><a href="#1-左右双指针-题目-977" class="headerlink" title="1.左右双指针 题目#977"></a>1.左右双指针 题目#977</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span></span><br><span class="line">z = r = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"><span class="comment"># result = [0 for _ in range(len(nums))]</span></span><br><span class="line">result = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)] * <span class="built_in">len</span>(nums)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(s &lt;= z):</span><br><span class="line">    <span class="keyword">if</span>(nums[s]**<span class="number">2</span> &gt; nums[z]**<span class="number">2</span>):</span><br><span class="line">        result[r] = nums[s]**<span class="number">2</span></span><br><span class="line">        s += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result[r] = nums[z]**<span class="number">2</span></span><br><span class="line">        z -= <span class="number">1</span></span><br><span class="line">    r -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>用左右双指针的思路是：因为是一个不降序的排列，平方之后的最大值一定是出现在左右两边，定义一个空数组，左右开始，从大到小取出来值放到空数组里，如果空数组需要从大到小，就从0插入，如果需要从小到大，就从最后插入。</p>
 <h3 id="2-滑动窗口-209"><a href="#2-滑动窗口-209" class="headerlink" title="2. 滑动窗口 #209"></a>2. 滑动窗口 #209</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span></span><br><span class="line">result = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">    <span class="built_in">sum</span> += nums[i]</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">sum</span>&gt;= target):</span><br><span class="line">        <span class="built_in">print</span>(i-s+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> (i-s+<span class="number">1</span>) &lt; result:</span><br><span class="line">            result = i-s+<span class="number">1</span></span><br><span class="line">        <span class="built_in">sum</span> -= nums[s]</span><br><span class="line">        s += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> result == <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"><span class="comment"># return min_len if min_len != float(&#x27;inf&#x27;) else 0</span></span><br><span class="line">                </span><br></pre></td></tr></table></figure>
@@ -111,135 +60,43 @@
 <p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html">https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tZ4y1q7XE">https://www.bilibili.com/video/BV1tZ4y1q7XE</a></p>
 <p>文章讲的非常清楚，如何处理边界条件，如何奇数中心位置是最大值，注意python里面的range（0，len），实际循环的最后一次是len-1。</p>
 <p><strong>python语法</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]  size 就是生成数组的长度</span><br><span class="line">size = <span class="number">4</span></span><br><span class="line">arr = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">arr = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line">arr = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, size):</span><br><span class="line">    <span class="built_in">print</span>(i)   <span class="comment"># index</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">    <span class="built_in">print</span>(i)   <span class="comment"># value</span></span><br><span class="line"><span class="keyword">for</span> index, ele <span class="keyword">in</span> <span class="built_in">enumerate</span>(arr):</span><br><span class="line">    <span class="built_in">print</span>(index, ele)  <span class="comment"># index and value</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]  size 就是生成数组的长度</span><br><span class="line">size = <span class="number">4</span></span><br><span class="line">arr = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">arr = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line">arr = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, size):</span><br><span class="line">    <span class="built_in">print</span>(i)   <span class="comment"># index</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">    <span class="built_in">print</span>(i)   <span class="comment"># value</span></span><br><span class="line"><span class="keyword">for</span> index, ele <span class="keyword">in</span> <span class="built_in">enumerate</span>(arr):</span><br><span class="line">    <span class="built_in">print</span>(index, ele)  <span class="comment"># index and value</span></span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="cltky4zlv0002tlwkarxjgy3y" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-02-21</span
+    >
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/02/22/20240222-LinkedList/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          20240222 LinkedList
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2024/02/20/20240220-Array/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">20240220 Array</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/03/08/20240309-tree-5/">20240309 tree-5</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/07/20240308-tree-4/">20240308 tree-4</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/06/20240307-tree-3/">20240307 tree-3</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/05/20240306-tree-2/">20240306 tree-2</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/04/20240305-tree-1/">20240305 tree-1</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 Claire<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
   </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
+  </body>
 </html>

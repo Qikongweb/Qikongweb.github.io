@@ -1,620 +1,214 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="utf-8">
-  
-  
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Leetcode Python solutions</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Leetcode Python solutions">
-<meta property="og:url" content="https://qikongweb.github.io/page/2/index.html">
-<meta property="og:site_name" content="Leetcode Python solutions">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="Claire">
-<meta name="twitter:card" content="summary">
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
   
-    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  <link rel="icon" href="/favicon.ico" />
   
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 <meta name="generator" content="Hexo 7.1.1"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Leetcode Python solutions</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
       </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
     </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
   </div>
 </header>
 
-      <div class="outer">
-        <section id="main">
+    <main>
+      <div class="mx-auto max-w-3xl"><ul class="flex items-center mt-4 py-8 border-b-2 border-dashed border-black">
+   
+  <li class="mr-4 w-6 h-6">
+    <a href="mailto:null" target="_blank" rel="noopener">
+      <img src="/icons/email.svg" alt="email" />
+    </a>
+  </li>
+   
+  <li class="mr-4 w-6 h-6">
+    <a href="" target="_blank" rel="noopener">
+      <img src="/icons/github.svg" alt="github" />
+    </a>
+  </li>
+   
+  <li class="mr-4 w-6 h-6">
+    <a href="" target="_blank" rel="noopener">
+      <img src="/icons/linkedin.svg" alt="linkedin" />
+    </a>
+  </li>
+   
+  <li class="mr-4 w-6 h-6">
+    <a href="" target="_blank" rel="noopener">
+      <img src="/icons/twitter.svg" alt="twitter" />
+    </a>
+  </li>
+   
+  <li class="mr-4 w-6 h-6">
+    <a href="" target="_blank" rel="noopener">
+      <img src="/icons/instagram.svg" alt="instagram" />
+    </a>
+  </li>
+   
+  <li class="mr-4 w-6 h-6">
+    <a href="" target="_blank" rel="noopener">
+      <img src="/icons/youtube.svg" alt="youtube" />
+    </a>
+  </li>
   
-    <article id="post-20240227-hash-table2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/26/20240227-hash-table2/" class="article-date">
-  <time class="dt-published" datetime="2024-02-26T13:57:40.000Z" itemprop="datePublished">2024-02-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/26/20240227-hash-table2/">20240227 hash table2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Hash-table-2"><a href="#Hash-table-2" class="headerlink" title="Hash table 2"></a>Hash table 2</h2><h3 id="1-四数相加-454"><a href="#1-四数相加-454" class="headerlink" title="1. 四数相加 #454"></a>1. 四数相加 #454</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自己的解法</span></span><br><span class="line"> res = <span class="number">0</span></span><br><span class="line">a_b = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(nums1)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums2)):</span><br><span class="line">        a_b[nums1[i]+nums2[j]] = a_b.get(nums1[i]+nums2[j], <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(nums3)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums4)):</span><br><span class="line">        <span class="keyword">if</span> <span class="number">0</span>-nums3[i]-nums4[j] <span class="keyword">in</span> a_b:</span><br><span class="line">            res += a_b[<span class="number">0</span>-nums3[i]-nums4[j]]</span><br><span class="line"><span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># 演示的解法</span></span><br><span class="line">rec, cnt = defaultdict(<span class="keyword">lambda</span>: <span class="number">0</span>), <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> nums1:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> nums2:</span><br><span class="line">        rec[i+j] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> nums3:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> nums4:</span><br><span class="line">        cnt += rec.get(-(i+j), <span class="number">0</span>) </span><br><span class="line"><span class="keyword">return</span> cnt</span><br></pre></td></tr></table></figure>
-
-<p>思路：</p>
-<ul>
-<li>还是用map，和两个数之和一样，把一个作为哈希表，另一个在里面查询是否存在，考虑到四个数组之和统计次数，只能用map，不能用set，数值和出现的次数都要存下来，不能用数组因为下标的跳动会非常大，浪费内存，查26个小写字母那道题，是因为下标是0-26，可以用数组</li>
-<li>如何做循环？暴力解法是O（n^4）,如何按循环第一组和后来三组，时间复杂度就是O(n^3),所以只有两个两个做循环，复杂度是O(n^2)</li>
-<li>注意defaultdict(lambda: 0)，或者可以写成defaultdict(int)，lambda是一个匿名函数，没有输入，默认返回0</li>
 </ul>
-<h3 id="2-赎金信-383"><a href="#2-赎金信-383" class="headerlink" title="2. 赎金信 #383"></a>2. 赎金信 #383</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组解法</span></span><br><span class="line">table = [<span class="number">0</span>] * <span class="number">26</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> magazine:</span><br><span class="line">    table[<span class="built_in">ord</span>(x) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] += <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(table)</span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> ransomNote:</span><br><span class="line">    table[<span class="built_in">ord</span>(y) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] -= <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(table)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> table:</span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># dict解法</span></span><br><span class="line">counts = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> magazine:</span><br><span class="line">    counts[x] = counts.get(x,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> ransomNote:</span><br><span class="line">    <span class="keyword">if</span> y <span class="keyword">not</span> <span class="keyword">in</span> counts <span class="keyword">or</span> counts[y] == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    counts[y] -= <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-<p>思路：</p>
-<ul>
-<li>注意的是先遍历哪个数组，把magazine先存进去，让ransomNote去找里面的字母，如果找不到就是False</li>
-<li>和有效的字母异位词#242，上一个hash map里面是类似的题，用数组运行快，也可以用dict</li>
+<ul class="py-8">
+  
+   
+   
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/03/08/20240309-tree-5/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240309 tree-5</span>
+      <span class="text-sm">Mar 8th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/03/07/20240308-tree-4/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240308 tree-4</span>
+      <span class="text-sm">Mar 7th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/03/06/20240307-tree-3/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240307 tree-3</span>
+      <span class="text-sm">Mar 6th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/03/05/20240306-tree-2/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240306 tree-2</span>
+      <span class="text-sm">Mar 5th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/03/04/20240305-tree-1/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240305 tree-1</span>
+      <span class="text-sm">Mar 4th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/03/04/20240304-stack-queue-3/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240304 stack-queue-3</span>
+      <span class="text-sm">Mar 4th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/03/01/20240302-stack-queue-2/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240302 stack-queue-2</span>
+      <span class="text-sm">Mar 1st 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/02/29/20240301-stack-queue-1/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240301 stack&queue#1</span>
+      <span class="text-sm">Feb 29th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/02/28/20240229-string-2/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240229 string#2</span>
+      <span class="text-sm">Feb 28th 2024</span>
+    </a>
+  </li>
+  
+  <li class="odd:bg-gray-100 even:bg-white hover:bg-gray-50 transition-colors">
+    <a
+      href="/2024/02/27/20240228-string-1/"
+      class="group flex items-center justify-between py-4 px-2"
+    >
+      <span class="group-hover:text-orange-500">20240228 string#1</span>
+      <span class="text-sm">Feb 27th 2024</span>
+    </a>
+  </li>
+  
 </ul>
-<h3 id="3-三数之和-15"><a href="#3-三数之和-15" class="headerlink" title="3. 三数之和 #15"></a>3. 三数之和 #15</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自己的解法，双指针</span></span><br><span class="line">res = []</span><br><span class="line">nums = <span class="built_in">sorted</span>(nums)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)-<span class="number">1</span>):</span><br><span class="line">    left = i+<span class="number">1</span></span><br><span class="line">    right = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line">    <span class="comment"># 第一个数去重，如果排序之后第一个数大于0，后面会更大</span></span><br><span class="line">    <span class="keyword">if</span> nums[i] &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 去重循环过的数</span></span><br><span class="line">    <span class="keyword">if</span>(i&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right):</span><br><span class="line">        </span><br><span class="line">        sum_num = nums[i] + nums[left] + nums[right]        </span><br><span class="line">        <span class="keyword">if</span> sum_num == <span class="number">0</span>:</span><br><span class="line">            res.append([nums[i], nums[left], nums[right]])</span><br><span class="line">            <span class="comment"># 跳过相同的元素以避免重复，第二个和第三个数去重</span></span><br><span class="line">            <span class="keyword">while</span> right &gt; left <span class="keyword">and</span> nums[right] == nums[right - <span class="number">1</span>]:</span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> right &gt; left <span class="keyword">and</span> nums[left] == nums[left + <span class="number">1</span>]:</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> sum_num &gt; <span class="number">0</span>:</span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-
-<p>思路：</p>
-<ul>
-<li>双指针方法，第一个数固定，用双指针，left指向第一个之后一个，right指向最后一个，如果和大于0，right往左移动一个，如果和小于0，left往右移动一个。直到left &#x3D; right 或大于right</li>
-<li>注意的是去重：三个地方<ul>
-<li>第一个数去重，如果排序之后第一个数大于0，后面会更大</li>
-<li>去重循环过的数</li>
-<li>跳过相同的元素以避免重复，第二个和第三个数去重</li>
-</ul>
-</li>
-<li>时间复杂度不难算，排序的复杂度为 O(NlogN)，twoSumTarget 函数中的双指针操作为 O(N)，threeSumTarget 函数在 for 循环中调用 twoSumTarget 所以总的时间复杂度就是 O(NlogN + N^2) &#x3D; O(N^2)。</li>
-</ul>
-<h3 id="4-四数之和-18"><a href="#4-四数之和-18" class="headerlink" title="4. 四数之和 #18"></a>4. 四数之和 #18</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fourSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        nums = <span class="built_in">sorted</span>(nums)</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>]: <span class="comment"># 去重</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">                <span class="keyword">if</span> j &gt; i+<span class="number">1</span> <span class="keyword">and</span> nums[j] == nums[j-<span class="number">1</span>]: <span class="comment"># 去重</span></span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                left = j+<span class="number">1</span></span><br><span class="line">                right = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line">                sum_temp = target - nums[i]</span><br><span class="line">                <span class="keyword">while</span> left &lt; right:</span><br><span class="line">                    </span><br><span class="line">                    sum_num = nums[j] + nums[left] + nums[right]</span><br><span class="line">                    <span class="keyword">if</span> sum_num &lt; sum_temp:</span><br><span class="line">                        left += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> sum_num &gt; sum_temp:</span><br><span class="line">                        right -= <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        res.append([nums[i], nums[j], nums[left], nums[right]])</span><br><span class="line">                        <span class="keyword">while</span> left &lt; right <span class="keyword">and</span> nums[left] == nums[left+<span class="number">1</span>] :</span><br><span class="line">                            left += <span class="number">1</span></span><br><span class="line">                        <span class="keyword">while</span> nums[right] == nums[right-<span class="number">1</span>] <span class="keyword">and</span> left &lt; right:</span><br><span class="line">                            right -= <span class="number">1</span></span><br><span class="line">                        left -= <span class="number">1</span></span><br><span class="line">                        right -= <span class="number">1</span></span><br><span class="line">        <span class="comment"># print(res)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">                    </span><br></pre></td></tr></table></figure>
-
-<p>思路：</p>
-<ul>
-<li>总的时间复杂度就是 O(N^3)</li>
-<li>跟上面的三数之和一样，就是外面再套一个循环，注意的是去重条件，两个关键的去重<br><em><strong>重点的去重步骤</strong></em><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>]: <span class="comment"># 去重</span></span><br><span class="line">    <span class="keyword">continue</span></span><br><span class="line"><span class="keyword">if</span> j &gt; i+<span class="number">1</span> <span class="keyword">and</span> nums[j] == nums[j-<span class="number">1</span>]: <span class="comment"># 去重</span></span><br><span class="line">    <span class="keyword">continue</span></span><br><span class="line"><span class="keyword">while</span> left &lt; right <span class="keyword">and</span> nums[left] == nums[left+<span class="number">1</span>] :</span><br><span class="line">    left += <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> nums[right] == nums[right-<span class="number">1</span>] <span class="keyword">and</span> left &lt; right:</span><br><span class="line">    right -= <span class="number">1</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/26/20240227-hash-table2/" data-id="cltky4zlw0004tlwk282w9d6n" data-title="20240227 hash table2" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240226-hash-table" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/24/20240226-hash-table/" class="article-date">
-  <time class="dt-published" datetime="2024-02-25T00:25:41.000Z" itemprop="datePublished">2024-02-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/24/20240226-hash-table/">20240226 hash table</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h2><h3 id="1-有效的字母异位词-242"><a href="#1-有效的字母异位词-242" class="headerlink" title="1. 有效的字母异位词 #242"></a>1. 有效的字母异位词 #242</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数组解法</span></span><br><span class="line">arr = [<span class="number">0</span>] * <span class="number">26</span></span><br><span class="line"><span class="keyword">for</span> ele <span class="keyword">in</span> s:</span><br><span class="line">    arr[<span class="built_in">ord</span>(ele) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> ele2 <span class="keyword">in</span> t:</span><br><span class="line">    arr[<span class="built_in">ord</span>(ele2) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)] -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">    <span class="keyword">if</span> i != <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"><span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># defaultDic 解法</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">s_dict = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">t_dict = defaultdict(<span class="built_in">int</span>)</span><br><span class="line"><span class="keyword">for</span> e <span class="keyword">in</span> s:</span><br><span class="line">    s_dict[e] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> t:</span><br><span class="line">    t_dict[x] += <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> s_dict == t_dict</span><br><span class="line"></span><br><span class="line"><span class="comment"># counter 解法</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">x = Counter(s)</span><br><span class="line">y = Counter(t)</span><br><span class="line"><span class="keyword">return</span> x == y</span><br></pre></td></tr></table></figure>
-
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
-<li>这道哈希表的题首先考虑用数组，在存的值不是特别大的话，可以用数组，用数组运行快，比set和map结构简单，但是不适合用数组的场景是，数据量特别大，或者存储的位置不连续，占用空间就得开的很大</li>
-<li>ord()和chr()是两个关于ASCII的转换的函数，ord是把一个字符串（Unicode 字符）作为参数，返回对应的ASCII 数值，或者Unicode 数值。chr主要用来表示ascii码对应的字符，可以用十进制，也可以用十六进制。<br>ord : 字符串&#x3D;&gt;ASCII  chr : ASCII &#x3D;&gt; 字符串</li>
-<li><em><strong>python里面是可以直接比较两个dict是否相等</strong></em></li>
-<li>defaultdic (字母都是小写)，Counter (第一个字母C是的大写)</li>
-</ul>
-<h3 id="2-两个数组的交集-349"><a href="#2-两个数组的交集-349" class="headerlink" title="2. 两个数组的交集 #349"></a>2. 两个数组的交集 #349</h3><p>哈希表使用场景：给一个元素，判断在这个集合是否出现过，快速查找</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自己想出来的解法，我循环短的数组，然后判断是不是在另一个长的里面，且在结果集里面</span></span><br><span class="line">res = []</span><br><span class="line">size1 = <span class="built_in">len</span>(nums1)</span><br><span class="line">size2 = <span class="built_in">len</span>(nums2)</span><br><span class="line"><span class="keyword">if</span>(size1 &gt; size2):</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> nums2:</span><br><span class="line">        <span class="keyword">if</span> s <span class="keyword">in</span> nums1 <span class="keyword">and</span> s <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">            res.append(s)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> nums1:</span><br><span class="line">        <span class="keyword">if</span> s <span class="keyword">in</span> nums2 <span class="keyword">and</span> s <span class="keyword">not</span> <span class="keyword">in</span> res:</span><br><span class="line">            res.append(s)</span><br><span class="line"><span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用字典和集合 推荐解法</span></span><br><span class="line">table = &#123;&#125;</span><br><span class="line">res = <span class="built_in">set</span>() <span class="comment"># 定义一个空set是为了去重</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> nums1:</span><br><span class="line">    <span class="comment"># table[s] = 1 # my code</span></span><br><span class="line">    table[s] = table.get(s,<span class="number">0</span>) + <span class="number">1</span> <span class="comment"># 如果s存在table里，返回对应的值加1，如果不存在返回默认值0加1</span></span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> nums2:</span><br><span class="line">    <span class="keyword">if</span> t <span class="keyword">in</span> table:</span><br><span class="line">        res.add(t) <span class="comment"># 添加一个ele到set里</span></span><br><span class="line">        <span class="keyword">del</span> table[t] <span class="comment"># 删除一个set里面的key，为了去重</span></span><br><span class="line"><span class="keyword">return</span> <span class="built_in">list</span>(res) <span class="comment"># 转set到list</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数组解法例子</span></span><br><span class="line">count1 = [<span class="number">0</span>]*<span class="number">1001</span></span><br><span class="line">count2 = [<span class="number">0</span>]*<span class="number">1001</span></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums1)):</span><br><span class="line">    count1[nums1[i]]+=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums2)):</span><br><span class="line">    count2[nums2[j]]+=<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1001</span>):</span><br><span class="line">    <span class="keyword">if</span> count1[k]*count2[k]&gt;<span class="number">0</span>:</span><br><span class="line">        result.append(k)</span><br><span class="line"><span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
-<p>python语法：</p>
-<ul>
-<li>table[num] &#x3D; table.get(num,0) + 1，table字典中获取键为num的-值，如果num不存在于字典中，则返回默认值0。然后将获取到的值加1。</li>
-<li>del my_dict[‘a’]，del关键字被用来删除字典my_dict中的键为’a’的键值对。</li>
-</ul>
-<h3 id="3-快乐数-202"><a href="#3-快乐数-202" class="headerlink" title="3. 快乐数 #202"></a>3. 快乐数 #202</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">table = <span class="built_in">set</span>()</span><br><span class="line">        </span><br><span class="line"><span class="keyword">while</span> n != <span class="number">1</span>:</span><br><span class="line">    <span class="comment"># res = 0</span></span><br><span class="line">    <span class="comment"># while n &gt; 0:</span></span><br><span class="line">    <span class="comment">#     digit = n % 10</span></span><br><span class="line">    <span class="comment">#     res = res + digit * digit</span></span><br><span class="line">    <span class="comment">#     n = n // 10</span></span><br><span class="line">    </span><br><span class="line">    n = <span class="built_in">sum</span>(<span class="built_in">int</span>(x)**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">str</span>(n))</span><br><span class="line">    <span class="keyword">if</span> n <span class="keyword">in</span> table:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        table.add(n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-<p>思路：不难，语法不太熟，</p>
-<ul>
-<li>python sum(list) ex: sum([1,2,3,4])</li>
-<li>n 不等于1的时候进去循环，然后不断更新n，并把n存在table里，如果table里找到n，有循环就返回，如果结果是1也返回</li>
-</ul>
-<h3 id="4-两数之和-1"><a href="#4-两数之和-1" class="headerlink" title="4. 两数之和 #1"></a>4. 两数之和 #1</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">table = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">    <span class="keyword">if</span> nums[x] <span class="keyword">in</span> table <span class="keyword">and</span> x != table[nums[x]]:</span><br><span class="line">        <span class="keyword">return</span> [x, table[nums[x]]]</span><br><span class="line">    table[target-nums[x]] = x</span><br><span class="line">    </span><br><span class="line"><span class="keyword">return</span> []  </span><br></pre></td></tr></table></figure>
-
-<p>思路：</p>
-<ul>
-<li>这个元素是否在集合中出现过，就要想到用hash map,这道题在遍历其中的元素的时候要知道以前的元素是否跟当前的有匹配，如果有的话就返回正确的值了，这样就是把之前所有遍历过的元素放在一个表里，让当前的元素快速查找，所有就想到了哈希表</li>
-<li>知道哈希表之后，用数组，还是set，还是dict，因为要保存index以及数值，所以我们要用dict，也就是map</li>
-</ul>
-<p><strong>Hash table in Python</strong></p>
-<h3 id="哈希表对应数据结构有数组，set，map"><a href="#哈希表对应数据结构有数组，set，map" class="headerlink" title="哈希表对应数据结构有数组，set，map"></a>哈希表对应数据结构有数组，set，map</h3><h3 id="在Python中，Set-和-Map-是两种不同的数据结构，它们有以下区别："><a href="#在Python中，Set-和-Map-是两种不同的数据结构，它们有以下区别：" class="headerlink" title="在Python中，Set 和 Map 是两种不同的数据结构，它们有以下区别："></a>在Python中，Set 和 Map 是两种不同的数据结构，它们有以下区别：</h3><ol>
-<li>Set（集合）是一种无序且元素唯一的数据结构，它不包含重复的元素。在集合中，每个元素都是独一无二的。例如：</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_set = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>Map（字典）是一种键值对的数据结构，它包含了键（key）和值（value）之间的映射关系。在字典中，键是唯一的，但值可以重复。例如：</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my_dict = &#123;<span class="string">&#x27;apple&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;banana&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;cherry&#x27;</span>: <span class="number">5</span>&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>总的来说，Set 是一种用于存储唯一元素的数据结构，而 Map 是一种用于存储键值对映射关系的数据结构。在Python中，Set 对应的数据结构是集合（set），Map 对应的数据结构是字典（dictionary）。</p>
-<p><strong>defaultdic in Python</strong></p>
-<h3 id="1-为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找"><a href="#1-为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找" class="headerlink" title="1. 为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找"></a>1. 为什么要用defaultdic？想拿dic里面的一个值，报错了，没办法，进行下去，如果有一个默认值，就可以继续查找</h3><ul>
-<li>在字典中查找某个值时，若key不存在时则会返回一个KeyError错误而不是一个默认值，这时候可以使用defaultdict函数。</li>
-</ul>
-<p><strong>注意：使用dict[key]时，若key不存在则报错；使用dict.get(key)时，若key不存在则会返回一个默认值。</strong></p>
-<p><strong>注意：key不存在dict当中时，dict[key] &#x3D; value是赋值，不会报错；key不存在dict当中，以dict[key]方式获取值，会报错</strong></p>
-<h3 id="2-返回的默认是都可以是什么？int-0-list-str-””-set"><a href="#2-返回的默认是都可以是什么？int-0-list-str-””-set" class="headerlink" title="2.返回的默认是都可以是什么？int&#x3D;&gt;0 list&#x3D;&gt;[], str&#x3D;&gt;””, set&#x3D;&gt;()"></a>2.返回的默认是都可以是什么？int&#x3D;&gt;0 list&#x3D;&gt;[], str&#x3D;&gt;””, set&#x3D;&gt;()</h3><ul>
-<li>defaultdict接受一个工厂函数作为参数，如下来构造：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict =defaultdict( factory_function)</span><br></pre></td></tr></table></figure>
-
-<p>factory_function可以是list、set、str等等，作用是当key不存在时，返回的是工厂函数的默认值，比如list对应[ ]，str对应的是空字符串，set对应set( )，int对应0。</p>
-<p><em><strong>defaultdict是python内建dict类的一个字类，功能与dict相同，但它带有一个默认的值，若key值不存在时返回一个默认的值。</strong></em></p>
-<h3 id="3-counter-在python里是什么？"><a href="#3-counter-在python里是什么？" class="headerlink" title="3. counter 在python里是什么？"></a>3. counter 在python里是什么？</h3><p>Counter（）是collections里面的一个类，作用是计算出字符串或者列表等中不同元素出现的个数，返回值可以理解为一个字典<br><em><strong>看例子就明白了</strong></em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = &#x27;abbccc&#x27;</span><br><span class="line">res = Counter(s)</span><br><span class="line">print(res) #Counter(&#123;&#x27;c&#x27;: 3, &#x27;b&#x27;: 2, &#x27;a&#x27;: 1&#125;)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/24/20240226-hash-table/" data-id="cltky4zlu0001tlwk7zxb11qo" data-title="20240226 hash table" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240223-LinkedList" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/23/20240223-LinkedList/" class="article-date">
-  <time class="dt-published" datetime="2024-02-23T17:36:46.000Z" itemprop="datePublished">2024-02-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/23/20240223-LinkedList/">20240223 LinkedList</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="1-两两交换链表中的节点-16"><a href="#1-两两交换链表中的节点-16" class="headerlink" title="1. 两两交换链表中的节点 #16"></a>1. 两两交换链表中的节点 #16</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(-<span class="number">1</span>)</span><br><span class="line">dummy_head.<span class="built_in">next</span> = head</span><br><span class="line">cur = dummy_head</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cur.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> cur.<span class="built_in">next</span>.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    temp = cur.<span class="built_in">next</span></span><br><span class="line">    next_temp = temp.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    cur.<span class="built_in">next</span> = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    cur.<span class="built_in">next</span>.<span class="built_in">next</span> = temp</span><br><span class="line">    temp.<span class="built_in">next</span> = next_temp</span><br><span class="line">    cur = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">return</span> dummy_head.<span class="built_in">next</span></span><br><span class="line">            </span><br></pre></td></tr></table></figure>
-<p>思路：这个题是一定要画图的，画完图我可以写出来。附图</p>
-<h3 id="2-删除链表倒数第N个节点，双指针-19"><a href="#2-删除链表倒数第N个节点，双指针-19" class="headerlink" title="2. 删除链表倒数第N个节点，双指针 #19"></a>2. 删除链表倒数第N个节点，双指针 #19</h3><h2 id="有虚拟头节点的方法"><a href="#有虚拟头节点的方法" class="headerlink" title="有虚拟头节点的方法"></a>有虚拟头节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line">slow = dummy_head</span><br><span class="line">fast = dummy_head</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n+<span class="number">1</span>):</span><br><span class="line">    fast = fast.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">slow.<span class="built_in">next</span> = slow.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> dummy_head.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="没有虚拟头节点的方法"><a href="#没有虚拟头节点的方法" class="headerlink" title="没有虚拟头节点的方法"></a>没有虚拟头节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">p1 = head</span><br><span class="line">p2 = head</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="built_in">print</span>(i)</span><br><span class="line">    p1 = p1.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> p1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">return</span> head.<span class="built_in">next</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">while</span> p1.<span class="built_in">next</span>:</span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">        p2 = p2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> p2.<span class="built_in">next</span>:</span><br><span class="line">    p2.<span class="built_in">next</span> = p2.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
-<p>思路: 这个题的思路是双指针，一个指针先走到N的位置，一个指针从起点开始，这时候两个指针同时向后走，这样两个指针之间相差N，一直到第一个指针先走到None，第二个指针就是到了链表的倒数第N个节点的前一个节点，就可以删除第N个节点了<br><em><strong>注意</strong></em></p>
-<ul>
-<li>要想删除第N个节点，指针一定要定位在N前面的一个节点，才能删掉第N个节点</li>
-<li>两个方法，一个是有虚拟头节点，一个是没有，写法上有虚拟头节点的更容易些，没有的话判断条件更多。推荐有虚拟头节点，移动的步数就是N+1</li>
-</ul>
-<h3 id="3-链表是否相交-160"><a href="#3-链表是否相交-160" class="headerlink" title="3. 链表是否相交 #160"></a>3. 链表是否相交 #160</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">p1 = headA</span><br><span class="line">p2 = headB</span><br><span class="line"><span class="keyword">while</span> p1 != p2:</span><br><span class="line">    <span class="keyword">if</span> p1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        p1 = headB</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span> p2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        p2 = headA</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p2 = p2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> p1 </span><br></pre></td></tr></table></figure>
-
-<p>思路： 把两个链表拼在一起，如果有相交点，会找到，headA+headB 和 headB+headA, 他们的长度一定是一样的，那么他们如果中间没有相交，到最后也一定会相交，都是None的时候</p>
-<ul>
-<li>一个指针从链表1开始，另一个指针从链表2开始。当第一个指针到达链表1的末尾时，我们将其重定向到链表2的头部。同样的，当第二个指针到达链表2的末尾时，我们将其重定向到链表1的头部。最终，两个指针会相遇，这就是它们的交点。</li>
-<li>如果有交点的话，就是两个节点的内存地址一样，所以后续的值一定一样，这样其实就是前面的长度可能会不一样，也就是有一个先到交点位置，有一个后到交点位置，但是如果是A+B 和B+A的时候，就是肯定同时到交点位置</li>
-</ul>
-<h3 id="4-环形链表，判断有否有环，找到环的起点，快慢指针-142"><a href="#4-环形链表，判断有否有环，找到环的起点，快慢指针-142" class="headerlink" title="4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142"></a>4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fast = head</span><br><span class="line">slow = head</span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span>(fast == slow):</span><br><span class="line">        index1 = fast</span><br><span class="line">        index2 = head</span><br><span class="line">        <span class="keyword">while</span> index1 != index2:</span><br><span class="line">            index1 = index1.<span class="built_in">next</span></span><br><span class="line">            index2 = index2.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> index1</span><br><span class="line"><span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
-
-<p>思路： 程序非常简单，原理证明推理过程比较复杂</p>
-<ul>
-<li><ol>
-<li>定义一个快指针一个慢指针，每次快指针移动两步，慢指针移动一步，如果有相遇，就存在环，没有相遇就不存在环</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>从相遇点找环的起点，相遇时，把快指针放在head，之后快慢指针每次移动一步，再次相交的点就是环的起点</li>
-</ol>
-</li>
-</ul>
-<h2 id="python-语法补充"><a href="#python-语法补充" class="headerlink" title="python 语法补充"></a>python 语法补充</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line"></span><br><span class="line">两个是一个意思</span><br><span class="line"></span><br><span class="line">dummy_head = ListNode(<span class="number">0</span>)</span><br><span class="line">dimmy_head.<span class="built_in">next</span> = head</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/23/20240223-LinkedList/" data-id="cltky4zls0000tlwkdwsd8e6t" data-title="20240223 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240222-LinkedList" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/22/20240222-LinkedList/" class="article-date">
-  <time class="dt-published" datetime="2024-02-23T00:59:34.000Z" itemprop="datePublished">2024-02-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/22/20240222-LinkedList/">20240222 LinkedList</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="1-移除链表-203"><a href="#1-移除链表-203" class="headerlink" title="1.移除链表 #203"></a>1.移除链表 #203</h3><p>心得体会：</p>
-<ul>
-<li>去掉head，判定只要head等于target就一直执行while，一直到head不等于target，这时候在执行下面时候，head一定不是target，可以放心用next</li>
-<li><strong>while(current.next)的时候，如果满足条件也就是current.next&#x3D;&#x3D;target，只改变了current的next指向哪里，但是current并没有改变指向的位置，再进入下次循环，仍然判定的是current的next是不是target，一直到current的next不再是target了，current才往下移动一位，为了删除连续是target的情况</strong></li>
-<li>一定要定义一个临时指针做循环，不能用head改变，因为head一旦改变就找不回去了。</li>
-<li>为什么要用虚拟节点？因为在删除头节点和后面的节点方法是不一样的。<!-- ![Test PNG image ](https://gssc.esa.int/navipedia/images/a/a9/Example.jpg) -->
-<img src="/2024/02/22/20240222-LinkedList/linkedlist.jpg" alt="上面的解释"></li>
-</ul>
-<h2 id="这是没有虚拟节点的方法"><a href="#这是没有虚拟节点的方法" class="headerlink" title="这是没有虚拟节点的方法"></a>这是没有虚拟节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> head <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> head.val == val :</span><br><span class="line">    head = head.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">current = head</span><br><span class="line"><span class="keyword">while</span> current <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> current.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">if</span> current.<span class="built_in">next</span>.val == val:</span><br><span class="line">        current.<span class="built_in">next</span> = current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        current = current.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
-
-<h2 id="这是有虚拟节点的方法"><a href="#这是有虚拟节点的方法" class="headerlink" title="这是有虚拟节点的方法"></a>这是有虚拟节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(-<span class="number">1</span>)</span><br><span class="line">dummy_head.<span class="built_in">next</span> = head</span><br><span class="line"><span class="comment"># 定义一个临时指针</span></span><br><span class="line">current = dummy_head</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> current.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(current.<span class="built_in">next</span>.val != val):</span><br><span class="line">        current = current.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        current.<span class="built_in">next</span> = current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> dummy_head.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-设计链表-707"><a href="#2-设计链表-707" class="headerlink" title="2.设计链表 #707"></a>2.设计链表 #707</h3><h2 id="没有虚拟节点的方法"><a href="#没有虚拟节点的方法" class="headerlink" title="没有虚拟节点的方法"></a>没有虚拟节点的方法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinkedList</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># Initialize your date structure here</span></span><br><span class="line">        self.head = <span class="literal">None</span></span><br><span class="line">        self.size = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, index: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># Get the value of the index-th node in the linked list. If the index is invalid, return -1.</span></span><br><span class="line">        <span class="keyword">if</span> index &gt;= self.size <span class="keyword">or</span> index &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        current = self.head   </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, index):</span><br><span class="line">            </span><br><span class="line">            current = current.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> current.val</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addAtHead</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># self.addAtIndex(0, val)</span></span><br><span class="line">        current = self.head</span><br><span class="line">        new_node = ListNode(val)</span><br><span class="line">        new_node.<span class="built_in">next</span> = current</span><br><span class="line">        self.head = new_node</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        self.size += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addAtTail</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># self.addAtIndex(self.size, val)</span></span><br><span class="line">        </span><br><span class="line">        new_node = ListNode(val)</span><br><span class="line">        <span class="keyword">if</span>(self.head <span class="keyword">is</span> <span class="literal">None</span>):</span><br><span class="line">            self.head = new_node</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            current = self.head       </span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, self.size-<span class="number">1</span>):</span><br><span class="line">                current = current.<span class="built_in">next</span></span><br><span class="line">            current.<span class="built_in">next</span> = new_node</span><br><span class="line">        </span><br><span class="line">        self.size += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addAtIndex</span>(<span class="params">self, index: <span class="built_in">int</span>, val: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># index is greater that the length, the node will not be inserted</span></span><br><span class="line">        <span class="keyword">if</span>(index &gt; self.size):</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line">        new_node = ListNode(val)</span><br><span class="line">        current = self.head</span><br><span class="line">        <span class="keyword">if</span> index &lt;= <span class="number">0</span>:</span><br><span class="line">            new_node.<span class="built_in">next</span> = current</span><br><span class="line">            self.head = new_node</span><br><span class="line">        <span class="keyword">else</span>: </span><br><span class="line">            <span class="comment"># 找到index对应的node</span></span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,index-<span class="number">1</span>):</span><br><span class="line">                current = current.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 在index之前插入新node</span></span><br><span class="line">            new_node.<span class="built_in">next</span> = current.<span class="built_in">next</span></span><br><span class="line">            current.<span class="built_in">next</span> = new_node </span><br><span class="line"></span><br><span class="line">        self.size += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">deleteAtIndex</span>(<span class="params">self, index: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># if index is larger than size, or -1</span></span><br><span class="line">        <span class="keyword">if</span> (index &gt; self.size-<span class="number">1</span> <span class="keyword">or</span> index &lt; <span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        current = self.head</span><br><span class="line">        <span class="keyword">if</span> index == <span class="number">0</span>:</span><br><span class="line">            self.head = self.head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, index-<span class="number">1</span>):</span><br><span class="line">                current = current.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">            current.<span class="built_in">next</span> = current.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        self.size -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="有虚拟节点的方法-代码随想录里面的，看完视频，刷的时候一遍过，happy"><a href="#有虚拟节点的方法-代码随想录里面的，看完视频，刷的时候一遍过，happy" class="headerlink" title="有虚拟节点的方法,代码随想录里面的，看完视频，刷的时候一遍过，happy^_^"></a>有虚拟节点的方法,代码随想录里面的，看完视频，刷的时候一遍过，happy^_^</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinkedList</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># Initialize your date structure here</span></span><br><span class="line">        self.dummy_head = ListNode()</span><br><span class="line">        self.size = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, index: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># Get the value of the index-th node in the linked list. If the index is invalid, return -1.</span></span><br><span class="line">        <span class="keyword">if</span> index &gt;= self.size <span class="keyword">or</span> index &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        current = self.dummy_head.<span class="built_in">next</span>   </span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, index):</span><br><span class="line">            current = current.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> current.val</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addAtHead</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># self.addAtIndex(0, val)</span></span><br><span class="line">        new_node = ListNode(val)</span><br><span class="line">        head = self.dummy_head.<span class="built_in">next</span></span><br><span class="line">        self.dummy_head.<span class="built_in">next</span> = new_node</span><br><span class="line">        new_node.<span class="built_in">next</span> = head</span><br><span class="line">        self.size += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addAtTail</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># self.addAtIndex(self.size, val)</span></span><br><span class="line">        </span><br><span class="line">        new_node = ListNode(val)</span><br><span class="line">        cur = self.dummy_head</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(self.size):</span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        cur.<span class="built_in">next</span> = new_node </span><br><span class="line">        self.size += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addAtIndex</span>(<span class="params">self, index: <span class="built_in">int</span>, val: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># index is greater that the length, the node will not be inserted</span></span><br><span class="line">        <span class="keyword">if</span>(index &gt; self.size):</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line">        new_node = ListNode(val)</span><br><span class="line">        current = self.dummy_head</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">            current = current.<span class="built_in">next</span></span><br><span class="line">        temp = current.<span class="built_in">next</span></span><br><span class="line">        current.<span class="built_in">next</span> = new_node</span><br><span class="line">        new_node.<span class="built_in">next</span> = temp</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        self.size += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">deleteAtIndex</span>(<span class="params">self, index: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="comment"># if index is larger than size, or -1</span></span><br><span class="line">        <span class="keyword">if</span> (index &gt; self.size-<span class="number">1</span> <span class="keyword">or</span> index &lt; <span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        cur = self.dummy_head</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        cur.<span class="built_in">next</span> = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        self.size -= <span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="3-反转链表-206"><a href="#3-反转链表-206" class="headerlink" title="3.反转链表 #206"></a>3.反转链表 #206</h3><p>思路: 双指针解法，就是改变每一个node的指向，从指向后一个变成指向前一个，递归的写法，完全是按照双指针的输入和输出做出来的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line"></span><br><span class="line">    pre = <span class="literal">None</span></span><br><span class="line">    current = head</span><br><span class="line">    <span class="keyword">while</span> current <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        n = current.<span class="built_in">next</span></span><br><span class="line">        current.<span class="built_in">next</span> = pre</span><br><span class="line">        pre = current</span><br><span class="line">        current = n</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pre</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二种递归的解法</span></span><br><span class="line">    <span class="keyword">return</span> self.reservs(<span class="literal">None</span>, head)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reservs</span>(<span class="params">self, pre, current</span>):</span><br><span class="line">        <span class="keyword">if</span> current <span class="keyword">is</span> <span class="literal">None</span>: </span><br><span class="line">            <span class="keyword">return</span> pre</span><br><span class="line">        temp = current.<span class="built_in">next</span></span><br><span class="line">        current.<span class="built_in">next</span> = pre</span><br><span class="line">        <span class="keyword">return</span> self.reservs(current, temp)</span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/22/20240222-LinkedList/" data-id="cltky4zlw0005tlwk1tao2m32" data-title="20240222 LinkedList" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240221-Array" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/21/20240221-Array/" class="article-date">
-  <time class="dt-published" datetime="2024-02-21T23:05:38.000Z" itemprop="datePublished">2024-02-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/21/20240221-Array/">20240221 Array</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="1-左右双指针-题目-977"><a href="#1-左右双指针-题目-977" class="headerlink" title="1.左右双指针 题目#977"></a>1.左右双指针 题目#977</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span></span><br><span class="line">z = r = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"><span class="comment"># result = [0 for _ in range(len(nums))]</span></span><br><span class="line">result = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)] * <span class="built_in">len</span>(nums)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(s &lt;= z):</span><br><span class="line">    <span class="keyword">if</span>(nums[s]**<span class="number">2</span> &gt; nums[z]**<span class="number">2</span>):</span><br><span class="line">        result[r] = nums[s]**<span class="number">2</span></span><br><span class="line">        s += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result[r] = nums[z]**<span class="number">2</span></span><br><span class="line">        z -= <span class="number">1</span></span><br><span class="line">    r -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>用左右双指针的思路是：因为是一个不降序的排列，平方之后的最大值一定是出现在左右两边，定义一个空数组，左右开始，从大到小取出来值放到空数组里，如果空数组需要从大到小，就从0插入，如果需要从小到大，就从最后插入。</p>
-<h3 id="2-滑动窗口-209"><a href="#2-滑动窗口-209" class="headerlink" title="2. 滑动窗口 #209"></a>2. 滑动窗口 #209</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span></span><br><span class="line">result = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line"><span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">    <span class="built_in">sum</span> += nums[i]</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">sum</span>&gt;= target):</span><br><span class="line">        <span class="built_in">print</span>(i-s+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> (i-s+<span class="number">1</span>) &lt; result:</span><br><span class="line">            result = i-s+<span class="number">1</span></span><br><span class="line">        <span class="built_in">sum</span> -= nums[s]</span><br><span class="line">        s += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> result == <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"><span class="comment"># return min_len if min_len != float(&#x27;inf&#x27;) else 0</span></span><br><span class="line">                </span><br></pre></td></tr></table></figure>
-
-<p>滑动窗口的思路：</p>
-<ul>
-<li>初始化 left &#x3D; right &#x3D; 0,定义一个窗口左闭右开[left, right)，会影响循环的条件。</li>
-<li>不断扩大right，使窗口满足条件，此题就是大于或等于target。</li>
-<li>满足条件之后要找到最优解，停止增加right，转而不断增加left，缩小窗口，把每个符合条件的长度和结果比较，直到窗口不再满足条件，然后就继续增加right，直到下一个满足条件的窗口出现，重复第二个步骤</li>
-<li>直到right走到头</li>
-</ul>
-<p>类似的题还有#76</p>
-<h3 id="螺旋矩阵-59-（面试常考题）这道题之后再刷一次"><a href="#螺旋矩阵-59-（面试常考题）这道题之后再刷一次" class="headerlink" title="螺旋矩阵 #59 （面试常考题）这道题之后再刷一次"></a>螺旋矩阵 #59 （面试常考题）这道题之后再刷一次</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">matrix = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">startx, starty = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">loop, mid = n//<span class="number">2</span>, n//<span class="number">2</span></span><br><span class="line">count = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> offset <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, loop+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(starty, n-offset):</span><br><span class="line">        matrix[startx][i] = count</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startx, n-offset):</span><br><span class="line">        matrix[i][n-offset] = count</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-offset, starty, -<span class="number">1</span>):</span><br><span class="line">        matrix[n-offset][i] = count</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-offset, startx, -<span class="number">1</span>):</span><br><span class="line">        matrix[i][starty] = count</span><br><span class="line">        count+=<span class="number">1</span></span><br><span class="line">    startx += <span class="number">1</span></span><br><span class="line">    starty += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(matrix)</span></span><br><span class="line"><span class="keyword">if</span> n%<span class="number">2</span> &gt; <span class="number">0</span>:</span><br><span class="line">    matrix[mid][mid] = n**<span class="number">2</span></span><br><span class="line"><span class="keyword">return</span> matrix</span><br></pre></td></tr></table></figure>
-
-<p>文章讲解：<a target="_blank" rel="noopener" href="https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html">https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html</a><br>视频讲解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tZ4y1q7XE">https://www.bilibili.com/video/BV1tZ4y1q7XE</a></p>
-<p>文章讲的非常清楚，如何处理边界条件，如何奇数中心位置是最大值，注意python里面的range（0，len），实际循环的最后一次是len-1。</p>
-<p><strong>python语法</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">arr = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]  size 就是生成数组的长度</span><br><span class="line">size = <span class="number">4</span></span><br><span class="line">arr = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">arr = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line">arr = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(size)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, size):</span><br><span class="line">    <span class="built_in">print</span>(i)   <span class="comment"># index</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">    <span class="built_in">print</span>(i)   <span class="comment"># value</span></span><br><span class="line"><span class="keyword">for</span> index, ele <span class="keyword">in</span> <span class="built_in">enumerate</span>(arr):</span><br><span class="line">    <span class="built_in">print</span>(index, ele)  <span class="comment"># index and value</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/21/20240221-Array/" data-id="cltky4zlv0002tlwkarxjgy3y" data-title="20240221 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240220-Array" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/20/20240220-Array/" class="article-date">
-  <time class="dt-published" datetime="2024-02-20T20:52:42.000Z" itemprop="datePublished">2024-02-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/20/20240220-Array/">20240220 Array</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <!-- deploy -->
-<!-- hexo clean && hexo d -g -->
-<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><h3 id="1-数组二分法-题目-704，-35"><a href="#1-数组二分法-题目-704，-35" class="headerlink" title="1.数组二分法 题目#704， #35"></a>1.数组二分法 题目#704， #35</h3><p>#704</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">left = <span class="number">0</span></span><br><span class="line">right = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> left &lt;=right:</span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> nums[mid] &lt; target:</span><br><span class="line">        left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">        right = mid -<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> mid</span><br><span class="line"><span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>套用模版，有两种，第一种是左闭右闭，第二种是左闭右开，区别在于定义right，while条件，以及如果右开，right&#x3D;mid</p>
-<p>#35</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">left = <span class="number">0</span></span><br><span class="line">right = <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"><span class="comment"># 左闭右闭</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(left &lt;= right ):</span><br><span class="line">    <span class="comment"># // 取模，向下取整</span></span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span>(nums[mid] &gt; target):</span><br><span class="line">        right = mid -<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> (nums[mid] &lt; target):</span><br><span class="line">        left = mid + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> mid</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> left</span><br></pre></td></tr></table></figure>
-<p>*<strong>这道题最后如果要插入的值不存在，返回的要插入的index，我的理解是循环的最后的条件是left&#x3D;right，这个时候，如果target大于mid，left加1，否则left不变，所以此时left是最新的值而不是mid，代表比插入值大的第一个元素的位置，或者也可以写right+1。</strong></p>
-<h3 id="2-数组快慢指针-题目-27"><a href="#2-数组快慢指针-题目-27" class="headerlink" title="2.数组快慢指针 题目#27"></a>2.数组快慢指针 题目#27</h3><p>解法：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slow = <span class="number">0</span></span><br><span class="line">fast = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> fast &lt; <span class="built_in">len</span>(nums):</span><br><span class="line">    <span class="keyword">if</span>(nums[fast] != val):</span><br><span class="line">        nums[slow] = nums[fast]</span><br><span class="line">        slow = slow + <span class="number">1</span></span><br><span class="line">    fast = fast + <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> slow</span><br></pre></td></tr></table></figure>
-<p>或者用index做快指针</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">slow = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">    <span class="keyword">if</span> nums[i] != val:</span><br><span class="line">        nums[slow] = nums[i]</span><br><span class="line">        slow += <span class="number">1</span></span><br><span class="line"><span class="keyword">return</span> slow </span><br></pre></td></tr></table></figure>
-
-<p>时间复杂度是O(N)<br><strong>注意：快指针代表获取新数组要更新的元素，慢指针代表获取数组中需要更新的位置</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/20240220-Array/" data-id="cltky4zlv0003tlwkh04y8aau" data-title="20240220 Array" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/20/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-02-20T20:31:21.856Z" itemprop="datePublished">2024-02-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/02/20/hello-world/" data-id="cltky4zm1000ftlwkbv3qcnxd" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/03/08/20240309-tree-5/">20240309 tree-5</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/07/20240308-tree-4/">20240308 tree-4</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/06/20240307-tree-3/">20240307 tree-3</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/05/20240306-tree-2/">20240306 tree-2</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/04/20240305-tree-1/">20240305 tree-1</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 Claire<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
   </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
+  </body>
 </html>

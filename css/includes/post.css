@@ -168,13 +168,3 @@
   background-color: rgba(249,115,22,0.1);
   border-radius: 6px;
 }
-.tag-cloud a {
-  display: inline-block;
-  margin: 5px 10px;
-  word-wrap: break-word;
-  transition: all ease-out 0.2s;
-}
-.tag-cloud a:hover {
-  color: #d1d5db;
-  transform: scale(1.1);
-}
