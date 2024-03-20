@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240320 backtracking-5</h1>
+  <article class="post-content"><h2 id="Backtracking-day5"><a href="#Backtracking-day5" class="headerlink" title="Backtracking day5"></a>Backtracking day5</h2><h3 id="1-递增子序列-491"><a href="#1-递增子序列-491" class="headerlink" title="1. 递增子序列 #491"></a>1. 递增子序列 #491</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findSubsequences</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(nums,<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, index</span>):</span><br><span class="line">        <span class="comment"># 收集子集</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path)&gt;<span class="number">1</span>:</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">        used = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="comment"># if i &gt; index and nums[i] == nums[i-1]:  #错误的去重方法，不适用本题</span></span><br><span class="line">            <span class="comment">#     continue</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">len</span>(self.path)&gt; <span class="number">0</span> <span class="keyword">and</span> nums[i] &lt; self.path[-<span class="number">1</span>]) <span class="keyword">or</span> nums[i] <span class="keyword">in</span> used:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            used.append(nums[i])</span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, i+<span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 可以定义set</span></span><br><span class="line">        uset = <span class="built_in">set</span>()  <span class="comment"># 使用集合对本层元素进行去重</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> (path <span class="keyword">and</span> nums[i] &lt; path[-<span class="number">1</span>]) <span class="keyword">or</span> nums[i] <span class="keyword">in</span> uset:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">            uset.add(nums[i])  <span class="comment"># 记录这个元素在本层用过了，本层后面不能再用了</span></span><br><span class="line">            path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, i + <span class="number">1</span>, path, result)</span><br><span class="line">            path.pop()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>首先也是去重，我就直接想到的是90题的去重方法，用的25-26行去重，但是前提是得给nums排序，但是这个题不能排序，为什么？<ul>
+<li>在90.子集II (opens new window)中我们是通过排序，再加一个标记数组来达到去重的目的。而本题求自增子序列，是不能对原数组进行排序的，排完序的数组都是自增子序列了。所以不能使用之前的去重逻辑！</li>
+</ul>
+</li>
+<li>那怎么才能去重，其实也是树层上的去重，如果是有序的话，就比较和前一个一样就跳过，但是无序的话我需要知道前面任何一个有没有一样的元素出现过，也就是我现在要用的used数组，或者是set，用这个数组记录的是树层上出现过的元素，不用回溯，因为每个树层都定义一个新的数组，只有判断当前的元素在不在里面就可以，这个去重方法也适用前面的90题，感觉用的更广泛</li>
+<li>used可以定义set，map，这里用的数组，因为数的范围不大，数组，set，map都可以做哈希表，而且数组干的活，map和set都能干，但如果数值范围小的话能用数组尽量用数组</li>
+</ul>
+<ol start="2">
+<li>全排列 #46</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">permute</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        used = [<span class="number">0</span>] * <span class="built_in">len</span>(nums)</span><br><span class="line"></span><br><span class="line">        self.backtracking(nums, used)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, used</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == <span class="built_in">len</span>(nums):</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> used[i] == <span class="number">0</span>:</span><br><span class="line">                used[i] = <span class="number">1</span></span><br><span class="line">                self.path.append(nums[i])</span><br><span class="line">                self.backtracking(nums, used)</span><br><span class="line">                self.path.pop()</span><br><span class="line">                used[i] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+<p>思路：</p>
+<ul>
+<li>排列问题需要一个used数组，标记已经选择的元素，每次循环的范围是从0到len（nums），不是从startIndex开始，循环的时候只要把used的数组用过的数跳过就可以了，因为used是树层上用过的数</li>
+<li>因为排列问题，每次都要从头开始搜索，例如元素1在[1,2]中已经使用过了，但是在[2,1]中还要再使用一次1。而used数组，其实就是记录此时path里都有哪些元素使用了，一个排列里一个元素只能使用一次。</li>
+</ul>
+<h3 id="3-全排列II-47"><a href="#3-全排列II-47" class="headerlink" title="3. 全排列II  #47"></a>3. 全排列II  #47</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">permuteUnique</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        used = [<span class="number">0</span>] * <span class="built_in">len</span>(nums)</span><br><span class="line">        nums.sort()</span><br><span class="line">        self.backtracking(nums, used)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, used</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == <span class="built_in">len</span>(nums):</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> i&gt; <span class="number">0</span> <span class="keyword">and</span> used[i-<span class="number">1</span>]==<span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> used[i] == <span class="number">0</span> :</span><br><span class="line">                used[i] = <span class="number">1</span></span><br><span class="line">                self.path.append(nums[i])</span><br><span class="line">                self.backtracking(nums, used)</span><br><span class="line">                self.path.pop()</span><br><span class="line">                used[i] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>去重的逻辑，很有意思，套用的是组合II的去重逻辑，<strong>必须是排列的数组</strong>，那里用的是判断</li>
+</ul>
+<p><code>if i &gt; index and nums[i]==nums[i-1]</code><br>为什么i &gt; index,为了确保是树层去重，而i-1和i的数比较是为了去掉树层一样的数，这个题，没有index，用什么呢？用的是used数组里的used【i】是不是0，used也是树层上的数是不是用过。由于是已经排序过的数组，那只比较前一个数和现在的数是不是想等就可以去重了。</p>
+<ul>
+<li>组合II里面的去重有另一种方法，也是用的used数组，可以实现树层去重，这里是一样的，这里还利用used判断数字是不是已经出现过，看上一题</li>
+<li>只要给定一个可包含重复数字的序列，一定需要去重， 还要强调的是去重一定要对元素进行排序，这样我们才方便通过相邻的节点来判断是否重复使用了</li>
+</ul>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-19</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
