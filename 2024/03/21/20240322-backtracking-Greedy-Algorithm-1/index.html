@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240322 backtracking-Greedy Algorithm-1</h1>
+  <article class="post-content"><h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-理论基础"><a href="#1-理论基础" class="headerlink" title="1. 理论基础"></a>1. 理论基础</h3><ul>
+<li>贪心的本质是选择每一阶段的局部最优，从而达到全局最优。</li>
+<li>说实话贪心算法并没有固定的套路。所以唯一的难点就是如何通过局部最优，推出整体最优。</li>
+<li>感觉贪心算法更像考脑力，思路很难想到，需要脑力大开，也就是所谓的常识，只要有思路，解题到不难</li>
+</ul>
+<h3 id="2-分发饼干-455"><a href="#2-分发饼干-455" class="headerlink" title="2. 分发饼干 #455"></a>2. 分发饼干 #455</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findContentChildren</span>(<span class="params">self, g: <span class="type">List</span>[<span class="built_in">int</span>], s: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        g.sort()</span><br><span class="line">        s.sort()</span><br><span class="line">        <span class="comment"># 指针</span></span><br><span class="line">        index = <span class="built_in">len</span>(s)-<span class="number">1</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(g)-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> index &gt;= <span class="number">0</span> <span class="keyword">and</span> s[index] &gt;= g[i]:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">                index -= <span class="number">1</span></span><br><span class="line">        <span class="comment"># print(res)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li><p>大尺寸的饼干既可以满足胃口大的孩子也可以满足胃口小的孩子，那么就应该优先满足胃口大的。</p>
+</li>
+<li><p>这里的局部最优就是大饼干喂给胃口大的，充分利用饼干尺寸喂饱一个，全局最优就是喂饱尽可能多的小孩。</p>
+</li>
+<li><p>可以尝试使用贪心策略，先将饼干数组和小孩数组排序。</p>
+</li>
+<li><p>然后从后向前遍历小孩数组，用大饼干优先满足胃口大的，并统计满足小孩数量。</p>
+</li>
+</ul>
+<h3 id="3-摆动序列-376"><a href="#3-摆动序列-376" class="headerlink" title="3. 摆动序列 #376"></a>3. 摆动序列 #376</h3><p>思路：</p>
+<ul>
+<li><p>局部最优：删除单调坡度上的节点（不包括单调坡度两端的节点），那么这个坡度就可以有两个局部峰值。</p>
+</li>
+<li><p>整体最优：整个序列有最多的局部峰值，从而达到最长摆动序列。</p>
+</li>
+</ul>
+<p>以下是我的思路：我用的是双指针的思路，定义了一个空数组，把所有满足结果的数放进去，<strong>总体思路是找拐点</strong>，一个指针是快指针，循环整个数组，另一个指针是慢指针，指向最后一个拐点，如果遇到持续下降或者持续上升，或者平坡的时候，我的慢指针要往前移动，也就是我的res数组最后一个数要替换最新的数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wiggleMaxLength</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = []</span><br><span class="line">        index = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(index &lt; <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(res) == <span class="number">0</span>:</span><br><span class="line">                res.append(nums[index])</span><br><span class="line">            <span class="keyword">elif</span> <span class="built_in">len</span>(res) == <span class="number">1</span> <span class="keyword">and</span> nums[index] != res[-<span class="number">1</span>]:</span><br><span class="line">                res.append(nums[index])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> nums[index] &gt; res[-<span class="number">1</span>] <span class="keyword">and</span> res[-<span class="number">1</span>] &lt; res[-<span class="number">2</span>]:</span><br><span class="line">                    res.append(nums[index])</span><br><span class="line">                <span class="keyword">elif</span> nums[index] &lt; res[-<span class="number">1</span>] <span class="keyword">and</span> res[-<span class="number">1</span>] &gt; res[-<span class="number">2</span>]:</span><br><span class="line">                    res.append(nums[index])</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    res[-<span class="number">1</span>] = nums[index]</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(res)</span><br><span class="line"></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<p>卡哥思路效率高：</p>
+<p>有三种情况<br>情况一：上下坡中有平坡, 判断preDiff &#x3D;&#x3D; 0可以有0的时候<br>情况二：数组首尾两端，在res加上1，代表末端，prediff也是从0开始，代表前面有一个平坡，可以记录加1<br>情况三：单调坡中有平坡：只有在遇到拐点的时候才更新preDiff</p>
+<ul>
+<li>用斜率的正负表示上坡还是下坡，因为比较的是斜率，要注意把收尾两端的点加上</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wiggleMaxLength</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums)&lt;=<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">len</span>(nums)</span><br><span class="line">        curDiff = <span class="number">0</span>; <span class="comment"># 当前一对差值</span></span><br><span class="line">        preDiff = <span class="number">0</span>; <span class="comment"># 前一对差值</span></span><br><span class="line">        result = <span class="number">1</span>;  <span class="comment"># 记录峰值个数，序列默认序列最右边有一个峰值</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)-<span class="number">1</span>):</span><br><span class="line">            curDiff = nums[i + <span class="number">1</span>] - nums[i]</span><br><span class="line">            <span class="comment"># 出现峰值</span></span><br><span class="line">            <span class="keyword">if</span> ((preDiff &lt;= <span class="number">0</span> <span class="keyword">and</span> curDiff &gt; <span class="number">0</span>) <span class="keyword">or</span> (preDiff &gt;= <span class="number">0</span> <span class="keyword">and</span> curDiff &lt; <span class="number">0</span>)) :</span><br><span class="line">                result += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">                preDiff = curDiff <span class="comment">#注意这里，只在摆动变化的时候更新prediff</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-最大子序和-53"><a href="#4-最大子序和-53" class="headerlink" title="4. 最大子序和 #53"></a>4. 最大子序和 #53</h3><p>思路：</p>
+<ul>
+<li>这道题思路很难想，程序很简单</li>
+<li>局部最优：当前“连续和”为负数的时候立刻放弃，从下一个元素重新计算“连续和”，因为负数加上下一个元素 “连续和”只会越来越小。</li>
+</ul>
+<p>全局最优：选取最大“连续和”</p>
+<p>以下是解题的关键</p>
+<ul>
+<li>连续和如果是负数，那就是从当前开始归0，从新计数，如果是正数就继续累加，因为负数只会拖累总和更小，每次超过最大值都记录下来。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        res = <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            count += nums[i]</span><br><span class="line">            <span class="keyword">if</span> count &gt; res:</span><br><span class="line">                res = count</span><br><span class="line">            <span class="keyword">if</span> count &lt; <span class="number">0</span>:</span><br><span class="line">                count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-21</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
