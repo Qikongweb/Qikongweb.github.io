@@ -58,3 +58,63 @@ class Solution:
 ```
 
 ### 2. 加油站 #134
+思路：
+
+直接从全局进行贪心选择，情况如下：
+
+情况一：如果gas的总和小于cost总和，那么无论从哪里出发，一定是跑不了一圈的
+
+情况二：rest[i] = gas[i]-cost[i]为一天剩下的油，i从0开始计算累加到最后一站，如果累加没有出现负数，说明从0出发，油就没有断过，那么0就是起点。
+
+情况三：如果累加的最小值是负数，汽车就要从非0节点出发，从后向前，看哪个节点能把这个负数填平，能把这个负数填平的节点就是出发节点。   
+
+```python
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        curSum = 0  # 当前累计的剩余油量
+        minFuel = float('inf')  # 从起点出发，油箱里的油量最小值
+        
+        for i in range(len(gas)):
+            rest = gas[i] - cost[i]
+            curSum += rest
+            if curSum < minFuel:
+                minFuel = curSum
+        
+        if curSum < 0:
+            return -1  # 情况1：整个行程的总消耗大于总供给，无法完成一圈
+        
+        if minFuel >= 0:
+            return 0  # 情况2：从起点出发到任何一个加油站时油箱的剩余油量都不会小于0，可以从起点出发完成一圈
+        
+        for i in range(len(gas) - 1, -1, -1):
+            rest = gas[i] - cost[i]
+            minFuel += rest
+            if minFuel >= 0:
+                return i  # 情况3：找到一个位置使得从该位置出发油箱的剩余油量不会小于0，返回该位置的索引
+        
+        return -1  # 无法完成一圈
+```
+
+### 3. 分发糖果 #135
+
+```python
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        candyVec = [1] * len(ratings)
+        
+        # 从前向后遍历，处理右侧比左侧评分高的情况
+        for i in range(1, len(ratings)):
+            if ratings[i] > ratings[i - 1]:
+                candyVec[i] = candyVec[i - 1] + 1
+        
+        # 从后向前遍历，处理左侧比右侧评分高的情况
+        for i in range(len(ratings) - 2, -1, -1):
+            if ratings[i] > ratings[i + 1]:
+                candyVec[i] = max(candyVec[i], candyVec[i + 1] + 1)
+        
+        # 统计结果
+        result = sum(candyVec)
+        return result
+
+```
