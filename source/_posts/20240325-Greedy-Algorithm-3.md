@@ -1,5 +1,5 @@
 ---
-title: 20240325 backtracking-Greedy Algorithm-3
+title: 20240325 Greedy Algorithm-3
 date: 2024-03-24 07:33:45
 tags:
 ---
