@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240323 backtracking-Greedy Algorithm-2 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="贪心算法1. 买卖股票的最佳时机II  #12212345678910class Solution:    def maxProfit(self, prices: List[int]) -&gt; int:        res &#x3D; 0        for i in range(1, len(prices)):            diff &#x3D; prices[i] - prices[i-1]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240323 backtracking-Greedy Algorithm-2">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="贪心算法1. 买卖股票的最佳时机II  #12212345678910class Solution:    def maxProfit(self, prices: List[int]) -&gt; int:        res &#x3D; 0        for i in range(1, len(prices)):            diff &#x3D; prices[i] - prices[i-1]">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/2020112917480858-20230310134659477.png">
+<meta property="article:published_time" content="2024-03-22T22:00:26.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:13:57.851Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/2020112917480858-20230310134659477.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240323-backtracking-Greedy-Algorithm-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/" class="article-date">
+  <time class="dt-published" datetime="2024-03-22T22:00:26.000Z" itemprop="datePublished">2024-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240323 backtracking-Greedy Algorithm-2
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-买卖股票的最佳时机II-122"><a href="#1-买卖股票的最佳时机II-122" class="headerlink" title="1. 买卖股票的最佳时机II  #122"></a>1. 买卖股票的最佳时机II  #122</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(prices)):</span><br><span class="line">            diff = prices[i] - prices[i-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> diff &gt; <span class="number">0</span>:</span><br><span class="line">                res += diff</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>本题首先要清楚两点：</li>
+</ul>
+<p>只有一只股票！<br>当前只有买股票或者卖股票的操作<br>想获得利润至少要两天为一个交易单元。</p>
+<ul>
+<li>把利润分解为每天为单位的维度,其实我们需要收集每天的正利润就可以，收集正利润的区间，就是股票买卖的区间，而我们只需要关注最终利润，不需要记录区间。</li>
+</ul>
+<p>那么只收集正利润就是贪心所贪的地方！</p>
+<p>局部最优：收集每天的正利润，全局最优：求得最大利润。</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/2020112917480858-20230310134659477.png" alt="题目分解为每天的利润"></p>
+<h3 id="2-跳跃游戏-55"><a href="#2-跳跃游戏-55" class="headerlink" title="2. 跳跃游戏 #55"></a>2. 跳跃游戏 #55</h3><p>思路：</p>
+<ul>
+<li>其实跳几步无所谓，关键在于可跳的覆盖范围！</li>
+</ul>
+<p>不一定非要明确一次究竟跳几步，每次取最大的跳跃步数，这个就是可以跳跃的覆盖范围。</p>
+<p>这个范围内，别管是怎么跳的，反正一定可以跳过来。</p>
+<p>那么这个问题就转化为跳跃覆盖范围究竟可不可以覆盖到终点！</p>
+<p>每次移动取最大跳跃步数（得到最大的覆盖范围），每移动一个单位，就更新最大覆盖范围。</p>
+<p>贪心算法局部最优解：每次取最大跳跃步数（取最大覆盖范围），整体最优解：最后得到整体最大覆盖范围，看是否能到终点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canJump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line"></span><br><span class="line">        cover = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) == <span class="number">1</span>: <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> i &lt;= cover:</span><br><span class="line">                cover = <span class="built_in">max</span>(i + nums[i], cover)</span><br><span class="line">                <span class="comment"># print(cover)</span></span><br><span class="line">                <span class="keyword">if</span> cover &gt;= <span class="built_in">len</span>(nums)-<span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<h3 id="3-跳跃游戏II-45"><a href="#3-跳跃游戏II-45" class="headerlink" title="3. 跳跃游戏II #45"></a>3. 跳跃游戏II #45</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cur_distance = <span class="number">0</span>  <span class="comment"># 当前覆盖最远距离下标</span></span><br><span class="line">        ans = <span class="number">0</span>  <span class="comment"># 记录走的最大步数</span></span><br><span class="line">        next_distance = <span class="number">0</span>  <span class="comment"># 下一步覆盖最远距离下标</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            next_distance = <span class="built_in">max</span>(nums[i] + i, next_distance)  <span class="comment"># 更新下一步覆盖最远距离下标</span></span><br><span class="line">            <span class="keyword">if</span> i == cur_distance:  <span class="comment"># 遇到当前覆盖最远距离下标</span></span><br><span class="line">                ans += <span class="number">1</span>  <span class="comment"># 需要走下一步</span></span><br><span class="line">                cur_distance = next_distance  <span class="comment"># 更新当前覆盖最远距离下标（相当于加油了）</span></span><br><span class="line">                <span class="keyword">if</span> next_distance &gt;= <span class="built_in">len</span>(nums) - <span class="number">1</span>:  <span class="comment"># 当前覆盖最远距离达到数组末尾，不用再做ans++操作，直接结束</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/" data-id="clu81jjhc000rtahp22nj08av" data-title="20240323 backtracking-Greedy Algorithm-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20240325 backtracking-Greedy Algorithm-3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240322 backtracking-Greedy Algorithm-1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/">20240325 backtracking-Greedy Algorithm-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/">20240323 backtracking-Greedy Algorithm-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/">20240322 backtracking-Greedy Algorithm-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

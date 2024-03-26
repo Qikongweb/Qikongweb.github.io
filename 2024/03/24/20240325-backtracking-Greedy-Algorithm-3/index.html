@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240325 backtracking-Greedy Algorithm-3 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="贪心算法1. K次取反后最大化的数组和 #1005思路：  两次贪心策略：  第一次：就是把整体的最大的负数拿出来取反，这样对于累加和事最有帮助的。 第二次：就是所有都是整数的时候，如果k还有值，那就是把最小的正数拿出来反复取反，直到k为0，因为不管最后是正还是负，对于总数和都是消耗最小的   贪心的思路，局部最优：让绝对值大的负数变为正数，当前数值达到最大，整体最优：整个数组和达到最大。  局部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240325 backtracking-Greedy Algorithm-3">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="贪心算法1. K次取反后最大化的数组和 #1005思路：  两次贪心策略：  第一次：就是把整体的最大的负数拿出来取反，这样对于累加和事最有帮助的。 第二次：就是所有都是整数的时候，如果k还有值，那就是把最小的正数拿出来反复取反，直到k为0，因为不管最后是正还是负，对于总数和都是消耗最小的   贪心的思路，局部最优：让绝对值大的负数变为正数，当前数值达到最大，整体最优：整个数组和达到最大。  局部">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-24T14:33:45.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:47:39.326Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240325-backtracking-Greedy-Algorithm-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/" class="article-date">
+  <time class="dt-published" datetime="2024-03-24T14:33:45.000Z" itemprop="datePublished">2024-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240325 backtracking-Greedy Algorithm-3
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-K次取反后最大化的数组和-1005"><a href="#1-K次取反后最大化的数组和-1005" class="headerlink" title="1. K次取反后最大化的数组和 #1005"></a>1. K次取反后最大化的数组和 #1005</h3><p>思路：</p>
+<ul>
+<li><p>两次贪心策略：</p>
+<ul>
+<li>第一次：就是把整体的最大的负数拿出来取反，这样对于累加和事最有帮助的。</li>
+<li>第二次：就是所有都是整数的时候，如果k还有值，那就是把最小的正数拿出来反复取反，直到k为0，因为不管最后是正还是负，对于总数和都是消耗最小的</li>
+</ul>
+</li>
+<li><p>贪心的思路，局部最优：让绝对值大的负数变为正数，当前数值达到最大，整体最优：整个数组和达到最大。</p>
+</li>
+<li><p>局部最优：只找数值最小的正整数进行反转，当前数值和可以达到最大</p>
+</li>
+<li><p>那么本题的解题步骤为：</p>
+</li>
+</ul>
+<p>第一步：将数组按照绝对值大小从大到小排序，注意要按照绝对值的大小<br>第二步：从前向后遍历，遇到负数将其变为正数，同时K–<br>第三步：如果K还大于0，那么反复转变数值最小的元素，将K用完<br>第四步：求和</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestSumAfterKNegations</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># arr_sort = sorted(nums, key=abs)</span></span><br><span class="line">        nums.sort(key=<span class="built_in">abs</span>,reverse=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># print(nums)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &lt; <span class="number">0</span>:</span><br><span class="line">                nums[i] = -nums[i]</span><br><span class="line">                k -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> k == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> k % <span class="number">2</span> !=<span class="number">0</span>:  <span class="comment"># 这里我只判断奇数还是偶数就可以了，不用wile循环</span></span><br><span class="line">            nums[-<span class="number">1</span>] *= -<span class="number">1</span>  </span><br><span class="line">        <span class="comment"># while k &gt; 0:</span></span><br><span class="line">        <span class="comment">#     nums[-1] = -nums[-1]</span></span><br><span class="line">        <span class="comment">#     k -= 1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(nums)</span><br></pre></td></tr></table></figure>
+
+<p>性能更好的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestSumAfterKNegations</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        nums.sort(key=<span class="built_in">abs</span>,reverse=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &lt; <span class="number">0</span> <span class="keyword">and</span> k &gt;<span class="number">0</span>:</span><br><span class="line">                nums[i] *= -<span class="number">1</span></span><br><span class="line">                k -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> k % <span class="number">2</span> !=<span class="number">0</span>:</span><br><span class="line">            nums[-<span class="number">1</span>] *= -<span class="number">1</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(nums)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-加油站-134"><a href="#2-加油站-134" class="headerlink" title="2. 加油站 #134"></a>2. 加油站 #134</h3><p>思路：</p>
+<p>直接从全局进行贪心选择，情况如下：</p>
+<p>情况一：如果gas的总和小于cost总和，那么无论从哪里出发，一定是跑不了一圈的</p>
+<p>情况二：rest[i] &#x3D; gas[i]-cost[i]为一天剩下的油，i从0开始计算累加到最后一站，如果累加没有出现负数，说明从0出发，油就没有断过，那么0就是起点。</p>
+<p>情况三：如果累加的最小值是负数，汽车就要从非0节点出发，从后向前，看哪个节点能把这个负数填平，能把这个负数填平的节点就是出发节点。   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        curSum = <span class="number">0</span>  <span class="comment"># 当前累计的剩余油量</span></span><br><span class="line">        minFuel = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)  <span class="comment"># 从起点出发，油箱里的油量最小值</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas)):</span><br><span class="line">            rest = gas[i] - cost[i]</span><br><span class="line">            curSum += rest</span><br><span class="line">            <span class="keyword">if</span> curSum &lt; minFuel:</span><br><span class="line">                minFuel = curSum</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> curSum &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>  <span class="comment"># 情况1：整个行程的总消耗大于总供给，无法完成一圈</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> minFuel &gt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 情况2：从起点出发到任何一个加油站时油箱的剩余油量都不会小于0，可以从起点出发完成一圈</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas) - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            rest = gas[i] - cost[i]</span><br><span class="line">            minFuel += rest</span><br><span class="line">            <span class="keyword">if</span> minFuel &gt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> i  <span class="comment"># 情况3：找到一个位置使得从该位置出发油箱的剩余油量不会小于0，返回该位置的索引</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>  <span class="comment"># 无法完成一圈</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-分发糖果-135"><a href="#3-分发糖果-135" class="headerlink" title="3. 分发糖果 #135"></a>3. 分发糖果 #135</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">candy</span>(<span class="params">self, ratings: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        candyVec = [<span class="number">1</span>] * <span class="built_in">len</span>(ratings)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从前向后遍历，处理右侧比左侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ratings)):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i - <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = candyVec[i - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从后向前遍历，处理左侧比右侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ratings) - <span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i + <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = <span class="built_in">max</span>(candyVec[i], candyVec[i + <span class="number">1</span>] + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 统计结果</span></span><br><span class="line">        result = <span class="built_in">sum</span>(candyVec)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/" data-id="clu81jjhc000ttahpfopkb2jh" data-title="20240325 backtracking-Greedy Algorithm-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240323 backtracking-Greedy Algorithm-2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/">20240325 backtracking-Greedy Algorithm-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/">20240323 backtracking-Greedy Algorithm-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/">20240322 backtracking-Greedy Algorithm-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

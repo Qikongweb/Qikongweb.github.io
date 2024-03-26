@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240316 backtracking-2 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Backtracking day21. 组合总和III #21612345678910111213141516171819202122class Solution:    def combinationSum3(self, k: int, n: int) -&gt; List[List[int]]:        # 回溯算法        self.res &#x3D; []        self.pa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240316 backtracking-2">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/15/20240316-backtracking-2/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="Backtracking day21. 组合总和III #21612345678910111213141516171819202122class Solution:    def combinationSum3(self, k: int, n: int) -&gt; List[List[int]]:        # 回溯算法        self.res &#x3D; []        self.pa">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123200304469.png">
+<meta property="article:published_time" content="2024-03-16T00:08:05.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:13:57.850Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123200304469.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240316-backtracking-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/15/20240316-backtracking-2/" class="article-date">
+  <time class="dt-published" datetime="2024-03-16T00:08:05.000Z" itemprop="datePublished">2024-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240316 backtracking-2
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Backtracking-day2"><a href="#Backtracking-day2" class="headerlink" title="Backtracking day2"></a>Backtracking day2</h3><h2 id="1-组合总和III-216"><a href="#1-组合总和III-216" class="headerlink" title="1. 组合总和III #216"></a>1. 组合总和III #216</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum3</span>(<span class="params">self, k: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 回溯算法</span></span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line"></span><br><span class="line">        self.backtracking(k, n, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(self.res)</span></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, k, n, startIndex</span>):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == k:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == n:</span><br><span class="line">                self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="number">10</span>):</span><br><span class="line">            self.path.append(i)</span><br><span class="line">            self.backtracking(k, n, i+<span class="number">1</span>)  <span class="comment">#这里需要注意的是从i+i开始，而不是从startIndex，会有重复结果会出现[1,3,3],[2,2,3]</span></span><br><span class="line">            self.path.pop()</span><br></pre></td></tr></table></figure>
+
+<p>剪枝也做对了！！！和上一个题很像，思路参考上一题#77</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum3</span>(<span class="params">self, k: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 回溯算法</span></span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line"></span><br><span class="line">        self.backtracking(k, n, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(self.res)</span></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, k, n, startIndex</span>):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == k:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == n:</span><br><span class="line">                self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path)&gt;n:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="number">10</span>-(k - <span class="built_in">len</span>(self.path))+ <span class="number">1</span>):</span><br><span class="line">            self.path.append(i)</span><br><span class="line">            self.backtracking(k, n, i+<span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-电话号码的字母组合-17"><a href="#2-电话号码的字母组合-17" class="headerlink" title="2. 电话号码的字母组合 #17"></a>2. 电话号码的字母组合 #17</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">letterCombinations</span>(<span class="params">self, digits: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = <span class="string">&quot;&quot;</span></span><br><span class="line">        self.dic = &#123;</span><br><span class="line">            <span class="number">2</span>: <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">            <span class="number">3</span>: <span class="string">&#x27;def&#x27;</span>,</span><br><span class="line">            <span class="number">4</span>: <span class="string">&#x27;ghi&#x27;</span>,</span><br><span class="line">            <span class="number">5</span>: <span class="string">&#x27;jkl&#x27;</span>,</span><br><span class="line">            <span class="number">6</span>: <span class="string">&#x27;mno&#x27;</span>,</span><br><span class="line">            <span class="number">7</span>: <span class="string">&#x27;pqrs&#x27;</span>,</span><br><span class="line">            <span class="number">8</span>: <span class="string">&#x27;tuv&#x27;</span>,</span><br><span class="line">            <span class="number">9</span>: <span class="string">&#x27;wxyz&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.backtracking(digits, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># index 是指的是循环到第几个字母了</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, digits, index</span>):</span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == <span class="built_in">len</span>(digits):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(self.path) != <span class="number">0</span>:</span><br><span class="line">                self.res.append(self.path)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="comment"># 单层递归回溯</span></span><br><span class="line">        <span class="comment"># 先把要做循环的数组找出来,每次递归进来，根据index，找到循环的第几个数，决定从哪个字符串里找字母</span></span><br><span class="line">        d = self.dic[<span class="built_in">int</span>(digits[index])]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(d)):</span><br><span class="line">            self.path += d[i]</span><br><span class="line">            self.backtracking(digits, index + <span class="number">1</span>)</span><br><span class="line">            self.path = self.path[:-<span class="number">1</span>]</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123200304469.png" alt="回溯过程的图，出自于代码随想录里"><br>思路：</p>
+<ul>
+<li><p>这个index是记录遍历第几个数字了，就是用来遍历digits的（题目中给出数字字符串），同时index也表示树的深度。</p>
+</li>
+<li><p>每次递归的时候，先取数字对应的字符集，在本次字符集里取一个字母,然后从第一次往里添加第一个数字字符集的第一个字母，第二次添加第二个字符集的第一个字母，第三次添加第三个字符集的第一个字母，第四次添加第三个字符集的第二个字母，以此类推，<br>adg<br>adh<br>adi<br>aeg<br>aeh<br>aei<br>afg<br>afh</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/15/20240316-backtracking-2/" data-id="clu81jjh9000htahphj8m9s73" data-title="20240316 backtracking-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/17/20240318-backtracking-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20240318 backtracking-3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/15/20240315-backtracking-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240315 backtracking-1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/">20240325 backtracking-Greedy Algorithm-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/">20240323 backtracking-Greedy Algorithm-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/">20240322 backtracking-Greedy Algorithm-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

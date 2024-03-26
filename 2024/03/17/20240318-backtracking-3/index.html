@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240318 backtracking-3 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Backtracking day31. 组合总和 #3912345678910111213141516171819class Solution:    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:        self.res &#x3D; []        self.path &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240318 backtracking-3">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/17/20240318-backtracking-3/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="Backtracking day31. 组合总和 #3912345678910111213141516171819class Solution:    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:        self.res &#x3D; []        self.path &#x3D;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-17T13:02:02.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:13:57.850Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240318-backtracking-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/17/20240318-backtracking-3/" class="article-date">
+  <time class="dt-published" datetime="2024-03-17T13:02:02.000Z" itemprop="datePublished">2024-03-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240318 backtracking-3
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Backtracking-day3"><a href="#Backtracking-day3" class="headerlink" title="Backtracking day3"></a>Backtracking day3</h2><h3 id="1-组合总和-39"><a href="#1-组合总和-39" class="headerlink" title="1. 组合总和 #39"></a>1. 组合总和 #39</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) &gt; target:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == target:</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, target, i)</span><br><span class="line">            self.path.pop()</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>self.res.append(self.path[:])，一定要用path[:]，不能传入引用而是穿数值</li>
+<li>在递归的时候用的是i，因为可以有重复元素</li>
+<li>做剪枝的时候要先排序，然后只要循环出现了大于target的时候后面都不用循环了，注意的额是要在push之前比较结果，如果是push之后要记得弹出，因为会一直比target大，而不再进入递归了</li>
+</ul>
+<p>做了程序优化和剪枝之后的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        res = []</span><br><span class="line">        candidates.sort()  <span class="comment"># 需要排序</span></span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>, res, [])</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index, res, path</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(path) == target:</span><br><span class="line">            res.append(path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(path) + nums[i] &gt; target:   <span class="comment"># 在push进去之前比较</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, target, i, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-组合总和II-40"><a href="#2-组合总和II-40" class="headerlink" title="2. 组合总和II #40"></a>2. 组合总和II #40</h3><p>思路：</p>
+<ul>
+<li><p>这道题和39题最主要的区别就是，给的数组中有重复的元素，而如果按之前的写法，结果集里肯定有重复的数组，此题是不可以有重复的数组，所以就是要在结果集里面去重</p>
+</li>
+<li><p>要在递归回溯的过程中去重，不然在最后去重，是会超时的</p>
+</li>
+<li><p>卡哥思路是：“使用过”在这个树形结构上是有两个维度的，一个维度是同一树枝上使用过，一个维度是同一树层上使用过。回看一下题目，元素在同一个组合内是可以重复的，怎么重复都没事，但两个组合不能相同。<br>所以我们要去重的是同一树层上的“使用过”，同一树枝上的都是一个组合里的元素，不用去重。</p>
+</li>
+<li><p>首先对数组排序</p>
+</li>
+<li><p>定义一个used的数组，记录每个元素有没有使用过，</p>
+</li>
+<li><p>当遇见两个数相等的时候，我需要知道前一个数的使用状态，如果前一个的状态是使用过了，那这个相等的数可以直接跳过，如果前一个的状态是使用中，那证明当前的数是在树枝上，可以有相等的存在，比如说[1,2,2,2,…],如果上次循环到第二个2，正要循环第三个2时，有两种情况，1，path &#x3D; [1,2], 2, path &#x3D; [1],第一种情况就是第一个2正在使用中，第二个2是一个树枝，可以重复取，第二种情况是第二个2已经都循环一遍了，它此时的状态是未使用，因为回溯的时候已经把它的状态回溯到最初的状态了，如果我们再去循环第3个2，会和上一个2有重复的情况，所以我们就要跳过这种情况了。第二种情况这就是卡哥说的树层的情况</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum2</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        candidates.sort()</span><br><span class="line">        self.used = [<span class="number">0</span>] * <span class="built_in">len</span>(candidates)</span><br><span class="line"></span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>, res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index, res</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == target:</span><br><span class="line">            res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) &gt; target:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="comment"># print(self.path)</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) + nums[i] &gt; target:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># print(self.used)</span></span><br><span class="line">            <span class="keyword">if</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>] <span class="keyword">and</span> self.used[i-<span class="number">1</span>] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.used[i] = <span class="number">1</span></span><br><span class="line">            self.backtracking(nums, target, i+<span class="number">1</span>, res)</span><br><span class="line">            self.path.pop()</span><br><span class="line">            self.used[i] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>另一种解法用index去重：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum2</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        candidates.sort()</span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>, res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index, res</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == target:</span><br><span class="line">            res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) &gt; target:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) + nums[i] &gt; target:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 要对同一树层使用过的元素进行跳过             </span></span><br><span class="line">            <span class="keyword">if</span> i &gt; index <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, target, i+<span class="number">1</span>, res)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>因为从一层从树枝递归的时候，每次ℹ️都是从index开始遍历的，进不去if，但是通过回溯会把i回溯的最初的上一层，也就是最初的i遍历完了，还是原来的i，但是for loop要往下走了，这时i+1肯定大于i，就可以进if条件了，换句话说，就是回溯到树层了，要往下循环了，自然要去重下一个一样的数字，思路是一样的，换个写法而已。我也能理解</p>
+<h3 id="分割回文串-131"><a href="#分割回文串-131" class="headerlink" title="分割回文串 #131"></a>分割回文串 #131</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">partition</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(s, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, s, startIndex</span>):</span><br><span class="line">        <span class="comment"># 切割线切到了字符串最后面，说明找到了一种切割方法，此时就是本层递归的终止条件</span></span><br><span class="line">        <span class="keyword">if</span> startIndex &gt;= <span class="built_in">len</span>(s):</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(s)):</span><br><span class="line">            s_sub = s[startIndex: i+<span class="number">1</span>]</span><br><span class="line">            <span class="built_in">print</span>(s, startIndex, i+<span class="number">1</span>, s_sub)</span><br><span class="line">            <span class="comment"># 只有在是回文的时候再往下分割</span></span><br><span class="line">            <span class="keyword">if</span> s_sub == s_sub[::-<span class="number">1</span>]:</span><br><span class="line">                self.path.append(s_sub)</span><br><span class="line">            </span><br><span class="line">                self.backtracking(s,i + <span class="number">1</span>)</span><br><span class="line">                self.path.pop()</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li><p>切割问题类似组合问题</p>
+<ul>
+<li>组合问题：选取一个a之后，在bcdef中再去选取第二个，选取b之后在cdef中再选取第三个…..。</li>
+<li>切割问题：切割一个a之后，在bcdef中再去切割第二段，切割b之后在cdef中再切割第三段…..。</li>
+</ul>
+</li>
+<li><p>那么在代码里什么是切割线呢？</p>
+</li>
+</ul>
+<p>在处理组合问题的时候，递归参数需要传入startIndex，表示下一轮递归遍历的起始位置，这个startIndex就是切割线。</p>
+<ul>
+<li>来看看在递归循环中如何截取子串呢？</li>
+</ul>
+<p>在for (int i &#x3D; startIndex; i &lt; s.size(); i++)循环中，我们 定义了起始位置startIndex，那么 [startIndex, i] 就是要截取的子串。<br>其实就是startIndex，从0，1，2，字串为s[0],s[1],s[2],回溯之后就到了1，字串为s[1:2],再回溯到了0，字串就是s[0:1],最后回溯到0时，字串就是s[0:2]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/17/20240318-backtracking-3/" data-id="clu81jjhc000ptahpbqtkbe1i" data-title="20240318 backtracking-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/18/20240319-backtracking-4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20240319 backtracking-4
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/15/20240316-backtracking-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240316 backtracking-2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/">20240325 backtracking-Greedy Algorithm-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/">20240323 backtracking-Greedy Algorithm-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/">20240322 backtracking-Greedy Algorithm-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

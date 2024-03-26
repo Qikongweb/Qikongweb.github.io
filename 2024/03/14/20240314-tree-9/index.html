@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240314 tree-9 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Tree - 91.修剪二叉搜索树 #669123456789101112131415class Solution:    def trimBST(self, root: Optional[TreeNode], low: int, high: int) -&gt; Optional[TreeNode]:        # 递归的终止条件        if root is None:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240314 tree-9">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/14/20240314-tree-9/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="Tree - 91.修剪二叉搜索树 #669123456789101112131415class Solution:    def trimBST(self, root: Optional[TreeNode], low: int, high: int) -&gt; Optional[TreeNode]:        # 递归的终止条件        if root is None:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-14T12:52:19.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:13:57.850Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240314-tree-9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/14/20240314-tree-9/" class="article-date">
+  <time class="dt-published" datetime="2024-03-14T12:52:19.000Z" itemprop="datePublished">2024-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240314 tree-9
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Tree-9"><a href="#Tree-9" class="headerlink" title="Tree - 9"></a>Tree - 9</h2><h3 id="1-修剪二叉搜索树-669"><a href="#1-修剪二叉搜索树-669" class="headerlink" title="1.修剪二叉搜索树 #669"></a>1.修剪二叉搜索树 #669</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trimBST</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], low: <span class="built_in">int</span>, high: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="comment"># 递归的终止条件</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="comment"># 遇到比区间最小的要小的时候，右子树有可能部分节点还在区间内,还要在右子树里面做递归剪裁</span></span><br><span class="line">        <span class="keyword">if</span> root.val &lt; low:</span><br><span class="line">            <span class="keyword">return</span> self.trimBST(root.right, low, high)</span><br><span class="line">        <span class="comment"># 遇到比区间最小的要大的时候，左子树有可能部分节点还在区间内</span></span><br><span class="line">        <span class="keyword">if</span> root.val &gt; high:</span><br><span class="line">            <span class="keyword">return</span> self.trimBST(root.left, low, high)</span><br><span class="line">        <span class="comment"># 返回剪裁之后的节点由谁来接住，左边由父节点的左孩子接住</span></span><br><span class="line">        root.left = self.trimBST(root.left, low, high)</span><br><span class="line">        root.right = self.trimBST(root.right, low, high)</span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<p>思路：<br>跟前两题裁剪的过程是一致的，只不过在裁剪的过程中多了再次裁剪的递归</p>
+<h3 id="2-将有序数组转换为二叉搜索树-108"><a href="#2-将有序数组转换为二叉搜索树-108" class="headerlink" title="2. 将有序数组转换为二叉搜索树 #108"></a>2. 将有序数组转换为二叉搜索树 #108</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sortedArrayToBST</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="comment"># self.nums = nums</span></span><br><span class="line">        <span class="keyword">return</span> self.traversal(nums, <span class="number">0</span>, <span class="built_in">len</span>(nums)-<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">traversal</span>(<span class="params">self, nums, left, right</span>):    </span><br><span class="line">        <span class="keyword">if</span> left &gt; right:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        mid = (right+left)//<span class="number">2</span></span><br><span class="line">        <span class="comment"># print(right,left)</span></span><br><span class="line">        <span class="comment"># print(mid, nums)</span></span><br><span class="line">        rootValue = nums[mid]</span><br><span class="line">        root = TreeNode(rootValue)</span><br><span class="line"></span><br><span class="line">        root.left = self.traversal(nums, left,mid-<span class="number">1</span>)</span><br><span class="line">        root.right = self.traversal(nums, mid+<span class="number">1</span>,right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>我的思路和流程都是对的，先找到中间点，构造根节点，划分区间构造左子树和右子树，有点像二分法</li>
+<li>再来看参数，首先是传入数组，然后就是左下标left和右下标right，我们在二叉树：构造二叉树登场！ (opens new window)中提过，在构造二叉树的时候尽量不要重新定义左右区间数组，而是用下标来操作原数组。</li>
+<li>需要注意的细节：<ul>
+<li>要另外构造一个traversal的递归函数，传入的是左右index</li>
+<li>左右区间是左闭右闭，最开始的传入的是0, len(nums)-1</li>
+<li>之后会变成left，mid-1，left，mid+1</li>
+<li>注意终止条件是左&gt;右</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-把二叉搜索树转换为累加树-538"><a href="#3-把二叉搜索树转换为累加树-538" class="headerlink" title="3. 把二叉搜索树转换为累加树 #538"></a>3. 把二叉搜索树转换为累加树 #538</h3><p>思路：</p>
+<ul>
+<li>遇到二叉搜索树，需要遍历的时候，一定要先想到的是左中右，这样会出现从小到大排序，本题需要的顺利是是从大到小，所以把左中右反过来就是右中左,从最大的开始加起来</li>
+<li>递归迭代的过程中只需要遍历不需要返回值，处理的是本节点和上一个节点的值之和，最后再把根节点返回来</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">convertBST</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        self.pre = <span class="literal">None</span></span><br><span class="line">        self.traversal(root)</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">traversal</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="comment"># right</span></span><br><span class="line">        self.traversal(root.right) </span><br><span class="line"></span><br><span class="line">        <span class="comment"># middle</span></span><br><span class="line">        <span class="keyword">if</span> self.pre:</span><br><span class="line">            root.val = root.val  + self.pre.val</span><br><span class="line">        self.pre = root</span><br><span class="line"></span><br><span class="line">        <span class="comment"># left</span></span><br><span class="line">        self.traversal(root.left)</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果定义的pre前指针是数值的话，就剩了两行代码，因为不需要判断pre是不是空，连return都不需要</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">convertBST</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        self.pre = <span class="number">0</span></span><br><span class="line">        self.traversal(root)</span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">traversal</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="comment"># right</span></span><br><span class="line">        self.traversal(root.right) </span><br><span class="line">        <span class="comment"># middle</span></span><br><span class="line">        root.val = root.val  + self.pre</span><br><span class="line">        self.pre = root.val</span><br><span class="line"></span><br><span class="line">        <span class="comment"># left</span></span><br><span class="line">        self.traversal(root.left)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/14/20240314-tree-9/" data-id="clu81jjh9000itahpgez4570o" data-title="20240314 tree-9" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/15/20240315-backtracking-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20240315 backtracking-1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/12/20240313-tree-8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240313 tree-8</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/">20240325 backtracking-Greedy Algorithm-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/">20240323 backtracking-Greedy Algorithm-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/">20240322 backtracking-Greedy Algorithm-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

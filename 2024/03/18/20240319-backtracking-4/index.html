@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240319 backtracking-4 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Backtracking day41. 复原IP地址 #93第一种解法：我自己的代码： 123456789101112131415161718192021222324252627282930313233343536373839class Solution:    def restoreIpAddresses(self, s: str) -&gt; List[str]:        self.re">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240319 backtracking-4">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/18/20240319-backtracking-4/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="Backtracking day41. 复原IP地址 #93第一种解法：我自己的代码： 123456789101112131415161718192021222324252627282930313233343536373839class Solution:    def restoreIpAddresses(self, s: str) -&gt; List[str]:        self.re">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-18T18:39:46.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:13:57.850Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240319-backtracking-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/18/20240319-backtracking-4/" class="article-date">
+  <time class="dt-published" datetime="2024-03-18T18:39:46.000Z" itemprop="datePublished">2024-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240319 backtracking-4
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Backtracking-day4"><a href="#Backtracking-day4" class="headerlink" title="Backtracking day4"></a>Backtracking day4</h2><h3 id="1-复原IP地址-93"><a href="#1-复原IP地址-93" class="headerlink" title="1. 复原IP地址 #93"></a>1. 复原IP地址 #93</h3><p>第一种解法：我自己的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">restoreIpAddresses</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(s,<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这道题和字符串切割的题思路是一样的</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, startIndex</span>):</span><br><span class="line">        <span class="comment"># 终止条件就是判断切割线（index）遍历到末尾了，如果path里有4个元素，就加到结果集里</span></span><br><span class="line">        <span class="keyword">if</span> startIndex &gt;= <span class="built_in">len</span>(nums) <span class="keyword">or</span> <span class="built_in">len</span>(self.path) &gt; <span class="number">4</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == <span class="number">4</span>:</span><br><span class="line">                s = <span class="string">&quot;.&quot;</span>.join(self.path)</span><br><span class="line">                self.res.append(s)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(nums)):</span><br><span class="line">            </span><br><span class="line">            s_sub = nums[startIndex:i+<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> self.is_valid(nums, startIndex, i):</span><br><span class="line">                <span class="comment"># print(s_sub)</span></span><br><span class="line">                self.path.append(s_sub)</span><br><span class="line">                self.backtracking(nums, i+<span class="number">1</span>)</span><br><span class="line">                self.path.pop()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># check if the string is legal </span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">is_valid</span>(<span class="params">self, s, start, end</span>):</span><br><span class="line">        <span class="keyword">if</span> start &gt; end:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> s[start] == <span class="string">&#x27;0&#x27;</span> <span class="keyword">and</span> start != end:  <span class="comment"># 0开头的数字不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        num = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(start, end + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> s[i].isdigit():  <span class="comment"># 遇到非数字字符不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            num = num * <span class="number">10</span> + <span class="built_in">int</span>(s[i])</span><br><span class="line">            <span class="keyword">if</span> num &gt; <span class="number">255</span>:  <span class="comment"># 如果大于255了不合法</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第二种解法：也是我的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">restoreIpAddresses</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(s,<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这道题和字符串切割的题思路是一样的</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, startIndex</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 终止条件当path有三个数就终止了</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">if</span> self.is_valid(nums, startIndex, <span class="built_in">len</span>(nums)-<span class="number">1</span>):</span><br><span class="line">                s = <span class="string">&quot;.&quot;</span>.join(self.path)+<span class="string">&#x27;.&#x27;</span>+nums[startIndex:<span class="built_in">len</span>(nums)]</span><br><span class="line">                self.res.append(s)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(nums)):</span><br><span class="line">            s_sub = nums[startIndex:i+<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> self.is_valid(nums, startIndex, i):</span><br><span class="line">                self.path.append(s_sub)</span><br><span class="line">                self.backtracking(nums, i+<span class="number">1</span>)</span><br><span class="line">                self.path.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># check if the string is legal</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">is_valid</span>(<span class="params">self, s, start, end</span>):</span><br><span class="line">        <span class="keyword">if</span> start &gt; end:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> s[start] == <span class="string">&#x27;0&#x27;</span> <span class="keyword">and</span> start != end:  <span class="comment"># 0开头的数字不合法</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        num = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">int</span>(s[start:end+<span class="number">1</span>])&gt;=<span class="number">0</span> <span class="keyword">and</span> <span class="built_in">int</span>(s[start:end+<span class="number">1</span>])&lt;=<span class="number">255</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>两种解法：</p>
+<ol>
+<li>判断的终止条件是切割到最后一位，path推进来4个数，这样在之前递归的时候就已经判断只有有效的值才推进path里面，剪枝就是path里面大于4就返回，因为如果没到s的结尾，他还会继续往下切割下一位，就不需要了，path已经有4个了</li>
+<li>第二种解法就是终止条件，我判断path里有三个数，这样默认就是剩余的算最有一个数，所以只要有三个我就返回，但是我得在终止条件里加一个对最后剩下的数的一个有效判断，这样才最后拼接结果到res里，注意的是我不需要再推进path里了，这么没有回溯</li>
+</ol>
+<p>无非就是终止条件怎么写，一个是有三位就终止，一个是4位终止，如果有四个终止的话得加上循环到最后一个位了，注意的是for 循环里break和continue的区别，break跳出循环，continue继续下面的循环</p>
+<ul>
+<li>时间复杂度: O(3^4)，IP地址最多包含4个数字，每个数字最多有3种可能的分割方式，则搜索树的最大深度为4，每个节点最多有3个子节点。<br>空间复杂度: O(n)</li>
+</ul>
+<h3 id="2-子集-78"><a href="#2-子集-78" class="headerlink" title="2. 子集 #78"></a>2. 子集 #78</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">subsets</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(nums,<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, startIndex</span>):</span><br><span class="line">        self.res.append(self.path[:])</span><br><span class="line">        <span class="comment"># if startIndex &gt; len(nums):</span></span><br><span class="line">        <span class="comment">#     return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(nums)):</span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, i + <span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>子集和组合的回溯过程是一样的，但是收获结果的位置不一样，子集是在每个节点都要收获结果，组合是在终止条件也就是叶子节点才收获结果</li>
+<li>此题没有终止条件也是可以的，因为进不了for循环</li>
+<li>求取子集问题，不需要任何剪枝！因为子集就是要遍历整棵树。</li>
+<li>时间复杂度: O(n * 2^n)：n表示数组的长度，2^n表示所有可能的子集数量，n * 2^n表示每个元素对于每个可能的子集的操作次数。</li>
+<li>空间复杂度: O(n)</li>
+</ul>
+<h3 id="3-子集II-98"><a href="#3-子集II-98" class="headerlink" title="3. 子集II #98"></a>3. 子集II #98</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">subsetsWithDup</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        <span class="comment"># self.used = [0]*len(nums)</span></span><br><span class="line">        nums.sort()</span><br><span class="line">        self.backtracking(nums, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, startIndex</span>):</span><br><span class="line">        <span class="comment"># 树层去重</span></span><br><span class="line">        self.res.append(self.path[:])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> i &gt; startIndex <span class="keyword">and</span> nums[i]== nums[i-<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, i+<span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 利用set数组进行去重，可以应用到下一题，也是模拟树枝去重，用途更广，我在下一题详细说明</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, startIndex, path, result</span>):</span><br><span class="line">        result.append(path[:])  <span class="comment"># 收集子集</span></span><br><span class="line">        uset = <span class="built_in">set</span>()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] <span class="keyword">in</span> uset:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            uset.add(nums[i])</span><br><span class="line">            path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, i + <span class="number">1</span>, path, result)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure>
+
+<p>思路：<br>这道题的思路就是子集去重，是78题和40题结合，就是求子集和数组去重的结合<br>本题也可以不使用used数组来去重，因为递归的时候下一个startIndex是i+1而不是0。</p>
+<p>如果要是全排列的话，每次要从0开始遍历，为了跳过已入栈的元素，需要使用used。<br>时间复杂度: O(n * 2^n)<br>空间复杂度: O(n)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/18/20240319-backtracking-4/" data-id="clu81jjha000ltahpe9ip4c1c" data-title="20240319 backtracking-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/19/20240320-backtracking-5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20240320 backtracking-5
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/17/20240318-backtracking-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240318 backtracking-3</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/">20240325 backtracking-Greedy Algorithm-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/">20240323 backtracking-Greedy Algorithm-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/">20240322 backtracking-Greedy Algorithm-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>20240315 backtracking-1 | Leetcode Python solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="BackTracking 回溯 day11. 理论基础 什么是回溯法回溯法也可以叫做回溯搜索法，它是一种搜索的方式。回溯的本质是穷举，穷举所有可能，然后选出我们想要的答案，回溯就是暴力搜索，用来搜索出来for循环做不到的情况  回溯法可以解决的问题    组合问题：N个数里面按一定规则找出k个数的集合 切割问题：一个字符串按一定规则有几种切割方式 子集问题：一个N个数的集合里有多少符合条件的子集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20240315 backtracking-1">
+<meta property="og:url" content="https://qikongweb.github.io/2024/03/15/20240315-backtracking-1/index.html">
+<meta property="og:site_name" content="Leetcode Python solutions">
+<meta property="og:description" content="BackTracking 回溯 day11. 理论基础 什么是回溯法回溯法也可以叫做回溯搜索法，它是一种搜索的方式。回溯的本质是穷举，穷举所有可能，然后选出我们想要的答案，回溯就是暴力搜索，用来搜索出来for循环做不到的情况  回溯法可以解决的问题    组合问题：N个数里面按一定规则找出k个数的集合 切割问题：一个字符串按一定规则有几种切割方式 子集问题：一个N个数的集合里有多少符合条件的子集">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130173631174.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195242899.png">
+<meta property="og:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130194335207-20230310134409532.png">
+<meta property="article:published_time" content="2024-03-15T13:02:37.000Z">
+<meta property="article:modified_time" content="2024-03-26T06:13:57.850Z">
+<meta property="article:author" content="Claire">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130173631174.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Leetcode Python solutions" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Leetcode Python solutions</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://qikongweb.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-20240315-backtracking-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/15/20240315-backtracking-1/" class="article-date">
+  <time class="dt-published" datetime="2024-03-15T13:02:37.000Z" itemprop="datePublished">2024-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      20240315 backtracking-1
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="BackTracking-回溯-day1"><a href="#BackTracking-回溯-day1" class="headerlink" title="BackTracking 回溯 day1"></a>BackTracking 回溯 day1</h2><h3 id="1-理论基础"><a href="#1-理论基础" class="headerlink" title="1. 理论基础"></a>1. 理论基础</h3><ol>
+<li><p>什么是回溯法<br>回溯法也可以叫做回溯搜索法，它是一种搜索的方式。回溯的本质是穷举，穷举所有可能，然后选出我们想要的答案，回溯就是暴力搜索，用来搜索出来for循环做不到的情况</p>
+</li>
+<li><p>回溯法可以解决的问题</p>
+</li>
+</ol>
+<ul>
+<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
+<li>切割问题：一个字符串按一定规则有几种切割方式</li>
+<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
+<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
+<li>棋盘问题：N皇后，解数独等等</li>
+</ul>
+<ol start="3">
+<li>如何理解回溯法</li>
+</ol>
+<ul>
+<li>回溯法解决的问题都可以抽象为树形结构，之前做的递归时，回溯就隐藏的递归的下面</li>
+<li>因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小就构成了树的宽度，递归的深度，都构成的树的深度</strong>。</li>
+</ul>
+<ol start="4">
+<li>回溯法模板</li>
+</ol>
+<ul>
+<li>回溯函数模板返回值以及参数</li>
+<li>回溯函数终止条件，一般到叶子节点，处理终止条件</li>
+<li>回溯搜索的遍历过程<br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130173631174.png" alt="回溯过程"></li>
+</ul>
+<p>大家可以从图中看出for循环可以理解是横向遍历，backtracking（递归）就是纵向遍历，这样就把这棵树全遍历完了，一般来说，搜索叶子节点就是找的其中一个结果了。<br>回溯模版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void backtracking(参数) &#123;</span><br><span class="line">    if (终止条件) &#123;</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-组合-77"><a href="#2-组合-77" class="headerlink" title="2. 组合 #77"></a>2. 组合 #77</h3><p>思路：</p>
+<ul>
+<li>为什么不能用for循环，如果只求两个数的和，那可以用两层for循环，但是如果是k个数之和，就要用k个for loop，解不了，所以用回溯，回溯法就用递归来解决嵌套层数的问题。</li>
+<li>递归来做层叠嵌套（可以理解是开k层for循环），每一次的递归中嵌套一个for循环，那么递归就可以用于解决多层嵌套循环的问题了。</li>
+</ul>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195242899.png" alt="回溯过程"></p>
+<ul>
+<li>图中可以发现n相当于树的宽度，k相当于树的深度。<br>如何理解上面的这句话，我的理解是树的宽度就是说循环的开始条件，是什么也就是树的根节点是什么，每一个情况对应的树的根节点就是不一样的<br>第二，k是树的深度，说明，这初始条件下，我往下找k次，这样就正好找到了k个元素，就是我们想要找的，之后就是一层一层回溯，数组的递归有点像遍历N叉树一样，一个叉代表一个数组的值，知道回到最初的根节点，然后for循环到下一个根节点开始往下遍历</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">self, n: <span class="built_in">int</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(n,k,<span class="number">1</span>) <span class="comment">#为什么是从1开始，因为1代表是数组元1，2，3，而不是index在本题里</span></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line">    <span class="comment"># 递归函数的返回值以及参数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, n, k, startIndex</span>):</span><br><span class="line">        <span class="comment"># 回溯函数终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == k:</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="comment"># 单层搜索的过程</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, n+<span class="number">1</span>):   <span class="comment"># 在这一层，就开始了递归，path从空开始，当i等于1时，进入到第一个数的递归，也就是后面的递归是从2开始往path里加数，然后等k个组合都完事了，pop出去，最后返回的是path为空，进入i=2的第二层循环，也就是i是值传递，不会被后面的影响</span></span><br><span class="line">            <span class="comment"># print(i)</span></span><br><span class="line">            self.path.append(i)</span><br><span class="line">            self.backtracking(n,k, i+<span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>剪枝：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">self, n: <span class="built_in">int</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        result = []  <span class="comment"># 存放结果集</span></span><br><span class="line">        self.backtracking(n, k, <span class="number">1</span>, [], result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, n, k, startIndex, path, result</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(path) == k:</span><br><span class="line">            result.append(path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, n - (k - <span class="built_in">len</span>(path)) + <span class="number">2</span>):  <span class="comment"># 优化的地方path循环的区间是左闭右开【0，3）所以是+2</span></span><br><span class="line">            path.append(i)  <span class="comment"># 处理节点</span></span><br><span class="line">            self.backtracking(n, k, i + <span class="number">1</span>, path, result)</span><br><span class="line">            path.pop()  <span class="comment"># 回溯，撤销处理的节点</span></span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>可以剪枝的地方就在递归中每一层的for循环所选择的起始位置。</li>
+</ul>
+<p>如果for循环选择的起始位置之后的元素个数 已经不足 我们需要的元素个数了，那么就没有必要搜索了。</p>
+<ul>
+<li>剪枝的步骤<ol>
+<li><p>已经选择的元素个数：path.size();</p>
+</li>
+<li><p>还需要的元素个数为: k - path.size();</p>
+</li>
+<li><p>在集合n中至多要从该起始位置 : n - (k - path.size()) + 1，开始遍历</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130194335207-20230310134409532.png" alt="剪枝优化过程"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/15/20240315-backtracking-1/" data-id="clu81jjha000jtahp2wn0fuks" data-title="20240315 backtracking-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/15/20240316-backtracking-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20240316 backtracking-2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/14/20240314-tree-9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">20240314 tree-9</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/24/20240325-backtracking-Greedy-Algorithm-3/">20240325 backtracking-Greedy Algorithm-3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/22/20240323-backtracking-Greedy-Algorithm-2/">20240323 backtracking-Greedy Algorithm-2</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/21/20240322-backtracking-Greedy-Algorithm-1/">20240322 backtracking-Greedy Algorithm-1</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Claire<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
