@@ -69,6 +69,202 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-20240328-Greedy-Algorithm-6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/27/20240328-Greedy-Algorithm-6/" class="article-date">
+  <time class="dt-published" datetime="2024-03-27T20:28:55.000Z" itemprop="datePublished">2024-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/27/20240328-Greedy-Algorithm-6/">20240328-Greedy-Algorithm-6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="单调递增的数字-738"><a href="#单调递增的数字-738" class="headerlink" title="单调递增的数字 #738"></a>单调递增的数字 #738</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">monotoneIncreasingDigits</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        arr = <span class="built_in">list</span>(<span class="built_in">str</span>(n))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(arr)-<span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="built_in">print</span>(i, arr[i], arr[i-<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">if</span> arr[i-<span class="number">1</span>] &gt; arr[i]:</span><br><span class="line">                arr[i:] = [<span class="string">&#x27;9&#x27;</span>] * (<span class="built_in">len</span>(arr)-i)</span><br><span class="line">                arr[i-<span class="number">1</span>] = <span class="built_in">str</span>(<span class="built_in">int</span>(arr[i-<span class="number">1</span>]) - <span class="number">1</span>)</span><br><span class="line">        res = <span class="string">&quot;&quot;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, arr))</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">int</span>(res)</span><br></pre></td></tr></table></figure>
+
+
+<p>另一种解法，立flag，把flag后面的位全替换成9</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="built_in">str</span>(n)</span><br><span class="line">flag = <span class="built_in">len</span>(s)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)-<span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> s[i-<span class="number">1</span>] &gt; s[i]:</span><br><span class="line">        flag = i</span><br><span class="line">        s = s[<span class="number">0</span>:i-<span class="number">1</span>] + <span class="built_in">str</span>(<span class="built_in">int</span>(s[i-<span class="number">1</span>]) - <span class="number">1</span>) + s[i:]</span><br><span class="line"><span class="built_in">print</span>(s,flag)</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(flag, <span class="built_in">len</span>(s)):</span><br><span class="line">    s = s[<span class="number">0</span>:j] + <span class="string">&#x27;9&#x27;</span> + s[j+<span class="number">1</span>:]</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">int</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>题目要求小于等于N的最大单调递增的整数，那么拿一个两位的数字来举例。</li>
+</ul>
+<p>例如：98，一旦出现strNum[i - 1] &gt; strNum[i]的情况（非单调递增），首先想让strNum[i - 1]–，然后strNum[i]给为9，这样这个整数就是89，即小于98的最大的单调递增整数。</p>
+<p>例如：1000，如果只把大于后面的数字替换成9，就是900，不是正确结果，999才是，所以要把后面所有的数字都变成9，所以注定要从后往前遍历</p>
+<ul>
+<li>两种解法思路是一样的，实现不一样，第一种是先int&#x3D;&#x3D;》str&#x3D;&#x3D;》list，好处是可以随时修改list任意位置的值，最后再转回来list&#x3D;&#x3D;》str&#x3D;&#x3D;》int<br>第二种解法是只有int&#x3D;&#x3D;》str，在str的上面改变数字，要是涉及拼接字符串了，我比较喜欢第一种方法</li>
+</ul>
+<h3 id="监控二叉树-968-跳过"><a href="#监控二叉树-968-跳过" class="headerlink" title="监控二叉树 #968 跳过"></a>监控二叉树 #968 跳过</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/27/20240328-Greedy-Algorithm-6/" data-id="club52okx000voehpetanbfgl" data-title="20240328-Greedy-Algorithm-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20240327-Greedy-Algorithm-5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/27/20240327-Greedy-Algorithm-5/" class="article-date">
+  <time class="dt-published" datetime="2024-03-27T18:58:02.000Z" itemprop="datePublished">2024-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/27/20240327-Greedy-Algorithm-5/">20240327-Greedy-Algorithm-5</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-无重叠区间-435"><a href="#1-无重叠区间-435" class="headerlink" title="1. 无重叠区间 #435"></a>1. 无重叠区间 #435</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eraseOverlapIntervals</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(intervals) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># 排序把区间左边界</span></span><br><span class="line">        intervals = <span class="built_in">sorted</span>(intervals, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment"># print(intervals)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(intervals)):</span><br><span class="line">            <span class="keyword">if</span> intervals[i][<span class="number">0</span>] &lt; intervals[i-<span class="number">1</span>][<span class="number">1</span>]:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">                intervals[i][<span class="number">1</span>] = <span class="built_in">min</span>(intervals[i-<span class="number">1</span>][<span class="number">1</span>], intervals[i][<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>根据上一个题，射气球的，找重叠区间的思路</li>
+<li>首先也是按左边界排序</li>
+<li>判断左边界是不是小于上一个区间的右边界，如果有重叠，res加1，并且更新这个区间的右边界为最小值</li>
+</ul>
+<h3 id="2-划分字母区间-736"><a href="#2-划分字母区间-736" class="headerlink" title="2. 划分字母区间 #736"></a>2. 划分字母区间 #736</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">partitionLabels</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        m = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            m[s[i]] = i <span class="comment"># 存储每个字符最后出现的位置</span></span><br><span class="line">        res = [<span class="number">0</span>]</span><br><span class="line">        ll = <span class="number">0</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            ll = <span class="built_in">max</span>(m[s[j]],ll)   <span class="comment"># 找到当前字符出现的最远位置</span></span><br><span class="line">            <span class="keyword">if</span> j == ll:</span><br><span class="line">                <span class="comment"># res.append(j-sum(res)+1)</span></span><br><span class="line">                res.append(j-left+<span class="number">1</span>)<span class="comment"># 如果当前位置是最远位置，表示可以分割出一个区间</span></span><br><span class="line">                left = j + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res[<span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>在遍历的过程中相当于是要找每一个字母的边界，如果找到之前遍历过的所有字母的最远边界，说明这个边界就是分割点了。此时前面出现过所有字母，最远也就到这个边界了。<br>可以分为如下两步：</li>
+</ul>
+<p>统计每一个字符最后出现的位置<br>从头遍历字符，并更新字符的最远出现下标，如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点</p>
+<ul>
+<li>具体解法和跳跃游戏II#45，很像，随时更新最远距离</li>
+</ul>
+<h3 id="3-合并区间-56"><a href="#3-合并区间-56" class="headerlink" title="3. 合并区间 #56"></a>3. 合并区间 #56</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">self, intervals: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(intervals) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="comment"># 排序把区间左边界</span></span><br><span class="line">        intervals = <span class="built_in">sorted</span>(intervals, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        res = [intervals[<span class="number">0</span>]]</span><br><span class="line">        <span class="comment"># print(intervals)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(intervals)):</span><br><span class="line">            <span class="keyword">if</span> intervals[i][<span class="number">0</span>] &lt;= res[-<span class="number">1</span>][<span class="number">1</span>]:</span><br><span class="line">                res[-<span class="number">1</span>][<span class="number">1</span>] = <span class="built_in">max</span>(intervals[i][<span class="number">1</span>], res[-<span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res.append(intervals[i])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>这道题的思路和#435，#452完全一样</li>
+<li>先排序，找重叠的，区间，不同的是，我这里把结果保存到res里，拿res的最后一个区间来和当前的区间比较，看是不是要扩大res里最后一个区间</li>
+<li>所以一样的套路，先排序，让所有的相邻区间尽可能的重叠在一起，按左边界，或者右边界排序都可以，处理逻辑稍有不同。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/27/20240327-Greedy-Algorithm-5/" data-id="club52okx000toehphn4wa0bn" data-title="20240327-Greedy-Algorithm-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20240326-Greedy-Algorithm-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/26/20240326-Greedy-Algorithm-4/" class="article-date">
+  <time class="dt-published" datetime="2024-03-26T20:13:07.000Z" itemprop="datePublished">2024-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/26/20240326-Greedy-Algorithm-4/">20240326-Greedy-Algorithm-4</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-柠檬水找零-860"><a href="#1-柠檬水找零-860" class="headerlink" title="1. 柠檬水找零 #860"></a>1. 柠檬水找零 #860</h3><p>我自己的解法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lemonadeChange</span>(<span class="params">self, bills: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        cash_left = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(bills)):</span><br><span class="line">            <span class="keyword">match</span> bills[i]:</span><br><span class="line">                <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                    cash_left[<span class="number">5</span>] = cash_left.get(<span class="number">5</span>,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">                <span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">                    <span class="keyword">if</span> cash_left.get(<span class="number">5</span>,<span class="number">0</span>) == <span class="number">0</span>:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                    cash_left[<span class="number">5</span>] = cash_left.get(<span class="number">5</span>,<span class="number">0</span>) - <span class="number">1</span></span><br><span class="line">                    cash_left[<span class="number">10</span>] = cash_left.get(<span class="number">10</span>,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">                <span class="keyword">case</span> <span class="number">20</span>:</span><br><span class="line">                    <span class="keyword">if</span> cash_left.get(<span class="number">10</span>,<span class="number">0</span>)&gt;=<span class="number">1</span> <span class="keyword">and</span> cash_left.get(<span class="number">5</span>,<span class="number">0</span>)&gt;=<span class="number">1</span>:</span><br><span class="line">                        cash_left[<span class="number">5</span>] -= <span class="number">1</span></span><br><span class="line">                        cash_left[<span class="number">10</span>] -= <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> cash_left.get(<span class="number">5</span>,<span class="number">0</span>)&gt;=<span class="number">3</span> :</span><br><span class="line">                        cash_left[<span class="number">5</span>] -= <span class="number">3</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>有如下三种情况：</li>
+</ul>
+<p>情况一：账单是5，直接收下。<br>情况二：账单是10，消耗一个5，增加一个10<br>情况三：账单是20，优先消耗一个10和一个5，如果不够，再消耗三个5</p>
+<ul>
+<li><p>因为美元10只能给账单20找零，而美元5可以给账单10和账单20找零，美元5更万能！</p>
+</li>
+<li><p>所以局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。</p>
+</li>
+</ul>
+<h3 id="2-根据身高重建队列-406"><a href="#2-根据身高重建队列-406" class="headerlink" title="2. 根据身高重建队列 #406"></a>2. 根据身高重建队列 #406</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reconstructQueue</span>(<span class="params">self, people: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 从身高由高到低排序</span></span><br><span class="line">        <span class="comment"># 先按照h维度的身高顺序从高到低排序。确定第一个维度</span></span><br><span class="line">        <span class="comment"># lambda返回的是一个元组：当-x[0](维度h）相同时，再根据x[1]（维度k）从小到大排序</span></span><br><span class="line">        people = <span class="built_in">sorted</span>(people, key=<span class="keyword">lambda</span> x: (-x[<span class="number">0</span>],x[<span class="number">1</span>]))</span><br><span class="line">        <span class="comment"># print(people)</span></span><br><span class="line"></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(people)):</span><br><span class="line">            index = people[i][<span class="number">1</span>]</span><br><span class="line">            res.insert(index, people[i])</span><br><span class="line">            <span class="comment"># print(res)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>思路很重要：</p>
+<ul>
+<li><p>又是碰见两个维度进行的比较，一定注意先一个一个维度进行比较</p>
+</li>
+<li><p>首先按身高排序从大到小，此时我们可以确定一个维度了，就是身高，前面的节点一定都比本节点高！</p>
+</li>
+<li><p>之后比较第二个维度，进行插入按照身高排序之后，优先按身高高的people的k来插入，后序插入节点也不会影响前面已经插入的节点，最终按照k的规则完成了队列</p>
+</li>
+<li><p>插入的时候要重新定义一个数组，因为在原数组上插入会改变之后的遍历过程，可能会遍历到同一个数</p>
+</li>
+<li><p>局部最优：优先按身高高的people的k来插入。插入操作过后的people满足队列属性</p>
+</li>
+<li><p>全局最优：最后都做完插入操作，整个队列满足题目队列属性</p>
+</li>
+</ul>
+<h3 id="3-用最少数量的箭引爆气球-452"><a href="#3-用最少数量的箭引爆气球-452" class="headerlink" title="3. 用最少数量的箭引爆气球 #452"></a>3. 用最少数量的箭引爆气球 #452</h3><p>思路很重要：</p>
+<ul>
+<li>为了让气球尽可能的重叠，需要对数组进行排序。这个我想到了，先排序左边界</li>
+<li>如果这个区间的左边界比上个区间的右边界还大，肯定不重复，就一定结果加1</li>
+<li>如果有重复的情况，就是左边界比右边界小，那么要更新右边界，来保证是不是可以和再下一个重复，次步是关键</li>
+<li>如果气球重叠了，重叠气球中右边边界的最小值 之前的区间一定需要一个弓箭。</li>
+<li>这道题目贪心的思路很简单也很直接，就是重复的一起射了</li>
+</ul>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123101929791.png" alt="卡哥解题图，更好理解"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMinArrowShots</span>(<span class="params">self, points: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(points) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># sort left from min to max</span></span><br><span class="line">        points = <span class="built_in">sorted</span>(points, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(points)):</span><br><span class="line">            <span class="comment"># check if there chongdie</span></span><br><span class="line">            <span class="keyword">if</span> points[i-<span class="number">1</span>][<span class="number">1</span>] &lt; points[i][<span class="number">0</span>]:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 难点，重叠的时候需要更新右边届，取最小值，看是不是能和再下一个重叠</span></span><br><span class="line">                points[i][<span class="number">1</span>] = <span class="built_in">min</span>(points[i][<span class="number">1</span>],points[i-<span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://qikongweb.github.io/2024/03/26/20240326-Greedy-Algorithm-4/" data-id="club52okw000roehp4xnv79qk" data-title="20240326-Greedy-Algorithm-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/03/25/hello-world/" class="article-date">
@@ -108,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/25/hello-world/" data-id="clu81qgz0000r7mhp382oh8lp" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/25/hello-world/" data-id="club52okx000uoehp4w6z7bm2" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -163,18 +359,53 @@
 <p>性能更好的代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestSumAfterKNegations</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        nums.sort(key=<span class="built_in">abs</span>,reverse=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &lt; <span class="number">0</span> <span class="keyword">and</span> k &gt;<span class="number">0</span>:</span><br><span class="line">                nums[i] *= -<span class="number">1</span></span><br><span class="line">                k -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> k % <span class="number">2</span> !=<span class="number">0</span>:</span><br><span class="line">            nums[-<span class="number">1</span>] *= -<span class="number">1</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(nums)</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-加油站-134"><a href="#2-加油站-134" class="headerlink" title="2. 加油站 #134"></a>2. 加油站 #134</h3><p>思路：</p>
+<h3 id="2-加油站-134"><a href="#2-加油站-134" class="headerlink" title="2. 加油站 #134"></a>2. 加油站 #134</h3><p>思路： 推荐解法</p>
+<ul>
+<li><p>我的思路是： </p>
+<ul>
+<li>求出来了剩余汽油的差值数组，然后求和比较是不是大于0，如果大于等于0，有可能会跑一圈，如果小于0，一定不能跑一圈</li>
+<li>大于0之后，找哪一天出发，我一开始想的是找最小值的下一天作为出发日期，单纯的是找最小值，但是不对，那就看题解，发现是找的范围，累加差值是不是小于0，如果小于0就取下一个</li>
+</ul>
+</li>
+<li><p>题解方法1:</p>
+<ul>
+<li>如果总油量减去总消耗大于等于零那么一定可以跑完一圈，说明 各个站点的加油站 剩油量rest[i]相加一定是大于等于零的。</li>
+<li>i从0开始累加rest[i]，和记为curSum，一旦curSum小于零，说明[0, i]区间都不能作为起始位置，因为这个区间选择任何一个位置作为起点，到i这里都会断油，那么起始位置从i+1算起，再从0计算curSum。</li>
+<li>那么局部最优：当前累加rest[i]的和curSum一旦小于0，起始位置至少要是i+1，因为从i之前开始一定不行。全局最优：找到可以跑一圈的起始位置。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        diff = [<span class="number">0</span>] * <span class="built_in">len</span>(gas)</span><br><span class="line">        total = <span class="number">0</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas)):</span><br><span class="line">            diff[i] = gas[i] - cost[i]</span><br><span class="line">            total += diff[i]</span><br><span class="line">            <span class="keyword">if</span> total &lt; <span class="number">0</span>:</span><br><span class="line">                res = i+<span class="number">1</span></span><br><span class="line">                total = <span class="number">0</span></span><br><span class="line">        <span class="comment"># print(res, total)</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(diff) &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐解法：</li>
+</ul>
 <p>直接从全局进行贪心选择，情况如下：</p>
 <p>情况一：如果gas的总和小于cost总和，那么无论从哪里出发，一定是跑不了一圈的</p>
 <p>情况二：rest[i] &#x3D; gas[i]-cost[i]为一天剩下的油，i从0开始计算累加到最后一站，如果累加没有出现负数，说明从0出发，油就没有断过，那么0就是起点。</p>
 <p>情况三：如果累加的最小值是负数，汽车就要从非0节点出发，从后向前，看哪个节点能把这个负数填平，能把这个负数填平的节点就是出发节点。   </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        curSum = <span class="number">0</span>  <span class="comment"># 当前累计的剩余油量</span></span><br><span class="line">        minFuel = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)  <span class="comment"># 从起点出发，油箱里的油量最小值</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas)):</span><br><span class="line">            rest = gas[i] - cost[i]</span><br><span class="line">            curSum += rest</span><br><span class="line">            <span class="keyword">if</span> curSum &lt; minFuel:</span><br><span class="line">                minFuel = curSum</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> curSum &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>  <span class="comment"># 情况1：整个行程的总消耗大于总供给，无法完成一圈</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> minFuel &gt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 情况2：从起点出发到任何一个加油站时油箱的剩余油量都不会小于0，可以从起点出发完成一圈</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas) - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            rest = gas[i] - cost[i]</span><br><span class="line">            minFuel += rest</span><br><span class="line">            <span class="keyword">if</span> minFuel &gt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> i  <span class="comment"># 情况3：找到一个位置使得从该位置出发油箱的剩余油量不会小于0，返回该位置的索引</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>  <span class="comment"># 无法完成一圈</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="3-分发糖果-135"><a href="#3-分发糖果-135" class="headerlink" title="3. 分发糖果 #135"></a>3. 分发糖果 #135</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">candy</span>(<span class="params">self, ratings: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        candyVec = [<span class="number">1</span>] * <span class="built_in">len</span>(ratings)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从前向后遍历，处理右侧比左侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ratings)):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i - <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = candyVec[i - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从后向前遍历，处理左侧比右侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ratings) - <span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i + <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = <span class="built_in">max</span>(candyVec[i], candyVec[i + <span class="number">1</span>] + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 统计结果</span></span><br><span class="line">        result = <span class="built_in">sum</span>(candyVec)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="3-分发糖果-135"><a href="#3-分发糖果-135" class="headerlink" title="3. 分发糖果 #135"></a>3. 分发糖果 #135</h3><p>思路：</p>
+<ul>
+<li><p><em><strong>这道题目一定是要确定一边之后，再确定另一边，例如比较每一个孩子的左边，然后再比较右边，如果两边一起考虑一定会顾此失彼。</strong></em></p>
+</li>
+<li><p>先确定右边评分大于左边的情况（也就是从前向后遍历）， 在左孩子的基础上加1</p>
+</li>
+<li><p>再确定左孩子大于右孩子的情况（从后向前遍历）， 一定要从后向前，因为如果比右孩子大的话，是在右孩子基础上加1</p>
+</li>
+<li><p>关键一步： 那么又要贪心了，局部最优：取candyVec[i + 1] + 1 和 candyVec[i] 最大的糖果数量，保证第i个小孩的糖果数量既大于左边的也大于右边的。全局最优：相邻的孩子中，评分高的孩子获得更多的糖果<br>candyVec[i]只有取最大的才能既保持对左边candyVec[i - 1]的糖果多，也比右边candyVec[i + 1]的糖果多。</p>
+</li>
+</ul>
+<p>我的解法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">candy</span>(<span class="params">self, ratings: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = [<span class="number">1</span>] * <span class="built_in">len</span>(ratings)</span><br><span class="line">        <span class="comment"># compare right is larger than left</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(ratings)):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] - ratings[i-<span class="number">1</span>] &gt;<span class="number">0</span>:</span><br><span class="line">                res[i] = res[i-<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line">        <span class="comment"># print(res)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># compare left is larger than right</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ratings)-<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="comment"># print(j,j+1)</span></span><br><span class="line">            <span class="keyword">if</span> ratings[j] - ratings[j+<span class="number">1</span>] &gt; <span class="number">0</span>:</span><br><span class="line">                res[j] = <span class="built_in">max</span>(res[j+<span class="number">1</span>]+ <span class="number">1</span>, res[j])</span><br><span class="line">            <span class="comment"># print(res)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(res)</span><br></pre></td></tr></table></figure>
+
+<p>卡哥解法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">candy</span>(<span class="params">self, ratings: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        candyVec = [<span class="number">1</span>] * <span class="built_in">len</span>(ratings)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从前向后遍历，处理右侧比左侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ratings)):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i - <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = candyVec[i - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从后向前遍历，处理左侧比右侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ratings) - <span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i + <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = <span class="built_in">max</span>(candyVec[i], candyVec[i + <span class="number">1</span>] + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 统计结果</span></span><br><span class="line">        result = <span class="built_in">sum</span>(candyVec)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/24/20240325-Greedy-Algorithm-3/" data-id="clu81qgz1000t7mhpcev03nyk" data-title="20240325 Greedy Algorithm-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/24/20240325-Greedy-Algorithm-3/" data-id="club52okw000ooehpb6tra2c8" data-title="20240325 Greedy Algorithm-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -237,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/22/20240323-Greedy-Algorithm-2/" data-id="clu81qgyz000q7mhpagu0eodm" data-title="20240323 Greedy Algorithm-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/22/20240323-Greedy-Algorithm-2/" data-id="club52okw000noehpc6bt823n" data-title="20240323 Greedy Algorithm-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -322,7 +553,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/21/20240322-Greedy-Algorithm-1/" data-id="clu81qgyz000o7mhpeguccmo5" data-title="20240322 Greedy Algorithm-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/21/20240322-Greedy-Algorithm-1/" data-id="club52okx000soehp8kvp93ip" data-title="20240322 Greedy Algorithm-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -399,7 +630,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/20/20240321-backtracking-6/" data-id="clu81qgyz000p7mhp9gw89g0d" data-title="20240321 backtracking-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/20/20240321-backtracking-6/" data-id="club52okw000moehp5au40968" data-title="20240321 backtracking-6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -491,7 +722,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/19/20240320-backtracking-5/" data-id="clu81qgyz000n7mhpbxw87rh4" data-title="20240320 backtracking-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/19/20240320-backtracking-5/" data-id="club52okw000poehp2xoa7x0c" data-title="20240320 backtracking-5" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -557,244 +788,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/18/20240319-backtracking-4/" data-id="clu81qgyz000m7mhp844p3chb" data-title="20240319 backtracking-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240318-backtracking-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/03/17/20240318-backtracking-3/" class="article-date">
-  <time class="dt-published" datetime="2024-03-17T13:02:02.000Z" itemprop="datePublished">2024-03-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/03/17/20240318-backtracking-3/">20240318 backtracking-3</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Backtracking-day3"><a href="#Backtracking-day3" class="headerlink" title="Backtracking day3"></a>Backtracking day3</h2><h3 id="1-组合总和-39"><a href="#1-组合总和-39" class="headerlink" title="1. 组合总和 #39"></a>1. 组合总和 #39</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) &gt; target:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == target:</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, target, i)</span><br><span class="line">            self.path.pop()</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-
-<p>注意：</p>
-<ul>
-<li>self.res.append(self.path[:])，一定要用path[:]，不能传入引用而是穿数值</li>
-<li>在递归的时候用的是i，因为可以有重复元素</li>
-<li>做剪枝的时候要先排序，然后只要循环出现了大于target的时候后面都不用循环了，注意的额是要在push之前比较结果，如果是push之后要记得弹出，因为会一直比target大，而不再进入递归了</li>
-</ul>
-<p>做了程序优化和剪枝之后的代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        res = []</span><br><span class="line">        candidates.sort()  <span class="comment"># 需要排序</span></span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>, res, [])</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index, res, path</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(path) == target:</span><br><span class="line">            res.append(path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(path) + nums[i] &gt; target:   <span class="comment"># 在push进去之前比较</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, target, i, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-组合总和II-40"><a href="#2-组合总和II-40" class="headerlink" title="2. 组合总和II #40"></a>2. 组合总和II #40</h3><p>思路：</p>
-<ul>
-<li><p>这道题和39题最主要的区别就是，给的数组中有重复的元素，而如果按之前的写法，结果集里肯定有重复的数组，此题是不可以有重复的数组，所以就是要在结果集里面去重</p>
-</li>
-<li><p>要在递归回溯的过程中去重，不然在最后去重，是会超时的</p>
-</li>
-<li><p>卡哥思路是：“使用过”在这个树形结构上是有两个维度的，一个维度是同一树枝上使用过，一个维度是同一树层上使用过。回看一下题目，元素在同一个组合内是可以重复的，怎么重复都没事，但两个组合不能相同。<br>所以我们要去重的是同一树层上的“使用过”，同一树枝上的都是一个组合里的元素，不用去重。</p>
-</li>
-<li><p>首先对数组排序</p>
-</li>
-<li><p>定义一个used的数组，记录每个元素有没有使用过，</p>
-</li>
-<li><p>当遇见两个数相等的时候，我需要知道前一个数的使用状态，如果前一个的状态是使用过了，那这个相等的数可以直接跳过，如果前一个的状态是使用中，那证明当前的数是在树枝上，可以有相等的存在，比如说[1,2,2,2,…],如果上次循环到第二个2，正要循环第三个2时，有两种情况，1，path &#x3D; [1,2], 2, path &#x3D; [1],第一种情况就是第一个2正在使用中，第二个2是一个树枝，可以重复取，第二种情况是第二个2已经都循环一遍了，它此时的状态是未使用，因为回溯的时候已经把它的状态回溯到最初的状态了，如果我们再去循环第3个2，会和上一个2有重复的情况，所以我们就要跳过这种情况了。第二种情况这就是卡哥说的树层的情况</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum2</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        candidates.sort()</span><br><span class="line">        self.used = [<span class="number">0</span>] * <span class="built_in">len</span>(candidates)</span><br><span class="line"></span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>, res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index, res</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == target:</span><br><span class="line">            res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) &gt; target:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="comment"># print(self.path)</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) + nums[i] &gt; target:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># print(self.used)</span></span><br><span class="line">            <span class="keyword">if</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>] <span class="keyword">and</span> self.used[i-<span class="number">1</span>] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.used[i] = <span class="number">1</span></span><br><span class="line">            self.backtracking(nums, target, i+<span class="number">1</span>, res)</span><br><span class="line">            self.path.pop()</span><br><span class="line">            self.used[i] = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>另一种解法用index去重：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum2</span>(<span class="params">self, candidates: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        candidates.sort()</span><br><span class="line">        self.backtracking(candidates, target, <span class="number">0</span>, res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, nums, target, index, res</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == target:</span><br><span class="line">            res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) &gt; target:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) + nums[i] &gt; target:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 要对同一树层使用过的元素进行跳过             </span></span><br><span class="line">            <span class="keyword">if</span> i &gt; index <span class="keyword">and</span> nums[i] == nums[i-<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            self.path.append(nums[i])</span><br><span class="line">            self.backtracking(nums, target, i+<span class="number">1</span>, res)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>因为从一层从树枝递归的时候，每次ℹ️都是从index开始遍历的，进不去if，但是通过回溯会把i回溯的最初的上一层，也就是最初的i遍历完了，还是原来的i，但是for loop要往下走了，这时i+1肯定大于i，就可以进if条件了，换句话说，就是回溯到树层了，要往下循环了，自然要去重下一个一样的数字，思路是一样的，换个写法而已。我也能理解</p>
-<h3 id="分割回文串-131"><a href="#分割回文串-131" class="headerlink" title="分割回文串 #131"></a>分割回文串 #131</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">partition</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(s, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, s, startIndex</span>):</span><br><span class="line">        <span class="comment"># 切割线切到了字符串最后面，说明找到了一种切割方法，此时就是本层递归的终止条件</span></span><br><span class="line">        <span class="keyword">if</span> startIndex &gt;= <span class="built_in">len</span>(s):</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="built_in">len</span>(s)):</span><br><span class="line">            s_sub = s[startIndex: i+<span class="number">1</span>]</span><br><span class="line">            <span class="built_in">print</span>(s, startIndex, i+<span class="number">1</span>, s_sub)</span><br><span class="line">            <span class="comment"># 只有在是回文的时候再往下分割</span></span><br><span class="line">            <span class="keyword">if</span> s_sub == s_sub[::-<span class="number">1</span>]:</span><br><span class="line">                self.path.append(s_sub)</span><br><span class="line">            </span><br><span class="line">                self.backtracking(s,i + <span class="number">1</span>)</span><br><span class="line">                self.path.pop()</span><br></pre></td></tr></table></figure>
-
-<p>思路：</p>
-<ul>
-<li><p>切割问题类似组合问题</p>
-<ul>
-<li>组合问题：选取一个a之后，在bcdef中再去选取第二个，选取b之后在cdef中再选取第三个…..。</li>
-<li>切割问题：切割一个a之后，在bcdef中再去切割第二段，切割b之后在cdef中再切割第三段…..。</li>
-</ul>
-</li>
-<li><p>那么在代码里什么是切割线呢？</p>
-</li>
-</ul>
-<p>在处理组合问题的时候，递归参数需要传入startIndex，表示下一轮递归遍历的起始位置，这个startIndex就是切割线。</p>
-<ul>
-<li>来看看在递归循环中如何截取子串呢？</li>
-</ul>
-<p>在for (int i &#x3D; startIndex; i &lt; s.size(); i++)循环中，我们 定义了起始位置startIndex，那么 [startIndex, i] 就是要截取的子串。<br>其实就是startIndex，从0，1，2，字串为s[0],s[1],s[2],回溯之后就到了1，字串为s[1:2],再回溯到了0，字串就是s[0:1],最后回溯到0时，字串就是s[0:2]</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/17/20240318-backtracking-3/" data-id="clu81qgyy000l7mhp5ejz1nzi" data-title="20240318 backtracking-3" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240316-backtracking-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/03/15/20240316-backtracking-2/" class="article-date">
-  <time class="dt-published" datetime="2024-03-16T00:08:05.000Z" itemprop="datePublished">2024-03-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/03/15/20240316-backtracking-2/">20240316 backtracking-2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="Backtracking-day2"><a href="#Backtracking-day2" class="headerlink" title="Backtracking day2"></a>Backtracking day2</h3><h2 id="1-组合总和III-216"><a href="#1-组合总和III-216" class="headerlink" title="1. 组合总和III #216"></a>1. 组合总和III #216</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum3</span>(<span class="params">self, k: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 回溯算法</span></span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line"></span><br><span class="line">        self.backtracking(k, n, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(self.res)</span></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, k, n, startIndex</span>):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == k:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == n:</span><br><span class="line">                self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="number">10</span>):</span><br><span class="line">            self.path.append(i)</span><br><span class="line">            self.backtracking(k, n, i+<span class="number">1</span>)  <span class="comment">#这里需要注意的是从i+i开始，而不是从startIndex，会有重复结果会出现[1,3,3],[2,2,3]</span></span><br><span class="line">            self.path.pop()</span><br></pre></td></tr></table></figure>
-
-<p>剪枝也做对了！！！和上一个题很像，思路参考上一题#77</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combinationSum3</span>(<span class="params">self, k: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 回溯算法</span></span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line"></span><br><span class="line">        self.backtracking(k, n, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(self.res)</span></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, k, n, startIndex</span>):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == k:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(self.path) == n:</span><br><span class="line">                self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(self.path)&gt;n:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, <span class="number">10</span>-(k - <span class="built_in">len</span>(self.path))+ <span class="number">1</span>):</span><br><span class="line">            self.path.append(i)</span><br><span class="line">            self.backtracking(k, n, i+<span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-电话号码的字母组合-17"><a href="#2-电话号码的字母组合-17" class="headerlink" title="2. 电话号码的字母组合 #17"></a>2. 电话号码的字母组合 #17</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">letterCombinations</span>(<span class="params">self, digits: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = <span class="string">&quot;&quot;</span></span><br><span class="line">        self.dic = &#123;</span><br><span class="line">            <span class="number">2</span>: <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">            <span class="number">3</span>: <span class="string">&#x27;def&#x27;</span>,</span><br><span class="line">            <span class="number">4</span>: <span class="string">&#x27;ghi&#x27;</span>,</span><br><span class="line">            <span class="number">5</span>: <span class="string">&#x27;jkl&#x27;</span>,</span><br><span class="line">            <span class="number">6</span>: <span class="string">&#x27;mno&#x27;</span>,</span><br><span class="line">            <span class="number">7</span>: <span class="string">&#x27;pqrs&#x27;</span>,</span><br><span class="line">            <span class="number">8</span>: <span class="string">&#x27;tuv&#x27;</span>,</span><br><span class="line">            <span class="number">9</span>: <span class="string">&#x27;wxyz&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.backtracking(digits, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># index 是指的是循环到第几个字母了</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, digits, index</span>):</span><br><span class="line">        <span class="comment"># 终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == <span class="built_in">len</span>(digits):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(self.path) != <span class="number">0</span>:</span><br><span class="line">                self.res.append(self.path)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="comment"># 单层递归回溯</span></span><br><span class="line">        <span class="comment"># 先把要做循环的数组找出来,每次递归进来，根据index，找到循环的第几个数，决定从哪个字符串里找字母</span></span><br><span class="line">        d = self.dic[<span class="built_in">int</span>(digits[index])]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(d)):</span><br><span class="line">            self.path += d[i]</span><br><span class="line">            self.backtracking(digits, index + <span class="number">1</span>)</span><br><span class="line">            self.path = self.path[:-<span class="number">1</span>]</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123200304469.png" alt="回溯过程的图，出自于代码随想录里"><br>思路：</p>
-<ul>
-<li><p>这个index是记录遍历第几个数字了，就是用来遍历digits的（题目中给出数字字符串），同时index也表示树的深度。</p>
-</li>
-<li><p>每次递归的时候，先取数字对应的字符集，在本次字符集里取一个字母,然后从第一次往里添加第一个数字字符集的第一个字母，第二次添加第二个字符集的第一个字母，第三次添加第三个字符集的第一个字母，第四次添加第三个字符集的第二个字母，以此类推，<br>adg<br>adh<br>adi<br>aeg<br>aeh<br>aei<br>afg<br>afh</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/15/20240316-backtracking-2/" data-id="clu81qgyy000j7mhphdtyce3d" data-title="20240316 backtracking-2" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-20240315-backtracking-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/03/15/20240315-backtracking-1/" class="article-date">
-  <time class="dt-published" datetime="2024-03-15T13:02:37.000Z" itemprop="datePublished">2024-03-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/03/15/20240315-backtracking-1/">20240315 backtracking-1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="BackTracking-回溯-day1"><a href="#BackTracking-回溯-day1" class="headerlink" title="BackTracking 回溯 day1"></a>BackTracking 回溯 day1</h2><h3 id="1-理论基础"><a href="#1-理论基础" class="headerlink" title="1. 理论基础"></a>1. 理论基础</h3><ol>
-<li><p>什么是回溯法<br>回溯法也可以叫做回溯搜索法，它是一种搜索的方式。回溯的本质是穷举，穷举所有可能，然后选出我们想要的答案，回溯就是暴力搜索，用来搜索出来for循环做不到的情况</p>
-</li>
-<li><p>回溯法可以解决的问题</p>
-</li>
-</ol>
-<ul>
-<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
-<li>切割问题：一个字符串按一定规则有几种切割方式</li>
-<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
-<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
-<li>棋盘问题：N皇后，解数独等等</li>
-</ul>
-<ol start="3">
-<li>如何理解回溯法</li>
-</ol>
-<ul>
-<li>回溯法解决的问题都可以抽象为树形结构，之前做的递归时，回溯就隐藏的递归的下面</li>
-<li>因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小就构成了树的宽度，递归的深度，都构成的树的深度</strong>。</li>
-</ul>
-<ol start="4">
-<li>回溯法模板</li>
-</ol>
-<ul>
-<li>回溯函数模板返回值以及参数</li>
-<li>回溯函数终止条件，一般到叶子节点，处理终止条件</li>
-<li>回溯搜索的遍历过程<br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130173631174.png" alt="回溯过程"></li>
-</ul>
-<p>大家可以从图中看出for循环可以理解是横向遍历，backtracking（递归）就是纵向遍历，这样就把这棵树全遍历完了，一般来说，搜索叶子节点就是找的其中一个结果了。<br>回溯模版</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void backtracking(参数) &#123;</span><br><span class="line">    if (终止条件) &#123;</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-组合-77"><a href="#2-组合-77" class="headerlink" title="2. 组合 #77"></a>2. 组合 #77</h3><p>思路：</p>
-<ul>
-<li>为什么不能用for循环，如果只求两个数的和，那可以用两层for循环，但是如果是k个数之和，就要用k个for loop，解不了，所以用回溯，回溯法就用递归来解决嵌套层数的问题。</li>
-<li>递归来做层叠嵌套（可以理解是开k层for循环），每一次的递归中嵌套一个for循环，那么递归就可以用于解决多层嵌套循环的问题了。</li>
-</ul>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195242899.png" alt="回溯过程"></p>
-<ul>
-<li>图中可以发现n相当于树的宽度，k相当于树的深度。<br>如何理解上面的这句话，我的理解是树的宽度就是说循环的开始条件，是什么也就是树的根节点是什么，每一个情况对应的树的根节点就是不一样的<br>第二，k是树的深度，说明，这初始条件下，我往下找k次，这样就正好找到了k个元素，就是我们想要找的，之后就是一层一层回溯，数组的递归有点像遍历N叉树一样，一个叉代表一个数组的值，知道回到最初的根节点，然后for循环到下一个根节点开始往下遍历</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">self, n: <span class="built_in">int</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(n,k,<span class="number">1</span>) <span class="comment">#为什么是从1开始，因为1代表是数组元1，2，3，而不是index在本题里</span></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line">    <span class="comment"># 递归函数的返回值以及参数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, n, k, startIndex</span>):</span><br><span class="line">        <span class="comment"># 回溯函数终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == k:</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="comment"># 单层搜索的过程</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, n+<span class="number">1</span>):   <span class="comment"># 在这一层，就开始了递归，path从空开始，当i等于1时，进入到第一个数的递归，也就是后面的递归是从2开始往path里加数，然后等k个组合都完事了，pop出去，最后返回的是path为空，进入i=2的第二层循环，也就是i是值传递，不会被后面的影响</span></span><br><span class="line">            <span class="comment"># print(i)</span></span><br><span class="line">            self.path.append(i)</span><br><span class="line">            self.backtracking(n,k, i+<span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>剪枝：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">self, n: <span class="built_in">int</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        result = []  <span class="comment"># 存放结果集</span></span><br><span class="line">        self.backtracking(n, k, <span class="number">1</span>, [], result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, n, k, startIndex, path, result</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(path) == k:</span><br><span class="line">            result.append(path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, n - (k - <span class="built_in">len</span>(path)) + <span class="number">2</span>):  <span class="comment"># 优化的地方path循环的区间是左闭右开【0，3）所以是+2</span></span><br><span class="line">            path.append(i)  <span class="comment"># 处理节点</span></span><br><span class="line">            self.backtracking(n, k, i + <span class="number">1</span>, path, result)</span><br><span class="line">            path.pop()  <span class="comment"># 回溯，撤销处理的节点</span></span><br></pre></td></tr></table></figure>
-<p>思路：</p>
-<ul>
-<li>可以剪枝的地方就在递归中每一层的for循环所选择的起始位置。</li>
-</ul>
-<p>如果for循环选择的起始位置之后的元素个数 已经不足 我们需要的元素个数了，那么就没有必要搜索了。</p>
-<ul>
-<li>剪枝的步骤<ol>
-<li><p>已经选择的元素个数：path.size();</p>
-</li>
-<li><p>还需要的元素个数为: k - path.size();</p>
-</li>
-<li><p>在集合n中至多要从该起始位置 : n - (k - path.size()) + 1，开始遍历</p>
-</li>
-</ol>
-</li>
-</ul>
-<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130194335207-20230310134409532.png" alt="剪枝优化过程"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://qikongweb.github.io/2024/03/15/20240315-backtracking-1/" data-id="clu81qgyy000k7mhpgz1jhb05" data-title="20240315 backtracking-1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://qikongweb.github.io/2024/03/18/20240319-backtracking-4/" data-id="club52okw000qoehp3n4s1r3j" data-title="20240319 backtracking-4" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -810,7 +804,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -842,23 +836,23 @@
       <ul>
         
           <li>
+            <a href="/2024/03/27/20240328-Greedy-Algorithm-6/">20240328-Greedy-Algorithm-6</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/27/20240327-Greedy-Algorithm-5/">20240327-Greedy-Algorithm-5</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/26/20240326-Greedy-Algorithm-4/">20240326-Greedy-Algorithm-4</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/25/hello-world/">Hello World</a>
           </li>
         
           <li>
             <a href="/2024/03/24/20240325-Greedy-Algorithm-3/">20240325 Greedy Algorithm-3</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/22/20240323-Greedy-Algorithm-2/">20240323 Greedy Algorithm-2</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/21/20240322-Greedy-Algorithm-1/">20240322 Greedy Algorithm-1</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/20/20240321-backtracking-6/">20240321 backtracking-6</a>
           </li>
         
       </ul>
