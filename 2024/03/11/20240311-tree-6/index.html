@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240311 tree-6</h1>
+  <article class="post-content"><h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h2><h3 id="1-最大二叉树-654"><a href="#1-最大二叉树-654" class="headerlink" title="1. 最大二叉树 #654"></a>1. 最大二叉树 #654</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">constructMaximumBinaryTree</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        rootValue = <span class="built_in">max</span>(nums)</span><br><span class="line">        index = nums.index(rootValue)</span><br><span class="line"></span><br><span class="line">        root = TreeNode(rootValue)</span><br><span class="line">        root.left = self.constructMaximumBinaryTree(nums[:index])</span><br><span class="line">        root.right = self.constructMaximumBinaryTree(nums[index+<span class="number">1</span>:])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 卡哥解法</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> TreeNode(nums[<span class="number">0</span>])</span><br><span class="line">        rootValue = <span class="built_in">max</span>(nums)</span><br><span class="line">        index = nums.index(rootValue)</span><br><span class="line"></span><br><span class="line">        root = TreeNode(rootValue)</span><br><span class="line">        <span class="keyword">if</span> index &gt; <span class="number">0</span>:</span><br><span class="line">            root.left = self.constructMaximumBinaryTree(nums[:index])</span><br><span class="line">        <span class="keyword">if</span> index &lt; <span class="built_in">len</span>(nums)-<span class="number">1</span>:</span><br><span class="line">            root.right = self.constructMaximumBinaryTree(nums[index+<span class="number">1</span>:])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>构造最大二叉树用的是前序，中左右，因为要先构造根节点，然后是左右节点</li>
+<li>终止条件，我判断是是len&#x3D;0，返回空节点，或者可以判断len&#x3D;1的，返回的是这个值的构造的根节点</li>
+<li>因为终止条件不一样，卡哥的递归比我的少递归一层，运行时间更快</li>
+<li>如果让空节点（空指针）进入递归，就不加if，如果不让空节点进入递归，就加if限制一下， 终止条件也会相应的调整。</li>
+<li>注意类似用数组构造二叉树的题目，每次分隔尽量不要定义新的数组，而是通过下标索引直接在原数组上操作，这样可以节约时间和空间上的开销。</li>
+</ul>
+<h2 id="2-合并二叉树-617"><a href="#2-合并二叉树-617" class="headerlink" title="2. 合并二叉树 #617"></a>2. 合并二叉树 #617</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mergeTrees</span>(<span class="params">self, root1: <span class="type">Optional</span>[TreeNode], root2: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">if</span> root1 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> root2    <span class="comment">#如果是root1为空，就返回root2</span></span><br><span class="line">        <span class="keyword">if</span> root2 <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> root1    <span class="comment">#如果是root2为空，就返回root1</span></span><br><span class="line">        <span class="comment"># 改造root1成为最后的tree</span></span><br><span class="line">        root1.val += root2.val  <span class="comment">#这里我们重复利用一下t1这个树，t1就是合并之后树的根节点（就是修改了原来树的结构）。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 也可以用新创建的一个节点</span></span><br><span class="line">        root = TreeNode() <span class="comment"># 创建新节点</span></span><br><span class="line">        root.val += root1.val + root2.val<span class="comment"># 中</span></span><br><span class="line"></span><br><span class="line">        root1.left = self.mergeTrees(root1.left, root2.left)</span><br><span class="line">        root1.right = self.mergeTrees(root1.right, root2.right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root1</span><br></pre></td></tr></table></figure>
+
+
+<p>思路：</p>
+<ul>
+<li>本题使用前中后序都是可以的，前序最好理解</li>
+<li>终止条件：<ul>
+<li><p>因为是传入了两个树，那么就有两个树遍历的节点t1 和 t2，如果t1 &#x3D;&#x3D; NULL 了，两个树合并就应该是 t2 了（如果t2也为NULL也无所谓，合并之后就是NULL）。</p>
+</li>
+<li><p>反过来如果t2 &#x3D;&#x3D; NULL，那么两个数合并就是t1（如果t1也为NULL也无所谓，合并之后就是NULL）。</p>
+</li>
+</ul>
+</li>
+<li>可以在root1基础上改造，或者可以新建一个节点</li>
+</ul>
+<h3 id="3-二叉搜索树中的搜索-700"><a href="#3-二叉搜索树中的搜索-700" class="headerlink" title="3. 二叉搜索树中的搜索 #700"></a>3. 二叉搜索树中的搜索 #700</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">searchBST</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], val: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>  <span class="keyword">or</span> root.val == val:</span><br><span class="line">            <span class="keyword">return</span> root</span><br><span class="line">        res = <span class="literal">None</span>     <span class="comment"># 定义的临时遍历，用来接住返回值</span></span><br><span class="line">        <span class="keyword">if</span> val &gt; root.val:</span><br><span class="line">            res = self.searchBST(root.right, val)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = self.searchBST(root.left, val)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 迭代法</span></span><br><span class="line">        <span class="keyword">while</span> root <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> root.val &gt; val:</span><br><span class="line">                root = root.left</span><br><span class="line">            <span class="keyword">elif</span> root.val &lt; val:</span><br><span class="line">                root = root.right</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> root</span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<p>思路： </p>
+<ul>
+<li>利用二叉搜索树的特性,左子树都是小于根节点的，右子树都是大于根节点的</li>
+<li>对于二叉搜索树，不需要回溯的过程，因为节点的有序性就帮我们确定了搜索的方向。</li>
+<li>我们不需要搜索其他节点，也不需要做回溯，查找的路径已经规划好了</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">searchBST</span>(<span class="params">self, root: TreeNode, val: <span class="built_in">int</span></span>) -&gt; TreeNode:</span><br><span class="line">        <span class="comment"># 为什么要有返回值: </span></span><br><span class="line">        <span class="comment">#   因为搜索到目标节点就要立即return，</span></span><br><span class="line">        <span class="comment">#   这样才是找到节点就返回（搜索某一条边），如果不加return，就是遍历整棵树了。</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> root.val == val: </span><br><span class="line">            <span class="keyword">return</span> root</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> root.val &gt; val: </span><br><span class="line">            <span class="keyword">return</span> self.searchBST(root.left, val)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> root.val &lt; val: </span><br><span class="line">            <span class="keyword">return</span> self.searchBST(root.right, val)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-验证二叉搜索树-98"><a href="#3-验证二叉搜索树-98" class="headerlink" title="3. 验证二叉搜索树 #98"></a>3. 验证二叉搜索树 #98</h3><p>思路：</p>
+<ul>
+<li>判断二叉搜索树的时候，一定要用中序， 左中右，这样遍历之后是一个单调递增的过程。</li>
+<li>三种解法，层层递增，越来越简单</li>
+<li>提到二叉搜索树一定要想到中序，左中右，例如：[1,2,3,4,5,6,7]<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    4</span><br><span class="line">   / \</span><br><span class="line">  2   6</span><br><span class="line"> / \ / \</span><br><span class="line">1  3 5  7</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>第一种解法：用中序遍历存到一个数组，判断数组是不是递增的,左右中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidBST</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        arr = []</span><br><span class="line">        self.appendToArr(root, arr)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(arr)-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> arr[i] &gt;= arr[i+<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 只需要遍历，不需要任何返回值，所以遍历的是不需要接上一层的返回值</span></span><br><span class="line">    <span class="comment"># 第一种解法：用中序遍历存到一个数组，判断数组是不是递增的,左右中</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">appendToArr</span>(<span class="params">self, root, arr</span>):</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line">        self.appendToArr(root.left, arr)    <span class="comment">#left</span></span><br><span class="line">        arr.append(root.val)                <span class="comment">#middle</span></span><br><span class="line">        self.appendToArr(root.right, arr)   <span class="comment">#right</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.vec = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">traversal</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        self.traversal(root.left)</span><br><span class="line">        self.vec.append(root.val)  <span class="comment"># 将二叉搜索树转换为有序数组</span></span><br><span class="line">        self.traversal(root.right)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidBST</span>(<span class="params">self, root</span>):</span><br><span class="line">        self.vec = []  <span class="comment"># 清空数组</span></span><br><span class="line">        self.traversal(root)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(self.vec)):</span><br><span class="line">            <span class="comment"># 注意要小于等于，搜索树里不能有相同元素</span></span><br><span class="line">            <span class="keyword">if</span> self.vec[i] &lt;= self.vec[i - <span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>陷阱1:</p>
+<ul>
+<li>不能单纯的比较左节点小于中间节点，右节点大于中间节点就完事了。我们要比较的是 左子树所有节点小于中间节点，右子树所有节点大于中间节点。所以要比较的其实和中序遍历很像，当前的值比上一个要大就行<br>陷阱2：</li>
+<li>样例中最小节点 可能是int的最小值，如果这样使用最小的int来比较也是不行的。</li>
+</ul>
+<p>第二种解法：用中序遍历的时候，传入一个变量存最大值，每次更新这个值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidBST</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        </span><br><span class="line">        self.max_val = <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> self.appendToArr(root)</span><br><span class="line">    <span class="comment"># 第二种解法：用中序遍历的时候，传入一个变量存最大值，每次更新这个值</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">appendToArr</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        left = self.appendToArr(root.left)</span><br><span class="line">        <span class="built_in">print</span>(self.max_val)</span><br><span class="line">        <span class="keyword">if</span> root.val &gt; self.max_val:</span><br><span class="line">            self.max_val = root.val</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        right = self.appendToArr(root.right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left <span class="keyword">and</span> right</span><br></pre></td></tr></table></figure>
+
+<p>第三种解法：用中序遍历的时候，用双指针的方法，每次都和上一次的值比较，然后一起往后移动,是第二种的升级版</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValidBST</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        </span><br><span class="line">        self.pre = <span class="literal">None</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> self.appendToArr(root)</span><br><span class="line">    <span class="comment"># 第二种解法：用中序遍历的时候，传入一个变量存最大值，每次更新这个值</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">appendToArr</span>(<span class="params">self, root</span>):</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        left = self.appendToArr(root.left)</span><br><span class="line">        <span class="keyword">if</span> self.pre <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> root.val &lt;= self.pre:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        self.pre = root</span><br><span class="line">        right = self.appendToArr(root.right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> left <span class="keyword">and</span> right</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-11</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

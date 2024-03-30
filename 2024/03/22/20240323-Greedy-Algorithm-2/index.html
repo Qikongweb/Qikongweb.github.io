@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240323 Greedy Algorithm-2</h1>
+  <article class="post-content"><h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-买卖股票的最佳时机II-122"><a href="#1-买卖股票的最佳时机II-122" class="headerlink" title="1. 买卖股票的最佳时机II  #122"></a>1. 买卖股票的最佳时机II  #122</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(prices)):</span><br><span class="line">            diff = prices[i] - prices[i-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> diff &gt; <span class="number">0</span>:</span><br><span class="line">                res += diff</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>思路：</p>
+<ul>
+<li>本题首先要清楚两点：</li>
+</ul>
+<p>只有一只股票！<br>当前只有买股票或者卖股票的操作<br>想获得利润至少要两天为一个交易单元。</p>
+<ul>
+<li>把利润分解为每天为单位的维度,其实我们需要收集每天的正利润就可以，收集正利润的区间，就是股票买卖的区间，而我们只需要关注最终利润，不需要记录区间。</li>
+</ul>
+<p>那么只收集正利润就是贪心所贪的地方！</p>
+<p>局部最优：收集每天的正利润，全局最优：求得最大利润。</p>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/2020112917480858-20230310134659477.png" alt="题目分解为每天的利润"></p>
+<h3 id="2-跳跃游戏-55"><a href="#2-跳跃游戏-55" class="headerlink" title="2. 跳跃游戏 #55"></a>2. 跳跃游戏 #55</h3><p>思路：</p>
+<ul>
+<li>其实跳几步无所谓，关键在于可跳的覆盖范围！</li>
+</ul>
+<p>不一定非要明确一次究竟跳几步，每次取最大的跳跃步数，这个就是可以跳跃的覆盖范围。</p>
+<p>这个范围内，别管是怎么跳的，反正一定可以跳过来。</p>
+<p>那么这个问题就转化为跳跃覆盖范围究竟可不可以覆盖到终点！</p>
+<p>每次移动取最大跳跃步数（得到最大的覆盖范围），每移动一个单位，就更新最大覆盖范围。</p>
+<p>贪心算法局部最优解：每次取最大跳跃步数（取最大覆盖范围），整体最优解：最后得到整体最大覆盖范围，看是否能到终点。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canJump</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line"></span><br><span class="line">        cover = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums) == <span class="number">1</span>: <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> i &lt;= cover:</span><br><span class="line">                cover = <span class="built_in">max</span>(i + nums[i], cover)</span><br><span class="line">                <span class="comment"># print(cover)</span></span><br><span class="line">                <span class="keyword">if</span> cover &gt;= <span class="built_in">len</span>(nums)-<span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<h3 id="3-跳跃游戏II-45"><a href="#3-跳跃游戏II-45" class="headerlink" title="3. 跳跃游戏II #45"></a>3. 跳跃游戏II #45</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cur_distance = <span class="number">0</span>  <span class="comment"># 当前覆盖最远距离下标</span></span><br><span class="line">        ans = <span class="number">0</span>  <span class="comment"># 记录走的最大步数</span></span><br><span class="line">        next_distance = <span class="number">0</span>  <span class="comment"># 下一步覆盖最远距离下标</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            next_distance = <span class="built_in">max</span>(nums[i] + i, next_distance)  <span class="comment"># 更新下一步覆盖最远距离下标</span></span><br><span class="line">            <span class="keyword">if</span> i == cur_distance:  <span class="comment"># 遇到当前覆盖最远距离下标</span></span><br><span class="line">                ans += <span class="number">1</span>  <span class="comment"># 需要走下一步</span></span><br><span class="line">                cur_distance = next_distance  <span class="comment"># 更新当前覆盖最远距离下标（相当于加油了）</span></span><br><span class="line">                <span class="keyword">if</span> next_distance &gt;= <span class="built_in">len</span>(nums) - <span class="number">1</span>:  <span class="comment"># 当前覆盖最远距离达到数组末尾，不用再做ans++操作，直接结束</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-22</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

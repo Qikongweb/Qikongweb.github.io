@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240325 Greedy Algorithm-3</h1>
+  <article class="post-content"><h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-K次取反后最大化的数组和-1005"><a href="#1-K次取反后最大化的数组和-1005" class="headerlink" title="1. K次取反后最大化的数组和 #1005"></a>1. K次取反后最大化的数组和 #1005</h3><p>思路：</p>
+<ul>
+<li><p>两次贪心策略：</p>
+<ul>
+<li>第一次：就是把整体的最大的负数拿出来取反，这样对于累加和事最有帮助的。</li>
+<li>第二次：就是所有都是整数的时候，如果k还有值，那就是把最小的正数拿出来反复取反，直到k为0，因为不管最后是正还是负，对于总数和都是消耗最小的</li>
+</ul>
+</li>
+<li><p>贪心的思路，局部最优：让绝对值大的负数变为正数，当前数值达到最大，整体最优：整个数组和达到最大。</p>
+</li>
+<li><p>局部最优：只找数值最小的正整数进行反转，当前数值和可以达到最大</p>
+</li>
+<li><p>那么本题的解题步骤为：</p>
+</li>
+</ul>
+<p>第一步：将数组按照绝对值大小从大到小排序，注意要按照绝对值的大小<br>第二步：从前向后遍历，遇到负数将其变为正数，同时K–<br>第三步：如果K还大于0，那么反复转变数值最小的元素，将K用完<br>第四步：求和</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestSumAfterKNegations</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># arr_sort = sorted(nums, key=abs)</span></span><br><span class="line">        nums.sort(key=<span class="built_in">abs</span>,reverse=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># print(nums)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &lt; <span class="number">0</span>:</span><br><span class="line">                nums[i] = -nums[i]</span><br><span class="line">                k -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> k == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> k % <span class="number">2</span> !=<span class="number">0</span>:  <span class="comment"># 这里我只判断奇数还是偶数就可以了，不用wile循环</span></span><br><span class="line">            nums[-<span class="number">1</span>] *= -<span class="number">1</span>  </span><br><span class="line">        <span class="comment"># while k &gt; 0:</span></span><br><span class="line">        <span class="comment">#     nums[-1] = -nums[-1]</span></span><br><span class="line">        <span class="comment">#     k -= 1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(nums)</span><br></pre></td></tr></table></figure>
+
+<p>性能更好的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestSumAfterKNegations</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        nums.sort(key=<span class="built_in">abs</span>,reverse=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &lt; <span class="number">0</span> <span class="keyword">and</span> k &gt;<span class="number">0</span>:</span><br><span class="line">                nums[i] *= -<span class="number">1</span></span><br><span class="line">                k -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> k % <span class="number">2</span> !=<span class="number">0</span>:</span><br><span class="line">            nums[-<span class="number">1</span>] *= -<span class="number">1</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(nums)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-加油站-134"><a href="#2-加油站-134" class="headerlink" title="2. 加油站 #134"></a>2. 加油站 #134</h3><p>思路： 推荐解法</p>
+<ul>
+<li><p>我的思路是： </p>
+<ul>
+<li>求出来了剩余汽油的差值数组，然后求和比较是不是大于0，如果大于等于0，有可能会跑一圈，如果小于0，一定不能跑一圈</li>
+<li>大于0之后，找哪一天出发，我一开始想的是找最小值的下一天作为出发日期，单纯的是找最小值，但是不对，那就看题解，发现是找的范围，累加差值是不是小于0，如果小于0就取下一个</li>
+</ul>
+</li>
+<li><p>题解方法1:</p>
+<ul>
+<li>如果总油量减去总消耗大于等于零那么一定可以跑完一圈，说明 各个站点的加油站 剩油量rest[i]相加一定是大于等于零的。</li>
+<li>i从0开始累加rest[i]，和记为curSum，一旦curSum小于零，说明[0, i]区间都不能作为起始位置，因为这个区间选择任何一个位置作为起点，到i这里都会断油，那么起始位置从i+1算起，再从0计算curSum。</li>
+<li>那么局部最优：当前累加rest[i]的和curSum一旦小于0，起始位置至少要是i+1，因为从i之前开始一定不行。全局最优：找到可以跑一圈的起始位置。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        diff = [<span class="number">0</span>] * <span class="built_in">len</span>(gas)</span><br><span class="line">        total = <span class="number">0</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas)):</span><br><span class="line">            diff[i] = gas[i] - cost[i]</span><br><span class="line">            total += diff[i]</span><br><span class="line">            <span class="keyword">if</span> total &lt; <span class="number">0</span>:</span><br><span class="line">                res = i+<span class="number">1</span></span><br><span class="line">                total = <span class="number">0</span></span><br><span class="line">        <span class="comment"># print(res, total)</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">sum</span>(diff) &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐解法：</li>
+</ul>
+<p>直接从全局进行贪心选择，情况如下：</p>
+<p>情况一：如果gas的总和小于cost总和，那么无论从哪里出发，一定是跑不了一圈的</p>
+<p>情况二：rest[i] &#x3D; gas[i]-cost[i]为一天剩下的油，i从0开始计算累加到最后一站，如果累加没有出现负数，说明从0出发，油就没有断过，那么0就是起点。</p>
+<p>情况三：如果累加的最小值是负数，汽车就要从非0节点出发，从后向前，看哪个节点能把这个负数填平，能把这个负数填平的节点就是出发节点。   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canCompleteCircuit</span>(<span class="params">self, gas: <span class="type">List</span>[<span class="built_in">int</span>], cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        curSum = <span class="number">0</span>  <span class="comment"># 当前累计的剩余油量</span></span><br><span class="line">        minFuel = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)  <span class="comment"># 从起点出发，油箱里的油量最小值</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas)):</span><br><span class="line">            rest = gas[i] - cost[i]</span><br><span class="line">            curSum += rest</span><br><span class="line">            <span class="keyword">if</span> curSum &lt; minFuel:</span><br><span class="line">                minFuel = curSum</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> curSum &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>  <span class="comment"># 情况1：整个行程的总消耗大于总供给，无法完成一圈</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> minFuel &gt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 情况2：从起点出发到任何一个加油站时油箱的剩余油量都不会小于0，可以从起点出发完成一圈</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gas) - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            rest = gas[i] - cost[i]</span><br><span class="line">            minFuel += rest</span><br><span class="line">            <span class="keyword">if</span> minFuel &gt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> i  <span class="comment"># 情况3：找到一个位置使得从该位置出发油箱的剩余油量不会小于0，返回该位置的索引</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>  <span class="comment"># 无法完成一圈</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-分发糖果-135"><a href="#3-分发糖果-135" class="headerlink" title="3. 分发糖果 #135"></a>3. 分发糖果 #135</h3><p>思路：</p>
+<ul>
+<li><p><em><strong>这道题目一定是要确定一边之后，再确定另一边，例如比较每一个孩子的左边，然后再比较右边，如果两边一起考虑一定会顾此失彼。</strong></em></p>
+</li>
+<li><p>先确定右边评分大于左边的情况（也就是从前向后遍历）， 在左孩子的基础上加1</p>
+</li>
+<li><p>再确定左孩子大于右孩子的情况（从后向前遍历）， 一定要从后向前，因为如果比右孩子大的话，是在右孩子基础上加1</p>
+</li>
+<li><p>关键一步： 那么又要贪心了，局部最优：取candyVec[i + 1] + 1 和 candyVec[i] 最大的糖果数量，保证第i个小孩的糖果数量既大于左边的也大于右边的。全局最优：相邻的孩子中，评分高的孩子获得更多的糖果<br>candyVec[i]只有取最大的才能既保持对左边candyVec[i - 1]的糖果多，也比右边candyVec[i + 1]的糖果多。</p>
+</li>
+</ul>
+<p>我的解法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">candy</span>(<span class="params">self, ratings: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = [<span class="number">1</span>] * <span class="built_in">len</span>(ratings)</span><br><span class="line">        <span class="comment"># compare right is larger than left</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(ratings)):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] - ratings[i-<span class="number">1</span>] &gt;<span class="number">0</span>:</span><br><span class="line">                res[i] = res[i-<span class="number">1</span>]+<span class="number">1</span></span><br><span class="line">        <span class="comment"># print(res)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># compare left is larger than right</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ratings)-<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="comment"># print(j,j+1)</span></span><br><span class="line">            <span class="keyword">if</span> ratings[j] - ratings[j+<span class="number">1</span>] &gt; <span class="number">0</span>:</span><br><span class="line">                res[j] = <span class="built_in">max</span>(res[j+<span class="number">1</span>]+ <span class="number">1</span>, res[j])</span><br><span class="line">            <span class="comment"># print(res)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(res)</span><br></pre></td></tr></table></figure>
+
+<p>卡哥解法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">candy</span>(<span class="params">self, ratings: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        candyVec = [<span class="number">1</span>] * <span class="built_in">len</span>(ratings)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从前向后遍历，处理右侧比左侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(ratings)):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i - <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = candyVec[i - <span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 从后向前遍历，处理左侧比右侧评分高的情况</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(ratings) - <span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ratings[i] &gt; ratings[i + <span class="number">1</span>]:</span><br><span class="line">                candyVec[i] = <span class="built_in">max</span>(candyVec[i], candyVec[i + <span class="number">1</span>] + <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 统计结果</span></span><br><span class="line">        result = <span class="built_in">sum</span>(candyVec)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-24</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

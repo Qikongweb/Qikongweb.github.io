@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240315 backtracking-1</h1>
+  <article class="post-content"><h2 id="BackTracking-回溯-day1"><a href="#BackTracking-回溯-day1" class="headerlink" title="BackTracking 回溯 day1"></a>BackTracking 回溯 day1</h2><h3 id="1-理论基础"><a href="#1-理论基础" class="headerlink" title="1. 理论基础"></a>1. 理论基础</h3><ol>
+<li><p>什么是回溯法<br>回溯法也可以叫做回溯搜索法，它是一种搜索的方式。回溯的本质是穷举，穷举所有可能，然后选出我们想要的答案，回溯就是暴力搜索，用来搜索出来for循环做不到的情况</p>
+</li>
+<li><p>回溯法可以解决的问题</p>
+</li>
+</ol>
+<ul>
+<li>组合问题：N个数里面按一定规则找出k个数的集合</li>
+<li>切割问题：一个字符串按一定规则有几种切割方式</li>
+<li>子集问题：一个N个数的集合里有多少符合条件的子集</li>
+<li>排列问题：N个数按一定规则全排列，有几种排列方式</li>
+<li>棋盘问题：N皇后，解数独等等</li>
+</ul>
+<ol start="3">
+<li>如何理解回溯法</li>
+</ol>
+<ul>
+<li>回溯法解决的问题都可以抽象为树形结构，之前做的递归时，回溯就隐藏的递归的下面</li>
+<li>因为回溯法解决的都是在集合中递归查找子集，<strong>集合的大小就构成了树的宽度，递归的深度，都构成的树的深度</strong>。</li>
+</ul>
+<ol start="4">
+<li>回溯法模板</li>
+</ol>
+<ul>
+<li>回溯函数模板返回值以及参数</li>
+<li>回溯函数终止条件，一般到叶子节点，处理终止条件</li>
+<li>回溯搜索的遍历过程<br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130173631174.png" alt="回溯过程"></li>
+</ul>
+<p>大家可以从图中看出for循环可以理解是横向遍历，backtracking（递归）就是纵向遍历，这样就把这棵树全遍历完了，一般来说，搜索叶子节点就是找的其中一个结果了。<br>回溯模版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">void backtracking(参数) &#123;</span><br><span class="line">    if (终止条件) &#123;</span><br><span class="line">        存放结果;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (选择：本层集合中元素（树中节点孩子的数量就是集合的大小）) &#123;</span><br><span class="line">        处理节点;</span><br><span class="line">        backtracking(路径，选择列表); // 递归</span><br><span class="line">        回溯，撤销处理结果</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-组合-77"><a href="#2-组合-77" class="headerlink" title="2. 组合 #77"></a>2. 组合 #77</h3><p>思路：</p>
+<ul>
+<li>为什么不能用for循环，如果只求两个数的和，那可以用两层for循环，但是如果是k个数之和，就要用k个for loop，解不了，所以用回溯，回溯法就用递归来解决嵌套层数的问题。</li>
+<li>递归来做层叠嵌套（可以理解是开k层for循环），每一次的递归中嵌套一个for循环，那么递归就可以用于解决多层嵌套循环的问题了。</li>
+</ul>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123195242899.png" alt="回溯过程"></p>
+<ul>
+<li>图中可以发现n相当于树的宽度，k相当于树的深度。<br>如何理解上面的这句话，我的理解是树的宽度就是说循环的开始条件，是什么也就是树的根节点是什么，每一个情况对应的树的根节点就是不一样的<br>第二，k是树的深度，说明，这初始条件下，我往下找k次，这样就正好找到了k个元素，就是我们想要找的，之后就是一层一层回溯，数组的递归有点像遍历N叉树一样，一个叉代表一个数组的值，知道回到最初的根节点，然后for循环到下一个根节点开始往下遍历</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">self, n: <span class="built_in">int</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        self.res = []</span><br><span class="line">        self.path = []</span><br><span class="line">        self.backtracking(n,k,<span class="number">1</span>) <span class="comment">#为什么是从1开始，因为1代表是数组元1，2，3，而不是index在本题里</span></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line">    <span class="comment"># 递归函数的返回值以及参数</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, n, k, startIndex</span>):</span><br><span class="line">        <span class="comment"># 回溯函数终止条件</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(self.path) == k:</span><br><span class="line">            self.res.append(self.path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="comment"># 单层搜索的过程</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, n+<span class="number">1</span>):   <span class="comment"># 在这一层，就开始了递归，path从空开始，当i等于1时，进入到第一个数的递归，也就是后面的递归是从2开始往path里加数，然后等k个组合都完事了，pop出去，最后返回的是path为空，进入i=2的第二层循环，也就是i是值传递，不会被后面的影响</span></span><br><span class="line">            <span class="comment"># print(i)</span></span><br><span class="line">            self.path.append(i)</span><br><span class="line">            self.backtracking(n,k, i+<span class="number">1</span>)</span><br><span class="line">            self.path.pop()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>剪枝：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">combine</span>(<span class="params">self, n: <span class="built_in">int</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        result = []  <span class="comment"># 存放结果集</span></span><br><span class="line">        self.backtracking(n, k, <span class="number">1</span>, [], result)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backtracking</span>(<span class="params">self, n, k, startIndex, path, result</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(path) == k:</span><br><span class="line">            result.append(path[:])</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(startIndex, n - (k - <span class="built_in">len</span>(path)) + <span class="number">2</span>):  <span class="comment"># 优化的地方path循环的区间是左闭右开【0，3）所以是+2</span></span><br><span class="line">            path.append(i)  <span class="comment"># 处理节点</span></span><br><span class="line">            self.backtracking(n, k, i + <span class="number">1</span>, path, result)</span><br><span class="line">            path.pop()  <span class="comment"># 回溯，撤销处理的节点</span></span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>可以剪枝的地方就在递归中每一层的for循环所选择的起始位置。</li>
+</ul>
+<p>如果for循环选择的起始位置之后的元素个数 已经不足 我们需要的元素个数了，那么就没有必要搜索了。</p>
+<ul>
+<li>剪枝的步骤<ol>
+<li><p>已经选择的元素个数：path.size();</p>
+</li>
+<li><p>还需要的元素个数为: k - path.size();</p>
+</li>
+<li><p>在集合n中至多要从该起始位置 : n - (k - path.size()) + 1，开始遍历</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210130194335207-20230310134409532.png" alt="剪枝优化过程"></p>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-15</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

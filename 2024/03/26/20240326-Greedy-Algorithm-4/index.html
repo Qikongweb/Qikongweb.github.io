@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240326-Greedy-Algorithm-4</h1>
+  <article class="post-content"><h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><h3 id="1-柠檬水找零-860"><a href="#1-柠檬水找零-860" class="headerlink" title="1. 柠檬水找零 #860"></a>1. 柠檬水找零 #860</h3><p>我自己的解法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lemonadeChange</span>(<span class="params">self, bills: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        cash_left = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(bills)):</span><br><span class="line">            <span class="keyword">match</span> bills[i]:</span><br><span class="line">                <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                    cash_left[<span class="number">5</span>] = cash_left.get(<span class="number">5</span>,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">                <span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">                    <span class="keyword">if</span> cash_left.get(<span class="number">5</span>,<span class="number">0</span>) == <span class="number">0</span>:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                    cash_left[<span class="number">5</span>] = cash_left.get(<span class="number">5</span>,<span class="number">0</span>) - <span class="number">1</span></span><br><span class="line">                    cash_left[<span class="number">10</span>] = cash_left.get(<span class="number">10</span>,<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">                <span class="keyword">case</span> <span class="number">20</span>:</span><br><span class="line">                    <span class="keyword">if</span> cash_left.get(<span class="number">10</span>,<span class="number">0</span>)&gt;=<span class="number">1</span> <span class="keyword">and</span> cash_left.get(<span class="number">5</span>,<span class="number">0</span>)&gt;=<span class="number">1</span>:</span><br><span class="line">                        cash_left[<span class="number">5</span>] -= <span class="number">1</span></span><br><span class="line">                        cash_left[<span class="number">10</span>] -= <span class="number">1</span></span><br><span class="line">                    <span class="keyword">elif</span> cash_left.get(<span class="number">5</span>,<span class="number">0</span>)&gt;=<span class="number">3</span> :</span><br><span class="line">                        cash_left[<span class="number">5</span>] -= <span class="number">3</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>思路：</p>
+<ul>
+<li>有如下三种情况：</li>
+</ul>
+<p>情况一：账单是5，直接收下。<br>情况二：账单是10，消耗一个5，增加一个10<br>情况三：账单是20，优先消耗一个10和一个5，如果不够，再消耗三个5</p>
+<ul>
+<li><p>因为美元10只能给账单20找零，而美元5可以给账单10和账单20找零，美元5更万能！</p>
+</li>
+<li><p>所以局部最优：遇到账单20，优先消耗美元10，完成本次找零。全局最优：完成全部账单的找零。</p>
+</li>
+</ul>
+<h3 id="2-根据身高重建队列-406"><a href="#2-根据身高重建队列-406" class="headerlink" title="2. 根据身高重建队列 #406"></a>2. 根据身高重建队列 #406</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reconstructQueue</span>(<span class="params">self, people: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        <span class="comment"># 从身高由高到低排序</span></span><br><span class="line">        <span class="comment"># 先按照h维度的身高顺序从高到低排序。确定第一个维度</span></span><br><span class="line">        <span class="comment"># lambda返回的是一个元组：当-x[0](维度h）相同时，再根据x[1]（维度k）从小到大排序</span></span><br><span class="line">        people = <span class="built_in">sorted</span>(people, key=<span class="keyword">lambda</span> x: (-x[<span class="number">0</span>],x[<span class="number">1</span>]))</span><br><span class="line">        <span class="comment"># print(people)</span></span><br><span class="line"></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(people)):</span><br><span class="line">            index = people[i][<span class="number">1</span>]</span><br><span class="line">            res.insert(index, people[i])</span><br><span class="line">            <span class="comment"># print(res)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>思路很重要：</p>
+<ul>
+<li><p>又是碰见两个维度进行的比较，一定注意先一个一个维度进行比较</p>
+</li>
+<li><p>首先按身高排序从大到小，此时我们可以确定一个维度了，就是身高，前面的节点一定都比本节点高！</p>
+</li>
+<li><p>之后比较第二个维度，进行插入按照身高排序之后，优先按身高高的people的k来插入，后序插入节点也不会影响前面已经插入的节点，最终按照k的规则完成了队列</p>
+</li>
+<li><p>插入的时候要重新定义一个数组，因为在原数组上插入会改变之后的遍历过程，可能会遍历到同一个数</p>
+</li>
+<li><p>局部最优：优先按身高高的people的k来插入。插入操作过后的people满足队列属性</p>
+</li>
+<li><p>全局最优：最后都做完插入操作，整个队列满足题目队列属性</p>
+</li>
+</ul>
+<h3 id="3-用最少数量的箭引爆气球-452"><a href="#3-用最少数量的箭引爆气球-452" class="headerlink" title="3. 用最少数量的箭引爆气球 #452"></a>3. 用最少数量的箭引爆气球 #452</h3><p>思路很重要：</p>
+<ul>
+<li>为了让气球尽可能的重叠，需要对数组进行排序。这个我想到了，先排序左边界</li>
+<li>如果这个区间的左边界比上个区间的右边界还大，肯定不重复，就一定结果加1</li>
+<li>如果有重复的情况，就是左边界比右边界小，那么要更新右边界，来保证是不是可以和再下一个重复，次步是关键</li>
+<li>如果气球重叠了，重叠气球中右边边界的最小值 之前的区间一定需要一个弓箭。</li>
+<li>这道题目贪心的思路很简单也很直接，就是重复的一起射了</li>
+</ul>
+<p><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20201123101929791.png" alt="卡哥解题图，更好理解"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMinArrowShots</span>(<span class="params">self, points: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(points) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># sort left from min to max</span></span><br><span class="line">        points = <span class="built_in">sorted</span>(points, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        res = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(points)):</span><br><span class="line">            <span class="comment"># check if there chongdie</span></span><br><span class="line">            <span class="keyword">if</span> points[i-<span class="number">1</span>][<span class="number">1</span>] &lt; points[i][<span class="number">0</span>]:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 难点，重叠的时候需要更新右边届，取最小值，看是不是能和再下一个重叠</span></span><br><span class="line">                points[i][<span class="number">1</span>] = <span class="built_in">min</span>(points[i][<span class="number">1</span>],points[i-<span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-26</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

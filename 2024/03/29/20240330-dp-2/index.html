@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240330-dp-2</h1>
+  <article class="post-content"><h2 id="动态规划-day2"><a href="#动态规划-day2" class="headerlink" title="动态规划 day2"></a>动态规划 day2</h2><h3 id="1-不同路径-62"><a href="#1-不同路径-62" class="headerlink" title="1. 不同路径 #62"></a>1. 不同路径 #62</h3><p>思路：</p>
+<ul>
+<li>先分析五个步骤：</li>
+</ul>
+<ol>
+<li>确定dp数组（dp[i,j] table）二维数组，以及下标的含义： dp[i，j]表示的是到达i，j的网格共有多少条不同的路径</li>
+<li>确定递推公式： dp[i，j] &#x3D; dp[i-1，j] + dp[i，j-1]，因为只能向右和向下走，所以，方法就是来自于左和上的和<br>此时在回顾一下 dp[i - 1][j] 表示啥，是从(0, 0)的位置到(i - 1, j)有几条路径，dp[i][j - 1]同理。<br>那么很自然，dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - 1]，因为dp[i][j]只有这两个方向过来。</li>
+<li>dp数组如何初始化: 如何初始化呢，首先dp[i][0]一定都是1，因为从(0, 0)的位置到(i, 0)的路径只有一条，那么dp[0][j]也同理。经过我实际错的时候，因为你开始遍历是从【1，1】开始了，所有就相当于，没有遍历【i，0】一个行和【0，i】这一列，而这一行和一列应该是有值的所以作为初始化值，并且一行只能从左边来，一列只能从上面来，所以只有一个路径</li>
+<li>便利顺序：从左上到右下， 双重for循环。这里要看一下递推公式dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - 1]，dp[i][j]都是从其上方和左方推导而来，那么从左到右一层一层遍历就可以了。</li>
+</ol>
+<p>这样就可以保证推导dp[i][j]的时候，dp[i - 1][j] 和 dp[i][j - 1]一定是有数值的。<br>5. 打印dp数组  debug</p>
+<p>分析的完全正确，做对了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">uniquePaths</span>(<span class="params">self, m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">1</span> <span class="keyword">and</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化dp</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m):</span><br><span class="line">            dp[a][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            dp[<span class="number">0</span>][b] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">                <span class="comment"># print(i,j)</span></span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i][j-<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>动态规划（版本二）空间优化版本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">uniquePaths</span>(<span class="params">self, m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 创建一个一维列表用于存储每列的唯一路径数</span></span><br><span class="line">        dp = [<span class="number">1</span>] * n</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算每个单元格的唯一路径数</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, m):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">                dp[i] += dp[i - <span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 返回右下角单元格的唯一路径数</span></span><br><span class="line">        <span class="keyword">return</span> dp[n - <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>数论的方法是不是很明白</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">uniquePaths</span>(<span class="params">self, m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        numerator = <span class="number">1</span>  <span class="comment"># 分子</span></span><br><span class="line">        denominator = m - <span class="number">1</span>  <span class="comment"># 分母</span></span><br><span class="line">        count = m - <span class="number">1</span>  <span class="comment"># 计数器，表示剩余需要计算的乘积项个数</span></span><br><span class="line">        t = m + n - <span class="number">2</span>  <span class="comment"># 初始乘积项</span></span><br><span class="line">        <span class="keyword">while</span> count &gt; <span class="number">0</span>:</span><br><span class="line">            numerator *= t  <span class="comment"># 计算乘积项的分子部分</span></span><br><span class="line">            t -= <span class="number">1</span>  <span class="comment"># 递减乘积项</span></span><br><span class="line">            <span class="keyword">while</span> denominator != <span class="number">0</span> <span class="keyword">and</span> numerator % denominator == <span class="number">0</span>:</span><br><span class="line">                numerator //= denominator  <span class="comment"># 约简分子</span></span><br><span class="line">                denominator -= <span class="number">1</span>  <span class="comment"># 递减分母</span></span><br><span class="line">            count -= <span class="number">1</span>  <span class="comment"># 计数器减1，继续下一项的计算</span></span><br><span class="line">        <span class="keyword">return</span> numerator  <span class="comment"># 返回最终的唯一路径数</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-不同路径II-63"><a href="#2-不同路径II-63" class="headerlink" title="2. 不同路径II #63"></a>2. 不同路径II #63</h3><p>思路跟上面的题是一样的，有几个不一样的地方：</p>
+<ul>
+<li>确定递推公式，递推公式和62.不同路径一样，dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - 1]。<br>但这里需要注意一点，因为有了障碍，(i, j)如果就是障碍的话应该就保持初始状态（初始状态为0）。</li>
+<li>dp数组如何初始化<br>因为从(0, 0)的位置到(i, 0)的路径只有一条，所以dp[i][0]一定为1，dp[0][j]也同理。<br>但如果(i, 0) 这条边有了障碍之后，障碍之后（包括障碍）都是走不到的位置了，所以障碍之后的dp[i][0]应该还是初始值0。<br>注意代码里for循环的终止条件，一旦遇到obstacleGrid[i][0] &#x3D;&#x3D; 1的情况就停止dp[i][0]的赋值1的操作，dp[0][j]同理</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">uniquePathsWithObstacles</span>(<span class="params">self, obstacleGrid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        m = <span class="built_in">len</span>(obstacleGrid)</span><br><span class="line">        n = <span class="built_in">len</span>(obstacleGrid[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> obstacleGrid[-<span class="number">1</span>][-<span class="number">1</span>] <span class="keyword">or</span> obstacleGrid[<span class="number">0</span>][<span class="number">0</span>] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> m == <span class="number">1</span> <span class="keyword">and</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化dp</span></span><br><span class="line">        <span class="comment"># dp[0][0] = 0</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m):</span><br><span class="line">            <span class="keyword">if</span> obstacleGrid[a][<span class="number">0</span>] ==<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            dp[a][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">            <span class="keyword">if</span> obstacleGrid[<span class="number">0</span>][b] ==<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            dp[<span class="number">0</span>][b] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">                <span class="comment"># print(i,j)</span></span><br><span class="line">                <span class="keyword">if</span> obstacleGrid[i][j] == <span class="number">0</span>:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i][j-<span class="number">1</span>]</span><br><span class="line">                <span class="comment">#  这里我想复杂了，其实我想的是上面有障碍的情况和下嘛有障碍的情况，还有一种应该是两边都有障碍的情况，因为默认有障碍的那个格有数字，但是如果直接判断有障碍的那个格，直接付成0就好 了，后面也不用判断是不是要加这个有障碍的格了，反正都是0</span></span><br><span class="line">                <span class="comment"># if obstacleGrid[i-1][j] == 1 and obstacleGrid[i][j-1] == 1:</span></span><br><span class="line">                <span class="comment">#     dp[i][j] = 0</span></span><br><span class="line">                <span class="comment"># elif obstacleGrid[i-1][j] == 1: </span></span><br><span class="line">                <span class="comment">#     dp[i][j] = dp[i][j-1]</span></span><br><span class="line">                <span class="comment"># elif obstacleGrid[i][j-1] == 1:</span></span><br><span class="line">                <span class="comment">#     dp[i][j] = dp[i-1][j]</span></span><br><span class="line">                <span class="comment"># else:</span></span><br><span class="line">                    <span class="comment"># dp[i][j] = dp[i-1][j] + dp[i][j-1]</span></span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-29</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

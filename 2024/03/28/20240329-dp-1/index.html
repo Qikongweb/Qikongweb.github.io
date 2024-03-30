@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240329-dp-1</h1>
+  <article class="post-content"><h2 id="动态规划-day1"><a href="#动态规划-day1" class="headerlink" title="动态规划 day1"></a>动态规划 day1</h2><h3 id="1-动态规划-理论基础"><a href="#1-动态规划-理论基础" class="headerlink" title="1. 动态规划 理论基础"></a>1. 动态规划 理论基础</h3><ul>
+<li><p>动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p>
+</li>
+<li><p>所以动态规划中每一个状态一定是由上一个状态推导出来的，这一点就区分于贪心，贪心没有状态推导，而是从局部直接选最优的，</p>
+</li>
+<li><p>对于动态规划问题，我将拆解为如下五步曲，这五步都搞清楚了，才能说把动态规划真的掌握了！</p>
+</li>
+</ul>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义</li>
+<li>确定递推公式</li>
+<li>dp数组如何初始化</li>
+<li>确定遍历顺序</li>
+<li>打印dp数组，举例推导dp数组 （debug用）</li>
+</ol>
+<ul>
+<li>动态规划应该如何debug</li>
+</ul>
+<ol>
+<li>找问题的最好方式就是把dp数组打印出来，看看究竟是不是按照自己思路推导的！</li>
+<li>做动规的题目，写代码之前一定要把状态转移在dp数组的上具体情况模拟一遍，心中有数，确定最后推出的是想要的结果。</li>
+</ol>
+<p>然后再写代码，如果代码没通过就打印dp数组，看看是不是和自己预先推导的哪里不一样。</p>
+<p>如果打印出来和自己预先模拟推导是一样的，那么就是自己的递归公式、初始化或者遍历顺序有问题了。</p>
+<p>如果和自己预先模拟推导的不一样，那么就是代码实现细节有问题。</p>
+<ol start="3">
+<li><p>发出这样的问题之前，其实可以自己先思考这三个问题：</p>
+<ul>
+<li>这道题目我举例推导状态转移公式了么？</li>
+<li>我打印dp数组的日志了么？</li>
+<li>打印出来了dp数组和我想的一样么？</li>
+</ul>
+</li>
+<li><p>大家工作之后就会发现，特别是大厂，问问题是一个专业活，是的，问问题也要体现出专业！</p>
+</li>
+</ol>
+<p>如果问同事很不专业的问题，同事们会懒的回答，领导也会认为你缺乏思考能力，这对职场发展是很不利的。</p>
+<p>所以大家在刷题的时候，就锻炼自己养成专业提问的好习惯。</p>
+<h3 id="2-斐波那契数-509"><a href="#2-斐波那契数-509" class="headerlink" title="2. 斐波那契数 #509"></a>2. 斐波那契数 #509</h3><h2 id="举例什么是斐波那契数列？就是一个数等于前两个数之和，位数是从0开始的"><a href="#举例什么是斐波那契数列？就是一个数等于前两个数之和，位数是从0开始的" class="headerlink" title="举例什么是斐波那契数列？就是一个数等于前两个数之和，位数是从0开始的"></a>举例什么是斐波那契数列？就是一个数等于前两个数之和，位数是从0开始的</h2><p>1，1，2，3，5，8，13</p>
+<h2 id="这道题是动态规划的简单题目，是用来熟悉五个步骤，动规五部曲："><a href="#这道题是动态规划的简单题目，是用来熟悉五个步骤，动规五部曲：" class="headerlink" title="这道题是动态规划的简单题目，是用来熟悉五个步骤，动规五部曲："></a>这道题是动态规划的简单题目，是用来熟悉五个步骤，动规五部曲：</h2><p>思路：</p>
+<ul>
+<li>先分析五个步骤：</li>
+</ul>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义： dp[i]第i个斐波那契数列称自为dp[i]</li>
+<li>确定递推公式： dp[i] &#x3D; dp[i-1] + dp[i-2]</li>
+<li>dp数组如何初始化: dp[0] &#x3D; 0 dp[1] &#x3D; 1</li>
+<li>便利顺序： 从前向后，因为dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的</li>
+<li>打印dp数组  debug</li>
+</ol>
+<p>解法1:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line">        <span class="comment"># 0,1,1,2,3,5</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)] <span class="comment"># 为什么要定义一个空数组是n+1，因为第n个斐波那契数就是dp[n]，所以数组的长度应该是n+1，因为数组是从0的index开始的</span></span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="built_in">len</span>(dp)):</span><br><span class="line">            dp[i] = dp[i-<span class="number">1</span>] + dp[i-<span class="number">2</span>]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+
+<p>解法2:<br>只存两个数值, [0,1] [1,1] [1,2] [2,3] [i,j] [a,b] b &#x3D; i+j ,a &#x3D; j</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line">        <span class="comment"># 0,1,1,2,3,5</span></span><br><span class="line">        <span class="comment"># 为了简化dp的数组，dp[n]=dp[n-1]+dp[n-2]只维护两个数就是了</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>)]</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="built_in">sum</span> = dp[<span class="number">0</span>] + dp[<span class="number">1</span>]</span><br><span class="line">            dp[<span class="number">0</span>] = dp[<span class="number">1</span>]</span><br><span class="line">            dp[<span class="number">1</span>] = <span class="built_in">sum</span></span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<p>解法3: 递归</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> n &lt; <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line">        <span class="keyword">return</span> self.fib(n - <span class="number">1</span>) + self.fib(n - <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(2^n)</li>
+<li>空间复杂度：O(n)，算上了编程语言中实现递归的系统栈所占空间</li>
+</ul>
+<h3 id="3-爬楼梯-70"><a href="#3-爬楼梯-70" class="headerlink" title="3. 爬楼梯 #70"></a>3. 爬楼梯 #70</h3><p>思路：</p>
+<ul>
+<li>先分析五个步骤：</li>
+</ul>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义： dp[i]第i层楼的多少种爬法</li>
+<li>确定递推公式： dp[i] &#x3D; dp[i-1] + dp[i-2]</li>
+<li>dp数组如何初始化: dp[1] &#x3D; 1 dp[2] &#x3D; 2， 这里定义dp[1]是有意义的，是第一层的方法，而dp[0]这里其实不需要定义，因为0层没有意义</li>
+<li>便利顺序： 从前向后，因为dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的</li>
+<li>打印dp数组  debug</li>
+</ol>
+<p>1层： 1<br>2层： 1+1，2<br>3层： 1+2，1+1+1，2+1<br>4层： 1+1+2，2+2，1+2+1，1+1+1+1，2+1+1<br>规律就是，爬第i层楼的时候其实是等于第i-1层的方法加1，和第i-2层的方法加2，也就是等于，前两层楼的爬法之和，和上面的题类似<br>所以递推公式就是dp[i] &#x3D; dp[i-1] + dp[i-2],其实就是斐波那契数</p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>完全背包问题：就是一步一个台阶，两个台阶，三个台阶，直到 m个台阶，有多少种方法爬到n阶楼顶。#70<br>此时我就发现一个绝佳的大厂面试题，第一道题就是单纯的爬楼梯，然后看候选人的代码实现，如果把dp[0]的定义成1了，就可以发难了，为什么dp[0]一定要初始化为1，此时可能候选人就要强行给dp[0]应该是1找各种理由。那这就是一个考察点了，对dp[i]的定义理解的不深入。</p>
+<p>然后可以继续发难，如果一步一个台阶，两个台阶，三个台阶，直到 m个台阶，有多少种方法爬到n阶楼顶。这道题目leetcode上并没有原题，绝对是考察候选人算法能力的绝佳好题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span> <span class="comment"># 把index0作为1层楼, 虽然可以通过，但是定义0没有意义的会产生歧义，😱😱😱😱😱😱</span></span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">2</span> <span class="comment"># 把index1作为2层楼</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,n):</span><br><span class="line">            dp[i] = dp[i-<span class="number">1</span>] + dp[i-<span class="number">2</span>]</span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>] <span class="comment"># 所以n层楼就是index为n-1，也就是这个数组的最后一个</span></span><br><span class="line">        <span class="comment">################### 正确解法 ########################################</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        dp = [<span class="number">0</span>] * (n+<span class="number">2</span>)</span><br><span class="line">        dp[<span class="number">1</span>], dp[<span class="number">2</span>] = <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,n+<span class="number">2</span>):</span><br><span class="line">            dp[i] = dp[i-<span class="number">1</span>] + dp[i-<span class="number">2</span>]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> n</span><br><span class="line">        dp = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>] <span class="comment"># 只保留两个楼层的方法数</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="built_in">sum</span> = dp[<span class="number">1</span>] + dp[<span class="number">2</span>]</span><br><span class="line">            dp[<span class="number">1</span>] = dp[<span class="number">2</span>]</span><br><span class="line">            dp[<span class="number">2</span>] = <span class="built_in">sum</span></span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="4-使用最小花费爬楼梯-746"><a href="#4-使用最小花费爬楼梯-746" class="headerlink" title="4. 使用最小花费爬楼梯 #746"></a>4. 使用最小花费爬楼梯 #746</h3><p>思路：</p>
+<ul>
+<li>先分析五个步骤：</li>
+</ul>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义： <strong>dp[i]到达第i台阶所花费的最少体力为dp[i]</strong> ? 感觉就是求一个总数total,到达i层的最小花费的总数</li>
+<li>确定递推公式：？？dp[i]取 dp[i-1]+cost[i-1]或者dp[i-2]+cost[i-2]的最小值，解释看下面</li>
+<li>dp数组如何初始化: ?? dp[0], dp[1] &#x3D; 0,0， 因为根据题意，只有往上跳的时候才产生花费，最初的时候可以选择站着0或1的位置，还没有起跳的时候，花费都是0</li>
+<li>便利顺序： 从前到后 ， 终止位置是到达len(cost),index 是 len(cost)而不是len(cost)-1</li>
+<li>打印dp数组  debug</li>
+</ol>
+<p>递推公式解释：<br>dp[i] 是由dp[i-1]跳一步或者dp[i-2]跳两步来到的,所以产生的花费是多少？那么就由跳的那一层的花费值决定，（根据题意，站在那一层是不消费的，而从那一层起跳到下一层要是花费那一层的体力值）所以从i-1和i-2起跳的时候所要花费的体力值就是cost[i-1],cost[i-2]，而dp[i-1]表示的是到达i-1层的总的最小花费，所以dp[i]就是由dp[i-1]+cost[i-1]或者dp[i-2]+cost[i-2]得来的，那么取谁呢，当然取最小的总花费了，天啊，终于明白了，卡哥讲的好深入浅出的讲，太清楚了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minCostClimbingStairs</span>(<span class="params">self, cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义一个dp数组 </span></span><br><span class="line">        dp = [<span class="number">0</span>]*(<span class="built_in">len</span>(cost)+<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        dp[<span class="number">0</span>], dp[<span class="number">1</span>] = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="built_in">len</span>(cost)+<span class="number">1</span>):</span><br><span class="line">            <span class="comment"># print((dp[i-1]+cost[i-1]),(dp[i-2]+cost[i-2]))</span></span><br><span class="line">            dp[i] = <span class="built_in">min</span>((dp[i-<span class="number">1</span>]+cost[i-<span class="number">1</span>]),(dp[i-<span class="number">2</span>]+cost[i-<span class="number">2</span>]))</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[<span class="built_in">len</span>(cost)]</span><br><span class="line"></span><br><span class="line">        <span class="comment">######################第二种解法########################</span></span><br><span class="line">        dp0, dp1 = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="built_in">len</span>(cost)+<span class="number">1</span>):</span><br><span class="line">            m =  <span class="built_in">min</span>((dp1+cost[i-<span class="number">1</span>]),(dp0+cost[i-<span class="number">2</span>]))</span><br><span class="line">            dp0 = dp1</span><br><span class="line">            dp1 = m</span><br><span class="line">        <span class="keyword">return</span> dp1</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-28</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
