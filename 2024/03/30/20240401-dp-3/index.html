@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240401-dp-3</h1>
+  <article class="post-content"><h2 id="动态规划-day3"><a href="#动态规划-day3" class="headerlink" title="动态规划 day3"></a>动态规划 day3</h2><h3 id="1-整数拆分-343"><a href="#1-整数拆分-343" class="headerlink" title="1. 整数拆分 #343"></a>1. 整数拆分 #343</h3><p>2  1X2 &#x3D; 2<br>3  2X1 &#x3D; 2<br>4  3+1, 3 , 2+2, 4<br>5  1,4 &#x3D;4 2,3 &#x3D; 6<br>6  1,5 &#x3D; 5 2,4 &#x3D; 8 3,3 &#x3D; 9</p>
+<p>思路有点复杂：</p>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义dp[i]：分拆数字i，可以得到的最大乘积为dp[i]。</li>
+<li>确定递推公式:其实可以从1遍历j，然后有两种渠道得到dp[i].<ul>
+<li>一个是j * (i - j) 直接相乘。</li>
+<li>一个是j * dp[i - j]，相当于是拆分(i - j)，对这个拆分不理解的话，可以回想dp数组的定义。<br>也可以这么理解，j * (i - j) 是单纯的把整数拆分为两个数相乘，而j * dp[i - j]是拆分成两个以及两个以上的个数相乘。</li>
+</ul>
+</li>
+<li>这里我只初始化dp[2] &#x3D; 1</li>
+<li>确定遍历顺序</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">integerBreak</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = dp[<span class="number">1</span>] =<span class="number">0</span></span><br><span class="line">        dp[<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n+<span class="number">1</span>):</span><br><span class="line">            <span class="comment"># 因为拆分一个数n 使之乘积最大，那么一定是拆分成m个近似相同的子数相乘才是最大的。</span></span><br><span class="line">            <span class="comment"># 例如 6 拆成 3 * 3， 10 拆成 3 * 3 * 4。 100的话 也是拆成m个近似数组的子数 相乘才是最大的。</span></span><br><span class="line">            <span class="comment"># 只不过我们不知道m究竟是多少而已，但可以明确的是m一定大于等于2，既然m大于等于2，也就是 最差也应该是拆成两个相同的 可能是最大值。</span></span><br><span class="line">            <span class="comment"># 那么 j 遍历，只需要遍历到 n/2 就可以，后面就没有必要遍历了，一定不是最大值。</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,i//<span class="number">2</span>+<span class="number">1</span>):</span><br><span class="line">                dp[i] = <span class="built_in">max</span>(j*(i-j), j*dp[i-j], dp[i])</span><br><span class="line">                <span class="comment"># 加dp[i]的原因是：在j的循环遍历中，因为dp[i]是时时刻刻在变化的，得记录每次遍历的最大值。加上dp[i]的最大作用并不是去与dp[i]的初始值比较，而是遍历j过程进行比较</span></span><br><span class="line">                <span class="comment"># print(i,j,j*(i-j),j*dp[i-j],dp[i])</span></span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-不同的二叉搜索树-96"><a href="#2-不同的二叉搜索树-96" class="headerlink" title="2. 不同的二叉搜索树 #96"></a>2. 不同的二叉搜索树 #96</h3><p><img src="/2024/03/30/20240401-dp-3/dp_searchTree.jpg" alt="画图讲解"></p>
+<p>如何推导的过程：<br>dp[3]，就是 元素1为头结点搜索树的数量 + 元素2为头结点搜索树的数量 + 元素3为头结点搜索树的数量</p>
+<p>元素1为头结点搜索树的数量 &#x3D; 右子树有2个元素的搜索树数量 * 左子树有0个元素的搜索树数量</p>
+<p>元素2为头结点搜索树的数量 &#x3D; 右子树有1个元素的搜索树数量 * 左子树有1个元素的搜索树数量</p>
+<p>元素3为头结点搜索树的数量 &#x3D; 右子树有0个元素的搜索树数量 * 左子树有2个元素的搜索树数量</p>
+<p>有2个元素的搜索树数量就是dp[2]。</p>
+<p>有1个元素的搜索树数量就是dp[1]。</p>
+<p>有0个元素的搜索树数量就是dp[0]。</p>
+<p>所以dp[3] &#x3D; dp[2] * dp[0] + dp[1] * dp[1] + dp[0] * dp[2]</p>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义 ， dp[i] ： 1到i为节点组成的二叉搜索树的个数为dp[i]。</li>
+</ol>
+<p>也可以理解是i个不同元素节点组成的二叉搜索树的个数为dp[i] ，理解为以1，2，3，4…i为节点组成的二叉搜索树的个数</p>
+<ol start="2">
+<li>递推公式： dp[i] +&#x3D; dp[以j为头结点左子树节点数量] * dp[以j为头结点右子树节点数量]</li>
+</ol>
+<p>j相当于是头结点的元素，从1遍历到i为止。j遍历，从哪开始遍历到哪呢？从1开始，(j&#x3D;1, i-1),(j&#x3D;2,i-2),(j&#x3D;3,j-3)…(j&#x3D;i-1,1)</p>
+<p>所以递推公式：dp[i] +&#x3D; dp[j - 1] * dp[i - j]; ，j-1 为j为头结点左子树节点数量，i-j 为以j为头结点右子树节点数量, 递推公式公式还有点点混乱。为什么是从j-1和i-j？</p>
+<ol start="3">
+<li><p>dp数组如何初始化 : dp[0] &#x3D;1 从定义上来讲，空节点也是一棵二叉树，也是一棵二叉搜索树，这是可以说得通的。</p>
+</li>
+<li><p>确定遍历顺序: 从左到右</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numTrees</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,i+<span class="number">1</span>):</span><br><span class="line">                dp[i] += dp[j-<span class="number">1</span>]*dp[i-j]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-03-30</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
