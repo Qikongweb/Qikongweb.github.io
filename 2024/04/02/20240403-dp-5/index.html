@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240403-dp-5</h1>
+  <article class="post-content"><h2 id="动态规划-day5"><a href="#动态规划-day5" class="headerlink" title="动态规划 day5"></a>动态规划 day5</h2><h3 id="1-最后一块石头的重量II-1049"><a href="#1-最后一块石头的重量II-1049" class="headerlink" title="1. 最后一块石头的重量II #1049"></a>1. 最后一块石头的重量II #1049</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lastStoneWeightII</span>(<span class="params">self, stones: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        target = <span class="built_in">sum</span>(stones) // <span class="number">2</span></span><br><span class="line">        dp = [<span class="number">0</span>]* (target+<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(stones)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(target, stones[i]-<span class="number">1</span>, -<span class="number">1</span>): <span class="comment">#在python里，范围是左闭右开，所以不包括stones[i]-1，因为是倒叙的，所以包括stones[i]，正好符合本题条件，遍历到不小于stones[i]</span></span><br><span class="line">                <span class="comment"># print(j,stones[i], dp[j])</span></span><br><span class="line">                dp[j] = <span class="built_in">max</span>(dp[j],dp[j-stones[i]]+stones[i])</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(stones) - dp[target]- dp[target]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-目标和-494"><a href="#2-目标和-494" class="headerlink" title="2. 目标和 #494"></a>2. 目标和 #494</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">total_sum = <span class="built_in">sum</span>(nums)  <span class="comment"># 计算nums的总和</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">abs</span>(target) &gt; total_sum:</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 此时没有方案</span></span><br><span class="line"><span class="keyword">if</span> (target + total_sum) % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>  <span class="comment"># 此时没有方案</span></span><br><span class="line">target_sum = (target + total_sum) // <span class="number">2</span>  <span class="comment"># 目标和</span></span><br><span class="line">dp = [<span class="number">0</span>] * (target_sum + <span class="number">1</span>)  <span class="comment"># 创建动态规划数组，初始化为0</span></span><br><span class="line">dp[<span class="number">0</span>] = <span class="number">1</span>  <span class="comment"># 当目标和为0时，只有一种方案，即什么都不选</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(target_sum, num - <span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        dp[j] += dp[j - num]  <span class="comment"># 状态转移方程，累加不同选择方式的数量</span></span><br><span class="line"><span class="keyword">return</span> dp[target_sum]  <span class="comment"># 返回达到目标和的方案数</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-一和零-474"><a href="#3-一和零-474" class="headerlink" title="3. 一和零 #474"></a>3. 一和零 #474</h3><p>思路：</p>
+<ul>
+<li>本题中strs 数组里的元素就是物品，每个物品都是一个！</li>
+<li>有m个0，n个1，是一个背包的两个维度，求装满这个背包最多有多少个物品？</li>
+<li>每个物品只能使用一次，所以是01背包的问题，一个背包有两个维度</li>
+<li>因为有三个变量，m,n和装了多少个物品，最后求的是dp[m][n]，在m和n都满足的条件下最多装多少个物品？</li>
+<li>物品的重量可以理解为i个0，和j个1，背包的最大容量其实就是m个0和n个1</li>
+<li>和01背包比较：对比一下就会发现，字符串的zeroNum和oneNum相当于物品的重量（weight[i]），字符串本身的个数相当于物品的价值（value[i]）</li>
+</ul>
+<p>dp定义：</p>
+<ul>
+<li>递推公式： dp[i][j] 可以由前一个strs里的字符串推导出来，strs里的字符串有zeroNum个0，oneNum个1。<br>dp[i][j] &#x3D; max(dp[i][j], dp[i - zeroNum][j - oneNum] + 1);</li>
+</ul>
+<p>dp[i][j] 就可以是 dp[i - zeroNum][j - oneNum] + 1。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMaxForm</span>(<span class="params">self, strs: <span class="type">List</span>[<span class="built_in">str</span>], m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 创建二维数组</span></span><br><span class="line">        dp = [[<span class="number">0</span>] * (n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">for</span> ss <span class="keyword">in</span> strs: <span class="comment"># 相当于物品</span></span><br><span class="line">            x = ss.count(<span class="string">&#x27;0&#x27;</span>)<span class="comment"># 统计字符串中1的个数</span></span><br><span class="line">            y = ss.count(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># print(x,y)</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m, x-<span class="number">1</span>, -<span class="number">1</span>): <span class="comment">#两个维度加起来算是容量遍历</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n, y-<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                    <span class="comment"># print(&quot;ij&quot;,i,j,i-x, j-y,m,n)</span></span><br><span class="line">                    <span class="comment"># dp[i][j] = max(dp[i][j], dp[i - zeros][j - ones] + 1) </span></span><br><span class="line">                    dp[i][j] = <span class="built_in">max</span>((dp[i-x][j-y]+<span class="number">1</span>),dp[i][j])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[m][n]</span><br></pre></td></tr></table></figure>
+
+<p>此时我们讲解了0-1背包的多种应用，</p>
+<p>纯 0 - 1 背包 (opens new window)是求 给定背包容量 装满背包 的最大价值是多少。<br>416. 分割等和子集 (opens new window)是求 给定背包容量，能不能装满这个背包。<br>1049. 最后一块石头的重量 II (opens new window)是求 给定背包容量，尽可能装，最多能装多少<br>494. 目标和 (opens new window)是求 给定背包容量，装满背包有多少种方法。<br>本题是求 给定背包容量，装满背包最多有多少个物品。</p>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-02</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
