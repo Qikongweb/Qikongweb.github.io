@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240405-dp-7</h1>
+  <article class="post-content"><h2 id="dp-day-7"><a href="#dp-day-7" class="headerlink" title="dp day-7"></a>dp day-7</h2><h3 id="1-爬楼梯-（进阶）-70"><a href="#1-爬楼梯-（进阶）-70" class="headerlink" title="1. 爬楼梯 （进阶）#70"></a>1. 爬楼梯 （进阶）#70</h3><p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬至多m (1 &lt;&#x3D; m &lt; n)个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>输入描述：输入共一行，包含两个正整数，分别表示n, m</p>
+<p>输出描述：输出一个整数，表示爬到楼顶的方法数。</p>
+<p>输入示例：3 2</p>
+<p>输出示例：3</p>
+<p>提示：</p>
+<p>当 m &#x3D; 2，n &#x3D; 3 时，n &#x3D; 3 这表示一共有三个台阶，m &#x3D; 2 代表你每次可以爬一个台阶或者两个台阶。</p>
+<p>此时你有三种方法可以爬到楼顶。</p>
+<p>1 阶 + 1 阶 + 1 阶段<br>1 阶 + 2 阶<br>2 阶 + 1 阶</p>
+<p>思路：</p>
+<ul>
+<li>这个是一个完全背包的问题</li>
+<li>遍历顺序是排序，所以先遍历背包，后遍历物品</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">            dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j - i &gt;= <span class="number">0</span>) dp[j] += dp[j - i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-零钱兑换-322"><a href="#2-零钱兑换-322" class="headerlink" title="2. 零钱兑换 #322"></a>2. 零钱兑换 #322</h3><p>思路：</p>
+<ul>
+<li>首先确定是完全背包问题： 每种硬币的数量是无限的，可以看出是典型的完全背包问题。</li>
+<li>amount可以理解为背包的容量，装满这个背包要用最少多少个钱币</li>
+<li>dp[j]：凑足总额为j所需钱币的最少个数为dp[j]</li>
+<li>凑足总额为j - coins[i]的最少个数为dp[j - coins[i]]，那么只需要加上一个钱币coins[i]即dp[j - coins[i]] + 1就是dp[j]（考虑coins[i]）所以dp[j] 要取所有 dp[j - coins[i]] + 1 中最小的。</li>
+</ul>
+<p>递推公式：dp[j] &#x3D; min(dp[j - coins[i]] + 1, dp[j]);</p>
+<ul>
+<li><p>初始化： 首先凑足总金额为0所需钱币的个数一定是0，那么dp[0] &#x3D; 0;其他的初始化成正无限大，因为上面的地推公式里是用min最小值，如果初始成0，其他的都是0，而且到最后得判断最后一位是不是infint，如果是返回-1</p>
+</li>
+<li><p>确定遍历顺序： 本题求钱币最小个数，那么钱币有顺序和没有顺序都可以，都不影响钱币的最小个数。所以本题并不强调集合是组合还是排列。本题既不是组合也不是排列，所以先遍历谁都可以</p>
+<ul>
+<li>如果求组合数就是外层for循环遍历物品，内层for遍历背包。</li>
+<li>如果求排列数就是外层for遍历背包，内层for循环遍历物品。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">coinChange</span>(<span class="params">self, coins: <span class="type">List</span>[<span class="built_in">int</span>], amount: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        dp = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)] * (amount+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(coin,amount+<span class="number">1</span>):</span><br><span class="line">                dp[j] = <span class="built_in">min</span>(dp[j-coin]+<span class="number">1</span>, dp[j])</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line">        <span class="keyword">if</span> dp[-<span class="number">1</span>] == <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>):</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-完全平方数-279"><a href="#3-完全平方数-279" class="headerlink" title="3. 完全平方数 #279"></a>3. 完全平方数 #279</h3><p>思路：</p>
+<ul>
+<li>根上一题思路一样，都是完全背包问题，背包容量就是正整数n</li>
+<li>和上一题不一样的地方就是物品的数组需要自己初始化，用n开平方，作为物品的个数，然后生成一个平方数组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numSquares</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        num = <span class="built_in">int</span>(<span class="built_in">pow</span>(n,<span class="number">0.5</span>))</span><br><span class="line">        <span class="comment"># print(num)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义物品的数组</span></span><br><span class="line">        m = [i*i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, num+<span class="number">1</span>)]</span><br><span class="line">        <span class="built_in">print</span>(m)</span><br><span class="line">        dp = [<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)] * (n+<span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> m:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,n+<span class="number">1</span>):</span><br><span class="line">                <span class="comment"># print(dp[j], dp[j-i]+1)</span></span><br><span class="line">                dp[j] = <span class="built_in">min</span>(dp[j], dp[j-i]+<span class="number">1</span>)</span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line">        <span class="comment"># 可以省略下面的，因为一定可以组合成一个数</span></span><br><span class="line">        <span class="comment"># if dp[n] == float(&#x27;inf&#x27;):</span></span><br><span class="line">        <span class="comment">#     return -1</span></span><br><span class="line">        <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-04</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
