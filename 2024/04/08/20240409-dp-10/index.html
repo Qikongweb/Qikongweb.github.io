@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240409-dp-10</h1>
+  <article class="post-content"><h3 id="dp-day10"><a href="#dp-day10" class="headerlink" title="dp - day10"></a>dp - day10</h3><h2 id="1-买卖股票的最佳时机-121"><a href="#1-买卖股票的最佳时机-121" class="headerlink" title="1. 买卖股票的最佳时机 #121"></a>1. 买卖股票的最佳时机 #121</h2><p>思路：</p>
+<ul>
+<li>很有意思，本题中只能买卖一次，其实一开始现金是0，那么加入第i天买入股票现金就是 -prices[i]， 这是一个负数。</li>
+<li>dp[i][0], dp[i][1]分两个状态：<ul>
+<li>dp[i][1] 表示第i天不持有股票所得最多现金 </li>
+<li>dp[i][0] 表示第i天持有股票所得最多现金<br>  注意这里说的是“持有”，“持有”不代表就是当天“买入”！也有可能是昨天就买入了，今天保持持有的状态</li>
+</ul>
+</li>
+<li>递推公式：<br>如果第i天持有股票即dp[i][0]， 那么可以由两个状态推出来</li>
+</ul>
+<p>第i-1天就持有股票，那么就保持现状，所得现金就是昨天持有股票的所得现金 即：dp[i - 1][0]<br>第i天买入股票，所得现金就是买入今天的股票后所得现金即：-prices[i]<br>那么dp[i][0]应该选所得现金最大的，所以dp[i][0] &#x3D; max(dp[i - 1][0], -prices[i]);</p>
+<p>如果第i天不持有股票即dp[i][1]， 也可以由两个状态推出来</p>
+<p>第i-1天就不持有股票，那么就保持现状，所得现金就是昨天不持有股票的所得现金 即：dp[i - 1][1]<br>第i天卖出股票，所得现金就是按照今天股票价格卖出后所得现金即：prices[i] + dp[i - 1][0]<br>同样dp[i][1]取最大的，dp[i][1] &#x3D; max(dp[i - 1][1], prices[i] + dp[i - 1][0]);</p>
+<ul>
+<li>初始化<br>那么dp[0][0]表示第0天持有股票，此时的持有股票就一定是买入股票了，因为不可能有前一天推出来，所以dp[0][0] -&#x3D; prices[0];</li>
+</ul>
+<p>dp[0][1]表示第0天不持有股票，不持有股票那么现金就是0，所以dp[0][1] &#x3D; 0;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># dp 很有意思的定义,0,1代表两个状态，0，1和上面分析的两个状态是反的</span></span><br><span class="line">        <span class="comment"># dp[i,0]代表的是到第i天，不持有这个股票，所得最多现金</span></span><br><span class="line">        <span class="comment"># dp[i,1]代表的是到第i天，持有这个股票，所得最多现金</span></span><br><span class="line"></span><br><span class="line">        dp = [[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(prices))]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span> <span class="comment">#代表不持有股票</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = -prices[<span class="number">0</span>] <span class="comment">#如果持有股票得花钱买，所以现在的现金就是负数</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(prices)):</span><br><span class="line">            <span class="comment"># 第一个状态代表到第i天不持有股票所得的现金, 两种情况，一种是之前已经被卖出去了，一种是现在卖出去</span></span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">0</span>], prices[i]+dp[i-<span class="number">1</span>][<span class="number">1</span>])</span><br><span class="line">            <span class="comment"># 第二个状态代表第i天持有股票所得的现金,两种情况，一种是之前已经持有，一种是现在买入，因为只有买卖一次</span></span><br><span class="line">            dp[i][<span class="number">1</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">1</span>], -prices[i])</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][<span class="number">0</span>] <span class="comment"># 不持有股票一定比持有股票，的现金多</span></span><br></pre></td></tr></table></figure>
+
+<p>简单写法，只维护两个常量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">length = <span class="built_in">len</span>(prices)</span><br><span class="line">        dp0, dp1 = -prices[<span class="number">0</span>], <span class="number">0</span> <span class="comment">#注意这里只维护两个常量，因为dp0的更新不受dp1的影响</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, length):</span><br><span class="line">            dp1 = <span class="built_in">max</span>(dp1, dp0 + prices[i])</span><br><span class="line">            dp0 = <span class="built_in">max</span>(dp0, -prices[i])</span><br><span class="line">        <span class="keyword">return</span> dp1</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-买卖股票的最佳时机II-122"><a href="#2-买卖股票的最佳时机II-122" class="headerlink" title="2. 买卖股票的最佳时机II #122"></a>2. 买卖股票的最佳时机II #122</h3><p>思路：</p>
+<ul>
+<li>根上一题不一样的地方：可以多次买卖，在递推公式上有一点不同</li>
+<li>这里重申一下dp数组的含义：</li>
+</ul>
+<p>dp[i][0] 表示第i天持有股票所得现金。<br>dp[i][1] 表示第i天不持有股票所得最多现金</p>
+<ul>
+<li>如果第i天持有股票即dp[i][0]， 那么可以由两个状态推出来，和上一题不同的是，上面的，当你要买股票的时候，手里现金一定是0，因为是一次买卖，那么就只有- prices[i]，而这个题，是多次买卖，手里的可能已经有现金哦，所以把手里有现金的前一个不持有股票的状态加进来<ul>
+<li>第i-1天就持有股票，那么就保持现状，所得现金就是昨天持有股票的所得现金 即：dp[i - 1][0]</li>
+<li>第i天买入股票，所得现金就是昨天不持有股票的所得现金减去 今天的股票价格 即：<strong>dp[i - 1][1] - prices[i]</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 贪心算法</span></span><br><span class="line">        <span class="comment"># res = 0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># for i in range(1, len(prices)):</span></span><br><span class="line">        <span class="comment">#     res += max(prices[i] - prices[i-1],0)</span></span><br><span class="line">        <span class="comment">#     # if diff &gt; 0:</span></span><br><span class="line">        <span class="comment">#     #     res += diff</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># return res</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 动态规划</span></span><br><span class="line">        dp = [[<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(prices))]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = -prices[<span class="number">0</span>]  <span class="comment"># 0代表持有股票，那就的买入</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">0</span>   <span class="comment"># 1代表不持有股票</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(prices)):</span><br><span class="line">            <span class="comment"># 持有股票，区别在于这里</span></span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">1</span>] - prices[i], dp[i-<span class="number">1</span>][<span class="number">0</span>])</span><br><span class="line">            <span class="comment"># 不持有股票</span></span><br><span class="line">            dp[i][<span class="number">1</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">1</span>], dp[i-<span class="number">1</span>][<span class="number">0</span>] + prices[i])</span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用两个常量记录持有和不持有两个状态</span></span><br><span class="line">        dp0 = -prices[<span class="number">0</span>]</span><br><span class="line">        dp1 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(prices)):</span><br><span class="line">            <span class="comment"># 持有股票</span></span><br><span class="line">            dp0 = <span class="built_in">max</span>(dp1-prices[i], dp0)</span><br><span class="line">            <span class="comment"># dp[i][0] = max(dp[i-1][1] - prices[i], dp[i-1][0])</span></span><br><span class="line">            <span class="comment"># 不持有股票</span></span><br><span class="line">            dp1 = <span class="built_in">max</span>(dp0+prices[i], dp1)</span><br><span class="line">            <span class="comment"># dp[i][1] = max(dp[i-1][1], dp[i-1][0] + prices[i])</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">print</span>(dp0, dp1)</span><br><span class="line">        <span class="keyword">return</span> dp1</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-08</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
