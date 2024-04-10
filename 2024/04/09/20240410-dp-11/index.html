@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240410-dp-11</h1>
+  <article class="post-content"><h2 id="dp-day11"><a href="#dp-day11" class="headerlink" title="dp - day11"></a>dp - day11</h2><h3 id="1-买卖股票的最佳时机IV-188"><a href="#1-买卖股票的最佳时机IV-188" class="headerlink" title="1. 买卖股票的最佳时机IV #188"></a>1. 买卖股票的最佳时机IV #188</h3><p>思路：</p>
+<ul>
+<li>这道题和上两道题的思路是一样，多了几个状态</li>
+<li>定义了四个状态：<ul>
+<li>dp[0][0]  # 第一次持有股票</li>
+<li>dp[0][1]  # 第一次不持有股票</li>
+<li>dp[0][2]  # 第二次持有股票</li>
+<li>dp[0][3]  # 第二次不持有股票</li>
+</ul>
+</li>
+<li>递推公式：<ul>
+<li>dp[i][0] &#x3D; max(dp[i-1][0], -prices[i])</li>
+<li>dp[i][1] &#x3D; max(dp[i-1][1], dp[i][0]+prices[i])</li>
+<li>dp[i][2] &#x3D; max(dp[i-1][2], dp[i-1][1]-prices[i]) 第二次持有股票是依赖于第一次卖出股票的金额</li>
+<li>dp[i][3] &#x3D; max(dp[i-1][3], dp[i-1][2]+prices[i])</li>
+</ul>
+</li>
+<li>dp数组如何初始化：<br>第0天做第一次买入的操作，dp[0][0] &#x3D; -prices[0];</li>
+</ul>
+<p>第0天做第一次卖出的操作，这个初始值应该是多少呢？<br>可以理解为同一天买入然后卖出了，所以是0<br>第0天做第二次买入的操作：第二次买入依赖于第一次卖出的状态，其实相当于第0天第一次买入了，第一次卖出了，然后再买入一次（第二次买入），那么现在手头上没有现金，只要买入，现金就做相应的减少。都在同一天操作买卖二次<br>所以只要买入的初始化就是-price【0】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(prices))]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] =  -prices[<span class="number">0</span>] <span class="comment"># 第一次持有股票</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] =  <span class="number">0</span>          <span class="comment"># 第一次不持有股票</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">2</span>] =  -prices[<span class="number">0</span>] <span class="comment"># 第二次持有股票</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">3</span>] =  <span class="number">0</span>          <span class="comment"># 第二次不持有股票</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(prices)):</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">0</span>], -prices[i])</span><br><span class="line">            dp[i][<span class="number">1</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">1</span>], dp[i][<span class="number">0</span>]+prices[i])</span><br><span class="line">            dp[i][<span class="number">2</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">2</span>], dp[i-<span class="number">1</span>][<span class="number">1</span>]-prices[i])</span><br><span class="line">            dp[i][<span class="number">3</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][<span class="number">3</span>], dp[i-<span class="number">1</span>][<span class="number">2</span>]+prices[i])</span><br><span class="line">        <span class="built_in">print</span>(dp)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-买卖股票的最佳时机IV-188"><a href="#2-买卖股票的最佳时机IV-188" class="headerlink" title="2. 买卖股票的最佳时机IV #188"></a>2. 买卖股票的最佳时机IV #188</h3><p>思路：</p>
+<ul>
+<li>把上面的两次买卖抽象成k次买卖，</li>
+<li>需要注意的是，在我的递推公式里，抽象之后<ul>
+<li>dp[i][j] &#x3D; max(dp[i-1][j],dp[i-1][j-1]-prices[i])</li>
+<li>dp[i][j+1] &#x3D; max(dp[i-1][j+1],dp[i-1][j]+prices[i])</li>
+</ul>
+</li>
+<li>初始化<ul>
+<li>发现第j的状态决定于前一个状态，那么j从1，开始遍历，我们也要初始化第0个状态，那么第0个状态是什么意思呢？</li>
+<li>第0个状态就是无操作的意思，既没有买也没有卖，那么我们就定义了2k+1个状态，第0个状态初始值就是0</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, k: <span class="built_in">int</span>, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(k*<span class="number">2</span>+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(prices))]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">2</span>*k+<span class="number">1</span>,<span class="number">2</span>):</span><br><span class="line">            dp[<span class="number">0</span>][i] = -prices[<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(prices)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">2</span>*k,<span class="number">2</span>):</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][j],dp[i-<span class="number">1</span>][j-<span class="number">1</span>]-prices[i])</span><br><span class="line">                dp[i][j+<span class="number">1</span>] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][j+<span class="number">1</span>],dp[i-<span class="number">1</span>][j]+prices[i])</span><br><span class="line">                <span class="comment"># 下面的是第二次买卖的持有和不持有的状态公式，把下面的公式抽象成上面的公式</span></span><br><span class="line">                <span class="comment"># dp[i][2] = max(dp[i-1][2], dp[i-1][1]-prices[i])</span></span><br><span class="line">                <span class="comment"># dp[i][3] = max(dp[i-1][3], dp[i-1][2]+prices[i])</span></span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-09</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
