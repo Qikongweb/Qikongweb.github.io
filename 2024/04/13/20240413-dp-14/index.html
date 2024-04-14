@@ -41,9 +41,8 @@
 
     <main>
       <div class="mx-auto max-w-3xl"><div class="py-8 post">
-  <h1 class="text-3xl font-semibold">20240413-dp-14 （#1143，#1035</h1>
-  <article class="post-content"><p>[[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 1, 1, 1], [0, 1, 1, 1, 1, 1, 2, 2], [0, 2, 2, 2, 2, 2, 2, 2], [0, 2, 2, 2, 3, 3, 3, 3]]</p>
-<h2 id="dp-子序问题"><a href="#dp-子序问题" class="headerlink" title="dp-子序问题"></a>dp-子序问题</h2><h3 id="1-最长公共子序列-1143"><a href="#1-最长公共子序列-1143" class="headerlink" title="1. 最长公共子序列 #1143"></a>1. 最长公共子序列 #1143</h3><p>思路：</p>
+  <h1 class="text-3xl font-semibold">20240413-dp-14 （#1143，#1035，#53）</h1>
+  <article class="post-content"><h2 id="dp-子序问题"><a href="#dp-子序问题" class="headerlink" title="dp-子序问题"></a>dp-子序问题</h2><h3 id="1-最长公共子序列-1143"><a href="#1-最长公共子序列-1143" class="headerlink" title="1. 最长公共子序列 #1143"></a>1. 最长公共子序列 #1143</h3><p>思路：</p>
 <ul>
 <li>本题和上一题：718. 最长重复子数组 (opens new window)区别在于这里不要求是连续的了，但要有相对顺序，即：”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。</li>
 <li>dp[i][j] 定义和上一题一样：长度为[0, i - 1]的字符串text1与长度为[0, j - 1]的字符串text2的最长公共子序列为dp[i][j]</li>
