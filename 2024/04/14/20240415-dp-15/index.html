@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240415-dp-15</h1>
+  <article class="post-content"><h2 id="dp-子序列"><a href="#dp-子序列" class="headerlink" title="dp-子序列"></a>dp-子序列</h2><h3 id="1-判断子序列-329"><a href="#1-判断子序列-329" class="headerlink" title="1. 判断子序列 #329"></a>1. 判断子序列 #329</h3><p>思路：</p>
+<ul>
+<li>这道题也可以抽象成求最长公共子序列,不连续的但是有排位，长度正好等于字串长度就返true，否则就是false</li>
+<li>确定dp数组（dp table）以及下标的含义<br>dp[i][j] 表示以下标i-1为结尾的字符串s，和以下标j-1为结尾的字符串t，相同子序列的长度为dp[i][j]。</li>
+<li>递推公式和上一题的区别就在于：<br>if (s[i - 1] &#x3D;&#x3D; t[j - 1])<br>t中找到了一个字符在s中也出现了 dp[i][j] &#x3D; dp[i - 1][j - 1] + 1;<br>if (s[i - 1] !&#x3D; t[j - 1])<br>相当于t要删除元素，继续匹配 dp[i][j] &#x3D; dp[i][j - 1];这里不是dp[i][j] &#x3D; max(dp[i][j - 1],dp[i-1][j]);<br>因为要比较的是s是不是t的字串，而不用反过来比较t是不是s的字串</li>
+<li>遍历结果： 最后的结果一定存在于最后一位</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSubsequence</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="comment"># dp方法</span></span><br><span class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(t)+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)+<span class="number">1</span>)]</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="comment"># print(&quot;n is&quot;,n)</span></span><br><span class="line">        <span class="comment"># 不需要初始化</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(s)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(t)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>]:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = dp[i][j-<span class="number">1</span>]</span><br><span class="line">                <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>] == n</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-不同的子序列-115"><a href="#2-不同的子序列-115" class="headerlink" title="2. 不同的子序列 #115"></a>2. 不同的子序列 #115</h3><p>思路：</p>
+<ul>
+<li>dp[i][j]：以i-1为结尾的s子序列中出现以j-1为结尾的t的个数为dp[i][j]</li>
+<li>确定递推公式：<br>这一类问题，基本是要分析两种情况</li>
+</ul>
+<p>s[i - 1] 与 t[j - 1]相等<br>s[i - 1] 与 t[j - 1] 不相等<br>当s[i - 1] 与 t[j - 1]相等时，dp[i][j]可以有两部分组成。</p>
+<p>一部分是用s[i - 1]来匹配，那么个数为dp[i - 1][j - 1]。即不需要考虑当前s子串和t子串的最后一位字母，所以只需要 dp[i-1][j-1]。</p>
+<p>一部分是不用s[i - 1]来匹配，个数为dp[i - 1][j]。意味着之前就有匹配好的字符了，做加和，比较bagg和bag，遍历到第二个g时，之前已经有一个匹配的了，所以要加和个数</p>
+<p><strong>如果不直接以i-1作为结尾，但是j-1必须被包含的次数转移至i-1,j。（总的来说，要么直接作为结尾，要不不直接作为结尾，因为统计次数，所以需要相加）</strong><br>以i-1为尾的s中有以j-1为尾的t个数&#x3D;以i-2为尾的s中有以j-2为尾的t的个数+以i-2为尾的s中有以j-1为尾的t的个数</p>
+<p>所以当s[i - 1] 与 t[j - 1]相等时，dp[i][j] &#x3D; dp[i - 1][j - 1] + dp[i - 1][j];</p>
+<p>当s[i - 1] 与 t[j - 1]不相等时，dp[i][j]只有一部分组成，不用s[i - 1]来匹配（就是模拟在s中删除这个元素），即：dp[i - 1][j]</p>
+<p>所以递推公式为：dp[i][j] &#x3D; dp[i - 1][j];<br>因为这里只考虑了t是s的一部分，就不用加dp[i][j-1]， s[i-1]是不是答案的一部分，如果是，那么s和t同时切去一个字符，如果不是就从s[i-1[之前继续匹配，而else明确代表着s[i-1]不参与。</p>
+<ul>
+<li>初始化：<br>dp[i][0]，第一行是t为空字符串，也就是s里包含多少个空字符串，那肯定都是1<br>dp[0][j]，第一列是s为空字符串，那么空字符串包含多少个t字符串，那肯定都是0.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numDistinct</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># t = &quot;&quot;</span></span><br><span class="line">        dp = [[<span class="number">0</span>] * (<span class="built_in">len</span>(t)+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)+<span class="number">1</span>):</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(s)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(t)+<span class="number">1</span>):</span><br><span class="line">                <span class="comment"># print(i,j)</span></span><br><span class="line">                <span class="keyword">if</span> s[i-<span class="number">1</span>] == t[j-<span class="number">1</span>]:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + dp[i-<span class="number">1</span>][j]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j]</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-14</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
