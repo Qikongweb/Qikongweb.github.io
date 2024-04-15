@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240416-dp-16</h1>
+  <article class="post-content"><h2 id="dp-距离"><a href="#dp-距离" class="headerlink" title="dp-距离"></a>dp-距离</h2><h3 id="1-两个字符串的删除操作-583"><a href="#1-两个字符串的删除操作-583" class="headerlink" title="1. 两个字符串的删除操作 #583"></a>1. 两个字符串的删除操作 #583</h3><p>思路：</p>
+<ul>
+<li>dp[i][j]是以i-1为结尾的字符串word1和以j-1为结尾的字符串word2，达到相等时候，所需要删除元素的最少次数。</li>
+<li>递推公式：<ul>
+<li>比较word1[i-1] 和 word2[j-1]<ul>
+<li>如果相同的时候：删除的次数不会增加，那么就等于不考虑word1[i-1] 和 word2[j-1]的dp[i-1][j-1]</li>
+<li>如果不相同的时候：一定要删一个字母，那么有两种情况，两个取最小值<ul>
+<li>一种是删除word1[i - 1]，最少操作次数为dp[i - 1][j] + 1</li>
+<li>另一种是删除word2[j - 1]，最少操作次数为dp[i][j-1] + 1</li>
+<li>第三种情况就是都删，那么最少操作次数为dp[i-1][j-1] + 2，这种情况被上面两种包含了，可以不考虑</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>递推公式可简化为：dp[i][j] &#x3D; min(dp[i - 1][j] + 1, dp[i][j - 1] + 1);</p>
+<ul>
+<li><p>初始化</p>
+</li>
+<li><p>从递推公式中，可以看出来，dp[i][0] 和 dp[0][j]是一定要初始化的。</p>
+</li>
+<li><p>dp[i][0]：word2为空字符串，以i-1为结尾的字符串word1要删除多少个元素，才能和word2相同呢，很明显dp[i][0] &#x3D; i。</p>
+</li>
+<li><p>dp[0][j]的话同理</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minDistance</span>(<span class="params">self, word1: <span class="built_in">str</span>, word2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 定义dp数组，就是最小的次数</span></span><br><span class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word1)+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word2)+<span class="number">1</span>)]</span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word2)+<span class="number">1</span>):</span><br><span class="line">            dp[i][<span class="number">0</span>] = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word1) + <span class="number">1</span>):</span><br><span class="line">            dp[<span class="number">0</span>][j] = j</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(word2)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(word1)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> word2[i-<span class="number">1</span>] == word1[j-<span class="number">1</span>]:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = <span class="built_in">min</span>(dp[i-<span class="number">1</span>][j]+<span class="number">1</span>,dp[i][j-<span class="number">1</span>]+<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>另一种思路：</p>
+<ul>
+<li>我自己非常喜欢，容易理解的思路：<ul>
+<li>转换为求最长公共子序列，然后再把两个word里面除了公共子序列的位都剪掉，就是要求的想要相同所需的最小步数</li>
+<li>也可以理解为删掉最少的字母让两个word相同，那么首先得找到最大的公共子序列，总的减去最大的公共子序列的长度就是要求的最小的删除步数</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第二种思路，求最长公共子序列</span></span><br><span class="line">dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word1)+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word2)+<span class="number">1</span>)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(word2)+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(word1)+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> word2[i-<span class="number">1</span>] == word1[j-<span class="number">1</span>]:</span><br><span class="line">            dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dp[i][j] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][j], dp[i][j-<span class="number">1</span>]) </span><br><span class="line"><span class="comment"># print(dp)</span></span><br><span class="line">l = dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">len</span>(word1)+<span class="built_in">len</span>(word2) - <span class="number">2</span>*l</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-编辑距离-72"><a href="#2-编辑距离-72" class="headerlink" title="2. 编辑距离 #72"></a>2. 编辑距离 #72</h3><p>思路：</p>
+<ul>
+<li>这道题就是最大公共子序列，不同的子序列，两个字符串的删除操作 的集合思路</li>
+<li>dp[i][j]含义： dp[i][j] 表示以下标i-1为结尾的字符串word1，和以下标j-1为结尾的字符串word2，最小操作次数</li>
+<li>递推公式：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (word1[i - 1] == word2[j - 1])</span><br><span class="line">    不操作</span><br><span class="line">if (word1[i - 1] != word2[j - 1])</span><br><span class="line">    增</span><br><span class="line">    删</span><br><span class="line">    换</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li>如果word1[i - 1] &#x3D;&#x3D; word2[j - 1]，那么不需要增加或减少操作次数，可以延续之前的没有word1[i - 1]和 word2[j - 1]的时候的操作次数</li>
+<li>如果是不相等的情况：<ul>
+<li>删除：在word1里面删除一个i-1的元素，那么就是以下标i-2为结尾的word1 与 j-1为结尾的word2的最小操作次数加上1<br>  在word2厘米删除一个j-1的元素，那么就是以下标i-1为结尾的word1 与 j-2为结尾的word2的最小操作次数加1<br>  两个元素都删除的情况已经被包含在前面两个情况中间了</li>
+<li>增：添加一个元素等同于删除一个元素，操作次数是一样的，例如“ab”，“a“，删除和增加的操作次数是一样的</li>
+<li>换：这个比较有意思，如果要把i-1的元素替换元素，换之后和j-1相同，那么不就是变成了word1[i - 1] &#x3D;&#x3D; word2[j - 1]了吗，就直接等于dp[i-1][j-1]+1，加1是因为替换了一个元素了。有一个替换的操作了，所以次数加一</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minDistance</span>(<span class="params">self, word1: <span class="built_in">str</span>, word2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># dp 定义</span></span><br><span class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word1)+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(word2)+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(word2)+<span class="number">1</span>):</span><br><span class="line">            dp[i][<span class="number">0</span>] = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(word1)+<span class="number">1</span>):</span><br><span class="line">            dp[<span class="number">0</span>][j] = j</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(word2)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(word1)+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> word2[i-<span class="number">1</span>] == word1[j-<span class="number">1</span>]:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    delete_method = <span class="built_in">min</span>(dp[i-<span class="number">1</span>][j]+<span class="number">1</span>, dp[i][j-<span class="number">1</span>]+<span class="number">1</span>) <span class="comment"># 删除word1[i]和删除word2[i]</span></span><br><span class="line">                    dp[i][j] = <span class="built_in">min</span>(delete_method, dp[i-<span class="number">1</span>][j-<span class="number">1</span>]+<span class="number">1</span>) <span class="comment"># 如果是替换就是用dp[i-1][j-1]+1,替换了一个字母使得word1和word2一样</span></span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-15</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
