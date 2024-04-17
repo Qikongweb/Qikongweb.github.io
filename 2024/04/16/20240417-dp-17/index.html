@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240417-dp-17</h1>
+  <article class="post-content"><h2 id="dp-回文字串-palindromic-substring"><a href="#dp-回文字串-palindromic-substring" class="headerlink" title="dp-回文字串 palindromic substring"></a>dp-回文字串 palindromic substring</h2><h3 id="1-回文子串-647"><a href="#1-回文子串-647" class="headerlink" title="1. 回文子串 #647"></a>1. 回文子串 #647</h3><p>思路：</p>
+<ul>
+<li>dp含义的定义：dp[i][j]代表的是[i,j]范围内的s字串是不是回文串<ul>
+<li>误区：dp[i] 为 下标i结尾的字符串有 dp[i]个回文串的话，我们会发现很难找到递归关系。dp[i] 和 dp[i-1] ，dp[i + 1] 看上去都没啥关系。</li>
+<li>首先一个字串是不是必须有一个范围i，j，如果想要判断[i,j]是不是回文，那么只要判断[i+1,j-1]的里面的是不是回文，所以为了明确这种递归关系，我们的dp数组是要定义成一位二维dp数组。</li>
+<li>例如：如果我们知道 s[1]，s[2]，s[3] 这个子串是回文的，那么只需要比较 s[0]和s[4]这两个元素是否相同，如果相同的话，这个字符串s 就是回文串。</li>
+</ul>
+</li>
+<li>确定递推公式：j&gt;&#x3D;i<ul>
+<li>情况一：下标i 与 j相同，同一个字符例如a，当然是回文子串</li>
+<li>情况二：下标i 与 j相差为1，例如aa，也是回文子串</li>
+<li>情况三：下标：i 与 j相差大于1的时候，例如cabac，此时s[i]与s[j]已经相同了，我们看i到j区间是不是回文子串就看aba是不是回文就可以了，那么aba的区间就是 i+1 与 j-1区间，这个区间是不是回文就看dp[i + 1][j - 1]是否为true。</li>
+</ul>
+</li>
+<li>dp数组如何初始化： 默认都是不是回文，全都是false</li>
+<li>确定遍历顺序：这里由于递推公式里面dp[i][j]是由dp[i+1][j-1]推到出来的<ul>
+<li>所以一定要从下到上，从左到右遍历，这样保证dp[i + 1][j - 1]都是经过计算的。</li>
+<li><em><strong>这里做两层for循环时要注意</strong></em></li>
+<li>定义一个二维数组的时候，里面的是列，外面的才是行，而循环的时候，如果是循环外面的是行，里面的是列，正好跟定义的时候反过来，这道题要从下往上，从左往右，就是第一层循环遍历层的时候，从大到小，第二层遍历列的时候从小到大，j&gt;&#x3D;i,其实就是i</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countSubstrings</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># dp定义的是在【i，j】范围内的dp[i][j]是否是回文字串, j &gt;= i</span></span><br><span class="line">        dp = [[<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s))] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s))]</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i,<span class="built_in">len</span>(s)):</span><br><span class="line">                <span class="comment"># print(i,j)</span></span><br><span class="line">                <span class="keyword">if</span> s[i] == s[j]:</span><br><span class="line">                    <span class="keyword">if</span> j-i&lt;=<span class="number">1</span>:</span><br><span class="line">                        dp[i][j] = <span class="literal">True</span></span><br><span class="line">                        res += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">if</span> dp[i+<span class="number">1</span>][j-<span class="number">1</span>]:</span><br><span class="line">                            dp[i][j] = <span class="literal">True</span></span><br><span class="line">                            res += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>动态规划的空间复杂度高<br>双指针的方法，以中心点遍历，让后向两边扩大，两种情况，一个中心和两个中心<br>卡哥双指针方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countSubstrings</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            result += self.extend(s, i, i, <span class="built_in">len</span>(s)) <span class="comment">#以i为中心</span></span><br><span class="line">            result += self.extend(s, i, i+<span class="number">1</span>, <span class="built_in">len</span>(s)) <span class="comment">#以i和i+1为中心</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">extend</span>(<span class="params">self, s, i, j, n</span>):</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt; n <span class="keyword">and</span> s[i] == s[j]:</span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">            res += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>之前做过的双指针方法，但是忘记思路了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">countSubstrings</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        l = <span class="built_in">len</span>(s)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> mid <span class="keyword">in</span> <span class="built_in">range</span>(l*<span class="number">2</span>-<span class="number">1</span>):</span><br><span class="line">            <span class="comment"># print(mid)</span></span><br><span class="line">            left = mid //<span class="number">2</span></span><br><span class="line">            right = left + mid %<span class="number">2</span></span><br><span class="line">            <span class="comment"># print(left,right)</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span> left &gt;= <span class="number">0</span> <span class="keyword">and</span> right &lt; l <span class="keyword">and</span> s[left]==s[right]:</span><br><span class="line">                res += <span class="number">1</span></span><br><span class="line">                left -= <span class="number">1</span></span><br><span class="line">                right += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-最长回文子序列-53"><a href="#2-最长回文子序列-53" class="headerlink" title="2. 最长回文子序列 #53"></a>2. 最长回文子序列 #53</h3><p>思路：</p>
+<ul>
+<li><p>跟上一题的区别在于：回文子串是要连续的，回文子序列可不是连续的！所以这道题是基于求最长公共子序列的解法</p>
+</li>
+<li><p>dp的定义：dp[i][j]：字符串s在[i, j]范围内最长的回文子序列的长度为dp[i][j]。这里默认就是j&gt;i</p>
+</li>
+<li><p>递推公式：在判断回文子串的题目中，关键逻辑就是看s[i]与s[j]是否相同。</p>
+<ul>
+<li><p>如果s[i]与s[j]相同，那么dp[i][j] &#x3D; dp[i + 1][j - 1] + 2;</p>
+</li>
+<li><p>如果不相同的情况，就相当于把之前求的最大的回文子序列拿过来，从哪拿过来呢？从上面一个拿过来，max(dp[i + 1][j], dp[i][j - 1])</p>
+<ul>
+<li><p>解释：如果s[i]与s[j]不相同，说明s[i]和s[j]的同时加入 并不能增加[i,j]区间回文子序列的长度，那么分别加入s[i]、s[j]看看哪一个可以组成最长的回文子序列。</p>
+</li>
+<li><p>加入s[j]的回文子序列长度为dp[i + 1][j]。</p>
+</li>
+<li><p>加入s[i]的回文子序列长度为dp[i][j - 1]。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>dp数组如何初始化：关键在于谁能初始化1，当然是单个的数了，单个的数也就是i&#x3D;j的时候，dp[i][j]&#x3D;1</p>
+<ul>
+<li>首先要考虑当i 和j 相同的情况，从递推公式：dp[i][j] &#x3D; dp[i + 1][j - 1] + 2; 可以看出 递推公式是计算不到 i 和j相同时候的情况。所以要初始化i&#x3D;j的dp<br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230102172155.png" alt="遍历顺序"></li>
+</ul>
+</li>
+<li><p>遍历顺序：</p>
+<ul>
+<li>这个可以重点想一想</li>
+<li>看上面的图可以知道遍历顺序是从下到上，从左到右，</li>
+<li>那么这样的话就是最先遍历的是右下脚的一个字母，然后是往上一行遍历最后两个，再往上一行，遍历最后三个，一次类推，因为j&gt;i，所以在一个正方形的数组里，只是遍历的是右斜上半部分</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestPalindromeSubseq</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="comment"># dp[i][j] 定义为[i,j]字符串的回文字串的长度</span></span><br><span class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s))] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s))]</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 初始化</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            dp[i][i] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)-<span class="number">2</span>,-<span class="number">1</span> ,-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="built_in">len</span>(s)):</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> s[i] == s[j]:</span><br><span class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">2</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = <span class="built_in">max</span>(dp[i][j-<span class="number">1</span>],dp[i+<span class="number">1</span>][j])</span><br><span class="line">                res = <span class="built_in">max</span>(res,dp[i][j])</span><br><span class="line">        <span class="comment"># print(dp)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-16</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
