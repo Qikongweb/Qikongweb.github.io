@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240418-Monotonic-Stack-1</h1>
+  <article class="post-content"><h2 id="Monotonic-Stack-day-1"><a href="#Monotonic-Stack-day-1" class="headerlink" title="Monotonic Stack day 1"></a>Monotonic Stack day 1</h2><h3 id="1-每日温度-739"><a href="#1-每日温度-739" class="headerlink" title="1. 每日温度 #739"></a>1. 每日温度 #739</h3><p>思路：</p>
+<ul>
+<li>我想到了暴力解法，两层for循环，但是超时了</li>
+<li>这道题用的是单调栈，什么是单调栈，什么时候用单调栈，优势是什么？<br>什么时候用单调栈</li>
+<li>通常是一维数组，要寻找任一个元素的右边或者左边第一个比自己大或者小的元素的位置，此时我们就要想到可以用单调栈了。时间复杂度为O(n)。</li>
+<li>什么是单调栈<br>单调栈的本质是空间换时间，因为在遍历的过程中需要用一个栈来记录右边第一个比当前元素高的元素，优点是整个数组只需要遍历一次。</li>
+<li>优势是什么？本质是什么？<br>更直白来说，就是用一个栈来记录我们遍历过的元素，因为我们遍历数组的时候，我们不知道之前都遍历了哪些元素，以至于遍历一个元素找不到是不是之前遍历过一个更小的，所以我们需要用一个容器（这里用单调栈）来记录我们遍历过的元素。</li>
+<li>在使用单调栈的时候首先要明确如下几点：<ul>
+<li>栈里可以存数字也可以存index</li>
+<li>注意栈的顺序是从栈顶到底部，递增还是递减</li>
+<li>如果求一个元素右边第一个更大元素，单调栈就是递增的，如果求一个元素右边第一个更小元素，单调栈就是递减的。</li>
+</ul>
+</li>
+</ul>
+<p>这里题遍历的时候有三种情况</p>
+<p>情况一：当前遍历的元素T[i]小于栈顶元素T[st.top()]的情况，加入栈（因为是栈顶到栈底是递增的，所以加入进去的前面的都是小的元素）<br>情况二：当前遍历的元素T[i]等于栈顶元素T[st.top()]的情况，弹出栈顶元素，加入新的元素（弹出栈顶元素就是找到了右边第一个比栈顶元素的的值了，做记录，然后接着看栈里面第二个元素，如果还是比T[i]小，继续弹出，直到遇到比它大的元素或者为空栈的时候就停止，然后把T[i]加入进去）<br>情况三：当前遍历的元素T[i]大于栈顶元素T[st.top()]的情况，弹出栈顶元素，加入新的元素，和上面第二种情况一样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dailyTemperatures</span>(<span class="params">self, temperatures: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        res = [<span class="number">0</span>] * <span class="built_in">len</span>(temperatures)</span><br><span class="line">        <span class="comment"># 暴力解法，两层for循环，时间复杂度是n^2，结果超时了</span></span><br><span class="line">        <span class="comment"># for i in range(len(temperatures)):</span></span><br><span class="line">        <span class="comment">#     for j in range(i,len(temperatures)):</span></span><br><span class="line">        <span class="comment">#         if temperatures[j] &gt; temperatures[i]:</span></span><br><span class="line">        <span class="comment">#             res[i] = j-i</span></span><br><span class="line">        <span class="comment">#             break</span></span><br><span class="line">        <span class="comment"># # print(res)</span></span><br><span class="line">        <span class="comment"># return res</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 单调栈解法</span></span><br><span class="line">        arr = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(temperatures)):</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(arr)&gt;<span class="number">0</span> <span class="keyword">and</span> temperatures[i] &gt; temperatures[arr[-<span class="number">1</span>]]:</span><br><span class="line">                res[arr[-<span class="number">1</span>]] = i - arr[-<span class="number">1</span>]</span><br><span class="line">                arr.pop()</span><br><span class="line">            arr.append(i)</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># print(res)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-下一个更大元素-I-496"><a href="#2-下一个更大元素-I-496" class="headerlink" title="2.下一个更大元素 I #496"></a>2.下一个更大元素 I #496</h3><p>思路：</p>
+<ul>
+<li><p>和上一题的思路是一样的，难点在于如果建立nums1和nums2之间的联系，我想到的是用map，因为注意题目中说是两个没有重复元素 的数组 nums1 和 nums2。</p>
+</li>
+<li><p>这里是我写的单调栈的思路，我是先把nums2找的右边第一个大的元素建立一个map映射，key存的是元素，value存的是结果值，然后再去遍历nums1，去找map里面是不是有这个元素存在，有的话放在结果集里。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">nextGreaterElement</span>(<span class="params">self, nums1: <span class="type">List</span>[<span class="built_in">int</span>], nums2: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        map_stack = &#123;&#125;</span><br><span class="line">        stack = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums2)):</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> nums2[i] &gt; stack[-<span class="number">1</span>]:</span><br><span class="line">                map_stack[stack[-<span class="number">1</span>]] = nums2[i]</span><br><span class="line">                stack.pop()</span><br><span class="line">            stack.append(nums2[i])</span><br><span class="line">        <span class="comment"># print( map_stack)</span></span><br><span class="line">        res = [-<span class="number">1</span>] * <span class="built_in">len</span>(nums1)</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums1)):</span><br><span class="line">            <span class="keyword">if</span> nums1[j] <span class="keyword">in</span> map_stack:</span><br><span class="line">                res[j] = map_stack[nums1[j]]</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>卡哥的思路是先把nums1建成一个map，做了结果集的index和nums1里元素的映射关系，然后在遍历nums2找到结果的时候，用map映射关系，找到nums1的元素，从而找到结果集的index，并进行插入，这种方法比我的方法空间复杂度稍稍底一点，不用把nums2所有的元素结果都存下来，只挑map里有映射关系的数存下来</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">nextGreaterElement</span>(<span class="params">self, nums1: <span class="type">List</span>[<span class="built_in">int</span>], nums2: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 单调栈 卡哥思路</span></span><br><span class="line">        res = [-<span class="number">1</span>] * <span class="built_in">len</span>(nums1)</span><br><span class="line">        map_nums1 = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums1)):</span><br><span class="line">            map_nums1[nums1[i]] = i</span><br><span class="line">        stack = [] <span class="comment"># 这里我存的元素，存index也可以</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums2)):</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> nums2[i] &gt; stack[-<span class="number">1</span>]:</span><br><span class="line">                <span class="keyword">if</span> stack[-<span class="number">1</span>] <span class="keyword">in</span> map_nums1:</span><br><span class="line">                    index = map_nums1[stack[-<span class="number">1</span>]]</span><br><span class="line">                    res[index] = nums2[i]</span><br><span class="line">                stack.pop()</span><br><span class="line">            stack.append(nums2[i])</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 版本二， 这里用了index的检索方法，就省略了map的映射记录了</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">nextGreaterElement</span>(<span class="params">self, nums1: <span class="type">List</span>[<span class="built_in">int</span>], nums2: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="comment"># 创建答案数组</span></span><br><span class="line">        ans = [-<span class="number">1</span>] * <span class="built_in">len</span>(nums1)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums2)):</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> nums2[i] &gt; nums2[stack[-<span class="number">1</span>]]:</span><br><span class="line">                <span class="comment"># 判断 num1 是否有 nums2[stack[-1]]。如果没有这个判断会出现指针异常</span></span><br><span class="line">                <span class="keyword">if</span> nums2[stack[-<span class="number">1</span>]] <span class="keyword">in</span> nums1:</span><br><span class="line">                    <span class="comment"># 锁定 num1 检索的 index</span></span><br><span class="line">                    index = nums1.index(nums2[stack[-<span class="number">1</span>]])</span><br><span class="line">                    <span class="comment"># 更新答案数组</span></span><br><span class="line">                    ans[index] = nums2[i]</span><br><span class="line">                <span class="comment"># 弹出小元素</span></span><br><span class="line">                <span class="comment"># 这个代码一定要放在 if 外面。否则单调栈的逻辑就不成立了</span></span><br><span class="line">                stack.pop()</span><br><span class="line">            stack.append(i)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-17</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
