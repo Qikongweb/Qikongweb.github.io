@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240419-Monotonic-Stack-2</h1>
+  <article class="post-content"><h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><h3 id="1-下一个更大元素II-503"><a href="#1-下一个更大元素II-503" class="headerlink" title="1. 下一个更大元素II #503"></a>1. 下一个更大元素II #503</h3><p>思路：</p>
+<ul>
+<li>一个单纯的单调栈问题加上数组是环的条件</li>
+<li>方法用的是index取模的方法，就是模拟把两个数组拼接的过程，虽然循环的i是两倍的数组长度，但是如果index取模之后就在数组长度以内了。</li>
+<li>我已经想到了，并且用了这个方法，但是实现的方式有一点不一样</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">nextGreaterElements</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># 单调栈</span></span><br><span class="line">        stack = []</span><br><span class="line">        res = [-<span class="number">1</span>] * <span class="built_in">len</span>(nums)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)*<span class="number">2</span>):</span><br><span class="line">            <span class="comment"># 这里的index也可以用取模的方法做</span></span><br><span class="line">            index = i%<span class="built_in">len</span>(nums)</span><br><span class="line">            index = i</span><br><span class="line">            <span class="keyword">if</span> i &gt;= <span class="built_in">len</span>(nums):</span><br><span class="line">                index = i - <span class="built_in">len</span>(nums)</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> nums[index] &gt; nums[stack[-<span class="number">1</span>]]:</span><br><span class="line">                res[stack[-<span class="number">1</span>]] = nums[index]</span><br><span class="line">                stack.pop()</span><br><span class="line">            stack.append(index)</span><br><span class="line">        <span class="comment"># print( map_stack)</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-接雨水-42"><a href="#2-接雨水-42" class="headerlink" title="2. 接雨水 #42"></a>2. 接雨水 #42</h3><p>单调栈 完全思路版：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trap</span>(<span class="params">self, height: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 单调栈的解法，找右边第一个不小于的元素</span></span><br><span class="line">        <span class="comment"># 先找到有面第一个比这个元素大的，再找左边第一个比他小的</span></span><br><span class="line">        res = [<span class="number">0</span>] * <span class="built_in">len</span>(height)</span><br><span class="line">        stack = [] <span class="comment"># 存的是什么，存的是index</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(height)):</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> height[i] &gt; height[stack[-<span class="number">1</span>]]:</span><br><span class="line">                <span class="comment"># 找到了右面第一个比它大的元素</span></span><br><span class="line">                right = height[i]</span><br><span class="line">                <span class="comment"># 找到左面第一个比它大的元素,有可能是0，这样形成一个凹槽</span></span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(stack) == <span class="number">1</span>: <span class="comment"># 说明左边的高度是0，那么最小的高度就是0，不能存雨水</span></span><br><span class="line">                    left = <span class="number">0</span></span><br><span class="line">                    res[stack[-<span class="number">1</span>]] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    left = height[stack[-<span class="number">2</span>]] <span class="comment"># 计算高度是左右高度的最小值再减去中间的高度</span></span><br><span class="line">                    res[stack[-<span class="number">1</span>]] = (<span class="built_in">min</span>(right,left)-height[stack[-<span class="number">1</span>]])*(i-stack[-<span class="number">2</span>]-<span class="number">1</span>)</span><br><span class="line">                stack.pop()</span><br><span class="line">            </span><br><span class="line">            stack.append(i)</span><br><span class="line">        <span class="comment"># print(res)</span></span><br><span class="line">       </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(res)</span><br></pre></td></tr></table></figure>
+<p>精简版</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trap</span>(<span class="params">self, height: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 单调栈的解法，找右边第一个不小于的元素</span></span><br><span class="line">        <span class="comment"># 先找到有面第一个比这个元素大的，再找左边第一个比他小的</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        stack = [] <span class="comment"># 存的是什么，存的是index</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(height)):</span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> <span class="keyword">and</span> height[i] &gt; height[stack[-<span class="number">1</span>]]:</span><br><span class="line">                mid_index = stack.pop()</span><br><span class="line">                <span class="comment"># 这里判断stack是否有值，是因为需要知道左边的高度，如果没值，就是0</span></span><br><span class="line">                <span class="keyword">if</span> stack:</span><br><span class="line">                    <span class="comment"># 找到了右面第一个比它大的元素</span></span><br><span class="line">                    right = height[i]</span><br><span class="line">                    <span class="comment"># 找到左面第一个比它大的元素,有可能是0，这样形成一个凹槽</span></span><br><span class="line">                    </span><br><span class="line">                    left = height[stack[-<span class="number">1</span>]]</span><br><span class="line">                    res += (<span class="built_in">min</span>(right,left)-height[mid_index])*(i-stack[-<span class="number">1</span>]-<span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">            stack.append(i)</span><br><span class="line">        <span class="comment"># print(res)</span></span><br><span class="line">       </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>卡哥详细解题思路：</p>
+<ul>
+<li>单调栈是横向技术收集雨水，需要知道高度和宽度，高度就是左右高度的最小值减去中间高度，宽度就是右的index-左index-1</li>
+<li>单调栈是递增，栈顶和栈顶的下一个元素以及要入栈的元素，三个元素来接水！所以这里需要知道栈里面的第二个元素，所以就涉及到弹出一个元素之后还有没有第二个元素了，如果没有结果就是0，不用计算，如果有才会计算雨水高度</li>
+</ul>
+<p>单调栈详解代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trap</span>(<span class="params">self, height: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 单调栈</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        单调栈是按照 行 的方向来计算雨水</span></span><br><span class="line"><span class="string">        从栈顶到栈底的顺序：从小到大</span></span><br><span class="line"><span class="string">        通过三个元素来接水：栈顶，栈顶的下一个元素，以及即将入栈的元素</span></span><br><span class="line"><span class="string">        雨水高度是 min(凹槽左边高度, 凹槽右边高度) - 凹槽底部高度</span></span><br><span class="line"><span class="string">        雨水的宽度是 凹槽右边的下标 - 凹槽左边的下标 - 1（因为只求中间宽度）</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># stack储存index，用于计算对应的柱子高度</span></span><br><span class="line">        stack = [<span class="number">0</span>]</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(height)):</span><br><span class="line">            <span class="comment"># 情况一</span></span><br><span class="line">            <span class="keyword">if</span> height[i] &lt; height[stack[-<span class="number">1</span>]]:</span><br><span class="line">                stack.append(i)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 情况二</span></span><br><span class="line">            <span class="comment"># 当当前柱子高度和栈顶一致时，左边的一个是不可能存放雨水的，所以保留右侧新柱子</span></span><br><span class="line">            <span class="comment"># 需要使用最右边的柱子来计算宽度</span></span><br><span class="line">            <span class="keyword">elif</span> height[i] == height[stack[-<span class="number">1</span>]]:</span><br><span class="line">                stack.pop()</span><br><span class="line">                stack.append(i)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 情况三</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 抛出所有较低的柱子</span></span><br><span class="line">                <span class="keyword">while</span> stack <span class="keyword">and</span> height[i] &gt; height[stack[-<span class="number">1</span>]]:</span><br><span class="line">                    <span class="comment"># 栈顶就是中间的柱子：储水槽，就是凹槽的地步</span></span><br><span class="line">                    mid_height = height[stack[-<span class="number">1</span>]]</span><br><span class="line">                    stack.pop()</span><br><span class="line">                    <span class="keyword">if</span> stack:</span><br><span class="line">                        right_height = height[i]</span><br><span class="line">                        left_height = height[stack[-<span class="number">1</span>]]</span><br><span class="line">                        <span class="comment"># 两侧的较矮一方的高度 - 凹槽底部高度</span></span><br><span class="line">                        h = <span class="built_in">min</span>(right_height, left_height) - mid_height</span><br><span class="line">                        <span class="comment"># 凹槽右侧下标 - 凹槽左侧下标 - 1: 只求中间宽度</span></span><br><span class="line">                        w = i - stack[-<span class="number">1</span>] - <span class="number">1</span></span><br><span class="line">                        <span class="comment"># 体积：高乘宽</span></span><br><span class="line">                        result += h * w</span><br><span class="line">                stack.append(i)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="comment"># 单调栈压缩版</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">trap</span>(<span class="params">self, height: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        stack = [<span class="number">0</span>]</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(height)):</span><br><span class="line">            <span class="keyword">while</span> stack <span class="keyword">and</span> height[i] &gt; height[stack[-<span class="number">1</span>]]:</span><br><span class="line">                mid_height = stack.pop()</span><br><span class="line">                <span class="keyword">if</span> stack:</span><br><span class="line">                    <span class="comment"># 雨水高度是 min(凹槽左侧高度, 凹槽右侧高度) - 凹槽底部高度</span></span><br><span class="line">                    h = <span class="built_in">min</span>(height[stack[-<span class="number">1</span>]], height[i]) - height[mid_height]</span><br><span class="line">                    <span class="comment"># 雨水宽度是 凹槽右侧的下标 - 凹槽左侧的下标 - 1</span></span><br><span class="line">                    w = i - stack[-<span class="number">1</span>] - <span class="number">1</span></span><br><span class="line">                    <span class="comment"># 累计总雨水体积</span></span><br><span class="line">                    result += h * w</span><br><span class="line">            stack.append(i)</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<p>暴力解法：</p>
+<ul>
+<li>纵向求雨水的体积</li>
+<li>要以i为中心计算左边最高的位置和右边最高的位置，比较得到最小值-i的高度，然后乘1，因为是纵向求体积，宽度就是1</li>
+</ul>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-18</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
