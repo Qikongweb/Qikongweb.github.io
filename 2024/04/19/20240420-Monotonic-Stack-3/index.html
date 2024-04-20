@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240420-Monotonic-Stack-3 （#84）</h1>
+  <article class="post-content"><h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><h3 id="1-柱状图中最大的矩形-84"><a href="#1-柱状图中最大的矩形-84" class="headerlink" title="1. 柱状图中最大的矩形 #84"></a>1. 柱状图中最大的矩形 #84</h3><p>思路：</p>
+<ul>
+<li>单调递减栈，要找到以i为中心，的两边比它小的元素的index，然后求中间的面积</li>
+<li>还需要注意的是首尾都加了个0，为什么？<br>  求面积的时候需要知道左边最小的left，有面最小的right其实就是栈顶和栈顶的下一个元素以及要入栈的三个元素组成了我们要求最大面积的高度和宽度<br>  尾部加0 如果数组本身就是升序的，例如[2,4,6,8]，那么入栈之后 都是单调递减，一直都没有走 情况三 计算结果的哪一步，所以最后输出的就是0了。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestRectangleArea</span>(<span class="params">self, heights: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 单调栈，这道题是用单调递减栈，找到以i为中心，的两边比它小的元素的index</span></span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        stack = []</span><br><span class="line">        heights.append(<span class="number">0</span>) <span class="comment"># 尾部加个0是为了清空栈，因为最后一位肯定是小于或等于heights的最后一位的</span></span><br><span class="line">        heights.insert(<span class="number">0</span>, <span class="number">0</span>) <span class="comment"># 头部加个0，是为了保证stack的底部肯定有值，所以从计算第一个数的时候left就可以一直有值了</span></span><br><span class="line">        <span class="comment"># print(heights)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(heights)):</span><br><span class="line"></span><br><span class="line">            <span class="comment"># print(stack,heights[i],i)</span></span><br><span class="line">            <span class="keyword">while</span> stack <span class="keyword">and</span> heights[i] &lt;= heights[stack[-<span class="number">1</span>]]:</span><br><span class="line">                mid = stack.pop() <span class="comment"># middle index</span></span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> stack:</span><br><span class="line">                    right = i</span><br><span class="line">                    left = stack[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">                    cube = (right - left - <span class="number">1</span> ) * heights[mid]</span><br><span class="line">                    <span class="comment"># print(left,right, stack, cube)</span></span><br><span class="line">                    res = <span class="built_in">max</span>(res, cube)</span><br><span class="line">                </span><br><span class="line">            </span><br><span class="line">            stack.append(i)</span><br><span class="line">        <span class="comment"># print(stack)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-19</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
