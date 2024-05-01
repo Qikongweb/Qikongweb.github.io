@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240429-graph-6</h1>
+  <article class="post-content"><h1 id="并查集理论基础"><a href="#并查集理论基础" class="headerlink" title="并查集理论基础"></a>并查集理论基础</h1><h2 id="首先要知道并查集可以解决什么问题呢？"><a href="#首先要知道并查集可以解决什么问题呢？" class="headerlink" title="首先要知道并查集可以解决什么问题呢？"></a>首先要知道并查集可以解决什么问题呢？</h2><ul>
+<li><p>并查集常用来解决连通性问题。大白话就是当我们需要判断两个元素是否在同一个集合里的时候，我们就要想到用并查集。</p>
+</li>
+<li><p>并查集主要有两个功能：</p>
+<ul>
+<li>将两个元素添加到一个集合中。</li>
+<li>判断两个元素在不在同一个集合</li>
+</ul>
+</li>
+</ul>
+<h2 id="原理讲解"><a href="#原理讲解" class="headerlink" title="原理讲解"></a>原理讲解</h2><ul>
+<li>只需要用一个一维数组来表示，即：father[A] &#x3D; B，father[B] &#x3D; C 这样就表述 A 与 B 与 C连通了（有向连通图）。</li>
+</ul>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将v，u 这条边加入并查集</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">join</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    u = <span class="built_in">find</span>(u); <span class="comment">// 寻找u的根</span></span><br><span class="line">    v = <span class="built_in">find</span>(v); <span class="comment">// 寻找v的根</span></span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span>; <span class="comment">// 如果发现根相同，则说明在一个集合，不用两个节点相连直接返回</span></span><br><span class="line">    father[v] = u;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>寻根的过程，找到同一个根，不停向上找，有点像多叉树</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并查集里寻根的过程</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (u == father[u]) <span class="keyword">return</span> u; <span class="comment">// 如果根就是自己，直接返回</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">find</span>(father[u]); <span class="comment">// 如果根不是自己，就根据数组下标一层一层向下找</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如何表示 C 也在同一个元素里呢？ 我们需要 father[C] &#x3D; C，即C的根也为C，这样就方便表示 A，B，C 都在同一个集合里了。</p>
+</li>
+</ul>
+<p>所以father数组初始化的时候要 father[i] &#x3D; i，默认自己指向自己。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并查集初始化</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        father[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>最后我们如何判断两个元素是否在同一个集合里，如果通过 find函数 找到 两个元素属于同一个根的话，那么这两个元素就是同一个集合，代码如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判断 u 和 v是否找到同一个根</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isSame</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    u = <span class="built_in">find</span>(u);</span><br><span class="line">    v = <span class="built_in">find</span>(v);</span><br><span class="line">    <span class="keyword">return</span> u == v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h2><p>在实现 find 函数的过程中，我们知道，通过递归的方式，不断获取father数组下标对应的数值，最终找到这个集合的根。搜索过程像是一个多叉树中从叶子到根节点的过程<br>我们的目的只需要知道这些节点在同一个根下就可以，所以对这棵多叉树的构造只需要构造一层，往上找一层就是根了<br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20230602103040.png" alt="多叉树构造"></p>
+<p>因为 find 函数向上寻找根节点，father[u] 表述 u 的父节点，那么让 father[u] 直接获取 find函数 返回的根节点，这样就让节点 u 的父节点 变成根节点。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并查集里寻根的过程</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (u == father[u]) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> father[u] = <span class="built_in">find</span>(father[u]); <span class="comment">// 路径压缩</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 压缩之后的代码就一行</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> u == father[u] ? u : father[u] = <span class="built_in">find</span>(father[u]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码模板"><a href="#代码模板" class="headerlink" title="代码模板"></a>代码模板</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n = <span class="number">1005</span>; <span class="comment">// n根据题目中节点数量而定，一般比节点数量大一点就好</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; father = <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; (n, <span class="number">0</span>); <span class="comment">// C++里的一种数组结构</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 并查集初始化</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        father[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 并查集里寻根的过程</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> u == father[u] ? u : father[u] = <span class="built_in">find</span>(father[u]); <span class="comment">// 路径压缩</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断 u 和 v是否找到同一个根</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isSame</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    u = <span class="built_in">find</span>(u);</span><br><span class="line">    v = <span class="built_in">find</span>(v);</span><br><span class="line">    <span class="keyword">return</span> u == v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将v-&gt;u 这条边加入并查集</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">join</span><span class="params">(<span class="type">int</span> u, <span class="type">int</span> v)</span> </span>&#123;</span><br><span class="line">    u = <span class="built_in">find</span>(u); <span class="comment">// 寻找u的根</span></span><br><span class="line">    v = <span class="built_in">find</span>(v); <span class="comment">// 寻找v的根</span></span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> ; <span class="comment">// 如果发现根相同，则说明在一个集合，不用两个节点相连直接返回</span></span><br><span class="line">    father[v] = u;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>通过模板，我们可以知道，并查集主要有三个功能。</p>
+</li>
+<li><p>寻找根节点，函数：find(int u)，也就是判断这个节点的祖先节点是哪个</p>
+</li>
+<li><p>将两个节点接入到同一个集合，函数：join(int u, int v)，将两个节点连在同一个根节点上</p>
+</li>
+<li><p>判断两个节点是否在同一个集合，函数：isSame(int u, int v)，就是判断两个节点是不是同一个根节点</p>
+</li>
+</ul>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>空间复杂度： O(n) ，申请一个father数组。</p>
+<p>路径压缩后的并查集时间复杂度在O(logn)与O(1)之间，且随着查询或者合并操作的增加，时间复杂度会越来越趋于O(1)。在第一次查询的时候，相当于是n叉树上从叶子节点到根节点的查询过程，时间复杂度是logn，但路径压缩后，后面的查询操作都是O(1)，而 join 函数 和 isSame函数 里涉及的查询操作也是一样的过程。</p>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-29</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

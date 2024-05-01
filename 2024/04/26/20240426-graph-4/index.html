@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240426-graph-4</h1>
+  <article class="post-content"><h2 id="1-太平洋大西洋水流问题-417"><a href="#1-太平洋大西洋水流问题-417" class="headerlink" title="1. 太平洋大西洋水流问题 #417"></a>1. 太平洋大西洋水流问题 #417</h2><p>思路：</p>
+<ul>
+<li>首先明确这道题的意思：其实就是找到哪些点 可以同时到达太平洋和大西洋。 流动的方式只能从高往低流。</li>
+<li>一种是通常的思路，就是遍历每一个节点，然后做dfs或者bfs，找到是否可以流向两个海洋。这种思路很直白，但很明显，超时了，来看看时间复杂度。</li>
+</ul>
+<p>遍历每一个节点，是 m * n，遍历每一个节点的时候，都要做深搜，深搜的时间复杂度是： m * n<br>那么整体时间复杂度 就是 O(m^2 * n^2) ，这是一个四次方的时间复杂度。所以很容易就超时了</p>
+<ul>
+<li><p>第二种思路是：那么我们可以 反过来想，从太平洋边上的节点 逆流而上，将遍历过的节点都标记上。 从大西洋的边上节点 逆流而长，将遍历过的节点也标记上。 然后两方都标记过的节点就是既可以流太平洋也可以流大西洋的节点。<br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220722103029.png" alt="从太平洋边上节点出发，如图："><br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220722103330.png" alt="从大西洋边上节点出发，如图："></p>
+</li>
+<li><p>具体实现：<br>定义两个二维数组存水流方向的<br>先遍历四条边，确定往高处走的流向，为什么只遍历四条边就行呢？因为根据题目，水一定要进去两个大洋，也就是最后一定要连接四个边的任意两个点，然后遍历边的时候，记录了水往高处走，能走的最大的高度。<br>最后比较两个水流方向的数组，都经历过的才输入到结果集，为什么？因为水流相当于既可以流向了pacifc，又能流向altilantic。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pacificAtlantic</span>(<span class="params">self, heights: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        pacific = [[<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights[<span class="number">0</span>]))] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights))]</span><br><span class="line">        atlantic = [[<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights[<span class="number">0</span>]))] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights))]</span><br><span class="line">        self.dirs = [(-<span class="number">1</span>,<span class="number">0</span>),(<span class="number">1</span>,<span class="number">0</span>),(<span class="number">0</span>,<span class="number">1</span>),(<span class="number">0</span>,-<span class="number">1</span>)]</span><br><span class="line">        result = []</span><br><span class="line">        <span class="comment"># 从pacific和Altantic出发，只遍历四条边界</span></span><br><span class="line">        <span class="comment"># 遍历第一行和最后一行</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights[<span class="number">0</span>])):</span><br><span class="line">            self.dfs(<span class="number">0</span>, i, heights, pacific)</span><br><span class="line">            self.dfs(<span class="built_in">len</span>(heights)-<span class="number">1</span>, i, heights, atlantic)</span><br><span class="line">            </span><br><span class="line">                </span><br><span class="line">        <span class="comment"># 遍历第一列和最后一列</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights)):</span><br><span class="line">            self.dfs(i, <span class="number">0</span>, heights, pacific)</span><br><span class="line">            self.dfs(i, <span class="built_in">len</span>(heights[<span class="number">0</span>])-<span class="number">1</span>, heights, atlantic)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(heights[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> pacific[i][j] <span class="keyword">and</span> atlantic[i][j]:</span><br><span class="line">                    result.append([i,j])</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">self, i, j, heights, visited</span>):</span><br><span class="line">        <span class="keyword">if</span> visited[i][j]:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        visited[i][j] = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> (x,y) <span class="keyword">in</span> self.dirs:</span><br><span class="line">            curx = i + x</span><br><span class="line">            cury = j + y</span><br><span class="line">            <span class="comment"># 判断条件：坐标不在范围内</span></span><br><span class="line">            <span class="keyword">if</span> curx &lt; <span class="number">0</span> <span class="keyword">or</span> curx &gt;= <span class="built_in">len</span>(heights) <span class="keyword">or</span> cury &lt;<span class="number">0</span> <span class="keyword">or</span> cury &gt;= <span class="built_in">len</span>(heights[<span class="number">0</span>]):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 高度要递增，如果递减就跳过</span></span><br><span class="line">            <span class="keyword">if</span> heights[curx][cury] &lt; heights[i][j]:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">            self.dfs(curx, cury, heights, visited)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-最大人工岛-827"><a href="#2-最大人工岛-827" class="headerlink" title="2. 最大人工岛 #827"></a>2. 最大人工岛 #827</h2><p>思路：</p>
+<ul>
+<li>分几部分，把每个岛屿进行编号，连起来的1作为一个岛屿进行编号，一共出现几个岛屿，然后没有岛屿的面积放在一个map里，好查询，之后再遍历一遍0的位置，每次把0变成1之后，就是把周围的上下左右有岛屿编号的面积都加起来，再加1，本身的这个变1之后的格子，面积取最大值</li>
+<li>第一部分，按照之前的dfs方法，求出每个岛屿的面积，并进行编号</li>
+<li>第二部分，判断这个整个是不是一个岛屿，就是全是1，那么直接返回整个面积</li>
+<li>第三部分，遍历每个0，把周围的面积加起来求一个最大值，注意，不要加和同一个面积编号的面积，这里用了set</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestIsland</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        self.area_map = &#123;&#125;</span><br><span class="line">        self.area_num = <span class="number">0</span></span><br><span class="line">        self.dirs = [(<span class="number">0</span>,<span class="number">1</span>),(<span class="number">0</span>,-<span class="number">1</span>),(<span class="number">1</span>,<span class="number">0</span>),(-<span class="number">1</span>,<span class="number">0</span>)]</span><br><span class="line">        </span><br><span class="line">        visited = [[<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid[<span class="number">0</span>]))] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid))]</span><br><span class="line">        area = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid[<span class="number">0</span>]))] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid))]</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        isAllGrid = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> grid[i][j] == <span class="number">0</span>:</span><br><span class="line">                    isAllGrid = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">if</span> visited[i][j] <span class="keyword">is</span> <span class="literal">False</span> <span class="keyword">and</span> grid[i][j] == <span class="number">1</span>:</span><br><span class="line">                    self.area_num += <span class="number">1</span>  <span class="comment"># 面积编号加1</span></span><br><span class="line">                    self.area_map[self.area_num] = <span class="number">0</span>  <span class="comment">#这个面积编号的面积从0开始</span></span><br><span class="line">                    <span class="comment"># print(i,j,self.area_num)</span></span><br><span class="line">                    self.dfs(i,j,grid,area,visited)</span><br><span class="line">        <span class="keyword">if</span> isAllGrid:</span><br><span class="line">            <span class="keyword">return</span> self.area_map[<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># change 0 to 1 cal area</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> grid[i][j] == <span class="number">0</span>:</span><br><span class="line">                    visited_island = <span class="built_in">set</span>() <span class="comment">#不要重复加和所有面积</span></span><br><span class="line">                    a_sum = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">for</span> x,y <span class="keyword">in</span> self.dirs:</span><br><span class="line">                        curx = i + x</span><br><span class="line">                        cury = j + y</span><br><span class="line">                        <span class="keyword">if</span> curx &gt;= <span class="number">0</span> <span class="keyword">and</span> curx &lt; <span class="built_in">len</span>(grid) <span class="keyword">and</span> cury &gt;= <span class="number">0</span> <span class="keyword">and</span> cury &lt; <span class="built_in">len</span>(grid[<span class="number">0</span>]) <span class="keyword">and</span> area[curx][cury] &gt; <span class="number">0</span>:</span><br><span class="line">                            <span class="comment"># print(curx,cury, self.area_map,area[curx][cury])</span></span><br><span class="line">                            <span class="keyword">if</span> area[curx][cury] <span class="keyword">not</span> <span class="keyword">in</span> visited_island:</span><br><span class="line">                                a_sum += self.area_map[area[curx][cury]]</span><br><span class="line">                            visited_island.add(area[curx][cury])</span><br><span class="line">                    </span><br><span class="line">                    result = <span class="built_in">max</span>(a_sum+<span class="number">1</span>, result)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># print(self.area_map, area, result)</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">self,i,j,grid,area,visited</span>):</span><br><span class="line">        visited[i][j] = <span class="literal">True</span></span><br><span class="line">        area[i][j] = self.area_num <span class="comment"># 给每个格子加入面积编号</span></span><br><span class="line">        self.area_map[self.area_num] += <span class="number">1</span> <span class="comment"># 这个面积编号的面积开始加一</span></span><br><span class="line">        <span class="comment"># print(self.area_num, self.area_map)</span></span><br><span class="line">        <span class="keyword">for</span> x,y <span class="keyword">in</span> self.dirs:</span><br><span class="line">            curx = i + x</span><br><span class="line">            cury = j + y</span><br><span class="line">            <span class="keyword">if</span> curx &lt;<span class="number">0</span> <span class="keyword">or</span> curx &gt;= <span class="built_in">len</span>(grid) <span class="keyword">or</span> cury &lt; <span class="number">0</span> <span class="keyword">or</span> cury &gt;= <span class="built_in">len</span>(grid[<span class="number">0</span>]) <span class="keyword">or</span> visited[curx][cury] <span class="keyword">or</span> grid[curx][cury] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="comment"># print(&quot;here&quot;, curx, cury, len(grid), len(grid[0]))</span></span><br><span class="line">            self.dfs(curx,cury,grid,area,visited)</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-26</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

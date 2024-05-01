@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240429-graph-5</h1>
+  <article class="post-content"><h2 id="1-钥匙和房间-841"><a href="#1-钥匙和房间-841" class="headerlink" title="1. 钥匙和房间 #841"></a>1. 钥匙和房间 #841</h2><p>思路：</p>
+<ul>
+<li>但本题是有向图，在有向图中，即使所有节点都是链接的，但依然不可能从0出发遍历所有边</li>
+<li>dfs有两种写法，根据处理的是当前的节点还是下一个节点，有两种不同的写法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canVisitAllRooms</span>(<span class="params">self, rooms: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        visited = [<span class="literal">False</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(rooms))]</span><br><span class="line">        visited[<span class="number">0</span>] = <span class="literal">True</span> <span class="comment">#这里只有在第二种写法的时候才出现</span></span><br><span class="line">        self.dfs(rooms, <span class="number">0</span>, visited)</span><br><span class="line">        <span class="comment"># print(visited)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> r <span class="keyword">in</span> visited:</span><br><span class="line">            <span class="keyword">if</span> r <span class="keyword">is</span> <span class="literal">False</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">self, rooms, i, visited</span>):</span><br><span class="line">        <span class="comment"># print(i, visited)</span></span><br><span class="line">        <span class="comment"># 第一种写法： 处理当前节点,终止条件</span></span><br><span class="line">        <span class="comment"># if visited[i]:</span></span><br><span class="line">        <span class="comment">#     return</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># visited[i] = True</span></span><br><span class="line">        <span class="comment"># for x in rooms[i]:</span></span><br><span class="line">        <span class="comment">#     self.dfs(rooms, x, visited)</span></span><br><span class="line">        <span class="comment"># 第二种写法，处理下一个节点，决定终止条件不一样了，还有主函数也不一样了</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> rooms[i]:</span><br><span class="line">            <span class="keyword">if</span> visited[x] <span class="keyword">is</span> <span class="literal">False</span>:</span><br><span class="line">                visited[x] = <span class="literal">True</span></span><br><span class="line">                self.dfs(rooms, x, visited)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-岛屿的周长-463"><a href="#2-岛屿的周长-463" class="headerlink" title="2. 岛屿的周长 #463"></a>2. 岛屿的周长 #463</h2><p>思路：</p>
+<ul>
+<li>这道题不要用dfs 或者bfs，其实最简单的方法就是判断它的四个方向是否有岛，有的话就少一个边</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">islandPerimeter</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        dirs = [(-<span class="number">1</span>,<span class="number">0</span>),(<span class="number">1</span>,<span class="number">0</span>),(<span class="number">0</span>,<span class="number">1</span>),(<span class="number">0</span>,-<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(grid[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> grid[i][j] == <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">for</span> x,y <span class="keyword">in</span> dirs:</span><br><span class="line">                        curx = i + x</span><br><span class="line">                        cury = j + y</span><br><span class="line">                        <span class="comment"># 这里判断的是上下左右是否有接壤的岛屿，没有的话边界加1，另外判断是不是在边界上，在的话也加一，后来就是把这两张情况都并在一起了</span></span><br><span class="line">                        <span class="comment"># if curx &lt;len(grid) and curx&gt;=0 and cury &lt;len(grid[0]) and cury&gt;=0 and grid[curx][cury] == 0:</span></span><br><span class="line">                        <span class="comment">#     result += 1</span></span><br><span class="line">                        <span class="keyword">if</span> curx == -<span class="number">1</span> <span class="keyword">or</span> curx == <span class="built_in">len</span>(grid) <span class="keyword">or</span> cury == -<span class="number">1</span> <span class="keyword">or</span> cury == <span class="built_in">len</span>(grid[<span class="number">0</span>]) <span class="keyword">or</span> grid[curx][cury] == <span class="number">0</span>:</span><br><span class="line">                            result += <span class="number">1</span></span><br><span class="line">                    <span class="comment"># print(i,j,result)</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-04-30</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
