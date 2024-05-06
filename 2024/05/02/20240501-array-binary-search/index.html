@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240501-array-binary-search</h1>
+  <article class="post-content"><h2 id="Array-Binary-Search"><a href="#Array-Binary-Search" class="headerlink" title="Array Binary Search"></a>Array Binary Search</h2><h2 id="1-Binary-Search-704"><a href="#1-Binary-Search-704" class="headerlink" title="1. Binary Search #704"></a>1. Binary Search #704</h2><p>思路：</p>
+<ul>
+<li>根据所选的区间决定之后程序里的条件和遍历等式，有两个可选用的区间，左闭右开，左闭右闭<br>这里比较[left, right], [left, right)<br>程序里？的位置是根据选择上面的哪个区间决定的<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">left = <span class="number">0</span></span><br><span class="line">right = ? <span class="built_in">len</span>(nums)-<span class="number">1</span>@<span class="number">1</span>  <span class="built_in">len</span>(nums)@<span class="number">2</span>, <span class="comment">#一种情况，区间包括right，包括右边界所以为了nums的合法行，就必须从len(nums)-1开始，如果是第二种情况，区间不包括右边界，所以right可以从len(nums)开始</span></span><br><span class="line"><span class="keyword">while</span> left ? right:  <span class="comment">#第一种情况如何要合法行的话，&lt;=都可以，因为包括右边界，例如[1,1],第二种情况，不包括右边界，如果保证合法性的话就只能是小于号，&lt; 例如[1,1)这是不对的</span></span><br><span class="line">    mid = (left + right) //<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> nums[mid] &gt; target:</span><br><span class="line">        right = mid ? <span class="comment"># 第一种情况右边界是闭合的，如果上面比较过一次mid了之后，这里有边界可以跳过mid，变成mid-1，第二种情况右边界是打开的，不包括右边界，所以这里右边界可以直接等于mid</span></span><br><span class="line">    <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">        left = mid + <span class="number">1</span>  <span class="comment">#因为左边一直都是闭合的，所以如果mid已经从来比较一次了，下一次就不用比较mid，跳过，从mid+1开始</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> mid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这里有两个原则，一个是是否合法，也就是进入循环的条件的合法性，另一个就是考虑，right是否包含上一个mid</span><br><span class="line">|                 | ?#1          | ?#2   | ?#3       |</span><br><span class="line">|-----------------|--------------|-------|-----------|</span><br><span class="line">| [left,right]    | len(nums)-1  |  &lt;=   |  mid - 1  |</span><br><span class="line">| [left,right)    | len(nums)    |  &lt;    |  mid      |</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-移除元素-27"><a href="#2-移除元素-27" class="headerlink" title="2. 移除元素 #27"></a>2. 移除元素 #27</h2><p>思路：</p>
+<ul>
+<li>这道题就是把所有不等于要删除的元素的值放在前面，返回的是有几个，但是要改变的是这个数组的结构</li>
+<li>把不删除的元素全部放在前面，返回的是最后一个index</li>
+<li>需要用到快慢指针，慢指针是获取数组中需要更新的位置，快指针是获取新数组要更新的元素，因为快指针是index，每次都往后走一个，碰到不是要删除的元素就需要跟慢指针的位置交换一下，这样慢指针永远都是记录的不删的元素，一直到快指针走完全程，如果慢指针不走了，那么说明后面都是要删除的元素。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeElement</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        slow = <span class="number">0</span></span><br><span class="line">        fast = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> fast &lt; <span class="built_in">len</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> nums[fast] != val:</span><br><span class="line">                nums[slow] = nums[fast]</span><br><span class="line">                slow += <span class="number">1</span></span><br><span class="line">            fast += <span class="number">1</span></span><br><span class="line">        <span class="comment"># print(nums)</span></span><br><span class="line">        <span class="keyword">return</span> slow</span><br><span class="line">        <span class="comment"># 第二种方法：是用index作为快指针</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] != val:</span><br><span class="line">                nums[i], nums[slow] = nums[slow], nums[i]</span><br><span class="line">                slow += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> slow</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Squares-of-sorted-array-977"><a href="#2-Squares-of-sorted-array-977" class="headerlink" title="2. Squares of sorted array #977"></a>2. Squares of sorted array #977</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sortedSquares</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(nums) - <span class="number">1</span></span><br><span class="line">        i = <span class="built_in">len</span>(nums) - <span class="number">1</span> <span class="comment"># 指向结果集最后一个位置</span></span><br><span class="line">        result = [ <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums))]</span><br><span class="line">        <span class="comment"># 思路，因为已经是排序后的数组，前面的数平方之后要不就是最后面要不就是最前面,这个不对，</span></span><br><span class="line">        <span class="comment"># 因为前面的负数如果平方后可能会再中间，或者后面，未必一定在最后</span></span><br><span class="line">        <span class="comment"># 但是最大值，一定出现在两端，所以我就比较两端，哪个大就插入到结果里，从后往前插入，因为返回的是从小打大排列的数组</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">            <span class="comment"># print(left, right)</span></span><br><span class="line">            <span class="keyword">if</span> nums[left]*nums[left] &gt; nums[right]*nums[right] :</span><br><span class="line">                result[i] = nums[left] * nums[left]</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">                </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result[i] =  nums[right] * nums[right]</span><br><span class="line">                right -= <span class="number">1</span></span><br><span class="line">            i -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Minimum-Size-Subarray-Sum"><a href="#3-Minimum-Size-Subarray-Sum" class="headerlink" title="3. Minimum Size Subarray Sum"></a>3. Minimum Size Subarray Sum</h2><p>思路：</p>
+<ul>
+<li>双指针，滑动窗口，注意的是是不是有指针可以用index来代替，这样一个for循环就好了。</li>
+<li>滑动窗口就是调节左右指针的位置，如果窗口里面没有满足要求，那么不断扩大右指针，如果窗口满足要求了，就开始缩小左指针了，这样才能找到最小的窗口</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minSubArrayLen</span>(<span class="params">self, target: <span class="built_in">int</span>, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 这道题不能排序，因为要找的是最小的符合条件的长度</span></span><br><span class="line">        result = <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="number">0</span></span><br><span class="line">        <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> right &lt;<span class="built_in">len</span>(nums):</span><br><span class="line">            <span class="built_in">sum</span> += nums[right]</span><br><span class="line">            <span class="comment"># print(left,right, sum, result)</span></span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">sum</span> &gt;= target:</span><br><span class="line">                <span class="keyword">if</span> (right-left + <span class="number">1</span>) &lt; result:</span><br><span class="line">                    result = right-left + <span class="number">1</span></span><br><span class="line">                </span><br><span class="line">                <span class="comment"># print(left,right, sum, result)</span></span><br><span class="line">                <span class="built_in">sum</span> -= nums[left]</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">            right += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> result == <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Fruits-into-basket-904"><a href="#4-Fruits-into-basket-904" class="headerlink" title="4. Fruits into basket #904"></a>4. Fruits into basket #904</h2><p>思路：</p>
+<ul>
+<li>双指针，滑动窗口，这道题的意思是只能选两种水果，最多能采多少颗树，两种水果意味着，数组里的值，只能选两个，而且还的是挨着，计算最多采多少颗树，就是求最长的子序列的长度</li>
+<li>难点在于，我用了hash map，记录了两种水果，但是如果新加入一种水果之后，如果才能把最早加入的水果去掉。而不是去掉后面加入进来的水果，这里有两种方法：<ul>
+<li>第一种是hash map里记录的是某一种水果的下标，left更新的时候就是用要删除的key对应的下标加1，为什么保留left呢？要求的是子序列的长度，所以right-left+1</li>
+<li>第二种解法是hash map存的是水果树的数量，这样的话，left只保留了初始位置，要删除key对应的值，就是一个一个删，每删一个left加1</li>
+</ul>
+</li>
+</ul>
+<p>个人喜欢第一种方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">totalFruit</span>(<span class="params">self, fruits: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        hash_map = &#123;&#125;</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        left = <span class="number">0</span> <span class="comment">#//我们采摘的第一种果子的起始下标</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(fruits)):</span><br><span class="line">            <span class="keyword">if</span> (fruits[i]) <span class="keyword">in</span> hash_map:</span><br><span class="line">                hash_map[fruits[i]] = i <span class="comment">#//不断更新果子的最后出现的下标</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(hash_map) &lt; <span class="number">2</span>:</span><br><span class="line">                    hash_map[fruits[i]] = i</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    key_pop = <span class="built_in">min</span>(hash_map, key=hash_map.get) <span class="comment">#//求出记录较小的下标，就是准备要删的key</span></span><br><span class="line">                    left = hash_map[key_pop] + <span class="number">1</span> <span class="comment">#更新left，就是要删除的下标加1</span></span><br><span class="line">                    <span class="keyword">del</span> hash_map[key_pop]  <span class="comment">#删除我们采摘的第一种果子的下标</span></span><br><span class="line">                    hash_map[fruits[i]] = i <span class="comment">#加入一种新果子的下标</span></span><br><span class="line">            result = <span class="built_in">max</span>(result, i-left+<span class="number">1</span>) <span class="comment">#//我们每次都需要更新采摘果子的最大值，不论是否出现第三种果子</span></span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<p>第二种方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">totalFruit</span>(<span class="params">self, fruits: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        hash_map = &#123;&#125;</span><br><span class="line">        result = <span class="number">0</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(fruits)):</span><br><span class="line">            <span class="keyword">if</span> (fruits[i]) <span class="keyword">in</span> hash_map:</span><br><span class="line">                hash_map[fruits[i]] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(hash_map) &lt; <span class="number">2</span>:</span><br><span class="line">                    hash_map[fruits[i]] = <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">while</span> hash_map[fruits[left]] &gt; <span class="number">0</span>: <span class="comment"># 这里是关键，其实就是如果更新left，这里是基于，减少一个value，left加1，往前移动一个，一直到都减到0，那么就把这个key删掉</span></span><br><span class="line">                        hash_map[fruits[left]] -= <span class="number">1</span></span><br><span class="line">                        <span class="keyword">if</span> hash_map[fruits[left]] == <span class="number">0</span>:</span><br><span class="line">                            <span class="keyword">del</span> hash_map[fruits[left]]</span><br><span class="line">                            hash_map[fruits[i]] = <span class="number">1</span></span><br><span class="line">                            left += <span class="number">1</span></span><br><span class="line">                            <span class="keyword">break</span></span><br><span class="line">                        left += <span class="number">1</span></span><br><span class="line">                   </span><br><span class="line">            result = <span class="built_in">max</span>(result, i-left+<span class="number">1</span>)</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-05-02</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
