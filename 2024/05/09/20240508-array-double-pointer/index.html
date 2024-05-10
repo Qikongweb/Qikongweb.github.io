@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240508-array-double-pointer</h1>
+  <article class="post-content"><h2 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h2><h2 id="在处理数组和链表相关问题时，双指针技巧是经常用到的，双指针技巧主要分为两类-左右指针和快慢指针"><a href="#在处理数组和链表相关问题时，双指针技巧是经常用到的，双指针技巧主要分为两类-左右指针和快慢指针" class="headerlink" title="在处理数组和链表相关问题时，双指针技巧是经常用到的，双指针技巧主要分为两类:左右指针和快慢指针"></a>在处理数组和链表相关问题时，双指针技巧是经常用到的，双指针技巧主要分为两类:左右指针和快慢指针</h2><ul>
+<li>所谓左右指针，就是两个指针相向而行或者相背而行;而所谓快慢指针，就是两个指针同向而行，一快一慢</li>
+</ul>
+<h2 id="回文字串-5"><a href="#回文字串-5" class="headerlink" title="回文字串 #5"></a>回文字串 #5</h2><p>思路： </p>
+<ul>
+<li>这道题是找最大的回文字串，双指针是从中间向两端扩展，因为回文字串有可能是奇数也可能是偶数，奇数就是有一个中心点，偶数有两个中心点</li>
+<li>如果是单纯判断是否是回文，双指针从两边向中间</li>
+<li>这道题还是挺有意思的，隐藏了很多小细节</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestPalindrome</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line"></span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            p1 = self.palindromic(s, i, i)</span><br><span class="line">            p2 = self.palindromic(s, i, i+<span class="number">1</span>) <span class="comment"># 这里为什么不用判断s[i],s[i+1]是否相等呢？i，i+1作为两个中心点，判断有没有回文，因为在子函数里有判断</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(p2)&gt; <span class="built_in">len</span>(res):</span><br><span class="line">                res = p2</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(p1)&gt;<span class="built_in">len</span>(res):</span><br><span class="line">                res = p1</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">palindromic</span>(<span class="params">self,s, i,j</span>):</span><br><span class="line">        <span class="keyword">while</span> i &gt;= <span class="number">0</span> <span class="keyword">and</span> j &lt;<span class="built_in">len</span>(s) <span class="keyword">and</span> s[i]==s[j]: <span class="comment"># 这里一进来就判断了s[i],s[i+1]是不是相等，如果相等才往下判断是否是有回文，不然直接返回，而返回的时候，会返s[i+1:j],也就是空</span></span><br><span class="line">            i-=<span class="number">1</span></span><br><span class="line">            j+=<span class="number">1</span></span><br><span class="line">        <span class="comment"># 因为如果跳出while循环的条件，就是i可能是-1，j可能是len(s),所以回文字串其实是范围应该是i+1,j-1</span></span><br><span class="line">        <span class="keyword">return</span> s[i+<span class="number">1</span>:j] <span class="comment"># 为什么这里用j而不是j-1，因为python是左闭右开的规则，[i,j），是不包含j</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><p>思路：</p>
+<ul>
+<li>维护一个窗口，右面不断扩大，在一个条件下左面不断缩小，然后更新答案</li>
+</ul>
+<p>模版</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">left, right = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> right &lt; <span class="built_in">len</span>(s):</span><br><span class="line">    <span class="comment"># increase the window</span></span><br><span class="line">    window.add(s[right])</span><br><span class="line">    right += <span class="number">1</span></span><br><span class="line">    <span class="comment"># shink the window from left</span></span><br><span class="line">    <span class="keyword">while</span> condition: window needs to shink:</span><br><span class="line">        windown.remove(s[left])</span><br><span class="line">        left += <span class="number">1</span></span><br></pre></td></tr></table></figure></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-05-09</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
