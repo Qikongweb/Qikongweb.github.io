@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">202405013-linked-list</h1>
+  <article class="post-content"><h2 id="203-remove-linked-list-element"><a href="#203-remove-linked-list-element" class="headerlink" title="203 remove linked list element"></a>203 remove linked list element</h2><p>思路：</p>
+<ul>
+<li>如果这个元素不是要删的元素，next等于这个元素，并且移动指针到这个元素</li>
+<li>如果这个元素是要删的元素，next等于这个元素的下一个元素，不移动指针，也就是next会一直变，直到出现第一种情况才移动指针</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeElements</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode], val: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="comment"># 如果出现一直是要删除的元素，怎么办，不是马上指向下一个，而是用双指针</span></span><br><span class="line">        <span class="comment"># 如果头节点就是要删除的元素呢？创建一个dummy node，然后把头节点当成是第二个节点删除</span></span><br><span class="line">        dummy_node = ListNode(-<span class="number">1</span>)</span><br><span class="line">        pointer = dummy_node</span><br><span class="line">        <span class="keyword">while</span> head:</span><br><span class="line">            <span class="keyword">if</span> head.val <span class="keyword">is</span> <span class="keyword">not</span> val:</span><br><span class="line">                <span class="comment"># 不是要删除的节点，指向这个节点</span></span><br><span class="line">                pointer.<span class="built_in">next</span> = head</span><br><span class="line">                pointer = pointer.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pointer.<span class="built_in">next</span> = head.<span class="built_in">next</span></span><br><span class="line">            head = head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> dummy_node.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="206-reverse-linked-list"><a href="#206-reverse-linked-list" class="headerlink" title="206 reverse linked list"></a>206 reverse linked list</h2><p>思路：</p>
+<ul>
+<li>很简单，就是双指针，把每个元素的指针反转</li>
+<li>下面会有详细介绍<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        pre = <span class="literal">None</span></span><br><span class="line">        current = head</span><br><span class="line">        <span class="keyword">while</span> current:</span><br><span class="line"></span><br><span class="line">            next_node = current.<span class="built_in">next</span></span><br><span class="line">            current.<span class="built_in">next</span> = pre</span><br><span class="line">            pre = current</span><br><span class="line">            current = next_node</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> pre</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="24-Swap-node-in-pairs"><a href="#24-Swap-node-in-pairs" class="headerlink" title="24 Swap node in pairs"></a>24 Swap node in pairs</h2><p>思路：</p>
+<ul>
+<li>做链表的时候，如果想处理当前节点的指向，一定要从前一个节点开始操作，也就是前一个节点的指向变成当前节点的下一个节点，那么当前节点就可以空出来了，对吧？</li>
+<li>重点：如果要把两个节点相交换，那么开始的位置一定是前一个节点，也就是每次循环的时候，指针都指向的是要交换的两个节点的前一个节点</li>
+<li>关键点：因为交换之后会改变指针方向，那么把之前的节点需要保存下来，保存哪个节点？好好想想。</li>
+<li>细节问题：就是循环的终止条件是什么？我创建了一个dummy节点之后<ul>
+<li>终止条件一定是当前节点的后两个要交换的两个节点不为空，那么就分奇数还是偶数，奇数的话，就是要交换的节点的第二个节点为空，那么就终止，偶数的话，要交换的第一个节点就为空，也终止</li>
+<li>另外一个问题就是如果本身head就是空呢？因为我们有了头节点，所以dummy的next就是head，也符合终止条件的判断，那么就是不用在前面去判断head是不是空了。太神了</li>
+</ul>
+</li>
+</ul>
+<p>画图如下：<br><img src="/2024/05/14/202405013-linked-list/swap%20nodes.jpg" alt="swap nodes steps"></p>
+<p>了解了思路，代码一气呵成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">swapPairs</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line"></span><br><span class="line">        dummy = ListNode(-<span class="number">1</span>)</span><br><span class="line">        dummy.<span class="built_in">next</span> = head</span><br><span class="line">        cur = dummy</span><br><span class="line">        <span class="keyword">while</span> cur.<span class="built_in">next</span> <span class="keyword">and</span> cur.<span class="built_in">next</span>.<span class="built_in">next</span>:</span><br><span class="line">            node1 = cur.<span class="built_in">next</span></span><br><span class="line">            node2 = node1.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span> = node1.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span>.<span class="built_in">next</span> = node1</span><br><span class="line">            node1.<span class="built_in">next</span> = node2</span><br><span class="line">            cur = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="19-Remove-Nth-node-from-end-of-list"><a href="#19-Remove-Nth-node-from-end-of-list" class="headerlink" title="19 Remove Nth node from end of list"></a>19 Remove Nth node from end of list</h2><p>思路：</p>
+<ul>
+<li>双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow所指向的节点就可以了。</li>
+<li>这道题也是需要一个dummy node放在head之前，那么就可以处理只有一个节点和两个节点的情况了。<ul>
+<li>例如只有一个节点，n&#x3D;1，cur1到node的时候，cur2还在dummy，cur2.next &#x3D; cur2.next.next就可以用了</li>
+</ul>
+</li>
+<li>细节：另外这道题也考察，我是吧cur2移动n还是n+1</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeNthFromEnd</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode], n: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        dummy = ListNode(-<span class="number">1</span>)</span><br><span class="line">        dummy.<span class="built_in">next</span> = head</span><br><span class="line">        cur1 = dummy <span class="comment"># 指针用来做n的计数的</span></span><br><span class="line">        cur2 = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n): <span class="comment">#如果这里是n+1</span></span><br><span class="line">            cur1 = cur1.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> cur1 <span class="keyword">and</span> cur1.<span class="built_in">next</span>: <span class="comment">#如果上面是n+1，这里只需要判断cur1不是空就好</span></span><br><span class="line">            cur2 = cur2.<span class="built_in">next</span></span><br><span class="line">            cur1 = cur1.<span class="built_in">next</span></span><br><span class="line">        cur2.<span class="built_in">next</span> = cur2.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="92-Reserve-linked-list-II-206-Reserved-whole-linked-list-Reserved-first-N-linked-list"><a href="#92-Reserve-linked-list-II-206-Reserved-whole-linked-list-Reserved-first-N-linked-list" class="headerlink" title="92 Reserve linked list II, 206 Reserved whole linked list, Reserved first N linked list"></a>92 Reserve linked list II, 206 Reserved whole linked list, Reserved first N linked list</h2><p>思路：</p>
+<ul>
+<li>反转链表分三种，层层递进，反转整个链表，反转前N个节点，反转中间部分节点</li>
+<li>基础方法是用两个pointer做反转，会出现很多细节上的问题。</li>
+<li>另一个思路就是用递归方法的做链表反转</li>
+</ul>
+<p>递归reserve方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 递归反转链表</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reserve</span>(<span class="params">node, <span class="number">1</span></span>):</span><br><span class="line">    <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> node.<span class="built_in">next</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> node</span><br><span class="line">    last = reserve(node.<span class="built_in">next</span>)</span><br><span class="line">    node.<span class="built_in">next</span>.<span class="built_in">next</span> = node</span><br><span class="line">    node.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> last  </span><br></pre></td></tr></table></figure>
+
+<p>原理如下图：<br><img src="/2024/05/14/202405013-linked-list/recusive-reserve.jpg" alt="递归反转链表"></p>
+<h2 id="第一种-先看反转整个链表-206"><a href="#第一种-先看反转整个链表-206" class="headerlink" title="第一种 先看反转整个链表 #206"></a>第一种 先看反转整个链表 #206</h2><p>两种方法，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># recusive 方法</span></span><br><span class="line">        <span class="keyword">return</span> self.reserve(head)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reserve</span>(<span class="params">self,node</span>):</span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> node.<span class="built_in">next</span> <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        last = self.reserve(node.<span class="built_in">next</span>)</span><br><span class="line">        node.<span class="built_in">next</span>.<span class="built_in">next</span> = node</span><br><span class="line">        node.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> last</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># pointer方法</span></span><br><span class="line">        dummy = <span class="literal">None</span></span><br><span class="line">        pre = head</span><br><span class="line">        <span class="keyword">while</span> pre:</span><br><span class="line">            temp = pre.<span class="built_in">next</span></span><br><span class="line">            pre.<span class="built_in">next</span> = dummy</span><br><span class="line">            dummy = pre</span><br><span class="line">            pre = temp</span><br><span class="line">        <span class="keyword">return</span> dummy</span><br></pre></td></tr></table></figure>
+
+<h2 id="第二种：反转链表前-N-个节点"><a href="#第二种：反转链表前-N-个节点" class="headerlink" title="第二种：反转链表前 N 个节点"></a>第二种：反转链表前 N 个节点</h2><p>需要一个图</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将链表的前 n 个节点反转（n &lt;= 链表长度）</span></span><br><span class="line">ListNode successor = null; <span class="comment">// 后驱节点,把反转之后和这个N+1的节点连上，上面全部节点反转的时候就是None</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 反转以 head 为起点的 n 个节点，返回新的头结点</span></span><br><span class="line"><span class="function">ListNode <span class="title">reverseN</span><span class="params">(ListNode head, <span class="type">int</span> n)</span>:</span></span><br><span class="line"><span class="function">    if (n =</span>= <span class="number">1</span>) &#123; </span><br><span class="line">        <span class="comment">// 记录第 n + 1 个节点</span></span><br><span class="line">        successor = head.next;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 以 head.next 为起点，需要反转前 n - 1 个节点</span></span><br><span class="line">    ListNode last = <span class="built_in">reverseN</span>(head.next, n - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    head.next.next = head;</span><br><span class="line">    <span class="comment">// 让反转之后的 head 节点和后面的节点连起来</span></span><br><span class="line">    head.next = successor; <span class="comment">// 之前的方法就是head.next = None</span></span><br><span class="line">    <span class="keyword">return</span> last;</span><br></pre></td></tr></table></figure>
+
+<p>具体的区别：</p>
+<p>1、base case 变为 n &#x3D;&#x3D; 1，反转一个元素，就是它本身，同时要记录后驱节点。</p>
+<p>2、刚才我们直接把 head.next 设置为 null，因为整个链表反转后原来的 head 变成了整个链表的最后一个节点。但现在 head 节点在递归反转之后不一定是最后一个节点了，所以要记录后驱 successor（第 n + 1 个节点），反转之后将 head 连接上。</p>
+<h2 id="第三种：反转部分链表-92"><a href="#第三种：反转部分链表-92" class="headerlink" title="第三种：反转部分链表 #92"></a>第三种：反转部分链表 #92</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 完整解题：</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseBetween</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode], left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> left == <span class="number">1</span>:</span><br><span class="line">            <span class="comment"># self.successor = None #也可以在这里定义一个全局变量</span></span><br><span class="line">            <span class="keyword">return</span> self.reverseN(head, right) <span class="comment">#这里注意别忘了return</span></span><br><span class="line">        head.<span class="built_in">next</span> = self.reverseBetween(head.<span class="built_in">next</span>, left-<span class="number">1</span>, right-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 递归反转链表</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseN</span>(<span class="params">self, head: ListNode, n: <span class="built_in">int</span></span>) -&gt; ListNode:</span><br><span class="line">        <span class="keyword">global</span> successor</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="comment"># 记录第 n + 1 个节点</span></span><br><span class="line">            successor = head.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        <span class="comment"># 以 head.next 为起点，需要反转前 n - 1 个节点</span></span><br><span class="line">        last = self.reverseN(head.<span class="built_in">next</span>, n - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        head.<span class="built_in">next</span>.<span class="built_in">next</span> = head</span><br><span class="line">        <span class="comment"># 让反转之后的 head 节点和后面的节点连起来</span></span><br><span class="line">        head.<span class="built_in">next</span> = successor</span><br><span class="line">        <span class="keyword">return</span> last</span><br><span class="line">    <span class="comment"># 自己写的，和上面的基本一样</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseN</span>(<span class="params">self,node, n</span>):</span><br><span class="line">        <span class="comment"># connect_node = None</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            self.successor = node.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        last = self.reverseN(node.<span class="built_in">next</span>, n-<span class="number">1</span>)</span><br><span class="line">        node.<span class="built_in">next</span>.<span class="built_in">next</span> = node</span><br><span class="line">        node.<span class="built_in">next</span> = self.successor</span><br><span class="line">        <span class="keyword">return</span> last  </span><br></pre></td></tr></table></figure>
+<ul>
+<li>head.next 指的是当前节点 head 的下一个节点。</li>
+<li>head.next 被作为新的 head 传递给递归调用 reverseBetween。</li>
+<li>递归调用 reverseBetween(head.next, m - 1, n - 1) 使用下一个节点作为新的 head，并将 m - 1 和 n - 1 作为新的索引。</li>
+<li>递归调用从下一个节点开始反转链表，直到 m - 1 个节点（不包括）。</li>
+<li>从递归调用返回的反转链表被返回。</li>
+<li>head.next 被更新为返回的反转链表。</li>
+<li>更新后的 head 被返回，它将连接反转后的链表到原始链表的其余部分。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseBetween</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode], left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二种方法 ，双指针</span></span><br><span class="line">        <span class="comment"># head是空，或者左右节点的位置相等，就直接返回</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> left == right:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        dummy = ListNode(<span class="number">0</span>, head)</span><br><span class="line">        prev = dummy</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(left-<span class="number">1</span>):</span><br><span class="line">            prev = prev.<span class="built_in">next</span></span><br><span class="line">        current = prev.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(right-left):</span><br><span class="line">            node_next = current.<span class="built_in">next</span> <span class="comment"># 这行代码将当前节点的下一个节点赋值给 next_node。这是为了保存要交换的下一个节点，以便后面进行交换。</span></span><br><span class="line">            current.<span class="built_in">next</span> = node_next.<span class="built_in">next</span> <span class="comment">#这行代码将当前节点的下一个节点更新为 next_node 的下一个节点。这是为了将要交换的节点从链表中移除。</span></span><br><span class="line">            node_next.<span class="built_in">next</span> = prev.<span class="built_in">next</span> <span class="comment"># 这里不能指向current，因为current不变，而prev.next 随之在变， 这行代码将 next_node 的下一个节点更新为 prev 的下一个节点。这是为了将 next_node 插入到链表中正确的位置。</span></span><br><span class="line">            prev.<span class="built_in">next</span> = node_next <span class="comment"># 这行代码将 prev 的下一个节点更新为 next_node。这是为了将 next_node 连接到链表中正确的位置。</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dummy.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+<p>双指针也需要一个图</p>
+<h2 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h2><p>递归的思想相对迭代思想，稍微有点难以理解，处理的技巧是：不要跳进递归，而是利用明确的定义来实现算法逻辑。</p>
+<p>处理看起来比较困难的问题，可以尝试化整为零，把一些简单的解法进行修改，解决困难的问题。</p>
+<p>值得一提的是，递归操作链表并不高效。和迭代解法相比，虽然时间复杂度都是 O(N)，但是迭代解法的空间复杂度是 O(1)，而递归解法需要堆栈，空间复杂度是 O(N)。所以递归操作链表可以作为对递归算法的练习或者拿去和小伙伴装逼，但是考虑效率的话还是使用迭代算法更好。</p>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-05-14</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

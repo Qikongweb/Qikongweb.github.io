@@ -59,7 +59,14 @@
 <li>一个指针从链表1开始，另一个指针从链表2开始。当第一个指针到达链表1的末尾时，我们将其重定向到链表2的头部。同样的，当第二个指针到达链表2的末尾时，我们将其重定向到链表1的头部。最终，两个指针会相遇，这就是它们的交点。</li>
 <li>如果有交点的话，就是两个节点的内存地址一样，所以后续的值一定一样，这样其实就是前面的长度可能会不一样，也就是有一个先到交点位置，有一个后到交点位置，但是如果是A+B 和B+A的时候，就是肯定同时到交点位置</li>
 </ul>
-<h3 id="4-环形链表，判断有否有环，找到环的起点，快慢指针-142"><a href="#4-环形链表，判断有否有环，找到环的起点，快慢指针-142" class="headerlink" title="4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142"></a>4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fast = head</span><br><span class="line">slow = head</span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span>(fast == slow):</span><br><span class="line">        index1 = fast</span><br><span class="line">        index2 = head</span><br><span class="line">        <span class="keyword">while</span> index1 != index2:</span><br><span class="line">            index1 = index1.<span class="built_in">next</span></span><br><span class="line">            index2 = index2.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> index1</span><br><span class="line"><span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-环形链表，判断有否有环，找到环的起点，快慢指针-142"><a href="#4-环形链表，判断有否有环，找到环的起点，快慢指针-142" class="headerlink" title="4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142"></a>4. 环形链表，判断有否有环，找到环的起点，快慢指针 #142</h3><p>思路：</p>
+<ul>
+<li>判断链表里是否有环，一定要用双指针，快慢指针，快指针走两步，慢指针走一步。如果在非None的时候，快慢指针相等的话，就说明有环，否则，就是一直到None了。</li>
+<li>这里while的条件一定要注意的是，判断快指针和快指针的next不为空，不用判断慢指针</li>
+<li>当相等的时候，把其中一个指针指到head起点，然后再同时往后移动一步，当再次相等的时候就是相交的起点。</li>
+<li>要怎么证明呢？</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fast = head</span><br><span class="line">slow = head</span><br><span class="line"><span class="keyword">while</span> fast <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> fast.<span class="built_in">next</span> <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    fast = fast.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">    slow = slow.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span>(fast == slow):</span><br><span class="line">        index1 = fast</span><br><span class="line">        index2 = head</span><br><span class="line">        <span class="keyword">while</span> index1 != index2:</span><br><span class="line">            index1 = index1.<span class="built_in">next</span></span><br><span class="line">            index2 = index2.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> index1</span><br><span class="line"><span class="keyword">return</span> <span class="literal">None</span></span><br></pre></td></tr></table></figure>
 
 <p>思路： 程序非常简单，原理证明推理过程比较复杂</p>
 <ul>
@@ -72,7 +79,43 @@
 </ol>
 </li>
 </ul>
-<h2 id="python-语法补充"><a href="#python-语法补充" class="headerlink" title="python 语法补充"></a>python 语法补充</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line"></span><br><span class="line">两个是一个意思</span><br><span class="line"></span><br><span class="line">dummy_head = ListNode(<span class="number">0</span>)</span><br><span class="line">dimmy_head.<span class="built_in">next</span> = head</span><br></pre></td></tr></table></figure></article>
+<h2 id="python-语法补充"><a href="#python-语法补充" class="headerlink" title="python 语法补充"></a>python 语法补充</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dummy_head = ListNode(<span class="number">0</span>, head)</span><br><span class="line"></span><br><span class="line">两个是一个意思</span><br><span class="line"></span><br><span class="line">dummy_head = ListNode(<span class="number">0</span>)</span><br><span class="line">dimmy_head.<span class="built_in">next</span> = head</span><br></pre></td></tr></table></figure>
+
+<h2 id="补充证明过程："><a href="#补充证明过程：" class="headerlink" title="补充证明过程："></a>补充证明过程：</h2><ol>
+<li>为什么有环的时候，快慢指针在环里一定会相遇？</li>
+</ol>
+<ul>
+<li>首先，在环里的时候，是快指针追慢指针的一个过程，以什么速度追慢指针呢？慢指针走一步，快指针走两步，所以快指针以相对速度是1的速度在追慢指针，也可以说快指针式相对慢指针一个节点一个节点去靠近，所以一定不会有交叉错过的情况。假如快指针一次移动三个节点，有可能出现错过的情况</li>
+<li>事实上，快指针走够至少一圈就肯定能追上慢指针了（因为步长为2，慢为1），所以慢指针必定没走够一圈</li>
+<li>因为快指针一开始肯定在慢指针的前边啊，如果想要相遇，快指针需要跑到慢指针的“后边”去追慢指针</li>
+</ul>
+<ol start="2">
+<li>如果找环的起点？怎么证明<!-- 画图 -->
+<img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20220925103433.png" alt="环的定义变量"></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一次相遇时，slow指针走过的节点数为</span></span><br><span class="line">x + y</span><br><span class="line"><span class="comment"># fast指针走过的节点数：n是多少圈，y+z是一圈内的节点数</span></span><br><span class="line">x + y + n*(y+z)</span><br><span class="line"><span class="comment"># 条件，快指针走的步数是慢指针的2倍，出现一个等式</span></span><br><span class="line"><span class="number">2</span>*(x+y) = x + y +n*(y+z)</span><br><span class="line">x + y = n * (y + z)</span><br><span class="line">x = n(y+z)-y</span><br><span class="line">x = (n-<span class="number">1</span>)(y+z) + z</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这个公式说明什么呢？</li>
+</ul>
+<p>先拿n为1的情况来举例，意味着fast指针在环形里转了一圈之后，就遇到了 slow指针了。<br>x &#x3D; z<br>这就意味着，从头结点出发一个指针，从相遇节点 也出发一个指针，这两个指针每次只走一个节点， 那么当这两个指针相遇的时候就是 环形入口的节点。<br>那么 n如果大于1是什么情况呢，就是fast指针在环形转n圈之后才遇到 slow指针。</p>
+<ul>
+<li>假设极端情况，慢指针走了一圈了，因为快指针是它的2倍速，所以快指针一定也走了两圈了，那么中间他们一定会相遇，所以慢指针一定是在一圈内被快指针追上了</li>
+</ul>
+<ol start="3">
+<li>为什么第一次在环中相遇，slow的 步数 是 x+y 而不是 x + 若干环的长度 + y 呢？</li>
+</ol>
+<ul>
+<li><p>首先slow进环的时候，fast一定是先进环来了。</p>
+</li>
+<li><p>如果slow进环入口，fast也在环入口，那么把这个环展开成直线，就是如下图的样子：<br><img src="https://code-thinking-1253855093.file.myqcloud.com/pics/2021031816515727.png" alt="把环拉成直线"></p>
+</li>
+</ul>
+<p>那么fast指针走到环入口3的时候，已经走了k + n 个节点，slow相应的应该走了(k + n) &#x2F; 2 个节点。</p>
+<p>因为k是小于n的（图中可以看出），所以(k + n) &#x2F; 2 一定小于n。</p>
+<p>也就是说slow一定没有走到环入口3，而fast已经到环入口3了。</p>
+<p>这说明什么呢？</p>
+<p>在slow开始走的那一环已经和fast相遇了</p>
+</article>
   <div class="flex items-center justify-between text-sm">
     
     <span class="flex items-center">
