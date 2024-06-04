@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240530_string_extra</h1>
+  <article class="post-content"><h2 id="python-string-处理的方法"><a href="#python-string-处理的方法" class="headerlink" title="python string 处理的方法"></a>python string 处理的方法</h2><h2 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><ul>
+<li><p>字符串(str)是 Python 中最常用的数据类型，可以使用单引号或双引号来创建字符串。注意：</p>
+</li>
+<li><p>Python不支持单字符类型(对应 c 语言中的 char)，单字符在 Python 中也是字符串类型。<br>字符串是不可变类型，即无法直接修改字符串的某一索引对应的字符，需要转换为列表处理。可以认为字符串是特殊的元组类型。</p>
+</li>
+<li><p>不可以已给某一个index赋值或者交换，所以上指针的时候需要交换两个指针的元素就不能使用了。</p>
+</li>
+</ul>
+<h2 id="如果处理字符串？有一些方法"><a href="#如果处理字符串？有一些方法" class="headerlink" title="如果处理字符串？有一些方法"></a>如果处理字符串？有一些方法</h2><ul>
+<li><p>空格剥离， 去掉前面或者后面，或者前后的所有空格</p>
+<ul>
+<li>lstrip() remove all space in the front</li>
+<li>rstrip() remove all space at the back</li>
+<li>strip() remove all space in the front and back</li>
+</ul>
+</li>
+<li><p>字符串拆分, spit(par)</p>
+<ul>
+<li>如果没有par，默认是根据空格拆分的</li>
+<li>par也可以是任何的字符</li>
+</ul>
+</li>
+<li><p>将列表元素合成字符串 join(), 拆分之后如何合并呢？</p>
+<ul>
+<li>“”.join(list) 所有元素全部拼接在一起</li>
+<li>“ “.join(list) 所有元素全部用空格拼接在一起</li>
+</ul>
+</li>
+<li><p>如何反转字符串，很有意思，可以通过上面的拆分再合并实现，也可以用数组本身的特性</p>
+<ul>
+<li>str.split(), res.reserve(), “ “.join(res)</li>
+<li>str[::-1] 字符串本身也是可以反转的</li>
+</ul>
+</li>
+<li><p>检查是否有字符串成员，这个方法和map，list是一样的用in</p>
+<ul>
+<li>“abc” in “abcdfe” return Ture</li>
+</ul>
+</li>
+<li><p>找字符串的位置 find()</p>
+<ul>
+<li>返回子字符串第一次出现的第一个字符的索引，如果找不到子字符串，则返回-1</li>
+</ul>
+</li>
+<li><p>子字符串替换 replace(par1,par2) 把par1替换成par2</p>
+<ul>
+<li>str.replace(“a”,”abc”)</li>
+</ul>
+</li>
+<li><p>同字母异序词检查， 用counter,不用counter的话要用map统计每个字母出现的次数，或者用list</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_anagram</span>(<span class="params">s1, s2</span>):  </span><br><span class="line">    <span class="keyword">return</span> Counter(s1) == Counter(s2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回文检查</p>
+<ul>
+<li>创建一个单词的反转，然后和原来的比较是否是相等，用的是上面反转字符串的方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="151-reverse-words-in-a-string"><a href="#151-reverse-words-in-a-string" class="headerlink" title="151 reverse words in a string"></a>151 reverse words in a string</h2><p>思路比较简单</p>
+<ul>
+<li>去多余的空格</li>
+<li>反转整个数组</li>
+<li>反转数组里每个单词</li>
+<li>python里面对字符串不能直接赋值操作，所以先转换成list，之后再用join连在一起</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseWords</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="comment"># remove extra space</span></span><br><span class="line">        str_list = <span class="built_in">list</span>(s) <span class="comment"># 拆成每个字符</span></span><br><span class="line">        new_arr = self.removeExtraSpace(str_list)</span><br><span class="line">        <span class="comment"># 全部反转</span></span><br><span class="line">        new_arr = self.reversOneWord(new_arr)</span><br><span class="line">        <span class="comment"># 反转每个单词</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(new_arr)+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i == <span class="built_in">len</span>(new_arr) <span class="keyword">or</span> new_arr[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                <span class="comment"># 开始反转单词</span></span><br><span class="line">                new_arr[start:i] = self.reversOneWord(new_arr[start:i])</span><br><span class="line">                start = i + <span class="number">1</span></span><br><span class="line">           </span><br><span class="line">        <span class="comment"># print(str_list_without_space)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(new_arr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeExtraSpace</span>(<span class="params">self, str_list</span>):</span><br><span class="line">        slow = <span class="number">0</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(str_list): <span class="comment"># 为什么要用while而不是用for，因为下面是一整个单词一起遍历</span></span><br><span class="line">            <span class="keyword">if</span> str_list[i] != <span class="string">&quot; &quot;</span>: <span class="comment">#不等于空格开始</span></span><br><span class="line">                <span class="comment"># 在每个单词的前面添加一个空格，除了第一个位置外</span></span><br><span class="line">                <span class="keyword">if</span> slow != <span class="number">0</span>: </span><br><span class="line">                    str_list[slow] = <span class="string">&quot; &quot;</span></span><br><span class="line">                    slow += <span class="number">1</span></span><br><span class="line">                <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(str_list) <span class="keyword">and</span> str_list[i] != <span class="string">&quot; &quot;</span>: <span class="comment"># 把整个单词都往前移动</span></span><br><span class="line">                    str_list[slow] = str_list[i]</span><br><span class="line">                    slow += <span class="number">1</span></span><br><span class="line">                    i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">        <span class="comment"># print(&quot;&quot;.join(str_list[:slow]))</span></span><br><span class="line">        <span class="keyword">return</span> str_list[:slow]</span><br><span class="line">    </span><br><span class="line">       </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reversOneWord</span> (self, s: <span class="built_in">list</span>):</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = <span class="built_in">len</span>(s)-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left &lt; right:</span><br><span class="line">            s[left], s[right] = s[right], s[left]</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> s </span><br></pre></td></tr></table></figure>
+
+
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><p>定义：</p>
+<ul>
+<li>KMP的思想就是当字符串发生不匹配时,根据已经知道的一部分匹配内容来避免重头匹配</li>
+</ul>
+<p>解决什么问题？</p>
+<ul>
+<li>解决的是一个字符串里是否包含另一个字符串，当不匹配的时候，需要往后移动几个字符而不是一个字符一个字符的移动，这样可以减少循环的次数，提高效率，可以认为是剪枝，但是到底移动几个字符呢？需要从前缀表里面查询知道，所以如果求出前缀表并利用前缀表里的元素就是解决匹配字符串少循环的关键</li>
+</ul>
+<p>需要了解的概念？</p>
+<ul>
+<li><p>前缀，后缀，最长的公共前后缀，前缀表（prefix table）</p>
+<ul>
+<li>一个字符串里面除了最后一个字符，其他的全部头部组合的连续子串，就是前缀</li>
+<li>一个字符串里面除了第一个字符，其他的全部尾部组合的连续子串，就是后缀</li>
+<li>最长的公共前后缀，是一个字符串最长且相等的前缀和后缀。</li>
+<li>前缀表，存储一个字符串所有的从最左边的字符到当前字符构成的字串的最长公共前后缀的长度,记录下标i之前（包括i）的字符串中，有多大长度的相同前缀后缀。</li>
+</ul>
+</li>
+<li><p>next数组</p>
+<ul>
+<li>是由前缀表的数组变化而来，通常就是右移一位，在最左边补-1</li>
+</ul>
+</li>
+<li><p>有点发现：<br>  在前缀表求前缀的时候是每往后移动一位，那么就在前缀组合里每一个情况最后都加入新的字符，空加新字符就是新字符<br>  在求后缀的时候是每往后移动一位，那么就在后缀组合里每一个情况的第一位都加入新的字符，空加新字符就是新字符，因为后缀是从后往前组合而来的。<br>举例：<br><img src="https://img-blog.csdnimg.cn/80bf1ace54aa47aaaa28da4f5cf676bc.png" alt="前缀表举例"></p>
+</li>
+</ul>
+<h2 id="知道了上面的前缀表如何求出来的，如何写代码得到前缀表"><a href="#知道了上面的前缀表如何求出来的，如何写代码得到前缀表" class="headerlink" title="知道了上面的前缀表如何求出来的，如何写代码得到前缀表?"></a>知道了上面的前缀表如何求出来的，如何写代码得到前缀表?</h2><p>定义两个指针i和j</p>
+<ul>
+<li>j指向真前缀末尾位置(同时j+1是最长相等真前后缀的长度)，那么如果j&#x3D;0，就是在有两个字符的条件下</li>
+<li>i指向真后缀末尾位置。真后缀的首字母是真前缀的最后一个字符，真后缀的末尾是真前缀的第一个字符</li>
+<li>初始化:j从0开始遍历模式串,i从1开始(因为真后缀不包括首字符)</li>
+</ul>
+<p>这里是动态规划的思想</p>
+<p>真前缀末尾位置的字符&#x3D;&#x3D;i指向真后缀末尾位置的字符,最长相等前一最长真前后缀的长度加1</p>
+<p>真前缀末尾位置的字符!&#x3D;i指向真后缀末尾位置的字符,根据KMP的思想,我们可以回退到可能匹配的位置,j &#x3D; next[j-1]如果匹配成功 ,长度等于j+1,匹配不成功继续回退</p>
+<p>边界条件,当回退到j&#x3D;0时并且s[i]和s[j]不相等,next[i]&#x3D;j.(j&#x3D;0,此时最长相等真前后缀长度为0)</p>
+<p>因为i是一直往后找的，j用来看前缀是不是和后缀的字母一样<br>j还代表着i之前包括i的字串的最长相等前后缀的长度，其实就是next里面的值</p>
+<p>一个自认为比较容易的理解方法就是把这一个串自己当作文本串(i)和模式串(j) 发现两者不匹配 那就回退到前缀相同的位置 即数组中前一个下标</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">getNext</span><span class="params">(<span class="type">int</span>* next, <span class="type">const</span> <span class="built_in">string</span>&amp; s)</span>&#123;</span><br><span class="line">  <span class="type">int</span> j = <span class="number">0</span>;<span class="comment">//初始化,next数组起始位置为0</span></span><br><span class="line">  next[<span class="number">0</span>] = j;</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; s.size();i++)&#123;</span><br><span class="line">   <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; s[i] != s[j])&#123;</span><br><span class="line">     j = next[j<span class="number">-1</span>];<span class="comment">//回退到可能匹配的位置</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span>(s[i] == s[j])&#123;</span><br><span class="line">   j++;<span class="comment">//如果匹配,最长相等真前后缀长度加1</span></span><br><span class="line">   &#125;</span><br><span class="line">   next[i] = j;<span class="comment">//j ==0 &amp;&amp; s[i]==s[j] 的情况在这里体现</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">kmp</span><span class="params">(<span class="built_in">string</span> l,<span class="built_in">string</span> needle)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(needle.size( ) == <span class="number">0</span>)&#123;</span><br><span class="line">     reutrn <span class="number">0</span>;<span class="comment">//模式串长度为0</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="type">int</span> next[needle.size( )];<span class="comment">//建立next数组</span></span><br><span class="line">   getNext(next, needle);</span><br><span class="line">   <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; l.size( ); i++)&#123;<span class="comment">//开始匹配</span></span><br><span class="line">   <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; l[i] != needle[j])&#123;<span class="comment">//匹配不成功回退</span></span><br><span class="line">         j = next[j<span class="number">-1</span>];</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span>( l[i] == needle[j])&#123;</span><br><span class="line">     j++;<span class="comment">//匹配成功就匹配下一个字符</span></span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> (j == needle.size)&#123;<span class="comment">//匹配完了就返回首字母的位置</span></span><br><span class="line">   <span class="keyword">return</span> (i-needle.size( )+<span class="number">1</span>);</span><br><span class="line">   &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/2301_76352996/article/details/132039757">https://blog.csdn.net/2301_76352996/article/details/132039757</a></p>
+<ul>
+<li>如何使用前缀表?</li>
+</ul>
+<p>假设n为文本串长度，m为模式串长度，因为在匹配的过程中，根据前缀表不断调整匹配的位置，可以看出匹配的过程是O(n)，之前还要单独生成next数组，时间复杂度是O(m)。所以整个KMP算法的时间复杂度是O(n+m)的。<br>暴力的解法显而易见是O(n × m)，所以KMP在字符串匹配中极大地提高了搜索的效率。</p>
+<p>python 解法</p>
+<figure class="highlight python"><figcaption><span>（不减一）</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getNext</span>(<span class="params">self, <span class="built_in">next</span>: <span class="type">List</span>[<span class="built_in">int</span>], s: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="built_in">next</span>[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="keyword">while</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> s[i] != s[j]:</span><br><span class="line">                j = <span class="built_in">next</span>[j - <span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> s[i] == s[j]:</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="built_in">next</span>[i] = j</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">strStr</span>(<span class="params">self, haystack: <span class="built_in">str</span>, needle: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(needle) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="built_in">next</span> = [<span class="number">0</span>] * <span class="built_in">len</span>(needle)</span><br><span class="line">        self.getNext(<span class="built_in">next</span>, needle)</span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(haystack)):</span><br><span class="line">            <span class="keyword">while</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> haystack[i] != needle[j]:</span><br><span class="line">                j = <span class="built_in">next</span>[j - <span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> haystack[i] == needle[j]:</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> j == <span class="built_in">len</span>(needle):</span><br><span class="line">                <span class="keyword">return</span> i - <span class="built_in">len</span>(needle) + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><figcaption><span>减一操作</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getNext</span>(<span class="params">self, <span class="built_in">next</span>, s</span>):</span><br><span class="line">        j = -<span class="number">1</span></span><br><span class="line">        <span class="built_in">next</span>[<span class="number">0</span>] = j</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="keyword">while</span> j &gt;= <span class="number">0</span> <span class="keyword">and</span> s[i] != s[j+<span class="number">1</span>]:</span><br><span class="line">                j = <span class="built_in">next</span>[j]</span><br><span class="line">            <span class="keyword">if</span> s[i] == s[j+<span class="number">1</span>]:</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="built_in">next</span>[i] = j</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">strStr</span>(<span class="params">self, haystack: <span class="built_in">str</span>, needle: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> needle:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="built_in">next</span> = [<span class="number">0</span>] * <span class="built_in">len</span>(needle)</span><br><span class="line">        self.getNext(<span class="built_in">next</span>, needle)</span><br><span class="line">        j = -<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(haystack)):</span><br><span class="line">            <span class="keyword">while</span> j &gt;= <span class="number">0</span> <span class="keyword">and</span> haystack[i] != needle[j+<span class="number">1</span>]:</span><br><span class="line">                j = <span class="built_in">next</span>[j]</span><br><span class="line">            <span class="keyword">if</span> haystack[i] == needle[j+<span class="number">1</span>]:</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> j == <span class="built_in">len</span>(needle) - <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> i - <span class="built_in">len</span>(needle) + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="KMP-算法-28"><a href="#KMP-算法-28" class="headerlink" title="KMP 算法 #28"></a>KMP 算法 #28</h2><p>思路：</p>
+<ul>
+<li>查找字串是否存在的循环步骤和求next数组的步骤是一样的</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">strStr</span>(<span class="params">self, haystack: <span class="built_in">str</span>, needle: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># prefix table</span></span><br><span class="line">        <span class="built_in">next</span> = [<span class="number">0</span>] * <span class="built_in">len</span>(needle)</span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(needle)):</span><br><span class="line">            <span class="comment"># if needle[i],[j] is not same</span></span><br><span class="line">            <span class="keyword">while</span> j &gt; <span class="number">0</span> <span class="keyword">and</span> needle[i] != needle[j]:</span><br><span class="line">                j = <span class="built_in">next</span>[j-<span class="number">1</span>]</span><br><span class="line">            <span class="comment"># if same</span></span><br><span class="line">            <span class="keyword">if</span> needle[i] == needle[j]:</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="built_in">next</span>[i] = j</span><br><span class="line">        <span class="comment"># print(next)</span></span><br><span class="line"></span><br><span class="line">        k = <span class="number">0</span></span><br><span class="line">        <span class="comment"># apply next array</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(haystack)):</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span> k &gt; <span class="number">0</span> <span class="keyword">and</span> haystack[i] != needle[k]:</span><br><span class="line">                k = <span class="built_in">next</span>[k-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> haystack[i] == needle[k]:</span><br><span class="line">                k += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> k == <span class="built_in">len</span>(needle):</span><br><span class="line">                <span class="keyword">return</span> i - k + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="KMP算法-459"><a href="#KMP算法-459" class="headerlink" title="KMP算法 #459"></a>KMP算法 #459</h2></article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-05-29</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

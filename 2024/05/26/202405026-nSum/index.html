@@ -79,12 +79,7 @@
 <p>如果是上面的ThreeSum, FourSum，如何调用nSum的方法？</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; threeSum(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">    sort(nums.begin(), nums.end());</span><br><span class="line">    <span class="comment">// n 为 3，从 nums[0] 开始计算和为 0 的三元组</span></span><br><span class="line">    <span class="keyword">return</span> nSumTarget(nums, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>);        </span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&gt; fourSum(<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target) &#123;</span><br><span class="line">    sort(nums.begin(), nums.end());</span><br><span class="line">    <span class="comment">// n 为 4，从 nums[0] 开始计算和为 target 的四元组</span></span><br><span class="line">    <span class="keyword">return</span> nSumTarget(nums, <span class="number">4</span>, <span class="number">0</span>, target);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<!-- 引用如下：
-作者：labuladong
-链接：https://juejin.cn/post/6894787422807130119
-来源：稀土掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 -->
-
+<p>引用如下：<br>作者：labuladong<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6894787422807130119">https://juejin.cn/post/6894787422807130119</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <p>总结： #259， #1099， #16<br>这三道题虽然都是用的同一个方法，都是双指针，但是细微上有些不同<br>题意：</p>
 <ul>
 <li>259: 求的是三个数之和小于目标的个数，也就是可以有重复，只要满足小于目标的条件下，结果就加1</li>
