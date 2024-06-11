@@ -86,6 +86,7 @@ class Solution:
     - 使用nlargest(k,list)与nsmallest(k,list)方法，取出最大或最小的前k个数
     - 使用heapq合并两个有序列表heapq.merge(sorted(array_a), sorted(array_b))
     - heapq.heapreplace(heap, item)弹出并返回 heap 中最小的一项，同时推入新的 item，是heappush和heappop的组合
+    - 这道题为什么只维护前k的元素呢？碰见大的就加入，把最小的弹出，因为根据时间复杂度，只维护k个数的时间复杂度是klogn，而正常维护n的排序需要的是nlogn，如果k比较小的是，性能就很好
 
 **时间复杂度**
 查找一个数，如果是用的二分法：

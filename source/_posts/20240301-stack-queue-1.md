@@ -26,7 +26,7 @@ class MyQueue:
         return self.stack_out.pop()
 
     def peek(self) -> int:
-        result = self.pop()
+        result = self.pop() # 这里直接使用这个class里的pop函数
         self.stack_out.append(result)
         return result
 
