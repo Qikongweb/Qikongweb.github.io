@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240608_parentheses</h1>
+  <article class="post-content"><h2 id="判断有效括号串-20"><a href="#判断有效括号串-20" class="headerlink" title="判断有效括号串 #20"></a>判断有效括号串 #20</h2><p>思路：</p>
+<ul>
+<li>如果只有一种括号的话，可以统计左括号出现的次数，遇到左括号加1，遇到右括号减1，但是对于有多种括号的情况，就不能只统计次数了，例如“（【）】”虽然次数相等，显然是无效的</li>
+<li>所以这用的是栈，有顺序的，左括号推入，右括号，找最近的推入是不是匹配</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        d = &#123;<span class="string">&#x27;(&#x27;</span>:<span class="string">&#x27;)&#x27;</span>,<span class="string">&#x27;&#123;&#x27;</span>:<span class="string">&#x27;&#125;&#x27;</span>,<span class="string">&#x27;[&#x27;</span>:<span class="string">&#x27;]&#x27;</span>&#125;</span><br><span class="line">        q = []</span><br><span class="line">        <span class="keyword">for</span> ele <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> ele <span class="keyword">in</span> d:</span><br><span class="line">                q.append(d[ele])</span><br><span class="line">            <span class="keyword">elif</span> <span class="keyword">not</span> q <span class="keyword">or</span> q[-<span class="number">1</span>] != ele:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">               </span><br><span class="line">                t = q.pop()</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(q) == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="平衡括号串-一-921"><a href="#平衡括号串-一-921" class="headerlink" title="平衡括号串 一 #921"></a>平衡括号串 一 #921</h2><p>思路：</p>
+<ul>
+<li>我用的是栈，只在右括号出现时统计，统计的变量只有一个，左括号出现时只是往里面push，右括号出现时有几种情况<ol>
+<li>非空栈，最后一个不是），那么需求加1，并pop出来，接着往前再找，用while，直到找到栈里也是）</li>
+<li>空栈，需要次数加1</li>
+<li>非空栈，并且最后一个是），pop出来最后一个元素</li>
+</ol>
+</li>
+<li>第1种情况实际上是找左括的需求次数，2，3种情况，是第一种情况的延续，第一种情况处理完之后的记过就是要不就是空栈，要不就是最后一个等于），那么就是可以执行下面两种操作了</li>
+<li>题解里的解法是单纯的统计次数，对应左括号需要多少次数，对应右括号需要多少次数。因为这个题是只有单一的括号，所以不用考虑括号的顺序，比较】）哪个在前，只统计次数就比较简单</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minAddToMakeValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        need = <span class="number">0</span></span><br><span class="line">        stack = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                stack.append(<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">while</span> stack <span class="keyword">and</span> stack[-<span class="number">1</span>] != i:</span><br><span class="line">                    need += <span class="number">1</span></span><br><span class="line">                    stack.pop()</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> stack:</span><br><span class="line">                    need += <span class="number">1</span></span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    stack.pop()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> need + <span class="built_in">len</span>(stack)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二种解法：</span></span><br><span class="line">        left_need = <span class="number">0</span></span><br><span class="line">        right_need = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">&quot;(&quot;</span>:</span><br><span class="line">                right_need += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                right_need -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> right_need == -<span class="number">1</span>:</span><br><span class="line">                    left_need += <span class="number">1</span></span><br><span class="line">                    right_need = <span class="number">0</span></span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> left_need + right_need</span><br></pre></td></tr></table></figure>
+
+<h2 id="平衡括号串-二-1541"><a href="#平衡括号串-二-1541" class="headerlink" title="平衡括号串 二 #1541"></a>平衡括号串 二 #1541</h2><p>思路：</p>
+<ul>
+<li>这道题因为也是只有一种括号，用了统计次数的方法，从上一个题继承来的</li>
+<li>有点困难，不太理解，判断need是否能被2整除,这里是一个难点</li>
+<li>例如”(()))()))”，在遍历这一组括号的时候，如果没有判断need%2的话，只统计次数，那么恰好有3个左括号和6个右括号，就不会用补充括号，但是，这道题是需要补充3个括号，为什么呢？因为合法性，也就是())这个顺序是要保证的，所以不能只在右括号上做统计。</li>
+<li>need%2是如何生效的呢？上面的例子，当遍历到第三个左括号的时候，就出现need%2&#x3D;&#x3D;1，说明对右括号的需求为奇数，如何把对右括号的需要变成偶数，所以这时res加1，意思是插入一个右括号，然后对need（右括号的需要）减1。保证对右括号的需求必须是偶数。</li>
+<li>我有一点理解了，如果need%2&#x3D;&#x3D;1的时候，说明在前面就对右括号有需求，这里已经遍历到了（，那么如果不把前面的右括号补齐的话，前面就会存在不合法的括号，need在后面会随时变化，被减去，那么如果后面的右括号又有剩余的正好把前面的不合法的右括号补齐了，统计的数就不准确了。所以要在出现（的时候，把前面的所有括号都补齐，一把一结账，哈哈。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minInsertions</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        res = <span class="number">0</span>  <span class="comment"># 记录插入的次数</span></span><br><span class="line">        need = <span class="number">0</span> <span class="comment"># 右括号的需求量</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                need += <span class="number">2</span></span><br><span class="line">                <span class="keyword">if</span> need % <span class="number">2</span> == <span class="number">1</span>: <span class="comment"># 难点：</span></span><br><span class="line">                    res += <span class="number">1</span></span><br><span class="line">                    need -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                need -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> need == -<span class="number">1</span>: <span class="comment"># 加一个左括号，要加两个右括号</span></span><br><span class="line">                    res += <span class="number">1</span></span><br><span class="line">                    need = <span class="number">1</span></span><br><span class="line">               </span><br><span class="line">        <span class="keyword">return</span> res + need</span><br></pre></td></tr></table></figure>
+
+<h2 id="32-最长有效括号"><a href="#32-最长有效括号" class="headerlink" title="32 最长有效括号"></a>32 最长有效括号</h2><p>思路：</p>
+<ul>
+<li>之前的括号的题，都是把各种不同的左括号推入，但是这道题求的是长度，所以不是把左括号推入，是把index推入</li>
+<li>如果遇到右括号的时候，只要stack不为空，就pop出来，出来的就是index，因为stack里面一定就是左括号的index</li>
+<li>而如果是空的话，就是没有配对的左括号</li>
+<li>对于这道题有两种解法，一种是dp，一种是非dp，但是很简便的一个解法，很有意思</li>
+</ul>
+<p>模版</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">stack = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">    <span class="keyword">if</span> s[i] == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">        <span class="comment"># 遇到左括号，记录索引</span></span><br><span class="line">        stack.push(i)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 遇到右括号</span></span><br><span class="line">        <span class="keyword">if</span> stack:</span><br><span class="line">            <span class="comment"># 配对的左括号对应的索引，[leftindex,i]是一个合法的括号字串</span></span><br><span class="line">            leftIndex = stack.pop()</span><br><span class="line">            <span class="comment"># 这个合法括号字串的长度，这里的长度只是统计一对合法的长度，如果多个合法括号字串连在一起，会形成一个更长的合法括号字串，但是这里是没办法统计的</span></span><br><span class="line">            l = <span class="number">1</span> + i - leftIndex</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 没有配对的左括号</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对于dp的解法，上面的是我所知道到到i为止的有效括号的长度，如果是我知道前一个位置leftIndex的有效括号长度，是不是就是可以和当前的长度加起来，这就是dp的思路</p>
+<ul>
+<li>dp定义：以结果为导向，dp表示以s[i-1]结尾的最长合法括号字串的长度</li>
+<li>初始化dp[0] &#x3D; 0，表示以i&#x3D;1为结尾的最长合法括号字串的长度</li>
+<li>递归公式 dp[i] &#x3D; i - leftIndex + dp[leftIndex] + 1</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestValidParentheses</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># dp</span></span><br><span class="line">        dp = [<span class="number">0</span>] * (<span class="built_in">len</span>(s)+<span class="number">1</span> )<span class="comment"># 记录以s[i-1]为结尾的最长合法括号字串长度</span></span><br><span class="line">        dp = [<span class="number">0</span>] * <span class="built_in">len</span>(s) <span class="comment"># 如果是这种定义的话</span></span><br><span class="line">        <span class="comment"># 这里为什么是i-1？而不是i</span></span><br><span class="line">        stack = []</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                stack.append(i)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 遇到右括号</span></span><br><span class="line">                <span class="keyword">if</span> stack:</span><br><span class="line">                    leftIndex = stack.pop()</span><br><span class="line">                    <span class="comment"># 原因是这里的长度加上的是leftIndex前一个为结尾的最长合法括号字串的长度，</span></span><br><span class="line">                    l = i - leftIndex + <span class="number">1</span> + dp[leftIndex]</span><br><span class="line">                    l = i - leftIndex + <span class="number">1</span> + dp[leftIndex-<span class="number">1</span>]</span><br><span class="line">                    res = <span class="built_in">max</span>(l,res)</span><br><span class="line">                    dp[i+<span class="number">1</span>] = l</span><br><span class="line">                    dp[i] = l</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>这里的非dp解法特别巧妙</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">res = <span class="number">0</span></span><br><span class="line">stack = [-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">    <span class="keyword">if</span> s[i] == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">        stack.append(i) <span class="comment"># 推入此时的index</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        stack.pop()  <span class="comment">#这里为什么先pop出来？因为留下来的才是前一个非法括号的index，为了pop合理，stack初始化的时候就是里面加一个-1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> stack: <span class="comment"># if popped -1, add a new start index，或者【】也是属于这里的</span></span><br><span class="line">            stack.append(i)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = <span class="built_in">max</span>(res, i-stack[-<span class="number">1</span>]) <span class="comment"># update the length of the valid substring</span></span><br><span class="line"><span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-06-07</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
