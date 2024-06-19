@@ -43,19 +43,20 @@
       <div class="mx-auto max-w-3xl"><div class="py-8 post">
   <h1 class="text-3xl font-semibold">20240305 tree-1</h1>
   <article class="post-content"><h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h2><h3 id="1-理论基础"><a href="#1-理论基础" class="headerlink" title="1. 理论基础"></a>1. 理论基础</h3><h3 id="二叉树的种类"><a href="#二叉树的种类" class="headerlink" title="二叉树的种类"></a><strong>二叉树的种类</strong></h3><ol>
-<li>满二叉树：没有节点都有两个子节点，也可以说深度为k，有2^k-1个节点的二叉树</li>
-<li>完全二叉树：除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。上一节里面的heap就是一个基于完全二叉树结构的函数</li>
+<li>满二叉树：没有节点都有两个子节点，也可以说深度为k，深度是从1开始的，也就是第一层k&#x3D;1，有2^k-1个节点的二叉树</li>
+<li>完全二叉树：除了最底层节点可能没填满外，其余每层节点数都达到最大值，并且最下面一层的节点都集中在该层最左边的若干位置。上一节里面的heap就是一个基于完全二叉树结构的函数，优先级队列（大顶堆，小顶堆）底层结构就是完全二叉树。另外满二叉树一定是完全二叉树。</li>
 <li>二叉搜索树：二叉搜索树是一个有序树<ul>
 <li>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</li>
 <li>若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</li>
-<li>它的左、右子树也分别为二叉排序树</li>
+<li>它的左、右子树也分别为二叉搜索树，对结构没有要求，但是对每个节点的顺序有要求</li>
+<li>搜索一个节点的时间复杂度是logn</li>
 </ul>
 </li>
-<li>平衡二叉搜索树： 又被称为AVL（Adelson-Velsky and Landis）树，它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。map、set的底层实现都是平衡二叉搜索树，所以map、set的增删操作时间时间复杂度是logn</li>
+<li>平衡二叉搜索树： 又被称为AVL（Adelson-Velsky and Landis）树，它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。map、set的底层实现都是平衡二叉搜索树，所以map、set的增删操作时间时间复杂度是logn，重要的一点是，map中的key和set是不是有序的？当然是有序的，因为底层实现就是平衡二叉搜索树，肯定是有序的。</li>
 </ol>
 <h3 id="二叉树的存储方式"><a href="#二叉树的存储方式" class="headerlink" title="二叉树的存储方式"></a><strong>二叉树的存储方式</strong></h3><ul>
 <li>链式存储，用指针，通过指针把分布在各个地址的节点串联一起</li>
-<li>顺序存储，用数组，顺序存储的元素在内存是连续分布的</li>
+<li>顺序存储，用数组，顺序存储的元素在内存是连续分布的，例如，想找一个index是i的左节点2<em>i+1，右节点是2</em>i+2</li>
 </ul>
 <h3 id="二叉树的遍历方式"><a href="#二叉树的遍历方式" class="headerlink" title="二叉树的遍历方式"></a><strong>二叉树的遍历方式</strong></h3><ul>
 <li>深度优先遍历：先往深走，遇到叶子节点再往回走。<ul>
@@ -65,7 +66,7 @@
 <li>经常会使用递归的方式来实现深度优先遍历，也就是实现前中后序遍历，使用递归是比较方便的。栈其实就是递归的一种实现结构，也就说前中后序遍历的逻辑其实都是可以借助栈使用递归的方式来实现的。</li>
 </ul>
 </li>
-<li>广度优先遍历：一层一层的去遍历。<ul>
+<li>广度优先遍历：一层一层的去遍历，在图论里是一圈一圈的遍历。<ul>
 <li>广度优先遍历的实现一般使用队列来实现，这也是队列先进先出的特点所决定的，因为需要先进先出的结构，才能一层一层的来遍历二叉树。</li>
 </ul>
 </li>
@@ -74,7 +75,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TreeNode</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, val, left=<span class="literal">None</span>, right=<span class="literal">None</span></span>):</span><br><span class="line">        self.val = val</span><br><span class="line">        self.left = left</span><br><span class="line">        self.right = right</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-递归遍历-144-145-94"><a href="#2-递归遍历-144-145-94" class="headerlink" title="2. 递归遍历 #144, #145, #94"></a>2. 递归遍历 #144, #145, #94</h3><h3 id="递归的三个要素"><a href="#递归的三个要素" class="headerlink" title="递归的三个要素"></a>递归的三个要素</h3><ol>
-<li><p>确定递归函数的参数和返回值： 确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数， 并且还要明确每次递归的返回值是什么进而确定递归函数的返回类型。</p>
+<li><p>确定递归函数的参数和返回值： 确定哪些参数是递归的过程中需要处理的，那么就在递归函数里加上这个参数， 并且还要明确每次递归的返回值是什么进而确定递归函数的返回类型。例如：参数大多就是传入一个根结点和一个数组用来存放结果的，返回值一般都是void，我们把返回值都放在了参数里</p>
 </li>
 <li><p>确定终止条件： 写完了递归算法, 运行的时候，经常会遇到栈溢出的错误，就是没写终止条件或者终止条件写的不对，操作系统也是用一个栈的结构来保存每一层递归的信息，如果递归没有终止，操作系统的内存栈必然就会溢出。</p>
 </li>

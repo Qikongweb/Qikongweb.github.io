@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240613_array_plus_hash</h1>
+  <article class="post-content"><h2 id="常数时间，删除，查找数组中的任意数-380"><a href="#常数时间，删除，查找数组中的任意数-380" class="headerlink" title="常数时间，删除，查找数组中的任意数 #380"></a>常数时间，删除，查找数组中的任意数 #380</h2><p>题意：</p>
+<ul>
+<li>删除，插入，查找随机数的时间复杂度都是O(1)</li>
+</ul>
+<p>思路：</p>
+<ul>
+<li>对于删除，插入，时间复杂度是1的话，要想到用hashmap</li>
+<li>但是如果只用hashmap的话，没办法查找一个随机数的位置，因为hashmap是没有排序的</li>
+<li>想到了数组，数组就可以利用一个随机数index，取到对应的index的数值，但是数组如果删除的话，是不是也可以是时间复杂度1呢？</li>
+<li>这里就是一个难点，因为如果我把尾部的值和要删除的值调换一下，就可以了，这里强调的是一个随机数的index，所以即使不按照插入时的顺序也是可以的。</li>
+</ul>
+<p>自己写的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RandomizedSet</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.arr = []</span><br><span class="line">        self.key_value = <span class="built_in">dict</span>()</span><br><span class="line">        self.last = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># insert to map and array if exist update value</span></span><br><span class="line">        <span class="keyword">if</span> val <span class="keyword">not</span> <span class="keyword">in</span> self.key_value:</span><br><span class="line">            self.key_value[val] = self.last</span><br><span class="line">            self.arr.append(val)</span><br><span class="line">            self.last += <span class="number">1</span> </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">remove</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># remove from map and array</span></span><br><span class="line">        <span class="keyword">if</span> val <span class="keyword">in</span> self.key_value:</span><br><span class="line">            <span class="comment"># delete from map, and get index</span></span><br><span class="line">            index = self.key_value[val]</span><br><span class="line">            <span class="comment"># 先把map里面的最后一个元素的index改了，再删map和arr</span></span><br><span class="line">            self.key_value[self.arr[-<span class="number">1</span>]] = index</span><br><span class="line">            <span class="comment"># 交换两个数</span></span><br><span class="line">            self.arr[index], self.arr[-<span class="number">1</span>] = self.arr[-<span class="number">1</span>], self.arr[index]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># delete from arr, swap last and index then pop last</span></span><br><span class="line">            self.arr.pop()</span><br><span class="line">            <span class="keyword">del</span> self.key_value[val]</span><br><span class="line">            self.last -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getRandom</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># generate a random num as index, and get value from index</span></span><br><span class="line">        ran = random.randint(<span class="number">0</span>, self.last-<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(ran, self.arr)</span></span><br><span class="line">        <span class="keyword">return</span> self.arr[ran]</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<p>例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RandomizedSet</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.nums = []</span><br><span class="line">        self.valToIndex = &#123;&#125;</span><br><span class="line">        self.size = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> val <span class="keyword">in</span> self.valToIndex:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        self.valToIndex[val] = self.size</span><br><span class="line">        self.nums.append(val)</span><br><span class="line">        self.size += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">remove</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> val <span class="keyword">not</span> <span class="keyword">in</span> self.valToIndex:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        index = self.valToIndex[val]</span><br><span class="line">        lastIndex = self.valToIndex[self.nums[self.size-<span class="number">1</span>]]</span><br><span class="line">        self.valToIndex[self.nums[self.size-<span class="number">1</span>]] = index</span><br><span class="line">        self.nums[index], self.nums[lastIndex] = self.nums[lastIndex], self.nums[index]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># delete nums last ele and map last ele</span></span><br><span class="line">        self.nums.pop()</span><br><span class="line">        <span class="keyword">del</span> self.valToIndex[val]</span><br><span class="line">        self.size -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getRandom</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> random.choice(self.nums)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your RandomizedSet object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = RandomizedSet()</span></span><br><span class="line"><span class="comment"># param_1 = obj.insert(val)</span></span><br><span class="line"><span class="comment"># param_2 = obj.remove(val)</span></span><br><span class="line"><span class="comment"># param_3 = obj.getRandom()</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>如果想高效地，等概率地随机获取元素，就要使用数组作为底层容器。</li>
+<li>如果要保持数组元素的紧凑性，可以把待删除元素换到最后，然后pop掉末尾的元素，这样的时间复杂度就是O(1)了。需要额外的哈希表记录值到索引的映射。</li>
+<li>在下面一题中，黑名单的数就是利用hash映射一个正常的数，方便随机抽取。</li>
+</ul>
+<h2 id="Random-pick-with-blacklist-710-很有意思的一个题"><a href="#Random-pick-with-blacklist-710-很有意思的一个题" class="headerlink" title="Random pick with blacklist #710 很有意思的一个题"></a>Random pick with blacklist #710 很有意思的一个题</h2><p>题目特别要求：</p>
+<ul>
+<li>尽量少调用rand（），生成随机数的函数，因为如果我用while判断是不是再blacklist，就是重复一直调用rand</li>
+</ul>
+<p>思路：</p>
+<ul>
+<li>利用上面的思路在数组里面交换位置，把所有的black list里面的数都交换到后面去，对前面的index做rand抽取，就可以达到抽一次就中的效果</li>
+<li>我首先想到的是之前做过双指针删除元素的题，可以那么做，但是对于这道题的话，要遍历的是从0到N，再找到再blacklist上面的数挪到最后面，如果N很大的话，遍历一遍很费时，还不如对blacklist做处理，可能会省时。我都试试</li>
+<li>我试了双指针的方法，结果内存超了，out of memory,因为这种方法，得把每个数都存在一个数组里面，rand一个index，再对应找数组里的数，N特别大的时候，内存就容易超</li>
+</ul>
+<h2 id="另一种思路：-还是想办法把blacklist上面的数换到末尾去，为了查找方便，就建立了一个map的映射关系，这回处理的是blacklist上面的数，量少-为什么要用map的映射关系呢？因为对于每个在blacklist上面的数，如果对应的value是一个正常数呢？那么就是pick的时候，如果上了blacklis，就从map里面找对应的正常的数代替就好了。-接下来就是如果建立一个正确的map映射了，这里为了保证最后一个就是blacklist上面的数，那么映射之后也还是它本身，就不对了。那就跳过去呗，找到正常数。-在遍历blacklist的时候，last从末尾开始记录，往前一个一个找，找到正常数的时候，就把此时blacklist上的数，映射到正常的数，再继续找，一直找完所有黑名单上的数"><a href="#另一种思路：-还是想办法把blacklist上面的数换到末尾去，为了查找方便，就建立了一个map的映射关系，这回处理的是blacklist上面的数，量少-为什么要用map的映射关系呢？因为对于每个在blacklist上面的数，如果对应的value是一个正常数呢？那么就是pick的时候，如果上了blacklis，就从map里面找对应的正常的数代替就好了。-接下来就是如果建立一个正确的map映射了，这里为了保证最后一个就是blacklist上面的数，那么映射之后也还是它本身，就不对了。那就跳过去呗，找到正常数。-在遍历blacklist的时候，last从末尾开始记录，往前一个一个找，找到正常数的时候，就把此时blacklist上的数，映射到正常的数，再继续找，一直找完所有黑名单上的数" class="headerlink" title="另一种思路：- 还是想办法把blacklist上面的数换到末尾去，为了查找方便，就建立了一个map的映射关系，这回处理的是blacklist上面的数，量少- 为什么要用map的映射关系呢？因为对于每个在blacklist上面的数，如果对应的value是一个正常数呢？那么就是pick的时候，如果上了blacklis，就从map里面找对应的正常的数代替就好了。- 接下来就是如果建立一个正确的map映射了，这里为了保证最后一个就是blacklist上面的数，那么映射之后也还是它本身，就不对了。那就跳过去呗，找到正常数。- 在遍历blacklist的时候，last从末尾开始记录，往前一个一个找，找到正常数的时候，就把此时blacklist上的数，映射到正常的数，再继续找，一直找完所有黑名单上的数"></a>另一种思路：<br>- 还是想办法把blacklist上面的数换到末尾去，为了查找方便，就建立了一个map的映射关系，这回处理的是blacklist上面的数，量少<br>- 为什么要用map的映射关系呢？因为对于每个在blacklist上面的数，如果对应的value是一个正常数呢？那么就是pick的时候，如果上了blacklis，就从map里面找对应的正常的数代替就好了。<br>- 接下来就是如果建立一个正确的map映射了，这里为了保证最后一个就是blacklist上面的数，那么映射之后也还是它本身，就不对了。那就跳过去呗，找到正常数。<br>- 在遍历blacklist的时候，last从末尾开始记录，往前一个一个找，找到正常数的时候，就把此时blacklist上的数，映射到正常的数，再继续找，一直找完所有黑名单上的数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n: <span class="built_in">int</span>, blacklist: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        </span><br><span class="line">        self.mapblack = &#123;&#125;</span><br><span class="line">        self.sz = n - <span class="built_in">len</span>(blacklist)</span><br><span class="line">        <span class="comment"># # print(self.sz)</span></span><br><span class="line">        <span class="comment"># 建立mapblack映射，为了更方便的找到是不是存在于blacklist</span></span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> blacklist:</span><br><span class="line">            self.mapblack[b] = -<span class="number">1</span></span><br><span class="line">        last = n - <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> blacklist:</span><br><span class="line">            <span class="comment"># 只关注的是在【0，sz）范围的数，因为有可能被抽到，需要做替换</span></span><br><span class="line">            <span class="keyword">if</span> b &lt; self.sz:</span><br><span class="line">                <span class="comment"># last从后往前遍历，找到不是blacklist上面的数</span></span><br><span class="line">                <span class="keyword">while</span> last <span class="keyword">in</span> blacklist:</span><br><span class="line">                    last -= <span class="number">1</span></span><br><span class="line">                <span class="comment"># 最后用一个黑名单的数映射一个正常数</span></span><br><span class="line">                self.mapblack[b] = last</span><br><span class="line">                last -= <span class="number">1</span> </span><br><span class="line">        <span class="comment"># print(self.mapblack)  </span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pick</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">       </span><br><span class="line">        i = random.randrange(self.sz)</span><br><span class="line">        <span class="keyword">return</span> self.mapblack.get(i, i)</span><br></pre></td></tr></table></figure>
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-06-13</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

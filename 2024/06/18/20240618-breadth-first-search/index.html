@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leetcode Python solutions</title>
+  <meta name="author" content="Claire" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  <body class="relative pb-8 min-h-screen border-t-2 border-black">
+    <header class="shadow-sm bg-white">
+  <div class="flex justify-between mx-auto max-w-3xl py-2">
+    <div class="flex items-center">
+      <div class="w-8 h-8">
+        <a href="/">
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+      </div>
+      <h1 class="ml-4"><a href="/" title="Leetcode Python solutions">Leetcode Python solutions</a></h1>
+    </div>
+    <ul class="flex items-center justify-end">
+      
+      <li class="ml-4"><a href="/" title="Home">Home</a></li>
+      
+      <li class="ml-4"><a href="/about/" title="About">About</a></li>
+      
+      <li class="ml-4"><a href="/archives/" title="Archives">Archives</a></li>
+      
+      <li class="ml-4"><a href="/tags/" title="Tags">Tags</a></li>
+      
+    </ul>
+  </div>
+</header>
+
+    <main>
+      <div class="mx-auto max-w-3xl"><div class="py-8 post">
+  <h1 class="text-3xl font-semibold">20240618_breadth_first_search</h1>
+  <article class="post-content"><h2 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h2><p>思路：</p>
+<ul>
+<li><p>需要借用一个辅助数据结构即<em>队列</em>来实现，<em>队列</em>先进先出，符合一层一层遍历的逻辑，而用栈先进后出适合模拟深度优先遍历也就是递归的逻辑。</p>
+</li>
+<li><p>而这种层序遍历方式就是图论中的广度优先遍历，只不过我们应用在二叉树上。</p>
+</li>
+<li><p>BFS: Breadth first search</p>
+</li>
+<li><p>做法很简单，只要是把一层的node都加入到队列，先进先出，每次左边弹出来一个节点，记录之后，把此节点的左右节点都加入到末尾，就能实现层序的顺序输出，唯一注意的是，因为每次弹出再推入，这个队列都在变化，如果能知道一层遍历结束呢？就要提前先记录下此时队列的数量，当弹出的数量正好是size的时候就是此层的节点都弹出来了。</p>
+</li>
+</ul>
+<p>层序遍历的基础题 #102 Level order traversal</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">levelOrder</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用队列实现层序遍历，队列的特性是先进先出，并记录一层又多少个节点</span></span><br><span class="line">        res = []</span><br><span class="line">        queue = deque()</span><br><span class="line">        size = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> root:</span><br><span class="line">            queue.append(root)</span><br><span class="line">        <span class="keyword">while</span> queue:  <span class="comment">#这里也可以用for循环</span></span><br><span class="line">            size = <span class="built_in">len</span>(queue)</span><br><span class="line">            ceng = []</span><br><span class="line">            <span class="keyword">while</span> size &gt; <span class="number">0</span>:</span><br><span class="line">                node = queue.popleft()</span><br><span class="line">                ceng.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    queue.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    queue.append(node.right)</span><br><span class="line">                size -= <span class="number">1</span></span><br><span class="line">            res.append(ceng)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<p>Average of levels in Binary Tree #637</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">averageOfLevels</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">float</span>]:</span><br><span class="line">        <span class="comment"># 中序遍历</span></span><br><span class="line">        res = []</span><br><span class="line">        q = deque()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> root:</span><br><span class="line">            q.append(root)</span><br><span class="line">        <span class="keyword">while</span> q:</span><br><span class="line">            size = <span class="built_in">len</span>(q)</span><br><span class="line">            level = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(size):</span><br><span class="line">                node = q.popleft()</span><br><span class="line">                level += node.val</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    q.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    q.append(node.right)</span><br><span class="line">            res.append(level/size)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+</article>
+  <div class="flex items-center justify-between text-sm">
+    
+    <span class="flex items-center">
+      
+    </span>
+    
+    <span class="text-gray-500"
+      >2024-06-18</span
+    >
+  </div>
+</div>
+</div>
+    </main>
+    <footer class="absolute bottom-2 left-0 right-0">
+  <div class="mx-auto max-w-3xl flex items-center justify-between">
+    <p class="text-sm text-gray-400">
+       Copyright &copy;  2024 Claire
+    </p>
+    <p class="text-sm text-gray-400">
+      Powered by
+      <a
+        href="https://hexo.io"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Hexo</a
+      >
+      • Theme
+      <a
+        href="https://github.com/mintsweet/hexo-theme-mints"
+        target="_blank"
+        class="text-orange-300 underline"
+        >Mints</a
+      >
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
